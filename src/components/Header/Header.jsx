@@ -15,13 +15,20 @@ const Header = (props) => {
   const login = localStorage.getItem("login")
   const cUser = localStorage.getItem("cUser")
   const admin = localStorage.getItem("admin");
+  const [anchor, setAnchor] = React.useState(null);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const loginsignupbtn = () => {
+    navigate("/lognsignup");
+    setMobileOpen(!mobileOpen);
+  };
+
   const loginbtn = () => {
     navigate("/login");
+    setAnchorEl(null);
     setMobileOpen(!mobileOpen);
   };
   const signupbtn = () => {
@@ -58,6 +65,16 @@ const Header = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleUserLogin = (event) => {
+    navigate('/login');
+    setAnchor(null);
+  }
+  const handleMouseOver = (event)=>{
+    setAnchor(event.currentTarget);
+  }
+  const handleDrawerMouseOver = (event)=>{
+    setAnchorEl(event.currentTarget);
+  }
   const drawer = (
     <div>
       <Toolbar />
@@ -85,8 +102,38 @@ const Header = (props) => {
 
                   <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logoutMobile}>logout</Button></MenuItem>
                 </div></div> : <div>
-                <Button className={classes.btn} onClick={loginbtn} as={Link} to='/login' >Login</Button>
-                <Button className={classes.btn} onClick={signupbtn} as={Link} to='/signUp'>Sign Up</Button>
+                {/* <Button className={classes.loginbttn} onClick={loginsignupbtn} as={Link} to='/loginsignup' >Login / Sign Up</Button>
+                <Menu 
+                    className={classes.dropdown}
+                    anchorEl={anchorE1}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}>
+                  <MenuItem onClick={handleClose}>Login as an admin</MenuItem>
+                  <MenuItem onClick={handleClose}>Login as a user</MenuItem>
+                </Menu> */}
+                <Button className={classes.btn} onClick={handleDrawerMouseOver}  >Login</Button>
+                <Menu
+                      className={classes}
+                      id="menu-appbar"
+                      anchorEl={anchorEl}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={Boolean(anchorEl)}
+                      onClose={handleClose}
+                    >
+                      <MenuItem onClick={loginbtn} >User Login</MenuItem>
+                      <MenuItem  >Company Login</MenuItem>
+                      
+                </Menu>
+                <Button className={classes.btn} onClick={signupbtn} >Sign Up</Button>
               </div>}
           </div>
           <hr />
@@ -159,6 +206,7 @@ const Header = (props) => {
                       open={Boolean(anchorEl)}
                       onClose={handleClose}
                     >
+                      
                       <div className={classes.MenuContainer}>
                         <MenuItem className={classes.MenuItems} ><AccountCircle className={classes.InnerUserIcon} /></MenuItem>
 
@@ -171,7 +219,26 @@ const Header = (props) => {
                         <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logout}>logout</Button></MenuItem>
                       </div>
                     </Menu></div> : <div>
-                    <Button className={classes.btn} onClick={() => { navigate('/login'); }} as={Link} to='/login' >Login</Button>
+                    <Button className={classes.btn} onClick={handleMouseOver} >Login</Button>
+                    <Menu
+                      className={classes}
+                      id="menu-appbar"
+                      anchorEl={anchor}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={Boolean(anchor)}
+                      onClose={handleClose}
+                    >
+                      <MenuItem onClick={handleClose} >Login as an admin</MenuItem>
+                      <MenuItem onClick={handleUserLogin} >Login as a user</MenuItem>
+                    </Menu>
                     <Button className={classes.btn} onClick={() => { navigate('/signup'); }} as={Link} to='/signUp'>Sign Up</Button>
                   </div>}
               </div>

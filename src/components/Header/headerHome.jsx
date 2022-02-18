@@ -20,6 +20,11 @@ const HeaderHome = (props) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const loginsignupbtn = () => {
+    navigate("/lognsignup");
+    setMobileOpen(!mobileOpen);
+  };
+
   const loginbtn = () => {
     navigate("/login");
     setMobileOpen(!mobileOpen);
@@ -83,6 +88,7 @@ const HeaderHome = (props) => {
 
                   <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logoutMobile}>logout</Button></MenuItem>
                 </div></div> : <div>
+                <Button className={classes.btn} onClick={loginsignupbtn} as={Link} to='/loginsignup' >Login / Sign Up</Button>
                 <Button className={classes.btn} onClick={loginbtn} as={Link} to='/login' >Login</Button>
                 <Button className={classes.btn} onClick={signupbtn} as={Link} to='/signUp'>Sign Up</Button>
               </div>}
@@ -169,6 +175,7 @@ const HeaderHome = (props) => {
                         <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logout}>logout</Button></MenuItem>
                       </div>
                     </Menu></div> : <div>
+                    <Button className={classes.btn} onClick={() => { navigate('/loginsignup'); }} as={Link} to='/loginsignup' >Login / Sign Up</Button>
                     <Button className={classes.btn} onClick={() => { navigate('/login'); }} as={Link} to='/login' >Login</Button>
                     <Button className={classes.btn} onClick={() => { navigate('/signup'); }} as={Link} to='/signUp'>Sign Up</Button>
                   </div>}

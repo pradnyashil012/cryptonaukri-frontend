@@ -7,11 +7,14 @@ import JobsPage from "./components/JobsPage";
 import Footer from "./components/Footer/Footer";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import BusReg from "./components/BusReg";
 import { Box, createTheme, makeStyles, ThemeProvider } from '@material-ui/core';
 import Landing from './components/homepage/landing';
 import JobForm from './components/jobPost/jobForm';
 import { ToastContainer } from 'react-toastify';
 import HeaderHome from "./components/Header/headerHome";
+import LoginSignup from "./components/LoginSignup";
+import BussinessProfile from "./components/BusinessProfile";
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
@@ -60,7 +63,11 @@ const App = () => {
           <Header />
           <Box className={classes.contentBody}>
             <Routes>
+              
               <Route exact path="/" element={<><Landing /></>}></Route>
+              <Route exact path="/businessprofile" element={<><BussinessProfile /></>}></Route>
+              <Route exact path="/busreg" element={<><BusReg /></>}></Route>
+              <Route exact path="/loginsignup" element={<><LoginSignup /></>}></Route>
               <Route path="/login" element={<><Login /></>}></Route>
               <Route path="/signup" element={<> <SignUp /></>}></Route>
               <Route path="/jobspage" element={<> <JobsPage /></>}></Route>

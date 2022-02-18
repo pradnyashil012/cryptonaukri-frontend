@@ -92,7 +92,7 @@ const Login = () => {
           localStorage.setItem('cUser', data.cUser);
           toast.success(data.status);
           if (data.admin) {
-            localStorage.setItem('boss', true);
+            localStorage.setItem('admin', true);
           }
           navigate('/')
         }
@@ -123,8 +123,8 @@ const Login = () => {
               color="primary" />
           </Box>
           <Box className={classes.inputContainer} >
-            <Typography variant="h6" > Password * </Typography> <
-              OutlinedInput variant="outlined"
+            <Typography variant="h6" > Password * </Typography> 
+              <OutlinedInput variant="outlined"
               placeholder="Enter Password"
               name="password"
               fullWidth type={values.showPassword ? "text" : "password"}
@@ -144,8 +144,14 @@ const Login = () => {
             <Button onClick={handleSubmit}
               variant="outlined"
               color="primary"
-              className={classes.Button} >
-              Login </Button> </Box> </Box> </Container> </div>
+              className={classes.Button} 
+              
+              >
+              Login </Button> 
+              </Box> 
+            </Box> 
+          </Container> 
+        </div>
   );
 };
 
