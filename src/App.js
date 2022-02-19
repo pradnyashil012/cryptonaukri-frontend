@@ -12,6 +12,9 @@ import Landing from './components/homepage/landing';
 import JobForm from './components/jobPost/jobForm';
 import { ToastContainer } from 'react-toastify';
 import HeaderHome from "./components/Header/headerHome";
+import Resume from "./components/userResume/rsume";
+import { responsiveFontSizes } from "@mui/material/styles/";
+import BusReg from "./components/BusnessRegestration";
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
@@ -24,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden'
   }
 }));
-const theme = createTheme({
+let theme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -49,12 +52,15 @@ const theme = createTheme({
     }
   },
 });
+
+theme = responsiveFontSizes(theme);
+
 const App = () => {
   const classes = useStyles();
   return (
-    <>
+    <> 
       <div className={classes.body}>
-        <ToastContainer />
+        <ToastContainer /> 
         <ThemeProvider theme={theme}>
 
           <Header />
@@ -66,6 +72,8 @@ const App = () => {
               <Route path="/jobspage" element={<> <JobsPage /></>}></Route>
               <Route path="/internships" element={<><InternshipPage /></>}></Route>
               <Route path="/jobform" element={<><JobForm /></>}></Route>
+              <Route path="/businessReg" element={<><BusReg /></>}></Route>
+              <Route path="/userResume" element={<><Resume /></>}></Route>
             </Routes>
           </Box>
           <Footer />

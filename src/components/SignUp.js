@@ -1,5 +1,5 @@
 import { Box, makeStyles, Typography, TextField, OutlinedInput, Button, InputAdornment, FormControlLabel, Checkbox, IconButton, Container, Select, InputLabel, MenuItem, FormControl } from '@material-ui/core';
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Email, Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from 'react';
 import React from 'react'
 import Axios from 'axios'
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Navigate } from 'react-router-dom';
+import { DriveFileRenameOutlineOutlined } from '@mui/icons-material';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -31,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
         padding: '10px',
         boxShadow: '0 0 10px #6292E8'
     },
-    body:{
-        marginTop:'70px'
+    body: {
+        marginTop: '70px'
     }
 }))
 
@@ -88,45 +89,71 @@ const SignUp = () => {
                         <Typography variant='h4'>Create New Account!</Typography>
                     </div><hr />
                     <Box className={classes.inputContainer}>
-                        <Typography variant='h6'>Your Fullname*</Typography>
-                        <TextField id="outlined-basic" placeholder="Enter your Fullname" className={classes.input} fullWidth variant="outlined"
-                            value={name}
-                            name="name"
-                            onChange={(e) => setName(e.target.value)}
-                            color="primary"
-                        />
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-name">Your Fullname</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-name"
+                                type='text'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            edge="end"
+                                        >
+                                            <DriveFileRenameOutlineOutlined />
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                            />
+                        </FormControl>
                     </Box>
                     <Box className={classes.inputContainer}>
-                        <Typography variant='h6'>Email Address*</Typography>
-                        <TextField id="outlined-basic" placeholder="Enter your email address" className={classes.input} fullWidth variant="outlined" value={email}
-                            name="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            color="primary" />
-                    </Box>
-                    <Box className={classes.inputContainer}>
-                        <Typography variant='h6'>Create Password*</Typography>
-                        <OutlinedInput
-                            variant="outlined"
-                            placeholder="Enter Password"
-                            name="password"
-                            fullWidth
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-email">Email Address</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-email"
+                                type='text'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            edge="end"
+                                        >
+                                            <Email />
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                            />
+                        </FormControl>
 
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
+                    </Box>
+                    <Box className={classes.inputContainer}>
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={values.showPassword ? 'text' : 'password'}
+                                value={values.password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                        >
+                                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                            />
+                        </FormControl>
                     </Box>
 
                     <Box className={classes.buttonBox}>
