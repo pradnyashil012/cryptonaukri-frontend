@@ -30,8 +30,12 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    body:{
-        marginTop:'70px'
+    body: {
+        marginTop: '100px',
+        height:'80vh',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center'
     }
 
 }))

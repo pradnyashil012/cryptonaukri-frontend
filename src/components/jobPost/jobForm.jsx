@@ -44,12 +44,21 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center'
     },
     body: {
-        marginTop: '100px'
+        marginTop: '100px',
+        minHeight:'80vh',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center'
     },
     btnBox: {
         display: 'flex',
         padding: '20px 0'
-    }
+    },
+    label:{
+        backgroundColor:'white',
+        padding :'2px 5px' ,
+        marginTop:'-5px',
+     }
 
 }))
 
@@ -295,7 +304,7 @@ const JobForm = (theme) => {
                         <Grid container spacing={3}>
                             <Grid item md={8} sm={2}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-name">Job Title</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Job Title</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-name"
                                         type='text'
@@ -307,7 +316,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Job Type</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Job Type</InputLabel>
                                     <Select
                                         variant='outlined'
                                         labelId="demo-simple-select-label"
@@ -326,7 +335,7 @@ const JobForm = (theme) => {
                                 <Grid item xs={12}>
                                     <Box >
                                         <FormControl fullWidth variant="outlined">
-                                            <InputLabel id="demo-simple-select-helper-label">Duration Of COntract</InputLabel>
+                                            <InputLabel className={classes.label} id="demo-simple-select-helper-label">Duration Of COntract</InputLabel>
                                             <Select
                                                 variant='outlined'
                                                 labelId="demo-simple-select-label"
@@ -347,7 +356,7 @@ const JobForm = (theme) => {
                                 </Grid> : <></>}
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Location type</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Location type</InputLabel>
                                     <Select
                                         variant='outlined'
                                         labelId="demo-simple-select-label"
@@ -364,7 +373,7 @@ const JobForm = (theme) => {
                             <Grid item xs={8}>
                                 {locationType === 2 ?
                                     <FormControl fullWidth variant="outlined">
-                                        <InputLabel htmlFor="outlined-adornment-location">City/Location</InputLabel>
+                                        <InputLabel className={classes.label} htmlFor="outlined-adornment-location">City/Location</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='text'
@@ -376,7 +385,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-location">No. Of Openings</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">No. Of Openings</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='number'
@@ -388,7 +397,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Experience</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Experience</InputLabel>
                                     <Select
                                         variant='outlined'
                                         labelId="demo-simple-select-label"
@@ -410,7 +419,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-location">CTC range</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">CTC range</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='text'
@@ -437,7 +446,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-location">Required Skils</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Required Skils</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='text'
@@ -450,7 +459,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Payment type</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Payment type</InputLabel>
                                     <Select
                                         variant='outlined'
                                         labelId="demo-simple-select-label"
@@ -467,7 +476,7 @@ const JobForm = (theme) => {
                             <Grid item xs={6}>
                                 {payType === 1 ?
                                     <FormControl fullWidth variant="outlined">
-                                        <InputLabel htmlFor="outlined-adornment-location">Salary</InputLabel>
+                                        <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Salary</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='text'
@@ -478,7 +487,7 @@ const JobForm = (theme) => {
                                     </FormControl> : <></>}
                                 {payType === 2 ?
                                     <FormControl fullWidth variant="outlined">
-                                        <InputLabel htmlFor="outlined-adornment-location">Variable pay</InputLabel>
+                                        <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Variable pay</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='text'
@@ -490,7 +499,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-location">Other Incentives</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Other Incentives</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='text'
@@ -503,7 +512,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-location">Perks</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Perks</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='text'
@@ -516,7 +525,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Probation period</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Probation period</InputLabel>
                                     <Select
                                         variant='outlined'
                                         value={probation}
@@ -534,7 +543,7 @@ const JobForm = (theme) => {
                             <Grid item xs={4}>
                                 {probation === undefined || probation === 0 ? <></> :
                                     <FormControl fullWidth variant="outlined">
-                                        <InputLabel htmlFor="outlined-adornment-location">Probation Salary</InputLabel>
+                                        <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Probation Salary</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='text'
@@ -546,7 +555,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Start Date</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Start Date</InputLabel>
                                     <Select
                                         variant='outlined'
                                         value={startDate}
@@ -563,7 +572,7 @@ const JobForm = (theme) => {
                         <Grid container spacing={3}>
                             <Grid item md={8} sm={2}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-name">Internship Title</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Internship Title</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-name"
                                         type='text'
@@ -574,7 +583,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Internships Type</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Internships Type</InputLabel>
                                     <Select
                                         variant='outlined'
                                         labelId="demo-simple-select-label"
@@ -589,7 +598,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={3}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Location type</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Location type</InputLabel>
                                     <Select
                                         variant='outlined'
                                         labelId="demo-simple-select-label"
@@ -605,7 +614,7 @@ const JobForm = (theme) => {
                             <Grid item xs={6}>
                                 {locationType === 2 ?
                                     <FormControl fullWidth variant="outlined">
-                                        <InputLabel htmlFor="outlined-adornment-location">City/Location</InputLabel>
+                                        <InputLabel className={classes.label} htmlFor="outlined-adornment-location">City/Location</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='text'
@@ -616,7 +625,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={3}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-location">Openings</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Openings</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='number'
@@ -654,7 +663,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-location">Required Skils</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Required Skils</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='text'
@@ -666,7 +675,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Stipend </InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Stipend </InputLabel>
                                     <Select
                                         variant='outlined'
                                         labelId="demo-simple-select-label"
@@ -683,7 +692,7 @@ const JobForm = (theme) => {
                             <Grid item xs={6}>
                                 {stipend === 3 ?
                                     <FormControl fullWidth variant="outlined">
-                                        <InputLabel htmlFor="outlined-adornment-location">Expected Range</InputLabel>
+                                        <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Expected Range</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='text'
@@ -694,7 +703,7 @@ const JobForm = (theme) => {
                                     </FormControl> : <></>}
                                 {stipend === 2 ?
                                     <FormControl fullWidth variant="outlined">
-                                        <InputLabel htmlFor="outlined-adornment-location">Stipend Amount</InputLabel>
+                                        <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Stipend Amount</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='number'
@@ -705,7 +714,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-location">Incentives</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Incentives</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='text'
@@ -717,7 +726,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-location">Perks</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Perks</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='text'
@@ -729,7 +738,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Probation period</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Probation period</InputLabel>
                                     <Select
                                         variant='outlined'
                                         onChange={handleProbationChange}
@@ -746,7 +755,7 @@ const JobForm = (theme) => {
                             <Grid item xs={4}>
                                 {probation === 0 || probation === undefined ? <></> :
                                     <FormControl fullWidth variant="outlined">
-                                        <InputLabel htmlFor="outlined-adornment-location">Probation Salary</InputLabel>
+                                        <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Probation Salary</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='text'
@@ -757,7 +766,7 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel id="demo-simple-select-helper-label">Start Date</InputLabel>
+                                    <InputLabel className={classes.label} id="demo-simple-select-helper-label">Start Date</InputLabel>
                                     <Select
                                         variant='outlined'
                                         value={startDate}
@@ -805,8 +814,6 @@ const JobForm = (theme) => {
                 </Box>
             </Container>
             };
-
-            <ToastContainer />
 
         </div >
     )

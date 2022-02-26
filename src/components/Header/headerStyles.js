@@ -112,6 +112,12 @@ const useStyles = makeStyles((theme) => ({
     },
     InnerUserIcon: {
         fontSize: '100px'
+    },
+    loginbttn:{
+        '&:hover':{
+            backgroundColor: theme.palette.primary.main,
+            color: 'white',
+        }
     }
 }));
 export default useStyles;
