@@ -137,7 +137,7 @@ const JobCard = (props) => {
 
   const handleApply = ()=>{
     if (login) {
-      window.open(`${props.link}`, "_blank");
+      navigate('/jobapplication')
     }else{
       toast.info('LogIn First !!');
     }

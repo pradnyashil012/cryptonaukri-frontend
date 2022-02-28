@@ -18,6 +18,9 @@ import LoginSignup from "./components/LoginSignup";
 import BussinessProfile from "./components/BusinessProfile";
 import Reset from "./components/forgotPass/forgotPass";
 import Otp from "./components/otp/otp";
+import JobDetails from "./components/JobDetails/JobDetails";
+import { AppBlocking } from "@mui/icons-material";
+import ApplyJob from "./components/applyJob/applyjob";
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
@@ -70,6 +73,8 @@ const App = () => {
             <Routes>
               <Route exact path="/" element={<><Landing /></>}></Route>
               <Route exact path="/businessprofile" element={<><BussinessProfile /></>}></Route>
+              <Route exact path="/details" element={<><JobDetails /></>}></Route>
+              <Route exact path="/jobapplication" element={<><ApplyJob /></>}></Route>
               <Route exact path="/loginsignup" element={<><LoginSignup /></>}></Route>
               <Route path="/userLogin" element={<><Login route="user" /></>}></Route>
               <Route path="/companyLogin" element={<><Login route="company" /></>}></Route>

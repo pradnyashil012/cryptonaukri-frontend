@@ -102,7 +102,7 @@ const Login = (props) => {
           if (data.login) {
             localStorage.setItem('login', true);
             localStorage.setItem('cUser', data.cUser);
-            localStorage.setItem('businessAdmin', true);
+            localStorage.setItem('admin', true);
             toast.success(data.message);
             navigate('/')
           }
@@ -139,15 +139,15 @@ const Login = (props) => {
             const response = await Axios.post(`${API}/user/authentication/login`, { email, password });
             console.log(email, password)
             const data = response.data;
-            if (data.login) {
-              localStorage.setItem('login', true);
-              localStorage.setItem('cUser', data.cUser);
-              toast.success(data.message);
-              navigate('/')
-            }
-            else {
-              toast.error(data.message)
-            }
+            // if (data.login) {
+            localStorage.setItem('login', true);
+            localStorage.setItem('cUser', data.cUser);
+            toast.success(data.message);
+            navigate('/')
+            // }
+            // else {
+            //   toast.error(data.message)
+            // }
           } catch (error) {
             toast.error('Login Failed ,please try again !!')
           }

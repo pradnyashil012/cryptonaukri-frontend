@@ -44,7 +44,7 @@ const Header = (props) => {
     setAnchorEl(null);
     setMobileOpen(!mobileOpen);
   };
-  
+
   const CompanyLoginbtn = () => {
     navigate("/companyLogin");
     setAnchorEl(null);
@@ -90,6 +90,14 @@ const Header = (props) => {
     navigate('/jobform');
     setMobileOpen(!mobileOpen);
   }
+  const goToProfile = () => {
+    setAnchorEl(null);
+    navigate('/businessprofile');
+  }
+  const goToProfileMobile = () => {
+    navigate('/businessprofile');
+    setMobileOpen(!mobileOpen);
+  }
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -132,11 +140,17 @@ const Header = (props) => {
                   </Typography></MenuItem>
 
                   {admin ?
-                    <MenuItem className={classes.MenuItems} onClick={addJobMobile} as={Link} to='/jobform'>
-                      <Typography className={classes.navText} variant="h6" component="div">
-                        Add Job/Internship
-                      </Typography>
-                    </MenuItem> : <div></div>
+                    <>
+                      <MenuItem className={classes.MenuItems} onClick={addJobMobile} as={Link} to='/jobform'>
+                        <Typography className={classes.navText} variant="h6" component="div">
+                          Add Job/Internship
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem className={classes.MenuItems} onClick={goToProfileMobile} as={Link} to='/jobform'>
+                        <Typography className={classes.navText} variant="h6" component="div">
+                          Profile
+                        </Typography>
+                      </MenuItem> </> : <div></div>
                   }
 
                   <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logoutMobile}>logout</Button></MenuItem>
@@ -272,7 +286,10 @@ const Header = (props) => {
                         <MenuItem className={classes.MenuItems} >{cUser}</MenuItem>
 
                         {admin ?
-                          <MenuItem className={classes.MenuItems} onClick={addJob} as={Link} to='/jobform'>Add Job/Intership</MenuItem> : <></>
+                          <>
+                            <MenuItem className={classes.MenuItems} onClick={addJob} as={Link} to='/jobform'>Add Job/Intership</MenuItem>
+                            <MenuItem className={classes.MenuItems} onClick={goToProfile} as={Link} to='/jobform'>Profile</MenuItem> </>
+                          : <></>
                         }
 
                         <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logout}>logout</Button></MenuItem>
