@@ -1,19 +1,21 @@
-import { Box, makeStyles, Typography, TextField, OutlinedInput, Button, InputAdornment, FormControlLabel, Checkbox, IconButton, Container, Select, InputLabel, MenuItem, FormControl } from '@material-ui/core';
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Box, makeStyles, Typography, TextField, OutlinedInput, Button, InputAdornment, FormControlLabel, Checkbox, IconButton, Container, Select, InputLabel, MenuItem, FormControl, Grid } from '@material-ui/core';
+import { Email, Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import React from 'react'
 import Axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Navigate } from 'react-router-dom';
+import Otp from '../components/otp/otp'
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
-        padding: '40px 20%'
-    },
-    inputContainer: {
-        margin: '30px 0'
+        padding: '30px',
+        margin: '20px 20%',
+        backgroundColor: 'white',
+        borderRadius: '5px',
+        boxShadow: '0 0 10px silver'
     },
     Button: {
         '&:hover': {
@@ -21,31 +23,50 @@ const useStyles = makeStyles((theme) => ({
             color: 'white'
         }
     },
+    label: {
+        backgroundColor: 'white',
+        padding: '2px 5px',
+        marginTop: '-5px',
+    },
     buttonBox: {
-        textAlign: 'center'
+        textAlign: "center",
+        paddingTop: '20px'
     },
     heading: {
-        color: 'white',
-        backgroundColor: theme.palette.primary.main,
-        borderRadius: '5px',
-        padding: '10px',
-        boxShadow: '0 0 10px #6292E8'
+        margin: '20px 10%',
+        color: theme.palette.primary.main,
+        fontWeight: 'bolder',
+        textAlign: 'center'
     },
-    body:{
-        marginTop:'70px'
+    body: {
+        marginTop: '100px',
+        height: '80vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 }))
 
 const SignUp = () => {
 
+    const [searchParams, setSearchParams] = useSearchParams();
+    let urlParamId = searchParams.get("code");
+
     const navigate = useNavigate();
     const classes = useStyles();
-    const [name, setName] = useState('');
+    const [fname, setFName] = useState('');
+    const [lname, setLName] = useState('');
     const [email, setEmail] = useState('');
+    const [coupon, setCoupon] = useState(urlParamId);
+    const [location, setLocation] = useState('');
+    const [number, setNumber] = useState('');
     const [password, setPassword] = useState('');
+    const [state, setState] = useState('signup');
     const [values, setValues] = React.useState({
         showPassword: false,
     });
+    const otpAPI = `/user/authentication/verify-email`
+    const secretCode = 'jbsf198237orAUaf';
 
     const handleClickShowPassword = () => {
         setValues({
@@ -58,80 +79,211 @@ const SignUp = () => {
         event.preventDefault();
     };
 
+    const handleFNameChange = (event) => {
+        setFName(event.target.value)
+    };
+    const handleLNameChange = (event) => {
+        setLName(event.target.value)
+    };
+
+
+    const handlesetCoupon = (event) => {
+        setCoupon(event.target.value);
+    };
+
+    const handlesetLocation = (event) => {
+        setLocation(event.target.value);
+    };
+
+    const handleCallback = (IncomingState) => {
+        setState(IncomingState);
+        // console.log('handlecallback is called !!')
+        // console.log(state);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!name || !email || !password) {
+        // if (secretCode === coupon ) {
+        //     toast.success('Coupon matched successfully!');
+        //     toast.success('Account Created !!');
+        //     toast.success('U can Now LogIn!!');
+        // } else { toast.error('Wrong code'); };
+
+        if (!fname || !lname || !email || !password) {
             toast.error('Enter All the Values');
         }
-        if (name && email && password) {
-            try {
+        if (fname && lname && email && password) {
+            if (state === 'signup') {
+                try {
+                    const response = await Axios.post('http://localhost:3001/user/authentication/signup', { fname, lname, email, number, password, location })
+                        .then((res) => {
+                            const data = res.data;
+                            // console.log(data)
+                            if (data.code !== false) {
+                                toast.success(data.message);
+                                setState('verify')
+                                console.log('again in the function')
+                            } else {
+                                toast.error(data.message);
+                            }
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        });
+                    // const data = response.data;
 
-                const response = await Axios.post('https://cryptonaukri-backend.herokuapp.com/signup', { name, email, password });
-                // const data = response.data;
+                } catch (error) {
+                    toast.error('Could not create account ,try again !!');
+                }
+            } else if (state === 'verified') {
                 toast.success('Account Created !!');
-                toast.success('U can Now LogIn!!');
-                navigate('/login');
+                navigate('/userLogin')
+                return toast.success('Try logging in !!');
 
-            } catch (error) {
-
-                toast.error('Could not create account ,try again !!');
+            } else if (state === 'verify') {
+                toast.info('Email is already sent to you !!');
             }
         }
-
     };
     return (
         <div className={classes.body}>
             <Container>
+                <div className={classes.heading}>
+                    <Typography variant="h4" >
+                        <Box sx={{
+                            fontWeight: 'bold'
+                        }}>
+                            New User SignUp
+                        </Box>
+                    </Typography>
+                </div>
                 <Box component='form' className={classes.formContainer}>
-                    <div className={classes.heading}>
-                        <Typography variant='h4'>Create New Account!</Typography>
-                    </div><hr />
-                    <Box className={classes.inputContainer}>
-                        <Typography variant='h6'>Your Fullname*</Typography>
-                        <TextField id="outlined-basic" placeholder="Enter your Fullname" className={classes.input} fullWidth variant="outlined"
-                            value={name}
-                            name="name"
-                            onChange={(e) => setName(e.target.value)}
-                            color="primary"
-                        />
-                    </Box>
-                    <Box className={classes.inputContainer}>
-                        <Typography variant='h6'>Email Address*</Typography>
-                        <TextField id="outlined-basic" placeholder="Enter your email address" className={classes.input} fullWidth variant="outlined" value={email}
-                            name="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            color="primary" />
-                    </Box>
-                    <Box className={classes.inputContainer}>
-                        <Typography variant='h6'>Create Password*</Typography>
-                        <OutlinedInput
-                            variant="outlined"
-                            placeholder="Enter Password"
-                            name="password"
-                            fullWidth
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
 
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
+                    <Grid container spacing={3}>
+
+                        <Grid item xs={6} >
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">First Name</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-name"
+                                    type='text'
+                                    value={fname}
+                                    onChange={handleFNameChange}
+                                    name='fname'
+                                    label='Company Name'
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item xs={6} >
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Last Name</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-name"
+                                    type='text'
+                                    value={lname}
+                                    onChange={handleLNameChange}
+                                    name='lname'
+                                    label='Company Name'
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item xs={7} >
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Email Address</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-email"
+                                    type='email'
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </FormControl>
+
+                        </Grid>
+
+                        <Grid item xs={5} >
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Phone</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-email"
+                                    type='tel'
+                                    value={number}
+                                    onChange={(e) => setNumber(e.target.value)}
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item xs={5} >
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Location/City</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-email"
+                                    type='text'
+                                    value={location}
+                                    onChange={handlesetLocation}
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        {/* <Grid item xs={7} >
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Coupon Code</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-email"
+                                    type='text'
+                                    value={coupon}
+                                    onChange={handlesetCoupon}
+                                />
+                            </FormControl>
+
+                        </Grid> */}
+
+
+                        <Grid item xs={7} >
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-password">Password</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label="Password"
+                                />
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item xs={12} >
+                            {state == 'verify' || state == 'verified' ?
+                                <Otp APIUrl={otpAPI} Email={email} callBack={handleCallback} />
+                                : <></>
                             }
-                        />
-                    </Box>
+                        </Grid>
+
+                    </Grid>
 
                     <Box className={classes.buttonBox}>
-                        <Button onClick={handleSubmit} variant="outlined" color="primary" className={classes.Button}  >
-                            Create Account
+                        <Button
+                            onClick={handleSubmit}
+                            type='submit'
+                            variant="outlined"
+                            color="primary"
+                            disabled={state === 'verify'}
+                            className={classes.Button}  >
+                            {state === 'signup' ? 'send Otp' : 'Create Account'}
                         </Button>
                     </Box>
                 </Box>

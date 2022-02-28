@@ -16,51 +16,52 @@ const Header = (props) => {
   const cUser = localStorage.getItem("cUser")
   const admin = localStorage.getItem("admin");
   const [anchor, setAnchor] = React.useState(null);
-  const [signanchorEl,setSignanchorEl]= React.useState(null);
-  const [signanchor,setSignanchor]=React.useState(null);
+  const [signanchorEl, setSignanchorEl] = React.useState(null);
+  const [signanchor, setSignanchor] = React.useState(null);
 
   //handleUserSignUp and handleMouseOverSignup are functions for the laptop view two types of signups
   const handleUserSignUp = (event) => {
-    navigate('/signup');
+    navigate('/userSignUp');
     setSignanchorEl(null);
   }
   const handleCompanySignUp = (event) => {
-    navigate('/busreg');
+    navigate('/companySignUp');
     setSignanchorEl(null);
   }
-  const handleMouseOverSignup = (event)=>{
+  const handleMouseOverSignup = (event) => {
     setSignanchorEl(event.currentTarget);
   }
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const loginsignupbtn = () => {
-    navigate("/lognsignup");
+  //handleDrawerMouseOver and loginbtn are for mobile view two types of login and for some other function as well
+  const handleDrawerMouseOver = (event) => {
+    setAnchorEl(event.currentTarget);
+  }
+  const UserLoginbtn = () => {
+    navigate("/userLogin");
+    setAnchorEl(null);
     setMobileOpen(!mobileOpen);
   };
 
-  //handleDrawerMouseOver and loginbtn are for mobile view two types of login and for some other function as well
-  const handleDrawerMouseOver = (event)=>{
-    setAnchorEl(event.currentTarget);
-  }
-  const loginbtn = () => {
-    navigate("/login");
+  const CompanyLoginbtn = () => {
+    navigate("/companyLogin");
     setAnchorEl(null);
     setMobileOpen(!mobileOpen);
   };
 
   //handleDrawerMouseOverSignup an signupbtnUser are used for the mobile view two types of signup
-  const handleDrawerMouseOverSignup = (event)=>{
+  const handleDrawerMouseOverSignup = (event) => {
     setSignanchor(event.currentTarget);
   }
   const signupbtnUser = () => {
-    navigate("/signup");
+    navigate("/userSignUp");
     setSignanchor(null);
     setMobileOpen(!mobileOpen);
   };
-  const signupbtnCompany = () =>{
-    navigate("/busreg");
+  const signupbtnCompany = () => {
+    navigate("/companySignUp");
     setSignanchor(null)
     setMobileOpen(!mobileOpen);
   }
@@ -77,6 +78,9 @@ const Header = (props) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+    setSignanchor(null);
+    setAnchor(null);
+    setSignanchorEl(null);
   };
   const addJob = () => {
     setAnchorEl(null);
@@ -84,6 +88,14 @@ const Header = (props) => {
   }
   const addJobMobile = () => {
     navigate('/jobform');
+    setMobileOpen(!mobileOpen);
+  }
+  const goToProfile = () => {
+    setAnchorEl(null);
+    navigate('/businessprofile');
+  }
+  const goToProfileMobile = () => {
+    navigate('/businessprofile');
     setMobileOpen(!mobileOpen);
   }
 
@@ -96,10 +108,16 @@ const Header = (props) => {
 
   //handleUserLogin and handleMouseOver are functions for the laptop view two types of logins
   const handleUserLogin = (event) => {
-    navigate('/login');
+    navigate('/userLogin');
     setAnchor(null);
   }
-  const handleMouseOver = (event)=>{
+
+  const handleBusinessLogin = (event) => {
+    navigate('/companyLogin');
+    setAnchor(null);
+  }
+
+  const handleLogin = (event) => {
     setAnchor(event.currentTarget);
   }
   //anchorEl={anchorEl},{anchor},{signanchor},{signanchorEl} se hi charo open ho rhe h se writing it here 
@@ -122,11 +140,17 @@ const Header = (props) => {
                   </Typography></MenuItem>
 
                   {admin ?
-                    <MenuItem className={classes.MenuItems} onClick={addJobMobile} as={Link} to='/jobform'>
-                      <Typography className={classes.navText} variant="h6" component="div">
-                        Add Job/Internship
-                      </Typography>
-                    </MenuItem> : <div></div>
+                    <>
+                      <MenuItem className={classes.MenuItems} onClick={addJobMobile} as={Link} to='/jobform'>
+                        <Typography className={classes.navText} variant="h6" component="div">
+                          Add Job/Internship
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem className={classes.MenuItems} onClick={goToProfileMobile} as={Link} to='/jobform'>
+                        <Typography className={classes.navText} variant="h6" component="div">
+                          Profile
+                        </Typography>
+                      </MenuItem> </> : <div></div>
                   }
 
                   <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logoutMobile}>logout</Button></MenuItem>
@@ -143,45 +167,45 @@ const Header = (props) => {
                 </Menu> */}
                 <Button className={classes.btn} onClick={handleDrawerMouseOver}  >Login</Button>
                 <Menu
-                      className={classes}
-                      id="menu-appbar"
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
-                    >
-                      <MenuItem onClick={loginbtn} >User Login</MenuItem>
-                      <MenuItem  >Business Login</MenuItem>
-                      
+                  className={classes}
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={UserLoginbtn} >Applicant Login</MenuItem>
+                  <MenuItem onClick={CompanyLoginbtn} >Company Login</MenuItem>
+
                 </Menu>
                 <Button className={classes.btn} onClick={handleDrawerMouseOverSignup} >Sign Up</Button>
                 <Menu
-                      className={classes}
-                      id="menu-appbar"
-                      anchorEl={signanchor}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={Boolean(signanchor)}
-                      onClose={handleClose}
-                    >
-                      <MenuItem onClick={signupbtnUser} >User Sign up</MenuItem>
-                      <MenuItem onClick={signupbtnCompany} >Business Sign up</MenuItem>
-                      
+                  className={classes}
+                  id="menu-appbar"
+                  anchorEl={signanchor}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(signanchor)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={signupbtnUser} >User Sign up</MenuItem>
+                  <MenuItem onClick={signupbtnCompany} >Business Sign up</MenuItem>
+
                 </Menu>
               </div>}
           </div>
@@ -213,7 +237,7 @@ const Header = (props) => {
           <Toolbar className={classes.navbar} >
             <div className={classes.navbox}>
               <MenuItem onClick={() => { navigate('/'); }} className={classes.navLogo} >
-                  <img className={classes.logo} src="img/logo.svg" alt="logo ayega bhai yaha" />
+                <img className={classes.logo} src="img/logo.svg" />
               </MenuItem>
             </div>
 
@@ -255,38 +279,44 @@ const Header = (props) => {
                       open={Boolean(anchorEl)}
                       onClose={handleClose}
                     >
-                      
+
                       <div className={classes.MenuContainer}>
                         <MenuItem className={classes.MenuItems} ><AccountCircle className={classes.InnerUserIcon} /></MenuItem>
 
                         <MenuItem className={classes.MenuItems} >{cUser}</MenuItem>
 
                         {admin ?
-                          <MenuItem className={classes.MenuItems} onClick={addJob} as={Link} to='/jobform'>Add Job/Intership</MenuItem> : <></>
+                          <>
+                            <MenuItem className={classes.MenuItems} onClick={addJob} as={Link} to='/jobform'>Add Job/Intership</MenuItem>
+                            <MenuItem className={classes.MenuItems} onClick={goToProfile} as={Link} to='/jobform'>Profile</MenuItem> </>
+                          : <></>
                         }
 
                         <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logout}>logout</Button></MenuItem>
                       </div>
                     </Menu></div> : <div>
-                    <Button className={classes.btn} onClick={handleMouseOver} >Login</Button>
+                    <Button
+                      aria-controls="menu-login"
+                      aria-haspopup="true"
+                      className={classes.btn} onClick={handleLogin} >Login</Button>
                     <Menu
                       className={classes}
-                      id="menu-appbar"
-                      anchorEl={anchor}
+                      id="menu-login"
                       anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
+                        vertical: 'top',
+                        horizontal: 'right',
                       }}
                       keepMounted
                       transformOrigin={{
                         vertical: 'top',
                         horizontal: 'right',
                       }}
-                      open={Boolean(anchor)}
                       onClose={handleClose}
+                      anchorEl={anchor}
+                      open={Boolean(anchor)}
                     >
-                      <MenuItem onClick={handleClose} >Business login</MenuItem>
-                      <MenuItem onClick={handleUserLogin} >User login</MenuItem>
+                      <MenuItem onClick={handleBusinessLogin} >Business login</MenuItem>
+                      <MenuItem onClick={handleUserLogin} >Applicant login</MenuItem>
                     </Menu>
                     <Button className={classes.btn} onClick={handleMouseOverSignup}>Sign Up</Button>
                     <Menu
@@ -306,7 +336,7 @@ const Header = (props) => {
                       onClose={handleClose}
                     >
                       <MenuItem onClick={handleCompanySignUp} >Business Sign up</MenuItem>
-                      <MenuItem onClick={handleUserSignUp} >User Sign up</MenuItem>
+                      <MenuItem onClick={handleUserSignUp} >Applicant Sign up</MenuItem>
                     </Menu>
                   </div>}
               </div>
