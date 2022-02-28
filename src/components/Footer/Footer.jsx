@@ -98,7 +98,7 @@ const Footer = () => {
                     <Typography variant="h6" className={classes.typography} >Contact</Typography>
                   </Link>
                   <Link href="#" color="inherit" underline="none" className={classes.typography}>
-                    <Typography variant="h6" className={classes.typography} >Blog</Typography>
+                    <Typography variant="h6" className={classes.typography} >DCMA</Typography>
                   </Link>
                   <Link href="#" color="inherit" underline="none" className={classes.typography}>
                     <Typography variant="h6" className={classes.typography} >General Queries</Typography>

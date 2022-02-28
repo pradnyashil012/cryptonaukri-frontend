@@ -15,7 +15,12 @@ import { ToastContainer } from 'react-toastify';
 import HeaderHome from "./components/Header/headerHome";
 import LoginSignup from "./components/LoginSignup";
 import BussinessProfile from "./components/BusinessProfile";
-
+import  AboutUS  from "./components/AboutUS";
+import Contact from "./components/Contact";
+import Privacy from "./components/Privacy";
+import DCMA from "./components/DCMA.js";
+import GeneralQueries from "./components/GeneralQueries";
+import Terms from "./components/Terms";
 const useStyles = makeStyles((theme) => ({
   contentBody: {
     height: "auto",
@@ -73,6 +78,12 @@ const App = () => {
               <Route path="/jobspage" element={<> <JobsPage /></>}></Route>
               <Route path="/internships" element={<><InternshipPage /></>}></Route>
               <Route path="/jobform" element={<><JobForm /></>}></Route>
+              <Route path="/Aboutus" element={<><AboutUS /></>}></Route>
+              <Route path="/Contact" element={<><Contact /></>}></Route>
+              <Route path="/Privacy" element={<><Privacy /></>}></Route>
+              <Route path="/DCMA" element={<><DCMA /></>}></Route>
+              <Route path="/GeneralQueries" element={<><GeneralQueries /></>}></Route>
+              <Route path="/Terms" element={<><Terms /></>}></Route>
             </Routes>
           </Box>
           <Footer />
