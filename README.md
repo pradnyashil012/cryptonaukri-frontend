@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### `npm install`
 
-Run 'nmp install' after cloning the front-end repository to initialise all the dev dependencies. 
+Run 'npm install' after cloning the front-end repository to initialise all the dev dependencies. Run below script to run the Project.
 
 ## Available Scripts
 
