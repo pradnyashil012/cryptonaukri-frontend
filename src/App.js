@@ -16,21 +16,18 @@ import { responsiveFontSizes } from "@mui/material/styles/";
 import BusReg from "./components/BusnessRegestration";
 import LoginSignup from "./components/LoginSignup";
 import BussinessProfile from "./components/BusinessProfile";
-<<<<<<< HEAD
 import  AboutUS  from "./components/AboutUS";
 import Contact from "./components/Contact";
 import Privacy from "./components/Privacy";
 import DCMA from "./components/DCMA.js";
 import GeneralQueries from "./components/GeneralQueries";
 import Terms from "./components/Terms";
-=======
 import Reset from "./components/forgotPass/forgotPass";
 import Otp from "./components/otp/otp";
 import JobDetails from "./components/JobDetails/JobDetails";
 import { AppBlocking } from "@mui/icons-material";
 import ApplyJob from "./components/applyJob/applyjob";
 
->>>>>>> bacafc95ec5e44327d63039a5f9fe0b983f11c62
 const useStyles = makeStyles((theme) => ({
   contentBody: {
     height: "auto",
@@ -92,18 +89,15 @@ const App = () => {
               <Route path="/jobspage" element={<> <JobsPage /></>}></Route>
               <Route path="/internships" element={<><InternshipPage /></>}></Route>
               <Route path="/jobform" element={<><JobForm /></>}></Route>
-<<<<<<< HEAD
               <Route path="/Aboutus" element={<><AboutUS /></>}></Route>
               <Route path="/Contact" element={<><Contact /></>}></Route>
               <Route path="/Privacy" element={<><Privacy /></>}></Route>
               <Route path="/DCMA" element={<><DCMA /></>}></Route>
               <Route path="/GeneralQueries" element={<><GeneralQueries /></>}></Route>
               <Route path="/Terms" element={<><Terms /></>}></Route>
-=======
               <Route path="/userResume" element={<><Resume /></>}></Route>
               <Route path="/resetPassWord" element={<><Reset /></>}></Route>
               <Route path="/Otp" element={<><Otp /></>}></Route>
->>>>>>> bacafc95ec5e44327d63039a5f9fe0b983f11c62
             </Routes>
           </Box>
           <Footer />
