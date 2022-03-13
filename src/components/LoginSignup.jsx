@@ -4,6 +4,7 @@ import { Visibility,VisibilityOff } from "@material-ui/icons";
 import { toast } from "react-toastify";
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const useStyles=makeStyles((theme)=>({
   formContainer: {
@@ -63,9 +64,12 @@ const LoginSignup=()=>{
   const [email, setEmail] = useState('');
   const [password2, setPassword2] = useState('');
 
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     showPassword: false,
   });
+
+  const [loading, setLoading] = useState(false);
+
   const handlePassChange = (e) => {
     setPass(e.target.value)
   }
@@ -93,10 +97,12 @@ const LoginSignup=()=>{
     }
     if (loginemail && password) {
       try {
+        setLoading(true);
         const API = process.env.URL;
         console.log(API)
-        const response = await Axios.post(`https://cryptonaukri-backend.herokuapp.com/login`, { loginemail, password });
+        const response = await Axios.post(`https://cryptonaukribackend.herokuapp.com/api/v1/user/login`, { loginemail, password });
         const data = response.data;
+        setLoading(false);
         if (data.login) {
           localStorage.setItem('login', true);
           localStorage.setItem('cUser', data.cUser);
@@ -110,6 +116,7 @@ const LoginSignup=()=>{
           toast.error(data.status)
         }
       } catch (error) {
+        setLoading(false);
         toast.error('Login Failed ,please try again !!')
       }
     }
@@ -122,15 +129,15 @@ const LoginSignup=()=>{
     }
     if (name && email && password2) {
         try {
-
-            const response = await Axios.post('https://cryptonaukri-backend.herokuapp.com/signup', { name, email, password });
+          setLoading(true);
+            const response = await Axios.post('https://cryptonaukribackend.herokuapp.com/api/v1/user/signup', { name, email, password });
             // const data = response.data;
             toast.success('Account Created !!');
             toast.success('U can Now LogIn!!');
             navigate('/login');
-
+            setLoading(false);
         } catch (error) {
-
+            setLoading(false);
             toast.error('Could not create account ,try again !!');
         }
     }
@@ -239,9 +246,9 @@ const LoginSignup=()=>{
                     </Box>
 
                     <Box className={classes.buttonBox}>
-                        <Button onClick={handleSubmitSignup} variant="outlined" color="primary" className={classes.Button}  >
+                        {loading?<CircularProgress /> :<Button onClick={handleSubmitSignup} variant="outlined" color="primary" className={classes.Button}  >
                             Create Account
-                        </Button>
+                        </Button>}
                     </Box>
             </Box> }
           </Box>

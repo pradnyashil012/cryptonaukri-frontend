@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -55,13 +55,14 @@ const Login = (props) => {
 
 
   const [password, setPass] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
   const classes = useStyles();
   const [email, setEmail] = useState("");
 
-  const API = 'http://localhost:3001'
+  const API = 'https://cryptonaukribackend.herokuapp.com/'
 
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     showPassword: false,
   });
 
@@ -96,9 +97,11 @@ const Login = (props) => {
         // console.log(email)
         // console.log(password)
         try {
+          setLoading(true);
           const response = await Axios.post(`${API}/business/authentication/login`, { email, password });
           console.log(email, password)
           const data = response.data;
+          setLoading(false);
           if (data.login) {
             localStorage.setItem('login', true);
             localStorage.setItem('cUser', data.cUser);
@@ -110,6 +113,7 @@ const Login = (props) => {
             toast.error(data.message)
           }
         } catch (error) {
+          setLoading(false);
           toast.error('Login Failed ,please try again !!')
         }
 
@@ -136,20 +140,32 @@ const Login = (props) => {
           // }
 
           try {
-            const response = await Axios.post(`${API}/user/authentication/login`, { email, password });
+            setLoading(true);
+            const response = await Axios.post(`${API}api/v1/user/login`, { email, password });
             console.log(email, password)
             const data = response.data;
+            setLoading(false);
+            console.log(response.headers['authorization']);
             // if (data.login) {
+            props.setToken(response.headers['authorization']);
             localStorage.setItem('login', true);
             localStorage.setItem('cUser', data.cUser);
             toast.success(data.message);
-            navigate('/')
+            navigate('/jobspage')
             // }
             // else {
             //   toast.error(data.message)
             // }
           } catch (error) {
-            toast.error('Login Failed ,please try again !!')
+            console.log( error.request.response );
+            const err = JSON.parse(error.request.response);
+            if(err.code == "WRONG_PASSWORD"){
+              toast.error("Wrong email or password !!")
+            }else{
+              toast.error(err.code);
+            }
+            setLoading(false);
+            //toast.error('Login Failed ,please try again !!')
           }
         }
     }
@@ -206,12 +222,12 @@ const Login = (props) => {
           </Grid>
 
           <Box className={classes.buttonBox} >
-            <Button onClick={handleSubmit}
+            {loading?<CircularProgress />:<Button onClick={handleSubmit}
               variant="outlined"
               color="primary"
               className={classes.Button}
             >
-              Login </Button>
+              Login </Button>}
           </Box>
         </Box>
       </Container>

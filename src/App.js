@@ -27,6 +27,7 @@ import Otp from "./components/otp/otp";
 import JobDetails from "./components/JobDetails/JobDetails";
 import { AppBlocking } from "@mui/icons-material";
 import ApplyJob from "./components/applyJob/applyjob";
+import useToken from './utils/useToken'
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
@@ -68,6 +69,9 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme);
 
 const App = () => {
+
+  const {token, setToken} = useToken();
+
   const classes = useStyles();
   return (
     <> 
@@ -82,7 +86,7 @@ const App = () => {
               <Route exact path="/details" element={<><JobDetails /></>}></Route>
               <Route exact path="/jobapplication" element={<><ApplyJob /></>}></Route>
               <Route exact path="/loginsignup" element={<><LoginSignup /></>}></Route>
-              <Route path="/userLogin" element={<><Login route="user" /></>}></Route>
+              <Route path="/userLogin" element={<><Login route="user" token={token} setToken={setToken} /></>}></Route>
               <Route path="/companyLogin" element={<><Login route="company" /></>}></Route>
               <Route path="/userSignUp" element={<> <SignUp /></>}></Route>
               <Route path="/companySignUp" element={<><BusReg /></>}></Route>

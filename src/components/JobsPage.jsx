@@ -38,9 +38,9 @@ const JobsPage = (e) => {
                     <h1 style={{ margin: '10px 0' }}>Discover jobs</h1>
                     {loading?
                         <>
-                        <JobCardLoading />
-                        <JobCardLoading />
-                        <JobCardLoading />
+                            <JobCardLoading />
+                            <JobCardLoading />
+                            <JobCardLoading />
                         </>:<>
                             {
                                 dataArr.slice(0).reverse().map((e) => {
