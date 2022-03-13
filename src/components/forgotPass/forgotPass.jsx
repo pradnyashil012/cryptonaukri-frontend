@@ -9,7 +9,7 @@ import Axios from 'axios';
 import Otp from '../otp/otp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "30px 0",
   },
   Button: {
+    marginTop: "5px",
     "&:hover": {
       backgroundColor: theme.palette.primary.main,
       color: "white",
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonBox: {
     textAlign: "center",
-    paddingTop: '20px'
+    paddingTop: '20px',
   },
   body: {
     marginTop: '100px',
@@ -54,55 +55,86 @@ const useStyles = makeStyles((theme) => ({
 
 const Reset = (props) => {
 
+  const baseAPI = "https://cryptonaukribackend.herokuapp.com/";
 
-  const [state, setState] = useState('pass')
+
+  const [state, setState] = useState(1)
   const [prevState, setPrevState] = useState('email')
   const [email, setEmail] = useState('')
   const [otp, setOtp] = useState('')
   const [pass, setPass] = useState('')
-  const [ConfPass, setConfpass] = useState('')
+  const [confPass, setConfPass] = useState('')
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const classes = useStyles();
 
   const handleEmailState = (e) => {
+    setEmail(e.target.value);
 
   }
   const handleOtpState = (e) => {
-
+    setOtp(e.target.value);
+  }
+  const handlePassword1 = (e) =>{
+    setPass(e.target.value);
+  }
+  const handlePassword2 = (e) =>{
+    setConfPass(e.target.value);
   }
 
 
-  const handleSubmit = async (e) => {
-
-    // e.preventDefault();
-
-    // if (!email || !password) {
-
-    //   return toast.error('Enter all the values !!');
-    // }
-    // if (email && password) {
-    //   try {
-    //     const API = process.env.URL;
-    //     console.log(API)
-    //     const response = await Axios.post(`https://cryptonaukri-backend.herokuapp.com/login`, { email, password });
-    //     const data = response.data;
-    //     if (data.login) {
-    //       localStorage.setItem('login', true);
-    //       localStorage.setItem('cUser', data.cUser);
-    //       toast.success(data.status);
-    //       if (data.admin) {
-    //         localStorage.setItem('admin', true);
-    //       }
-    //       navigate('/')
-    //     }
-    //     else {
-    //       toast.error(data.status)
-    //     }
-    //   } catch (error) {
-    //     toast.error('Login Failed ,please try again !!')
-    //   }
-    // }
+  const handleOtpSubmit = async (e) => {
+    e.preventDefault();
+    if(email){
+      try{
+        setLoading(true);
+        const response = await Axios.get(`${baseAPI}api/v1/user/forgetPasswordOTP?email=${email}`);
+        const data = response.data;
+        if(data.code == "OTP_SENT"){
+          toast.success(data.message);
+          setState(2);
+        }
+        setLoading(false);
+      } catch(error){
+        console.log(error);
+      }
+      
+    }
   };
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    if(!email || !otp){
+      toast.error("OTP is required !!")
+    }
+    if(email && otp && pass === confPass){
+      console.log("pass same ready to payload");
+      try{
+        setLoading(true);
+        const response = await Axios.post(`${baseAPI}api/v1/user/forgetPassword`,{
+                        email: email,
+                        otp: Number(otp),
+                        newPassword: pass,
+                        });
+        const data = response.data;
+        if(data.code == "CHANGED_PASSWORD"){
+          toast.success("Password changes successfully !!")
+        }
+        navigate('/userLogin');
+        return;
+        console.log(data);
+        setLoading(false);
+      }catch(error){
+        const err = JSON.parse(error.request.response);
+        toast.error(err.message);
+        setLoading(false);
+      }
+      
+                
+    }else{
+      toast.error("Passwords must be same")
+    }
+  }
 
   return (
     <div className={classes.body} >
@@ -119,100 +151,93 @@ const Reset = (props) => {
 
           <Grid container spacing={3}>
 
-            {state == 'email' ? <Grid item xs={12} >
-              <FormControl fullWidth variant="outlined">
-                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Email</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-name"
-                  type='email'
-                  value={email}
-                  onChange={() => { setEmail(this.value) }}
-                  name='comp'
-                  label='Company Name'
-                />
-              </FormControl>
-            </Grid> : <></>}
+              {state===1?<Grid item xs={12} >
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Email</InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-name"
+                      type='email'
+                      value={email}
+                      onChange={handleEmailState}
+                      name='comp'
+                      label='Company Name'
+                    />
+                  </FormControl>
+              </Grid>:<></>}
+              {
+                state === 1?
+                  <Grid item xs={12} >
 
-            {state == 'otp' ? <Grid item xs={12} >
-              <FormControl fullWidth variant="outlined">
-                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Otp</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-name"
-                  type='text'
-                  value={otp}
-                  onChange={() => { setOtp(this.value) }}
-                  name='comp'
-                  label='Company Name'
-                />
-              </FormControl>
-            </Grid> : <></>}
+                    { loading?<CircularProgress />:<Button onClick={handleOtpSubmit}
+                        color="primary"
+                        fullWidth 
+                        variant="contained"
+                        type="submit"
+                        className={classes.Button}
+                      >
+                        Send OTP</Button>
+                    }
 
-            {state == 'pass' ? <> <Grid item xs={6} >
-              <FormControl fullWidth variant="outlined">
-                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter New Password</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-name"
-                  type='text'
-                  value={pass}
-                  onChange={() => { setPass(this.value) }}
-                  name='comp'
-                  label='Company Name'
-                />
-              </FormControl>
-            </Grid>
-              <Grid item xs={6} >
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Confirm New Password</InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-name"
-                    type='text'
-                    value={ConfPass}
-                    onChange={() => { setConfpass(this.value) }}
-                    name='comp'
-                    label='Company Name'
-                  />
-                </FormControl>
-              </Grid> </> : <></>}
-            <Otp />
+                  </Grid>:<></>
+              }
+
+              {
+                state === 2? 
+                  <Grid item xs={12} spacing={10}>
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel className={classes.label} htmlFor="outlined-adornment-name">OTP</InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-name"
+                        type='number'
+                        value={otp}
+                        onChange={handleOtpState}
+                        name='otp'
+                        label='OTP'
+                      />
+                    </FormControl>
+                    <br /> <br />
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel className={classes.label} htmlFor="outlined-adornment-name">New Password</InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-name"
+                        type='password'
+                        value={pass}
+                        onChange={handlePassword1}
+                        name='Password'
+                        label='Pass'
+                      />
+                    </FormControl>
+                    <br /> <br />
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Re-enter Password</InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-name"
+                        type='text'
+                        value={confPass}
+                        onChange={handlePassword2}
+                        name='Re Password'
+                        label='Pass'
+                      />
+                    </FormControl>
+                    <Grid item xs={12} >
+
+                    { loading?<CircularProgress />:<Button onClick={handleSubmit}
+                        color="primary"
+                        fullWidth 
+                        variant="contained"
+                        type="submit"
+                        className={classes.Button}
+                      >
+                        Change Password</Button>
+                    }
+
+                  </Grid>
+
+                </Grid>
+                : <></>
+              }
+            
           </Grid>
-
-          <Box className={classes.buttonBox} >
-            {state == 'email' ?
-              <Button onClick={handleEmailState}
-                variant="outlined"
-                color="primary"
-                className={classes.Button}
-              >
-                Send Otp </Button>
-              : <></>
-            }
-            {state == 'otp' ?
-              <Button onClick={handleOtpState}
-                variant="outlined"
-                color="primary"
-                className={classes.Button}
-              >
-                Verify Otp </Button>
-              : <></>
-            }
-            {state == 'pass' ?
-              <Button onClick={handleSubmit}
-                variant="outlined"
-                color="primary"
-                className={classes.Button}
-              >
-                Update Pass</Button>
-              : <></>
-            }
-            <Typography variant="p">
-              <Box sx={{
-                paddingTop: '10px'
-              }}>
-                Ayush is here
-              </Box>
-            </Typography>
-          </Box>
-
         </Box>
       </Container>
     </div >

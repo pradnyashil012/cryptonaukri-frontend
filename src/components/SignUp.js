@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Otp from '../components/otp/otp'
+import CircularProgress from '@mui/material/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -61,11 +62,16 @@ const SignUp = () => {
     const [location, setLocation] = useState('');
     const [number, setNumber] = useState('');
     const [password, setPassword] = useState('');
-    const [state, setState] = useState('signup');
-    const [values, setValues] = React.useState({
+    const [state, setState] = useState('otp');
+    const [otp, setOtp] = useState();
+    const [values, setValues] = useState({
         showPassword: false,
     });
-    const otpAPI = `/user/authentication/verify-email`
+
+    const [loading, setLoading] = useState(false);
+
+
+    const otpAPI = `https://cryptonaukribackend.herokuapp.com/api/v1/user/otp?email=`
     const secretCode = 'jbsf198237orAUaf';
 
     const handleClickShowPassword = () => {
@@ -100,9 +106,88 @@ const SignUp = () => {
         // console.log('handlecallback is called !!')
         // console.log(state);
     }
+    const handleOtpChange = (event) =>{
+        setOtp(event.target.value);
+    }
+
+    const handleOtp = async (e) =>{
+        e.preventDefault();
+        if (!fname || !lname || !email || !password) {
+                toast.error('Enter All the Values');
+                return;
+        }
+        if (fname && lname && email && password) {
+            if(state === 'verify'){
+
+                try{
+                    setLoading(true);
+                    let payload = JSON.stringify({
+                            firstName: fname,
+                            lastName: lname,
+                            email: email,
+                            password: password,
+                            location: location,
+                            phoneNumber: number,
+                            otp: Number(otp),
+                        });
+                    console.log(payload);
+                    console.log("Now verify otp with signup");
+                    const response = await Axios.post('https://cryptonaukribackend.herokuapp.com/api/v1/user/signup',{
+                            firstName: fname,
+                            lastName: lname,
+                            email: email,
+                            password: password,
+                            location: location,
+                            phoneNumber: number,
+                            otp: Number(otp),
+                        }
+                    );
+                    const data = response.data;
+                    console.log(data);
+                    setLoading(false);
+                    return;
+                } catch(error){
+                    setLoading(false);
+                    console.log( error.request.response );
+                    const err = JSON.parse(error.request.response);
+                    toast.error(err.message);
+                }
+                
+            }
+        }
+        
+    }
+
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(state === 'otp'){
+            if (!fname || !lname || !email || !password) {
+                toast.error('Enter All the Values');
+                return;
+            }
+            if (fname && lname && email && password) {
+                if (state === 'otp') {
+                    try {
+                        setLoading(true);
+                        const response = await Axios.get(otpAPI+email);
+                        const data = response.data;
+                        if(data.otpSent === true){
+                            toast.success('OTP sent to your registered email address.');
+                            setState('verify');
+                        }
+                        setLoading(false);
+
+                    } catch (error) {
+                        setLoading(false);
+                        const err = JSON.parse(error.request.response);
+                        toast.error(err.message);
+                    }
+                }
+            }
+        }
 
         // if (secretCode === coupon ) {
         //     toast.success('Coupon matched successfully!');
@@ -110,41 +195,45 @@ const SignUp = () => {
         //     toast.success('U can Now LogIn!!');
         // } else { toast.error('Wrong code'); };
 
-        if (!fname || !lname || !email || !password) {
-            toast.error('Enter All the Values');
-        }
-        if (fname && lname && email && password) {
-            if (state === 'signup') {
-                try {
-                    const response = await Axios.post('http://localhost:3001/user/authentication/signup', { fname, lname, email, number, password, location })
-                        .then((res) => {
-                            const data = res.data;
-                            // console.log(data)
-                            if (data.code !== false) {
-                                toast.success(data.message);
-                                setState('verify')
-                                console.log('again in the function')
-                            } else {
-                                toast.error(data.message);
-                            }
-                        })
-                        .catch((err) => {
-                            console.log(err)
-                        });
-                    // const data = response.data;
+        // if (!fname || !lname || !email || !password) {
+        //     toast.error('Enter All the Values');
+        // }
+        // if (fname && lname && email && password) {
+        //     if (state === 'signup') {
+        //         try {
+        //             setLoading(true);
+        //             const response = await Axios.post('https://cryptonaukribackend.herokuapp.com/api/v1/user/signup', { fname, lname, email, number, password, location })
+        //                 .then((res) => {
+        //                     const data = res.data;
+        //                     setLoading(false);
+        //                     // console.log(data)
+        //                     if (data.code !== false) {
+        //                         toast.success(data.message);
+        //                         setState('verify')
+        //                         console.log('again in the function')
+        //                     } else {
+        //                         toast.error(data.message);
+        //                     }
+        //                 })
+        //                 .catch((err) => {
+        //                     setLoading(false);
+        //                     console.log(err)
+        //                 });
+        //             // const data = response.data;
 
-                } catch (error) {
-                    toast.error('Could not create account ,try again !!');
-                }
-            } else if (state === 'verified') {
-                toast.success('Account Created !!');
-                navigate('/userLogin')
-                return toast.success('Try logging in !!');
+        //         } catch (error) {
+        //             setLoading(false);
+        //             toast.error('Could not create account ,try again !!');
+        //         }
+        //     } else if (state === 'verified') {
+        //         toast.success('Account Created !!');
+        //         navigate('/userLogin')
+        //         return toast.success('Try logging in !!');
 
-            } else if (state === 'verify') {
-                toast.info('Email is already sent to you !!');
-            }
-        }
+        //     } else if (state === 'verify') {
+        //         toast.info('Email is already sent to you !!');
+        //     }
+        // }
     };
     return (
         <div className={classes.body}>
@@ -227,7 +316,7 @@ const SignUp = () => {
                             </FormControl>
                         </Grid>
 
-                        {/* <Grid item xs={7} >
+                        <Grid item xs={7} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Coupon Code</InputLabel>
                                 <OutlinedInput
@@ -238,7 +327,7 @@ const SignUp = () => {
                                 />
                             </FormControl>
 
-                        </Grid> */}
+                        </Grid>
 
 
                         <Grid item xs={7} >
@@ -266,26 +355,44 @@ const SignUp = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={12} >
-                            {state == 'verify' || state == 'verified' ?
-                                <Otp APIUrl={otpAPI} Email={email} callBack={handleCallback} />
-                                : <></>
-                            }
-                        </Grid>
+                        {state=='verify'?<>
+                            <Grid item xs={9} >
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Otp</InputLabel>
+                                    <OutlinedInput variant="outlined"
+                                    name="password"
+                                    fullWidth
+                                    type="text"
+                                    value={otp}
+                                    onChange={handleOtpChange}
+                                    disabled={state == 'verified' ? true : false}
+                                    />
+                                </FormControl>
+                            </Grid>
+                            <Box className={classes.buttonBox}>
+                                {loading?<CircularProgress/> :<Button onClick={handleOtp}
+                                        variant="outlined"
+                                        color="primary"
+                                        className={classes.Button}
+                                        disabled={state == 'verified' ? true : false}
+                                    >
+                                    {state == 'verified' ? 'verified' : 'verify Otp and Signup'} </Button>}
+                            </Box>
+                        </>:<></>}
 
                     </Grid>
 
-                    <Box className={classes.buttonBox}>
-                        <Button
+                    {state=='verify'?<></>:<Box className={classes.buttonBox}>
+                        {loading?<CircularProgress/> :<Button
                             onClick={handleSubmit}
                             type='submit'
                             variant="outlined"
                             color="primary"
                             disabled={state === 'verify'}
                             className={classes.Button}  >
-                            {state === 'signup' ? 'send Otp' : 'Create Account'}
-                        </Button>
-                    </Box>
+                            {state === 'otp' ? 'send Otp' : 'Create Account'}
+                        </Button>}
+                    </Box>}
                 </Box>
             </Container>
         </div>
