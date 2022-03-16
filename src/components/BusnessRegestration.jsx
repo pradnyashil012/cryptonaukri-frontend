@@ -72,7 +72,7 @@ const BusReg = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     let urlParamId = searchParams.get("id");
-    const APIUrl = `http://localhost:3001`;
+    const APIUrl = `https://cryptonaukri-backend.herokuapp.com`;
     const otpAPI = `/business/authentication/verify-email`
 
     const handleExecChange = (e) => {
@@ -135,12 +135,12 @@ const BusReg = () => {
                 return toast.error('Enter all values !');
             }
 
-            var webFromMail = email.split('@')
-            // console.log(webFromMail[1])
-            // console.log(website)
-            if (webFromMail[1] !== website) {
-                return toast.error('Use official Email of the Company !');
-            }
+            // var webFromMail = email.split('@')
+            // // console.log(webFromMail[1])
+            // //.log(website.split("."))
+            // if (webFromMail[1] !== website) {
+            //     return toast.error('Use official Email of the Company !');
+            // }
 
             if (state === 'registration') {
 
@@ -158,7 +158,7 @@ const BusReg = () => {
 
                     })
                     .catch((err) => {
-                        console.log(err);
+                        console.log(err.response);
                     })
 
             } else if (state === 'verified') {

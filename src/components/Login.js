@@ -120,25 +120,6 @@ const Login = (props) => {
       }
       else
         if (props.route == 'user') {
-          // try {
-          //   const response = await Axios.post(`https://cryptonaukri-backend.herokuapp.com/login`, { email, password });
-          //   const data = response.data;
-          //   if (data.login) {
-          //     localStorage.setItem('login', true);
-          //     localStorage.setItem('cUser', data.cUser);
-          //     toast.success(data.status);
-          //     if (data.admin) {
-          //       localStorage.setItem('Busineadmin', true);
-          //     }
-          //     navigate('/')
-          //   }
-          //   else {
-          //     toast.error(data.status)
-          //   }
-          // } catch (error) {
-          //   toast.error('Login Failed ,please try again !!')
-          // }
-
           try {
             setLoading(true);
             const response = await Axios.post(`${API}api/v1/user/login`, { email, password });

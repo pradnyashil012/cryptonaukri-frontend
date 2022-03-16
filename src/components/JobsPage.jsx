@@ -23,6 +23,7 @@ const JobsPage = (e) => {
         .then((res)=>{
             setLoading(false);
             setDataArr(res.data);
+            console.log(res.data);
         })
         .catch((err)=>{
             setLoading(false);
@@ -44,7 +45,7 @@ const JobsPage = (e) => {
                         </>:<>
                             {
                                 dataArr.slice(0).reverse().map((e) => {
-                                    return <JobCard position={e.position} cmp={e.company} exp={e.experience} opn={e.openings} link={e.link} srNo={e._id}/>
+                                    return <JobCard key={e._id} position={e.position} cmp={e.company} exp={e.experience} opn={e.openings} link={e.link} srNo={e._id}/>
                                 })
                             }
                     </>}

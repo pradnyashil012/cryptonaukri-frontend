@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppBar, Box, Toolbar, Typography, IconButton, Menu, MenuItem, Button, CssBaseline, makeStyles, Container, Divider, List, ListItem, ListItemText, Drawer, Chip } from "@material-ui/core";
 import { AccountCircle, ArrowDropDown, } from "@material-ui/icons";
 import useStyles from './headerStyles';
 import { Link, useNavigate } from "react-router-dom";
 import { MenuRounded, Close } from '@mui/icons-material';
-
+import axios from 'axios';
 const drawerWidth = 340;
 
 
@@ -12,9 +12,11 @@ const Header = (props) => {
   const classes = useStyles();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const login = localStorage.getItem("login")
-  const cUser = localStorage.getItem("cUser")
+  const login = localStorage.getItem("login");
+  const cUser = localStorage.getItem("cUser");
   const admin = localStorage.getItem("admin");
+  const token = localStorage.getItem("token");
+  const [user, setUser] = useState();
   const [anchor, setAnchor] = React.useState(null);
   const [signanchorEl, setSignanchorEl] = React.useState(null);
   const [signanchor, setSignanchor] = React.useState(null);
@@ -76,6 +78,21 @@ const Header = (props) => {
     navigate("/");
   };
 
+
+  const getUser = async() =>{
+    if(token){
+      console.log(token.split('"')[1]);
+      
+      const response = await axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
+                        headers: {
+                          "Authorization": `Bearer ${token.split('"')[1]}`,
+                        }
+                      });
+      console.log(response.data);
+      setUser(response.data);
+    }
+  }
+
   const handleClose = () => {
     setAnchorEl(null);
     setSignanchor(null);
@@ -122,6 +139,13 @@ const Header = (props) => {
   }
   //anchorEl={anchorEl},{anchor},{signanchor},{signanchorEl} se hi charo open ho rhe h se writing it here 
   //so that we can have a note of it
+
+  useEffect(()=>{
+    if(token){
+      getUser();
+    }
+  },[token])
+
   const drawer = (
     <div>
       <Toolbar />
@@ -136,7 +160,7 @@ const Header = (props) => {
                     <AccountCircle className={classes.userIcon} />
                   </MenuItem>
                   <MenuItem className={classes.MenuItems}><Typography className={classes.navText} variant="h6" component="div">
-                    {cUser}
+                    {user.firstName}
                   </Typography></MenuItem>
 
                   {admin ?
