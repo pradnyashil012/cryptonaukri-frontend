@@ -144,6 +144,8 @@ const SignUp = () => {
                     );
                     const data = response.data;
                     console.log(data);
+                    toast.success("User Created!!, Please login now!!")
+                    navigate('/userLogin');
                     setLoading(false);
                     return;
                 } catch(error){

@@ -68,12 +68,14 @@ const BusReg = () => {
     const [pass, setPass] = useState('');
     const [state, setState] = useState('registration');
     const [otp, setOtp] = useState('');
+    const [loading, setLoading] = useState(false);
 
 
     const [searchParams, setSearchParams] = useSearchParams();
     let urlParamId = searchParams.get("id");
-    const APIUrl = `http://localhost:3001`;
-    const otpAPI = `/business/authentication/verify-email`
+    const APIUrl = `https://cryptonaukri-backend.herokuapp.com`;
+    //const otpAPI = `/business/authentication/verify-email`
+    const otpAPI = `https://cryptonaukribackend.herokuapp.com/api/v1/business/otp?email=`
 
     const handleExecChange = (e) => {
         setExec(e.target.value);
@@ -135,12 +137,12 @@ const BusReg = () => {
                 return toast.error('Enter all values !');
             }
 
-            var webFromMail = email.split('@')
-            // console.log(webFromMail[1])
-            // console.log(website)
-            if (webFromMail[1] !== website) {
-                return toast.error('Use official Email of the Company !');
-            }
+            // var webFromMail = email.split('@')
+            // // console.log(webFromMail[1])
+            // //.log(website.split("."))
+            // if (webFromMail[1] !== website) {
+            //     return toast.error('Use official Email of the Company !');
+            // }
 
             if (state === 'registration') {
 
@@ -158,7 +160,7 @@ const BusReg = () => {
 
                     })
                     .catch((err) => {
-                        console.log(err);
+                        console.log(err.response);
                     })
 
             } else if (state === 'verified') {
@@ -178,6 +180,24 @@ const BusReg = () => {
     }
     const handleEdit = () => {
 
+    }
+
+    const sendOTP = async () =>{
+        try {
+            setLoading(true);
+            const response = await Axios.get(otpAPI+email);
+            const data = response.data;
+            if(data.otpSent === true){
+                toast.success('OTP sent to your registered email address.');
+                setState('verify');
+            }
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            const err = JSON.parse(error.request.response);
+            console.log(err);
+            toast.error(err.message);
+        }
     }
 
     return (
@@ -345,7 +365,7 @@ const BusReg = () => {
                         </Grid>
                     </Grid>
                     <Box className={classes.buttonBox}>
-                        <Button
+                        {/* <Button
                             onClick={urlParamId === null ? handleSubmit : handleEdit}
                             type='submit'
                             variant="outlined"
@@ -353,7 +373,15 @@ const BusReg = () => {
                             disabled={state==='verify'}
                             className={classes.Button}  >
                             {urlParamId === null ? <>{state === 'registration' ? 'send Otp' : 'Create Account'}</> : 'Update Company Details'}
-                        </Button>
+                        </Button> */}
+                        <Button
+                            type='submit'
+                            variant="outlined"
+                            color="primary"
+                            disabled={loading}
+                            className={classes.Button}
+                            onClick={sendOTP}
+                        >{loading?"Sending OTP...":"Send OTP"}</Button>
                     </Box>
                 </Box>
             </Container>

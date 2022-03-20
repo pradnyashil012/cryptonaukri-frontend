@@ -122,8 +122,6 @@ const Reset = (props) => {
         }
         navigate('/userLogin');
         return;
-        console.log(data);
-        setLoading(false);
       }catch(error){
         const err = JSON.parse(error.request.response);
         toast.error(err.message);
