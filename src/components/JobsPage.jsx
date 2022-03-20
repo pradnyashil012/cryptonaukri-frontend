@@ -19,11 +19,14 @@ const JobsPage = (e) => {
 
     useEffect(async ()=>{
         setLoading(true);
-        const response = await Axios.get('https://cryptonaukri-backend.herokuapp.com/jobs')
+        const response = await Axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob')
         .then((res)=>{
+            const resp = res.data;
+            console.log(resp.data);
+            setDataArr(resp.data);
+            console.log(dataArr);
             setLoading(false);
-            setDataArr(res.data);
-            console.log(res.data);
+            
         })
         .catch((err)=>{
             setLoading(false);
@@ -44,8 +47,18 @@ const JobsPage = (e) => {
                             <JobCardLoading />
                         </>:<>
                             {
-                                dataArr.slice(0).reverse().map((e) => {
-                                    return <JobCard key={e._id} position={e.position} cmp={e.company} exp={e.experience} opn={e.openings} link={e.link} srNo={e._id}/>
+                                dataArr.map((data) => {
+                                    return(
+                                        <JobCard 
+                                            type={"job"}
+                                            key={data._id} 
+                                            position={data.jobTitle} 
+                                            cmp={"Company Name"} 
+                                            exp={data.experience} 
+                                            opn={data.openings}
+                                            sr={data._id} 
+                                        />
+                                    );
                                 })
                             }
                     </>}
@@ -55,7 +68,6 @@ const JobsPage = (e) => {
             </Container>
         </div>
     )
-  
 }
 export default JobsPage;
 

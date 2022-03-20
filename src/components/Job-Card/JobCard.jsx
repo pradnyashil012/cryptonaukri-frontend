@@ -109,10 +109,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const JobCard = (props) => {
-  let position = props.position;
-  let company = props.company;
-  let experience = props.exp;
-  let openings = props.opn;
+  // let position = props.position;
+  // let company = props.company;
+  // let experience = props.exp;
+  // let openings = props.opn;
+  console.log(props);
   
   const login = localStorage.getItem("login")
   const navigate = useNavigate();
@@ -134,9 +135,11 @@ const JobCard = (props) => {
     }
   };
 
-  const handleApply = ()=>{
+  const handleApply = (props)=>{
     if (login) {
-      navigate('/jobapplication')
+      // console.log(props);
+      // var encodedData = btoa(props.cmp+"::"+props.position+"::"+props.exp+"::"+props.link+"::"+props.opn+"::"+props.srNo); //company,position,experince,link,openings 
+      navigate(`/jobapplication?id=${props.sr}&type=${props.type}`)
     }else{
       toast.info('LogIn First !!');
     }
@@ -211,7 +214,7 @@ const JobCard = (props) => {
                 </Box>
               </Box>
               <Box>
-                <Button onClick={handleApply} className={classes.applyBtn} variant="outlined" color="primary">
+                <Button onClick={()=>{handleApply(props)}} className={classes.applyBtn} variant="outlined" color="primary">
                   Apply Now
                 </Button>
               </Box>

@@ -159,8 +159,8 @@ const Header = (props) => {
                   <MenuItem>
                     <AccountCircle className={classes.userIcon} />
                   </MenuItem>
-                  <MenuItem className={classes.MenuItems}><Typography className={classes.navText} variant="h6" component="div">
-                    {user.firstName}
+                  <MenuItem onClick={()=>navigate('/aboutme')} className={classes.MenuItems}><Typography className={classes.navText} variant="h6" component="div">
+                    {user?<>{user.firstName}</>:<></>}
                   </Typography></MenuItem>
 
                   {admin ?
@@ -307,7 +307,7 @@ const Header = (props) => {
                       <div className={classes.MenuContainer}>
                         <MenuItem className={classes.MenuItems} ><AccountCircle className={classes.InnerUserIcon} /></MenuItem>
 
-                        <MenuItem className={classes.MenuItems} >{cUser}</MenuItem>
+                        <MenuItem onClick={()=>navigate('/aboutme')} className={classes.MenuItems} >{user?<>{user.firstName}</>:<></>}</MenuItem>
 
                         {admin ?
                           <>

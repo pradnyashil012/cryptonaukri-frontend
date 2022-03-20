@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
-import { Box, Paper, Typography, Button, makeStyles, CardActions, Container, Chip, } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Box, Modal, Paper, Typography, Button, makeStyles, CardActions, Container, Chip, } from '@material-ui/core';
 import { spacing } from '@mui/system';
 import { Delete, Edit } from "@material-ui/icons";
 import Axios from 'axios';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Skeleton from '@mui/material/Skeleton';
+import {
+    TextField,
+} from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
+    modal:{
+        position: 'absolute',
+        top: '30%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        maxWidth:'500px',
+        backgroundColor: theme.palette.primary.main,
+        boxShadow: 540,
+        borderRadius: 2,
+        p: 4,
+        mt:10,
+    },
     jobCardContainer: {
         [theme.breakpoints.between('xs', 770)]: {
             display: 'flex',
@@ -107,19 +123,56 @@ const useStyles = makeStyles((theme) => ({
     },
     Chip: {
         margin: '5px'
+    },
+    Chip2: {
+        margin: '5px',
+        backgroundColor: 'blue',
     }
 }));
 
 const ApplyJob = (props) => {
-    let position = props.position;
-    let company = props.company;
-    let experience = props.exp;
-    let openings = props.opn;
+
+
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var jobid = url.searchParams.get("id");
+    var type = url.searchParams.get("type")
+    // const jobDescription = jobdesc.split("::");
+    // console.log(jobDescription);
+
+    // let position = props.position;
+    // let company = props.company;
+    // let experience = props.exp;
+    // let openings = props.opn;
 
     const [applied, setApplied] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [jobInfo, setJobInfo] = useState();
+    const [loading, setLoading] = useState(false);
+    const [stage, setStage] = useState(1);
+    const [avl, setAvl] = useState("");
+    const [whyHire, setWhyHire] = useState("");
 
     const login = localStorage.getItem("login")
     const navigate = useNavigate();
+
+    useEffect(async()=>{
+        try{
+            setLoading(true);
+            const response = await Axios.get(`https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob/${jobid}`);
+            console.log(response.data.details);
+            const jobdata = response.data.details;
+            setJobInfo(jobdata);
+            console.log(jobInfo);
+            setLoading(false);
+        }catch{
+            toast.error("Something went wrong !!!")
+        }
+        
+    },[]);
+
+    var jobPostedTime = jobInfo ? jobInfo.postedOn.split("T"):"";
+    //console.log(jobPostedTime);
 
     const handleEdit = async (e) => {
         navigate(`/jobform?id=${e}`);
@@ -139,14 +192,40 @@ const ApplyJob = (props) => {
         }
     };
 
-    const handleApply = () => {
+    const handleApply = async () => {
         console.log('ok apply krneka idhhr handle kari bhai !!')
+        console.log(whyHire, avl);
+        var token = localStorage.getItem('token');
+        try{
+            const response = await Axios.post(`https://cryptonaukribackend.herokuapp.com/api/v1/jobs/applyJob`,{
+                jobAssociated: jobInfo._id,
+                whyHire: whyHire,
+                candidateAvailability: avl,
+            },
+            {
+                headers: {
+                            "Authorization": `Bearer ${token.split('"')[1]}`,
+                }
+            },
+            );
+            console.log(response);
+            if(response.data.code === "JOB_APPLIED"){
+                toast.success("You have success fully applied for the job !!")
+                setStage(3);
+            }
+        }catch(error){
+            console.log(error.response)
+            toast.error("Something went wrong!!")
+        }
     }
 
     const classes = useStyles();
-    return (
-        <div className={classes.body}>
-            <Box className={classes.jobCardContainer}>
+
+
+
+    if(loading){
+        return <div className={classes.body}>
+                <Box className={classes.jobCardContainer}>
                 <Container>
                     <Box className={classes.right}>
                         <Box>
@@ -156,19 +235,21 @@ const ApplyJob = (props) => {
                                         <Box sx={{
                                             fontWeight: '500',
                                         }}>
-                                            BlockChain Developer
+                                            <Skeleton variant="text" />
                                         </Box>
+                                        
                                     </Typography>
+
                                     <Typography className={classes.cardComp} variant='h5'>
                                         <Box sx={{
                                             fontWeight: 'bold',
                                         }}>
-                                            CryptoNaukri
+                                            <Skeleton variant="text" />
                                         </Box>
                                     </Typography>
+                                    Posted by <Skeleton variant="text" />
                                 </Box>
                             </Box>
-
                         </Box>
 
                         <Box>
@@ -191,13 +272,26 @@ const ApplyJob = (props) => {
                                         <Box sx={{
                                             fontWeight: 'regular',
                                         }}>
-                                            20-feb-2022
+                                            <Skeleton variant="text" />
                                         </Box>
                                     </Typography>
                                 </div>
                                 <div>
 
+                                    {type=="job"?<>
                                     <Typography variant="p">
+                                        <Box sx={{
+                                            fontWeight: 'bold',
+                                        }}>
+                                            Fixed Pay
+                                        </Box>
+                                        <Box sx={{
+                                            fontWeight: 'regular',
+                                        }}>
+                                            <Skeleton variant="text" />
+                                        </Box>
+                                    </Typography>
+                                    </>:<Typography variant="p">
                                         <Box sx={{
                                             fontWeight: 'bold',
                                         }}>
@@ -206,9 +300,9 @@ const ApplyJob = (props) => {
                                         <Box sx={{
                                             fontWeight: 'regular',
                                         }}>
-                                            3 months
+                                            <Skeleton variant="text" />
                                         </Box>
-                                    </Typography>
+                                    </Typography>}
                                 </div>
                                 <div>
 
@@ -216,12 +310,12 @@ const ApplyJob = (props) => {
                                         <Box sx={{
                                             fontWeight: 'bold',
                                         }}>
-                                            Stipend
+                                            CTC
                                         </Box>
                                         <Box sx={{
                                             fontWeight: 'regular',
                                         }}>
-                                            2000/month
+                                            <Skeleton variant="text" />
                                         </Box>
                                     </Typography>
                                 </div>
@@ -236,7 +330,7 @@ const ApplyJob = (props) => {
                                         <Box sx={{
                                             fontWeight: 'regular',
                                         }}>
-                                            2
+                                            <Skeleton variant="text" />
                                         </Box>
                                     </Typography>
                                 </div>
@@ -249,6 +343,8 @@ const ApplyJob = (props) => {
                                         padding: '5px'
                                     }}>
                                         About Company
+                                        
+
                                     </Box>
                                 </Typography>
                                 <Typography variant="p">
@@ -256,7 +352,13 @@ const ApplyJob = (props) => {
                                         fontWeight: 'regular',
                                         padding: '5px'
                                     }}>
-                                        SISL is providing state-of-the-art geospatial services to GIS companies worldwide. We are well experienced and equipped to deliver the services with high quality on time, related to software development services, lidar data processing, BIM services, highway/road assets mapping, and parcel mapping.
+                                        <Skeleton variant="text" />
+                                        <Skeleton variant="text" />
+                                        <Skeleton variant="text" />
+
+                                        <br />
+                                        <br />
+                                        <Skeleton variant="text" />
                                     </Box>
                                 </Typography>
                             </Box>
@@ -267,7 +369,7 @@ const ApplyJob = (props) => {
                                         fontWeight: 'bold',
                                         padding: '5px'
                                     }}>
-                                        About Job/Internship
+                                        About Job
                                     </Box>
                                 </Typography>
                                 <Typography variant="p">
@@ -275,17 +377,10 @@ const ApplyJob = (props) => {
                                         fontWeight: 'regular',
                                         padding: '5px'
                                     }}>
-                                        Selected intern's day-to-day responsibilities include: <br /><br />
-
-                                        1. Developing new user-facing features using React and Redux<br />
-                                        2. Building reusable components and front end tools for future use<br />
-                                        3. Translating designs and wireframes into high-quality code<br />
-                                        4. Optimizing components for maximum performance across a vast array of web-capable devices and browsers<br /><br />
-
-                                        Requirements:<br /><br />
-
-                                        1. If someone will perform well, we can offer full-time job opportunities with the company.<br />
-                                        2. Should work from home  and must have a laptop.
+                                        <Skeleton variant="text" />
+                                        <Skeleton variant="text" />
+                                        <Skeleton variant="text" />
+                                        <Skeleton variant="text" />
                                     </Box>
                                 </Typography>
                             </Box>
@@ -304,11 +399,7 @@ const ApplyJob = (props) => {
                                         fontWeight: 'regular',
                                         padding: '5px'
                                     }}>
-                                        <Chip className={classes.Chip} label="JavaScript" />
-                                        <Chip className={classes.Chip} label="HTML" />
-                                        <Chip className={classes.Chip} label="Reactjs" />
-                                        <Chip className={classes.Chip} label="Mongodb" />
-                                        <Chip className={classes.Chip} label="PHP" />
+                                        <Skeleton variant="text" />
                                     </Box>
                                 </Typography>
                             </Box>
@@ -327,7 +418,228 @@ const ApplyJob = (props) => {
                                         fontWeight: 'regular',
                                         padding: '5px'
                                     }}>
-                                        10
+                                        <Skeleton variant="text" />
+                                    </Box>
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Container>
+            </Box >
+            </div>
+    }
+    return (
+
+        <div className={classes.body}>
+            
+            {jobInfo&&stage===1?<Box className={classes.jobCardContainer}>
+                <Container>
+                    <Box className={classes.right}>
+                        <Box>
+                            <Box className={classes.headcontain} >
+                                <Box >
+                                    <Typography className={classes.cardHead} variant={'h4'}>
+                                        <Box sx={{
+                                            fontWeight: '500',
+                                        }}>
+                                            {jobInfo.jobTitle}
+                                            
+                                        </Box>
+                                        
+                                    </Typography>
+
+                                    <Typography className={classes.cardComp} variant='h5'>
+                                        <Box sx={{
+                                            fontWeight: 'bold',
+                                        }}>
+                                            {jobInfo.postedBy.companyName}
+                                        </Box>
+                                    </Typography>
+                                    Posted by {jobInfo.postedBy.executiveName}
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        <Box>
+                            <Box sx={{
+                                fontWeight: 'regular',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-around',
+                                paddingTop: '20px',
+                                paddingBottom: '20px',
+                            }}>
+                                <div>
+
+                                    <Typography variant="p">
+                                        <Box sx={{
+                                            fontWeight: 'bold',
+                                        }}>
+                                            Posted On
+                                        </Box>
+                                        <Box sx={{
+                                            fontWeight: 'regular',
+                                        }}>
+                                            {jobPostedTime[0]}
+                                        </Box>
+                                    </Typography>
+                                </div>
+                                <div>
+
+                                    {type=="job"?<>
+                                    <Typography variant="p">
+                                        <Box sx={{
+                                            fontWeight: 'bold',
+                                        }}>
+                                            Fixed Pay
+                                        </Box>
+                                        <Box sx={{
+                                            fontWeight: 'regular',
+                                        }}>
+                                            {jobInfo.fixedPay}
+                                        </Box>
+                                    </Typography>
+                                    </>:<Typography variant="p">
+                                        <Box sx={{
+                                            fontWeight: 'bold',
+                                        }}>
+                                            Duration
+                                        </Box>
+                                        <Box sx={{
+                                            fontWeight: 'regular',
+                                        }}>
+                                            3 months
+                                        </Box>
+                                    </Typography>}
+                                </div>
+                                <div>
+
+                                    <Typography variant="p">
+                                        <Box sx={{
+                                            fontWeight: 'bold',
+                                        }}>
+                                            CTC
+                                        </Box>
+                                        <Box sx={{
+                                            fontWeight: 'regular',
+                                        }}>
+                                            {jobInfo.ctc}
+                                        </Box>
+                                    </Typography>
+                                </div>
+                                <div>
+
+                                    <Typography variant="p">
+                                        <Box sx={{
+                                            fontWeight: 'bold',
+                                        }}>
+                                            Applications
+                                        </Box>
+                                        <Box sx={{
+                                            fontWeight: 'regular',
+                                        }}>
+                                            {jobInfo.usersApplied.length}
+                                        </Box>
+                                    </Typography>
+                                </div>
+                            </Box>
+
+                            <Box>
+                                <Typography variant="h6">
+                                    <Box sx={{
+                                        fontWeight: 'bold',
+                                        padding: '5px'
+                                    }}>
+                                        About Company
+                                        
+
+                                    </Box>
+                                </Typography>
+                                <Typography variant="p">
+                                    <Box sx={{
+                                        fontWeight: 'regular',
+                                        padding: '5px'
+                                    }}>
+                                        {jobInfo.postedBy.description}
+
+                                        <br />
+                                        <br />
+                                        {
+                                            jobInfo.healthInsurance?<Chip className={classes.Chip} label={"Health Insurance"} />:<></>
+                                        }
+                                        {
+                                            jobInfo.informalDress?<Chip className={classes.Chip} label={"Informal Dress"} />:<></>
+                                        }
+                                        {
+                                            jobInfo.incentives?<Chip className={classes.Chip} label={"Incentives"} />:<></>
+                                        }
+                                        {
+                                            jobInfo.isRemote?<Chip className={classes.Chip} label={"Remote"} />:<></>
+                                        }
+                                    </Box>
+                                </Typography>
+                            </Box>
+
+                            <Box>
+                                <Typography variant="h6">
+                                    <Box sx={{
+                                        fontWeight: 'bold',
+                                        padding: '5px'
+                                    }}>
+                                        About Job
+                                    </Box>
+                                </Typography>
+                                <Typography variant="p">
+                                    <Box sx={{
+                                        fontWeight: 'regular',
+                                        padding: '5px'
+                                    }}>
+                                        {jobInfo.jobDescription}
+                                    </Box>
+                                </Typography>
+                            </Box>
+
+                            <Box>
+                                <Typography variant="h6">
+                                    <Box sx={{
+                                        fontWeight: 'bold',
+                                        padding: '5px'
+                                    }}>
+                                        Required Skill(s)
+                                    </Box>
+                                </Typography>
+                                <Typography variant="p">
+                                    <Box sx={{
+                                        fontWeight: 'regular',
+                                        padding: '5px'
+                                    }}>
+                                        {/* <Chip className={classes.Chip} label="JavaScript" />
+                                        <Chip className={classes.Chip} label="HTML" />
+                                        <Chip className={classes.Chip} label="Reactjs" />
+                                        <Chip className={classes.Chip} label="Mongodb" />
+                                        <Chip className={classes.Chip} label="PHP" /> */}
+                                        {jobInfo.skills.map((skill)=>{
+                                            return <Chip className={classes.Chip} label={skill} />
+                                        })}
+                                    </Box>
+                                </Typography>
+                            </Box>
+
+                            <Box>
+                                <Typography variant="h6">
+                                    <Box sx={{
+                                        fontWeight: 'bold',
+                                        padding: '5px'
+                                    }}>
+                                        No. of Openings
+                                    </Box>
+                                </Typography>
+                                <Typography variant="p">
+                                    <Box sx={{
+                                        fontWeight: 'regular',
+                                        padding: '5px'
+                                    }}>
+                                        {jobInfo.openings}
                                     </Box>
                                 </Typography>
                             </Box>
@@ -340,14 +652,89 @@ const ApplyJob = (props) => {
                                  <Button onClick={handleApply} className={classes.applyBtn} disabled variant="outlined" color="primary">
                                     Already Applied
                                 </Button> :
-                                    <Button onClick={handleApply} className={classes.applyBtn} variant="outlined" color="primary">
+                                    <Button onClick={()=>{setStage(2)}} className={classes.applyBtn} variant="outlined" color="primary">
                                         Apply
                                     </Button>}
                             </Box>
                         </Box>
                     </Box>
                 </Container>
-            </Box >
+            </Box >:<></>}
+            {stage==2?<>
+            <Box className={classes.jobCardContainer}>
+                <Container>
+                    <Box className={classes.right}>
+                        <Typography className={classes.cardComp} variant='h5'>
+                            <Box sx={{
+                                fontWeight: 'semibold',
+                            }}>
+                                Answer the following to questions to move forward
+                            </Box>
+                        </Typography><br />
+                        
+                        <TextField sx={{ marginTop:3 }}  fullWidth label="Why Should we hire you?" id="taskDescription"
+                            placeholder="Be creative, think what makes you different."
+                            multiline
+                            rows={2}
+                            maxRows={4}
+                            value={whyHire}
+                            onChange={(e)=>{
+                                setWhyHire(e.target.value);
+                            }}
+                        />
+                        <br />
+                        <TextField sx={{ marginTop:3 }}  fullWidth label="When can you start working ?" id="taskDescription"
+                            placeholder="Can you join immediately?. Tell us more about you availiblity"
+                            multiline
+                            rows={2}
+                            maxRows={4}
+                            value={avl}
+                            onChange={(e)=>{
+                                setAvl(e.target.value);
+                            }}
+                        />
+                        <br/>
+                        <Button sx={{maxWidth:'200px'}} onClick={()=>{handleApply(1)}} className={classes.applyBtn} variant="contained" color="primary">
+                                        Submit
+                        </Button>
+                        <br />
+                        <Button sx={{maxWidth:'200px'}} onClick={()=>{setStage(1)}} className={classes.applyBtn} variant="outlined" color="primary">
+                                        Back
+                        </Button>
+                    </Box>
+                </Container>
+            </Box>
+            </>:<></>}
+            {stage===3?<>
+                            <Box className={classes.jobCardContainer}>
+                <Container>
+                    <Box className={classes.right}>
+                        <Typography className={classes.cardComp} variant='h4'>
+                            <Box sx={{
+                                fontWeight: 'bold',
+                                color: 'green',
+                            }}>
+                                🎉🎉🎉 Congratulationss! you have successfully applied for the job.
+
+                            </Box>
+                        </Typography>
+                        <Typography className={classes.cardComp} variant='h6'>
+                            <Box sx={{
+                                fontWeight: '',
+                                color: 'green',
+                            }}>
+                                Rest be assured your application will be sent tot the recruiter
+
+                            </Box>
+                        </Typography>
+                        <br />
+                        <Button sx={{maxWidth:'200px'}} onClick={()=>{setStage(1)}} className={classes.applyBtn} variant="outlined" color="primary">
+                                        Back
+                        </Button>
+                    </Box>
+                </Container>
+            </Box>
+            </>:<></>}
         </div >
     )
 }
