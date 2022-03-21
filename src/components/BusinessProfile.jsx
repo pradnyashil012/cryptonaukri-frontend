@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
 const BussinessProfile = () => {
     const navigate = useNavigate();
 
+    const token = localStorage.getItem('token');
+    console.log(token);
+
     const classes = useStyles();
     const [option, setOption] = useState('Posted Jobs');
 
