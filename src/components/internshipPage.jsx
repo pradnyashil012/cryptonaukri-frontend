@@ -21,7 +21,7 @@ const InternshipPage = () => {
         setLoading(true);
         const response = await Axios.get('https://cryptonaukri-backend.herokuapp.com/internships')
             .then((res) => {
-                setLoading(false);
+                setLoading(false); 
                 setDataArr(res.data);
             })
             .catch((err) => {

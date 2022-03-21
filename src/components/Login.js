@@ -97,21 +97,22 @@ const Login = (props) => {
           setLoading(true);
           const response = await Axios.post(`${API}api/v1/business/login`, { email , password });
           // console.log(email, password)
-  
-          // console.log(response.data);
-          // console.log(response.headers['authorization']);
+          localStorage.setItem('tokenNew',response.headers['authorization']);
+          console.log(response.data);
+          console.log(response.headers['authorization']);
           
           setLoading(false);
           if (response.data.userLoggedIn) {
-            // props.setToken(response.headers['authorization']);
-            localStorage.setItem('login', true);
             toast.success(response.data.message);
+            localStorage.setItem('login', true);
+            localStorage.setItem('cUser', 'BUISNESS');
             navigate('/businessprofile')
           }
           else {
             toast.success(response.data.message)
           }
         } catch (error) {
+          console.log(error);
           setLoading(false);
           toast.error('Login Failed ,please try again !!')
         }
