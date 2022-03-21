@@ -54,11 +54,11 @@ const useStyles = makeStyles((theme) => ({
 const Login = (props) => {
 
 
-  const [password, setPass] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPass] = useState("");
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
   const classes = useStyles();
-  const [email, setEmail] = useState("");
 
   const API = 'https://cryptonaukribackend.herokuapp.com/'
 
@@ -87,30 +87,29 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
-
+  
     if (!email || !password) {
       return toast.error('Enter all the values !!');
     }
     if (email && password) {
-
       if (props.route == 'company') {
-        // console.log(email)
-        // console.log(password)
         try {
           setLoading(true);
-          const response = await Axios.post(`${API}/business/authentication/login`, { email, password });
-          console.log(email, password)
-          const data = response.data;
+          const response = await Axios.post(`${API}api/v1/business/login`, { email , password });
+          // console.log(email, password)
+  
+          // console.log(response.data);
+          // console.log(response.headers['authorization']);
+          
           setLoading(false);
-          if (data.login) {
+          if (response.data.userLoggedIn) {
+            props.setToken(response.headers['authorization']);
             localStorage.setItem('login', true);
-            localStorage.setItem('cUser', data.cUser);
-            localStorage.setItem('admin', true);
-            toast.success(data.message);
-            navigate('/')
+            toast.success(response.data.message);
+            navigate('/businessprofile')
           }
           else {
-            toast.error(data.message)
+            toast.success(response.data.message)
           }
         } catch (error) {
           setLoading(false);
@@ -118,8 +117,7 @@ const Login = (props) => {
         }
 
       }
-      else
-        if (props.route == 'user') {
+      else if (props.route == 'user') {
           try {
             setLoading(true);
             const response = await Axios.post(`${API}api/v1/user/login`, { email, password });
@@ -151,9 +149,11 @@ const Login = (props) => {
         }
     }
   };
-
+  
   return (
+    
     <div className={classes.body} >
+      
       <Container >
         <div className={classes.heading} >
           <Typography variant="h4" >
