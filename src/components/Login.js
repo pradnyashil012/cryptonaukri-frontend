@@ -92,7 +92,7 @@ const Login = (props) => {
       return toast.error('Enter all the values !!');
     }
     if (email && password) {
-      if (props.route == 'company') {
+      if (props.route === 'company') {
         try {
           setLoading(true);
           const response = await Axios.post(`${API}api/v1/business/login`, { email , password });
@@ -103,7 +103,7 @@ const Login = (props) => {
           
           setLoading(false);
           if (response.data.userLoggedIn) {
-            props.setToken(response.headers['authorization']);
+            // props.setToken(response.headers['authorization']);
             localStorage.setItem('login', true);
             toast.success(response.data.message);
             navigate('/businessprofile')
@@ -117,7 +117,7 @@ const Login = (props) => {
         }
 
       }
-      else if (props.route == 'user') {
+      else if (props.route === 'user') {
           try {
             setLoading(true);
             const response = await Axios.post(`${API}api/v1/user/login`, { email, password });
@@ -138,7 +138,7 @@ const Login = (props) => {
           } catch (error) {
             console.log( error.request.response );
             const err = JSON.parse(error.request.response);
-            if(err.code == "WRONG_PASSWORD"){
+            if(err.code === "WRONG_PASSWORD"){
               toast.error("Wrong email or password !!")
             }else{
               toast.error(err.code);
