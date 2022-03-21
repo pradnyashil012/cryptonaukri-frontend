@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Container, Grid, Typography, TextField, OutlinedInput, Button, Box, InputLabel, FormControl } from "@material-ui/core";
+import { Container, Grid, Typography, TextField,InputAdornment, OutlinedInput,IconButton, Button, Box, InputLabel, FormControl } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+import { Email, Visibility, VisibilityOff } from "@material-ui/icons";
 import { useSearchParams, useNavigate } from
     "react-router-dom";
 import Axios from 'axios'
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const BusReg = () => {
 
     const navigate = useNavigate();
+    const classes = useStyles();
 
     const [exec, setExec] = useState('');
     const [comp, setComp] = useState('');
@@ -66,16 +68,17 @@ const BusReg = () => {
     const [phoneNo, setPhoneNo] = useState('');
     const [website, setWebsite] = useState('');
     const [pass, setPass] = useState('');
-    const [state, setState] = useState('registration');
+    const [state, setState] = useState('otp');
     const [otp, setOtp] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [values, setValues] = useState({
+        showPassword: false,
+    });
 
 
     const [searchParams, setSearchParams] = useSearchParams();
-    let urlParamId = searchParams.get("id");
-    const APIUrl = `https://cryptonaukri-backend.herokuapp.com`;
-    //const otpAPI = `/business/authentication/verify-email`
-    const otpAPI = `https://cryptonaukribackend.herokuapp.com/api/v1/business/otp?email=`
+    // let urlParamId = searchParams.get("id");
+    const APIUrl = `https://cryptonaukribackend.herokuapp.com/`;
+    const otpAPI = `https://cryptonaukribackend.herokuapp.com/api/v1/business/otp?email=`;
 
     const handleExecChange = (e) => {
         setExec(e.target.value);
@@ -84,6 +87,9 @@ const BusReg = () => {
     const handleCompChange = (e) => {
         setComp(e.target.value);
         // console.log(comp);
+    }
+    const handleOtpChange = (event) =>{
+        setOtp(event.target.value);
     }
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -109,97 +115,117 @@ const BusReg = () => {
         setPhoneNo(e.target.value);
         // console.log(phoneNo);
     }
-    const handlePassChange = (e) => {
-        setPass(e.target.value);
-        // console.log(pass);
-    }
+    
     const handleWebsiteChange = (e) => {
         setWebsite(e.target.value);
         // console.log(website);
     }
-    const classes = useStyles();
-
     const handleCallback = (IncomingState) => {
         setState(IncomingState);
         console.log('handlecallback is called !!')
         console.log(state);
+
     }
 
-    console.log(state)
-    console.log('this is state')
+    const handleClickShowPassword = () => {
+        setValues({
+          ...values,
+          showPassword: !values.showPassword,
+        });
+      };
+    
+      const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+      };
 
-    const handleSubmit = async (e) => {
+    const handleOtp = async (e) => {
         e.preventDefault();
-
+        if (!exec || !email || !pass || !comp || !desc || !year || !gstin || !hq || !phoneNo || !website) {
+            return toast.error('Enter all values !');
+        }
+        if (exec && email && pass && comp && desc && year && gstin && hq && phoneNo && website) {
+            
         try {
+            if (state === 'verify') {
+                let payload = JSON.stringify({
+                        executiveName : exec,
+                        officialEmail : email,
+                        password : pass,
+                        companyName : comp,
+                        description : desc,
+                        establishedYear : year,
+                        GSTIN : gstin,
+                        headquarters : hq,
+                        phoneNumber : phoneNo,
+                        websiteLink : website,
+                        otp:Number(otp)
+                    
+                })
+                console.log(payload);
+               let resp =  await Axios.post(`${APIUrl}api/v1/business/signup`,
+               {    executiveName : exec,
+                    officialEmail : email,
+                    password : pass,
+                    companyName : comp,
+                    description : desc,
+                    establishedYear : year,
+                    GSTIN : gstin,
+                    headquarters : hq,
+                    phoneNumber : phoneNo,
+                    websiteLink : website,
+                    otp:Number(otp)
+                });
+                    console.log(resp.data);
+                
+                     if(resp.data.userAdded){
+                    toast.success("You are successfully registered");
+                     }
+                    
+                     setTimeout(() => {
+                        navigate('/companyLogin');
+                      }, 3000);
 
-            if (!exec || !email || !pass || !comp || !desc || !year || !gstin || !hq || !phoneNo || !website) {
-                return toast.error('Enter all values !');
+                     
             }
-
-            // var webFromMail = email.split('@')
-            // // console.log(webFromMail[1])
-            // //.log(website.split("."))
-            // if (webFromMail[1] !== website) {
-            //     return toast.error('Use official Email of the Company !');
-            // }
-
-            if (state === 'registration') {
-
-                const response = await Axios.post(`${APIUrl}/business/authentication/signup`, { exec, email, pass, comp, desc, year, gstin, hq, phoneNo, website })
-                    .then((res) => {
-                        const data = res.data;
-                        // console.log(data)
-                        if (data.code !== false) {
-                            toast.success(data.message);
-                            setState('verify')
-                            // console.log('again in the function')
-                        } else {
-                            toast.error(data.message);
-                        }
-
-                    })
-                    .catch((err) => {
-                        console.log(err.response);
-                    })
-
-            } else if (state === 'verified') {
-                toast.success('Account Created !!');
-                navigate('/companyLogin')
-                return toast.success('Try logging in !!');
-
-            } else if (state === 'verify') {
-                toast.info('Email is already sent to you !!');
-            }
-            // navigate('/login');
-
-        } catch (error) {
+        }
+         catch (error) {
             toast.error(error);
         }
-
     }
-    const handleEdit = () => {
 
     }
 
-    const sendOTP = async () =>{
-        try {
-            setLoading(true);
-            const response = await Axios.get(otpAPI+email);
-            const data = response.data;
-            if(data.otpSent === true){
-                toast.success('OTP sent to your registered email address.');
-                setState('verify');
+    const  handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if(state === 'otp'){
+            if (!exec || !email || !pass || !comp || !desc || !year || !gstin || !hq || !phoneNo || !website) {
+             toast.error('Enter all values !')
+             return;
             }
-            setLoading(false);
-        } catch (error) {
-            setLoading(false);
-            const err = JSON.parse(error.request.response);
-            console.log(err);
-            toast.error(err.message);
-        }
-    }
+            if (exec && email && pass && comp && desc && year && gstin && hq && phoneNo && website) {
+                if (state === 'otp') {
+                    try {
+                    
+                        const response = await Axios.get(otpAPI+email);
+                        const data = response.data;
+                        console.log(data);
+                        if(data.otpSent === true){
+                            toast.success('OTP sent to your registered email address.');
+                            setState('verify');
+                        }
+                    
 
+                    } catch (error) {
+                        const err = JSON.parse(error.request.response);
+                        toast.error(err.message);
+                    }
+                }
+            }
+        }
+
+
+    };
     return (
         <div className={classes.body}>
             <Container>
@@ -214,7 +240,7 @@ const BusReg = () => {
                 </div>
                 <Box component='form' className={classes.formContainer}>
                     <Grid container spacing={3}>
-
+                            {/*            company name                   */}
                         <Grid item xs={8} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Company Name</InputLabel>
@@ -243,7 +269,6 @@ const BusReg = () => {
                                 />
                             </FormControl>
                         </Grid>
-
 
                         <Grid item xs={4} >
                             <FormControl fullWidth variant="outlined">
@@ -344,45 +369,68 @@ const BusReg = () => {
                                 />
                             </FormControl>
                         </Grid>
+
                         <Grid item xs={4} >
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">CreatePass</InputLabel>
+                        <FormControl fullWidth variant="outlined">
+                                <InputLabel className={classes.label} autoComplete="on" htmlFor="outlined-adornment-password">Password</InputLabel>
                                 <OutlinedInput
-                                    id="outlined-adornment-name"
-                                    type='text'
-                                    value={pass}
-                                    onChange={handlePassChange}
-                                    name='phoneNo'
-                                    required
+                                    id="outlined-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={(e) => setPass(e.target.value)}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label="Password"
                                 />
                             </FormControl>
                         </Grid>
-                        <Grid item xs={8} >
-                            {state == 'verify'||state == 'verified' ?
-                                <Otp APIUrl={otpAPI} Email={email} callBack={handleCallback} />
-                                : <></>
-                            }
-                        </Grid>
+                        {state=='verify'?
+                        <>
+                            <Grid item xs={9} >
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Otp</InputLabel>
+                                    <OutlinedInput variant="outlined"
+                                    name="password"
+                                    fullWidth
+                                    type="text"
+                                    value={otp}
+                                    onChange={handleOtpChange}
+                                    disabled={state == 'verified' ? true : false}
+                                    />
+                                </FormControl>
+                            </Grid>
+                            <Box className={classes.buttonBox}>
+                                {<Button onClick={handleOtp}
+                                        variant="outlined"
+                                        color="primary"
+                                        className={classes.Button}
+                                        disabled={state == 'verified' ? true : false}
+                                    >
+                                    {state == 'verified' ? 'verified' : 'verify Otp and Signup'} </Button>}
+                            </Box>
+                        </>:<></>}
                     </Grid>
-                    <Box className={classes.buttonBox}>
-                        {/* <Button
-                            onClick={urlParamId === null ? handleSubmit : handleEdit}
+                    {state=='verify'?<></>:<Box className={classes.buttonBox}>
+                        {<Button
+                            onClick={handleSubmit}
                             type='submit'
                             variant="outlined"
                             color="primary"
-                            disabled={state==='verify'}
+                            disabled={state === 'verify'}
                             className={classes.Button}  >
-                            {urlParamId === null ? <>{state === 'registration' ? 'send Otp' : 'Create Account'}</> : 'Update Company Details'}
-                        </Button> */}
-                        <Button
-                            type='submit'
-                            variant="outlined"
-                            color="primary"
-                            disabled={loading}
-                            className={classes.Button}
-                            onClick={sendOTP}
-                        >{loading?"Sending OTP...":"Send OTP"}</Button>
-                    </Box>
+                            {state === 'otp' ? 'send Otp' : 'Create Account'}
+                        </Button>}
+                        </Box>}
                 </Box>
             </Container>
         </div >
