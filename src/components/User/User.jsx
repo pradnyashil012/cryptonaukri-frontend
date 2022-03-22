@@ -247,6 +247,7 @@ const User = () =>{
                                     Status : Pending
                                 </Box>;
                             })}
+                            {user.appliedAt.length === 0?<>You have no pending applications.</>:<></>}
                         </Box>
                     </Container>
                 </Box>
