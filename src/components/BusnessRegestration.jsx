@@ -140,10 +140,10 @@ const BusReg = () => {
 
     const handleOtp = async (e) => {
         e.preventDefault();
-        if (!exec || !email || !pass || !comp || !desc || !year || !gstin || !hq || !phoneNo || !website) {
+        if (!exec || !email || !pass || !comp || !desc || !year  || !hq || !phoneNo || !website) {
             return toast.error('Enter all values !');
         }
-        if (exec && email && pass && comp && desc && year && gstin && hq && phoneNo && website) {
+        if (exec && email && pass && comp && desc && year  && hq && phoneNo && website) {
             
         try {
             if (state === 'verify') {
@@ -199,11 +199,11 @@ const BusReg = () => {
         e.preventDefault();
 
         if(state === 'otp'){
-            if (!exec || !email || !pass || !comp || !desc || !year || !gstin || !hq || !phoneNo || !website) {
+            if (!exec || !email || !pass || !comp || !desc || !year  || !hq || !phoneNo || !website) {
              toast.error('Enter all values !')
              return;
             }
-            if (exec && email && pass && comp && desc && year && gstin && hq && phoneNo && website) {
+            if (exec && email && pass && comp && desc && year  && hq && phoneNo && website) {
                 if (state === 'otp') {
                     try {
                     
