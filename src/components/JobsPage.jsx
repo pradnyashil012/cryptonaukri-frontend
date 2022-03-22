@@ -53,7 +53,7 @@ const JobsPage = (e) => {
                                             type={"job"}
                                             key={data._id} 
                                             position={data.jobTitle} 
-                                            cmp={"Company Name"} 
+                                            cmp={data.postedByDetails.companyName} 
                                             exp={data.experience} 
                                             opn={data.openings}
                                             sr={data._id} 
