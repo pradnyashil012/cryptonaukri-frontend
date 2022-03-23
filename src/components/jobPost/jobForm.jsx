@@ -63,22 +63,26 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const JobForm = (theme) => {
+    const token = localStorage.getItem('tokenNew');
+      console.log(token);
+    const postjobAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/jobs/postJob';
+    const postIntAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/internship/postInternship';
     const [title, setTitle] = useState();
     const [type, setType] = useState();
     const [contractDuration, setContractDuration] = useState('');
     const [locationType, setLocationType] = useState('');
-    const [location, setLocation] = useState('');
-    const [openings, setOpenings] = useState('');
+    const [location, setLocation] = useState('Work From Home');
+    const [openings, setOpenings] = useState();
     const [experience, setExperience] = useState('');
-    const [ctc, setctc] = useState('');
+    const [ctc, setctc] = useState();
     const [skills, setSkills] = useState('');
     const [description, setDescription] = useState('');
     const [payType, setPayType] = useState('');
     const [incentives, setIncentives] = useState('');
-    const [salary, setSalary] = useState('');
+    const [salary, setSalary] = useState();
     const [perks, setPerks] = useState('');
-    const [probation, setProbation] = useState();
-    const [probationSalary, setProbationSalary] = useState('');
+    const [probation, setProbation] = useState('');
+    const [probationSalary, setProbationSalary] = useState();
     const [resp, setResp] = useState('');
     const [stipend, setStipend] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -90,7 +94,7 @@ const JobForm = (theme) => {
     const month = (CurrentDate.getMonth() + 1).toString();
     const year = CurrentDate.getFullYear().toString();
     const date = (year + '-0' + month + '-' + day).toString();
-    // console.log(date)
+     console.log(date)
 
     const classes = useStyles();
     const navigate = useNavigate();
@@ -98,37 +102,7 @@ const JobForm = (theme) => {
     const [searchParams, setSearchParams] = useSearchParams();
     let urlParamId = searchParams.get("id");
 
-    // useEffect(async (e) => {
-    //     let id = searchParams.get("id");
-    //     const response = await Axios.get(`https://cryptonaukri-backend.herokuapp.com/jobs/:${id}`)
-    //         .then((res) => {
-    //             setPosition(res.data[0].position)
-    //             setCompany(res.data[0].company)
-    //             setType(1);
-    //             setExperience(res.data[0].experience)
-    //             setOpenings(res.data[0].openings)
-    //             setLink(res.data[0].link)
-    //         })
-    //         .catch((err) => {
 
-    //         });
-    // }, []);
-
-    // useEffect(async (e) => {
-    //     let id = searchParams.get("id");
-    //     const response = await Axios.get(`https://cryptonaukri-backend.herokuapp.com/internships/:${id}`)
-    //         .then((res) => {
-    //             setPosition(res.data[0].position)
-    //             setCompany(res.data[0].company)
-    //             setType(2);
-    //             setOpenings(res.data[0].openings)
-    //             setLink(res.data[0].link)
-    //         })
-    //         .catch((err) => {
-    //         });
-    // }, []);
-
-    // let admin = localStorage.getItem("admin");
     let admin = true;
 
 
@@ -216,48 +190,110 @@ const JobForm = (theme) => {
     const handleStipendChange = (event) => {
         setStipend(event.target.value)
     };
+    // console.log(location);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const date = new Date();
+        // console.log(date);
+        // console.log(btnState);
+        if(btnState == 2 ){
+            if ( (!title || !location || !openings || !experience || !description || !ctc  || !probation) ) {
+                toast.error('Enter All the Values !');
+            }
+        }else if(btnState == 1 ){
+                if ( (!title || !location || !openings || !description || !salary)) {
+                    toast.error('Enter All the Values !');
+                }
+        }
+        const jobData = {
+            "jobTitle":title,
+            "location":location,
+            "openings":openings,
+            "experience":experience,
+            "jobDescription":description,
+            "ctc":ctc,
+            "fixedPay":salary,
+            "variablePay":salary,
+            "incentives": incentives,
+            "probationPeriod":probation,
+            "probationDuration":probation,
+            "probationSalary":probationSalary,
+            "perks":[perks],
+            "fiveDaysWeek":false,
+            "isRemote":!location,
+            "transportation":false,
+            "informalDress":true,
+            "healthInsurance":false,
+            "snacks":false,
+            "skills":[skills],
+            "candidatePreferences":"pref",
+            "status":"status"
+        }
+
+        const intData={
+            "internshipTitle": title,
+            "location": location,
+            "isRemote" : !location,
+            "openings": openings,
+            "duration": probation,
+            "responsibilities": resp,
+            "stipend" : {
+                "amountType": stipend,
+                "currencyType": "Indian Rupess",
+                "amount":salary 
+            },
+            "perks" : {
+                "certificate": true,
+                "letterOfRecommendation": true,
+                "workHours": 4,
+                "dressCode": false,
+                "food": true,
+                "isPPO": true,
+                "fiveDaysWeek" : true
+            },
+            "skills": [skills],
+            "status": "status"
+        };
 
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const date = new Date();
-    //     console.log(date);
+        try {
+            
 
-    //     if ((!position || !company || !openings || !experience || !link) && type == 1) {
-    //         toast.error('Enter All the Values !');
-    //     }
+            if (btnState === 2) {
+                // console.log(jobData);
+                const response = await Axios.post(postjobAPI,jobData,{
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                  });
 
-    //     if ((!position || !company || !openings || !link) && type != 1) {
-    //         toast.error('Enter All the Values !');
-    //     }
+                const data = response.data;
+                //  console.log(data);
+                toast.success('jobCard Created!!');
+                navigate('/businessprofile');
 
+            }
+            else if (btnState !== 2) {
+                // console.log(intData);
+                const response = await Axios.post(postIntAPI,intData,{ 
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                  });
 
-    //     try {
-
-    //         if (type == 1) {
-    //             const response = await Axios.post('https://cryptonaukri-backend.herokuapp.com/jobs', { position, company, experience, openings, link, date });
-
-    //             const data = response.data;
-
-    //             toast.success('jobCard Created!!');
-    //             navigate('/')
-
-    //         }
-    //         else if (type == 2) {
-    //             const response = await Axios.post('https://cryptonaukri-backend.herokuapp.com/internships', { position, company, openings, link, date });
-
-    //             const data = response.data;
-
-    //             toast.success('Internship Created!!');
-    //             navigate('/')
-    //         }
+                const data = response.data;
+                    // console.log(data);
+                toast.success('Internship Created!!');
+                navigate('/businessprofile')
+            }
 
 
-    //     } catch (error) {
-    //         toast.error('jobCard Creation Failed!!');
-    //     }
+        } catch (error) {
+            toast.error('jobCard Creation Failed!!');
+        }
 
-    // };
+    };
     // const handleEdit = async () => {
 
     //     if (type === 1) {
@@ -377,6 +413,7 @@ const JobForm = (theme) => {
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='text'
+                                            placeholder='location'
                                             value={location}
                                             onChange={handleLocationChange}
                                             name='location'
@@ -419,11 +456,11 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">CTC range</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">CTC Upto</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
                                         type='text'
-                                        placeholder='____ to ____'
+                                        placeholder='in Inr'
                                         value={ctc}
                                         onChange={handlectcChange}
                                         name='ctc'
@@ -529,14 +566,15 @@ const JobForm = (theme) => {
                                     <Select
                                         variant='outlined'
                                         value={probation}
+                                        type='text'
                                         onChange={handleProbationChange}
                                         name='probation'
                                     >
-                                        <MenuItem value={0}>No probation</MenuItem>
-                                        <MenuItem value={1}>1 week</MenuItem>
-                                        <MenuItem value={2}>2 weeks</MenuItem>
-                                        <MenuItem value={3}>3 weeks</MenuItem>
-                                        <MenuItem value={4}>1 month</MenuItem>
+                                        <MenuItem value={"No probation"}>No probation</MenuItem>
+                                        <MenuItem value={"1 week"}>1 week</MenuItem>
+                                        <MenuItem value={"2 week"}>2 weeks</MenuItem>
+                                        <MenuItem value={"3 week"}>3 weeks</MenuItem>
+                                        <MenuItem value={"1 month"}>1 month</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
@@ -546,7 +584,7 @@ const JobForm = (theme) => {
                                         <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Probation Salary</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
-                                            type='text'
+                                         
                                             value={probationSalary}
                                             onChange={handleProbSalaryChange}
                                             name='probationSalary'
@@ -741,14 +779,16 @@ const JobForm = (theme) => {
                                     <InputLabel className={classes.label} id="demo-simple-select-helper-label">Probation period</InputLabel>
                                     <Select
                                         variant='outlined'
-                                        onChange={handleProbationChange}
                                         value={probation}
+                                        type='text'
+                                        onChange={handleProbationChange}
+
                                     >
-                                        <MenuItem value={0}>No probation</MenuItem>
-                                        <MenuItem value={1}>1 week</MenuItem>
-                                        <MenuItem value={2}>2 weeks</MenuItem>
-                                        <MenuItem value={3}>3 weeks</MenuItem>
-                                        <MenuItem value={4}>1 month</MenuItem>
+                                        <MenuItem value={"No probation"}>No probation</MenuItem>
+                                        <MenuItem value={"1 week"}>1 week</MenuItem>
+                                        <MenuItem value={"2 week"}>2 weeks</MenuItem>
+                                        <MenuItem value={"3 week"}>3 weeks</MenuItem>
+                                        <MenuItem value={"1 month"}>1 month</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
@@ -758,7 +798,6 @@ const JobForm = (theme) => {
                                         <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Probation Salary</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
-                                            type='text'
                                             value={probationSalary}
                                             onChange={handleProbSalaryChange}
                                         />
@@ -787,11 +826,13 @@ const JobForm = (theme) => {
                         {btnState === 2 ?
                             <Button
                                 //  onClick={urlParamId === null ? handleSubmit : handleEdit}
+                                 onClick={handleSubmit }
                                 type='button' variant="outlined" color="primary" className={classes.Button}  >
                                 {urlParamId === null ? 'Create Job Card' : 'Update Job Card'}
                             </Button> :
                             <Button
                                 //  onClick={urlParamId === null ? handleSubmit : handleEdit}
+                                onClick={handleSubmit }
                                 type='button' variant="outlined" color="primary" className={classes.Button}  >
                                 {urlParamId === null ? 'Create internship Card' : 'Update internship Card'}
                             </Button>}
