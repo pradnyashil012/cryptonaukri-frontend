@@ -119,27 +119,30 @@ const BussinessProfile = () => {
                                     <Box sx={{
                                         fontWeight: 'bold',
                                     }}>
-                                        Your Posted Jobs
+                                        Your Internships Jobs
                                     </Box>
                                 </Typography>
                                 <Grid item >
-                                    <Card sx={{ maxWidth: 20 }} className={classes.card}>
-                                        <CardHeader
-                                            title="For Internships"
-                                            subheader="Aug 12,2015"
-                                        />
-                                        <CardContent>
-                                            <Typography variant="subtitle2">
-                                                <span>Details : </span>
-                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, suscipit eum.
-                                                Ab, odit voluptates. Laudantium reprehenderit exercitationem dolore deserunt.
-                                                In pariatur odit tempora placeat neque excepturi, nobis autem perferendis numquam?
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <Button size="small" color="primary" onClick={() => {navigate('/details')}} >Details</Button>
-                                        </CardActions>
-                                    </Card>
+                                    {buisnessDetails.internshipsAdded.length===0?<>You have not yet posted any jobs</>:<></>}
+                                    {buisnessDetails.internshipsAdded.reverse().map((job)=>{
+                                        console.log(job)
+                                        return(
+                                        <Card sx={{ maxWidth: 20 }} className={classes.card}>
+                                            <CardHeader
+                                                title={job.internshipTitle}
+                                                subheader={job.postedOn.split("T")[0]}
+                                            />
+                                            <CardContent>
+                                                <Typography variant="subtitle2">
+                                                    <span>Details : </span>
+                                                    {job.responsibilities.substring(0,160)}...
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions>
+                                                <Button size="small" color="primary" onClick={() => {navigate(`/details?id=${job._id}`)}} >Details</Button>
+                                            </CardActions>
+                                        </Card>);
+                                    })}
                                 </Grid>
                             </Grid>}
                         {option === "Posted Jobs" &&
