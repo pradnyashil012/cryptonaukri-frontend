@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Grid, Box, makeStyles, Typography, ButtonGroup, Button, Card, CardHeader, CardContent, CardActions, List, ListItem, Paper, MenuList, MenuItem, Divider } from "@material-ui/core";
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import AddCircleOutlineSharpIcon from '@mui/icons-material/AddCircleOutlineSharp';
 import { Navigate, useNavigate } from "react-router-dom";
+import Axios from 'axios';
 //import { ListItemButton } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,12 +56,28 @@ const useStyles = makeStyles((theme) => ({
 
 const BussinessProfile = () => {
     const navigate = useNavigate();
-
+    const [buisnessDetails, setBuisnessDetails] = useState();
     const token = localStorage.getItem('tokenNew');
-    // console.log(token);
+    console.log(token);
+
+    useEffect(async ()=>{
+        if(token){
+            const response = await Axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/business/loggedInBusinessDetails', {
+                                headers: {
+                                    "Authorization": `Bearer ${token}`,
+                                }
+                            });
+            setBuisnessDetails(response.data);
+            console.log(response);
+        }
+    },[])
 
     const classes = useStyles();
     const [option, setOption] = useState('Posted Jobs');
+
+    if(!buisnessDetails){
+        return("Loading...")
+    }
 
     return (
         <div className={classes.mainbox}>
@@ -102,27 +119,30 @@ const BussinessProfile = () => {
                                     <Box sx={{
                                         fontWeight: 'bold',
                                     }}>
-                                        Your Posted Jobs
+                                        Your Internships Jobs
                                     </Box>
                                 </Typography>
                                 <Grid item >
-                                    <Card sx={{ maxWidth: 20 }} className={classes.card}>
-                                        <CardHeader
-                                            title="For Internships"
-                                            subheader="Aug 12,2015"
-                                        />
-                                        <CardContent>
-                                            <Typography variant="subtitle2">
-                                                <span>Details : </span>
-                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, suscipit eum.
-                                                Ab, odit voluptates. Laudantium reprehenderit exercitationem dolore deserunt.
-                                                In pariatur odit tempora placeat neque excepturi, nobis autem perferendis numquam?
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <Button size="small" color="primary" onClick={() => {navigate('/details')}} >Details</Button>
-                                        </CardActions>
-                                    </Card>
+                                    {buisnessDetails.internshipsAdded.length===0?<>You have not yet posted any jobs</>:<></>}
+                                    {buisnessDetails.internshipsAdded.reverse().map((job)=>{
+                                        console.log(job)
+                                        return(
+                                        <Card sx={{ maxWidth: 20 }} className={classes.card}>
+                                            <CardHeader
+                                                title={job.internshipTitle}
+                                                subheader={job.postedOn.split("T")[0]}
+                                            />
+                                            <CardContent>
+                                                <Typography variant="subtitle2">
+                                                    <span>Details : </span>
+                                                    {job.responsibilities.substring(0,160)}...
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions>
+                                                <Button size="small" color="primary" onClick={() => {navigate(`/details?id=${job._id}`)}} >Details</Button>
+                                            </CardActions>
+                                        </Card>);
+                                    })}
                                 </Grid>
                             </Grid>}
                         {option === "Posted Jobs" &&
@@ -136,23 +156,26 @@ const BussinessProfile = () => {
                                     </Box>
                                 </Typography>
                                 <Grid item >
-                                    <Card sx={{ maxWidth: 20 }} className={classes.card}>
-                                        <CardHeader
-                                            title="For Jobs"
-                                            subheader="Aug 12,2015"
-                                        />
-                                        <CardContent>
-                                            <Typography variant="subtitle2">
-                                                <span>Details : </span>
-                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, suscipit eum.
-                                                Ab, odit voluptates. Laudantium reprehenderit exercitationem dolore deserunt.
-                                                In pariatur odit tempora placeat neque excepturi, nobis autem perferendis numquam?
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <Button size="small" color="primary" onClick={() => {navigate('/details')}} >Details</Button>
-                                        </CardActions>
-                                    </Card>
+                                    {buisnessDetails.jobsAdded.length===0?<>You have not yet posted any jobs</>:<></>}
+                                    {buisnessDetails.jobsAdded.reverse().map((job)=>{
+                                        console.log(job)
+                                        return(
+                                        <Card sx={{ maxWidth: 20 }} className={classes.card}>
+                                            <CardHeader
+                                                title={job.jobTitle}
+                                                subheader={job.postedOn.split("T")[0]}
+                                            />
+                                            <CardContent>
+                                                <Typography variant="subtitle2">
+                                                    <span>Details : </span>
+                                                    {job.jobDescription.substring(0,160)}...
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions>
+                                                <Button size="small" color="primary" onClick={() => {navigate(`/details?id=${job._id}`)}} >Details</Button>
+                                            </CardActions>
+                                        </Card>);
+                                    })}
                                 </Grid>
                             </Grid>}
                     </Grid>

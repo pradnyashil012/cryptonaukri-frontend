@@ -100,7 +100,6 @@ const Login = (props) => {
           localStorage.setItem('tokenNew',response.headers['authorization']);
           console.log(response.data);
           console.log(response.headers['authorization']);
-          
           setLoading(false);
           if (response.data.userLoggedIn) {
             toast.success(response.data.message);

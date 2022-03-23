@@ -63,6 +63,8 @@ const HeaderHome = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
+  console.log("B")
+
   const drawer = (
     <div >
       <List >

@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 const JobForm = (theme) => {
     const token = localStorage.getItem('tokenNew');
-      console.log(token);
+    //console.log("On job form ",token);
     const postjobAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/jobs/postJob';
     const postIntAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/internship/postInternship';
     const [title, setTitle] = useState();
@@ -94,7 +94,7 @@ const JobForm = (theme) => {
     const month = (CurrentDate.getMonth() + 1).toString();
     const year = CurrentDate.getFullYear().toString();
     const date = (year + '-0' + month + '-' + day).toString();
-     console.log(date)
+    console.log(date)
 
     const classes = useStyles();
     const navigate = useNavigate();
@@ -152,7 +152,7 @@ const JobForm = (theme) => {
     };
 
     const handleSkillChange = (event) => {
-        setSkills(event.target.value)
+        setSkills((event.target.value));
     };
 
     const handlePayTypeChange = (event) => {
@@ -164,7 +164,8 @@ const JobForm = (theme) => {
     };
 
     const handleIncentivesChange = (event) => {
-        setIncentives(event.target.value)
+        //setIncentives(true);
+        setIncentives(event.target.value);
     };
 
     const handlePerksChange = (event) => {
@@ -226,7 +227,7 @@ const JobForm = (theme) => {
             "informalDress":true,
             "healthInsurance":false,
             "snacks":false,
-            "skills":[skills],
+            "skills":skills.split(","),
             "candidatePreferences":"pref",
             "status":"status"
         }
@@ -280,7 +281,7 @@ const JobForm = (theme) => {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
-                  });
+                });
 
                 const data = response.data;
                     // console.log(data);
@@ -290,7 +291,8 @@ const JobForm = (theme) => {
 
 
         } catch (error) {
-            toast.error('jobCard Creation Failed!!');
+            console.log(error.response);
+            toast.error(error.response.data.message);
         }
 
     };
@@ -536,15 +538,20 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Other Incentives</InputLabel>
-                                    <OutlinedInput
-                                        id="outlined-adornment-location"
-                                        type='text'
-                                        placeholder='Add comma separated incentives'
+                                    <InputLabel 
+                                        className={classes.label} 
+                                        id="demo-simple-select-helper-label">Incentives</InputLabel>
+                                    <Select
+                                        variant='outlined'
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
                                         value={incentives}
                                         onChange={handleIncentivesChange}
-                                        name='incentives'
-                                    />
+                                        name='locationType'
+                                    >
+                                        <MenuItem value={true}>Yes</MenuItem>
+                                        <MenuItem value={false}>No</MenuItem>
+                                    </Select>
                                 </FormControl>
                             </Grid>
                             <Grid item xs={6}>
@@ -584,7 +591,6 @@ const JobForm = (theme) => {
                                         <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Probation Salary</InputLabel>
                                         <OutlinedInput
                                             id="outlined-adornment-location"
-                                         
                                             value={probationSalary}
                                             onChange={handleProbSalaryChange}
                                             name='probationSalary'
@@ -752,6 +758,24 @@ const JobForm = (theme) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
+                                    <InputLabel 
+                                        className={classes.label} 
+                                        id="demo-simple-select-helper-label">Incentives</InputLabel>
+                                    <Select
+                                        variant='outlined'
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={incentives}
+                                        onChange={handleIncentivesChange}
+                                        name='locationType'
+                                    >
+                                        <MenuItem value={true}>Yes</MenuItem>
+                                        <MenuItem value={false}>No</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            {/* <Grid item xs={6}>
+                                <FormControl fullWidth variant="outlined">
                                     <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Incentives</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-location"
@@ -761,7 +785,7 @@ const JobForm = (theme) => {
                                         onChange={handleIncentivesChange}
                                     />
                                 </FormControl>
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={6}>
                                 <FormControl fullWidth variant="outlined">
                                     <InputLabel className={classes.label} htmlFor="outlined-adornment-location">Perks</InputLabel>
