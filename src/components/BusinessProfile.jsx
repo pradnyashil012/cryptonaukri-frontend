@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Grid, Box, makeStyles, Typography, ButtonGroup, Button, Card, CardHeader, CardContent, CardActions, List, ListItem, Paper, MenuList, MenuItem, Divider } from "@material-ui/core";
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import AddCircleOutlineSharpIcon from '@mui/icons-material/AddCircleOutlineSharp';
 import { Navigate, useNavigate } from "react-router-dom";
 //import { ListItemButton } from "@material-ui/icons";
 
@@ -55,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
 const BussinessProfile = () => {
     const navigate = useNavigate();
 
-    const token = localStorage.getItem('token');
-    console.log(token);
+    const token = localStorage.getItem('tokenNew');
+    // console.log(token);
 
     const classes = useStyles();
     const [option, setOption] = useState('Posted Jobs');
@@ -76,6 +77,18 @@ const BussinessProfile = () => {
                                     </MenuItem>
                                     <MenuItem onClick={() => { setOption('Posted Jobs') }}>
                                         <ListItemText>Your Jobs</ListItemText>
+                                    </MenuItem>
+                                </MenuList>
+                            </Paper>
+                            </Box>
+                            <Box sx={{
+                            margin: '35px 10px',justifyContent:'center'
+                        }}>
+                            <Paper sx={{ width: 320, maxWidth: '100%',margin: '35px'}}>
+                                <MenuList>
+                                    
+                                    <MenuItem style={{display:'flex', alignItems:'center',justifyContent:'center'}}>
+                                    <Button variant="contained" color="primary" endIcon={<AddCircleOutlineSharpIcon/> }  onClick={() => {navigate('/jobform')}} >Add Job </Button>  
                                     </MenuItem>
                                 </MenuList>
                             </Paper>
