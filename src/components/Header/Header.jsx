@@ -16,6 +16,7 @@ const Header = (props) => {
   const cUser = localStorage.getItem("cUser");
   const admin = localStorage.getItem("admin");
   const token = localStorage.getItem("token");
+  const btoken = localStorage.getItem("tokenNew");
   const [user, setUser] = useState();
   const [anchor, setAnchor] = React.useState(null);
   const [signanchorEl, setSignanchorEl] = React.useState(null);
@@ -91,6 +92,16 @@ const Header = (props) => {
       console.log(response.data);
       setUser(response.data);
     }
+    if(btoken){
+      const response = await axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/business/loggedInBusinessDetails', {
+                        headers: {
+                          "Authorization": `Bearer ${btoken}`,
+                        }
+                      });
+      console.log(response.data);
+      setUser(response.data);
+    }
+    console.log("bt",btoken)
   }
 
   const handleClose = () => {
@@ -163,7 +174,7 @@ const Header = (props) => {
                     {user?<>{user.firstName}</>:<></>}
                   </Typography></MenuItem>
 
-                  {admin ?
+                  {cUser === 'BUISNESS' ?
                     <>
                       <MenuItem className={classes.MenuItems} onClick={addJobMobile} as={Link} to='/jobform'>
                         <Typography className={classes.navText} variant="h6" component="div">
@@ -309,7 +320,7 @@ const Header = (props) => {
 
                         <MenuItem onClick={()=>navigate('/aboutme')} className={classes.MenuItems} >{user?<>{user.firstName}</>:<></>}</MenuItem>
 
-                        {admin ?
+                        {cUser==='BUISNESS' ?
                           <>
                             <MenuItem className={classes.MenuItems} onClick={addJob} as={Link} to='/jobform'>Add Job/Intership</MenuItem>
                             <MenuItem className={classes.MenuItems} onClick={goToProfile} as={Link} to='/jobform'>Profile</MenuItem> </>
@@ -399,7 +410,6 @@ const Header = (props) => {
         >
           {drawer}
         </Drawer>
-        {/* </Box> */}
       </Box>
     </>
   );

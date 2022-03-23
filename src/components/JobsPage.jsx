@@ -47,7 +47,7 @@ const JobsPage = (e) => {
                             <JobCardLoading />
                         </>:<>
                             {
-                                dataArr.map((data) => {
+                                dataArr.reverse().map((data) => {
                                     return(
                                         <JobCard 
                                             type={"job"}
