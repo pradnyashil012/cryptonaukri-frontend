@@ -165,13 +165,14 @@ const ApplyJob = (props) => {
       const response = await Axios.get(
         `https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob/${jobid}`
       );
-      console.log(response.data.details);
+      //console.log(response.data.details);
       const jobdata = response.data.details;
       setJobInfo(jobdata);
-      console.log(jobInfo);
+      //console.log(jobInfo);
       setLoading(false);
-    } catch {
-      toast.error("Something went wrong !!!");
+    } catch(error) {
+      //console.log(error.response);
+      toast.error("Something went wrong !!");
     }
   }, []);
 
@@ -198,8 +199,8 @@ const ApplyJob = (props) => {
   };
 
   const handleApply = async () => {
-    console.log("ok apply krneka idhhr handle kari bhai !!");
-    console.log(whyHire, avl);
+    //console.log("ok apply krneka idhhr handle kari bhai !!");
+    //console.log(whyHire, avl);
     var token = localStorage.getItem("token");
     try {
       const response = await Axios.post(
@@ -215,14 +216,14 @@ const ApplyJob = (props) => {
           },
         }
       );
-      console.log(response);
+      //console.log(response);
       if (response.data.code === "JOB_APPLIED") {
         toast.success("You have success fully applied for the job !!");
         setStage(3);
       }
     } catch (error) {
-      console.log(error.response);
-      toast.error("Something went wrong!!");
+      //console.log(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
 

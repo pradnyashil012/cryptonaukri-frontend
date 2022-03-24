@@ -82,14 +82,14 @@ const Header = (props) => {
 
   const getUser = async() =>{
     if(token){
-      console.log(token.split('"')[1]);
+      //console.log(token.split('"')[1]);
       
       const response = await axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
                         headers: {
                           "Authorization": `Bearer ${token.split('"')[1]}`,
                         }
                       });
-      console.log(response.data);
+      //console.log(response.data);
       setUser(response.data);
     }
     if(btoken){
@@ -98,10 +98,10 @@ const Header = (props) => {
                           "Authorization": `Bearer ${btoken}`,
                         }
                       });
-      console.log(response.data);
+      //console.log(response.data);
       setUser(response.data);
     }
-    console.log("bt",btoken)
+    //console.log("bt",btoken)
   }
 
   const handleClose = () => {
