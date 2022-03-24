@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  AppBar,
-  makeStyles,
-  Container,
-  Grid,
-  Link,
-  Box,
-} from "@material-ui/core";
+import { makeStyles, Container, Grid, Link, Box } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import {
   Instagram,
-  Facebook,
   Twitter,
   YouTube,
   LinkedIn,

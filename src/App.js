@@ -25,7 +25,6 @@ import Terms from "./components/Terms";
 import Reset from "./components/forgotPass/forgotPass";
 import Otp from "./components/otp/otp";
 import JobDetails from "./components/JobDetails/JobDetails";
-import { AppBlocking } from "@mui/icons-material";
 import ApplyJob from "./components/applyJob/applyjob";
 import AboutMe from "./components/User/User";
 import useToken from './utils/useToken'
