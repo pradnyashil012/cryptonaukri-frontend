@@ -25,7 +25,6 @@ import Terms from "./components/Terms";
 import Reset from "./components/forgotPass/forgotPass";
 import Otp from "./components/otp/otp";
 import JobDetails from "./components/JobDetails/JobDetails";
-import { AppBlocking } from "@mui/icons-material";
 import ApplyJob from "./components/applyJob/applyjob";
 import AboutMe from "./components/User/User";
 import useToken from './utils/useToken'
@@ -96,12 +95,12 @@ const App = () => {
               <Route path="/internships" element={<><InternshipPage /></>}></Route>
               <Route path="/jobform" element={<><JobForm /></>}></Route>
               <Route path="/aboutme" element={<><AboutMe token={token} useToken={useToken}/></>}></Route>
-              <Route path="/Aboutus" element={<><AboutUS /></>}></Route>
-              <Route path="/Contact" element={<><Contact /></>}></Route>
-              <Route path="/Privacy" element={<><Privacy /></>}></Route>
-              <Route path="/DCMA" element={<><DCMA /></>}></Route>
-              <Route path="/GeneralQueries" element={<><GeneralQueries /></>}></Route>
-              <Route path="/Terms" element={<><Terms /></>}></Route>
+              <Route path="/aboutus" element={<><AboutUS /></>}></Route>
+              <Route path="/contactus" element={<><Contact /></>}></Route>
+              <Route path="/privacy" element={<><Privacy /></>}></Route>
+              <Route path="/dcma" element={<><DCMA /></>}></Route>
+              <Route path="/generalQueries" element={<><GeneralQueries /></>}></Route>
+              <Route path="/terms" element={<><Terms /></>}></Route>
               <Route path="/userResume" element={<><Resume /></>}></Route>
               <Route path="/resetPassWord" element={<><Reset /></>}></Route>
               <Route path="/Otp" element={<><Otp /></>}></Route>
