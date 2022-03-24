@@ -135,19 +135,24 @@ const User = () =>{
     const [user, setUser] = useState();
     const navigate = useNavigate();
 
-    const getUser = async() =>{
+    const getUser = () =>{
         setLoading(true);
         if(token){
-            console.log(token.split('"')[1]);
+            //console.log(token.split('"')[1]);
             
-            const response = await axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
+            const response =  axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
                                 headers: {
                                 "Authorization": `Bearer ${token.split('"')[1]}`,
                                 }
                             });
-            setLoading(false);
-            console.log(response.data);
+            
+            response.then((data)=>{
+                //console.log(data.data);
+                setUser(data.data);
+                setLoading(false);
+            })
             setUser(response.data);
+            
         }
         else{
             setLoading(false);
@@ -160,8 +165,10 @@ const User = () =>{
         if(!token){
             toast.error("Please Login first !!");
             navigate('/');
+        }else{
+            getUser();
         }
-        getUser();
+        
     },[]);
 
     const classes = useStyles();
@@ -236,18 +243,38 @@ const User = () =>{
                                 <Box sx={{
                                     fontWeight: '500',
                                 }}>
-                                    My Applications
+                                    My Applications (Jobs)
                                 </Box>
                             </Typography><br />
-                            {user.appliedAt.map((data, index)=>{
-                                var time = data.appliedOn.split("T");
-                                return <Box className={classes.right}>
-                                            <Typography sx={{fontWeight: '500'}} variant="h7">{index+1}. Job Id : <a href={`/jobapplication?id=${data.jobAssociated}`} >{data.jobAssociated}</a></Typography>
-                                    <Typography variant="p">Applied on <span sx={{fontWeight: '500'}}>{time[0]}</span></Typography>
-                                    Status : Pending
-                                </Box>;
-                            })}
-                            {user.appliedAt.length === 0?<>You have no pending applications.</>:<></>}
+                            {user?<>
+                                {user.appliedAtJobs.map((data, index)=>{
+                                    var time = data.appliedOn.split("T");
+                                    return <Box className={classes.right}>
+                                                <Typography sx={{fontWeight: '500'}} variant="h7">{index+1}. Job Id : <a href={`/jobapplication?id=${data.jobAssociated}`} >{data.jobAssociated}</a></Typography>
+                                        <Typography variant="p">Applied on <span sx={{fontWeight: '500'}}>{time[0]}</span></Typography>
+                                        {/* Status : Pending */}
+                                    </Box>;
+                                })}
+                            </>:<></>}
+                            {user.appliedAtJobs.length === 0?<>You have no pending applications.</>:<></>}
+                            <Typography className={classes.cardHead} variant={'h6'}>
+                                <Box sx={{
+                                    fontWeight: '500',
+                                }}>
+                                    My Applications (Internships)
+                                </Box>
+                            </Typography><br />
+                            {user?<>
+                                {user.appliedAtInternships.map((data, index)=>{
+                                    var time = data.appliedOn.split("T");
+                                    return <Box className={classes.right}>
+                                                <Typography sx={{fontWeight: '500'}} variant="h7">{index+1}. Job Id : <a href={`/jobapplication?id=${data.jobAssociated}`} >{data.jobAssociated}</a></Typography>
+                                        <Typography variant="p">Applied on <span sx={{fontWeight: '500'}}>{time[0]}</span></Typography>
+                                        {/* Status : Pending */}
+                                    </Box>;
+                                })}
+                            </>:<></>}
+                            {user.appliedAtInternships.length === 0?<>You have no pending applications.</>:<></>}
                         </Box>
                     </Container>
                 </Box>
