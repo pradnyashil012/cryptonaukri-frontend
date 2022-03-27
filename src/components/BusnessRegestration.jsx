@@ -69,6 +69,7 @@ const BusReg = () => {
     const [website, setWebsite] = useState('');
     const [pass, setPass] = useState('');
     const [state, setState] = useState('otp');
+    const [coupon, setCoupon] = useState('');
     const [otp, setOtp] = useState('');
     const [values, setValues] = useState({
         showPassword: false,
@@ -114,6 +115,10 @@ const BusReg = () => {
     const handlePhoneNoChange = (e) => {
         setPhoneNo(e.target.value);
         // console.log(phoneNo);
+    }
+    const handleCoupon = (e) => {
+        setCoupon(e.target.value);
+        // console.log(coupon);
     }
     
     const handleWebsiteChange = (e) => {
@@ -162,7 +167,7 @@ const BusReg = () => {
                     
                 })
                 console.log(payload);
-               let resp =  await Axios.post(`${APIUrl}api/v1/business/signup`,
+               let resp =  await Axios.post(`${APIUrl}api/v1/business/signup?coupon=${coupon}`,
                {    executiveName : exec,
                     officialEmail : email,
                     password : pass,
@@ -370,7 +375,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={4} >
+                        <Grid item xs={5} >
                         <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} autoComplete="on" htmlFor="outlined-adornment-password">Password</InputLabel>
                                 <OutlinedInput
@@ -394,6 +399,21 @@ const BusReg = () => {
                                 />
                             </FormControl>
                         </Grid>
+
+                        <Grid item xs={5} >
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Coupon Code</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-name"
+                                    type='text'
+                                    value={coupon}
+                                    onChange={handleCoupon}
+                                    name='coupon'
+                                    required
+                                />
+                            </FormControl>
+                        </Grid>
+
                         {state=='verify'?
                         <>
                             <Grid item xs={9} >
