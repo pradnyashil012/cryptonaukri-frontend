@@ -168,6 +168,7 @@ const ApplyJob = (props) => {
       //console.log(response.data.details);
       const jobdata = response.data.details;
       setJobInfo(jobdata);
+      console.log(jobdata);
       //console.log(jobInfo);
       setLoading(false);
     } catch(error) {

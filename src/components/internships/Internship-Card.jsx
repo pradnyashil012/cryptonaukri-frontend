@@ -132,7 +132,7 @@ const InternshipCard = (props) => {
 
   const handleApply = () => {
     if (login) {
-      navigate('/jobapplication')
+      navigate(`/jobapplication?id=${props.srId}&type=${props.type}`)
     } else {
       toast.info('LogIn First !!');
     }

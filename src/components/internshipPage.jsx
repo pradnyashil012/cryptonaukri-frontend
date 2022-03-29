@@ -17,17 +17,21 @@ const InternshipPage = () => {
     // const [datarr, setDataArr] = React.useState([]);
 
 
-    useEffect(async () => {
+    useEffect(async ()=>{
         setLoading(true);
-        const response = await Axios.get('https://cryptonaukri-backend.herokuapp.com/internships')
-            .then((res) => {
-                setLoading(false); 
-                setDataArr(res.data);
-            })
-            .catch((err) => {
-                setLoading(false);
-            });
-    }, []);
+        const response = await Axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob')
+        .then((res)=>{
+            const resp = res.data;
+            console.log(resp.data);
+            setDataArr(resp.data);
+            console.log(dataArr);
+            setLoading(false);
+            
+        })
+        .catch((err)=>{
+            setLoading(false);
+        });
+    } ,[]);
     return (
         <div className={classes.body}>
             <Container>
@@ -42,8 +46,19 @@ const InternshipPage = () => {
                             <JobCardLoading />
                         </>:<>
                             {
-                                dataArr.slice(0).reverse().map((e) => {
-                                    return <InternshipCard position={e.position} cmp={e.company} opn={e.openings} link={e.link} srNo={e._id}/>
+                                dataArr.slice(0).reverse().map((internship) => {
+                                    //console.log(internship);
+
+                                    return( 
+                                        <InternshipCard 
+                                            position={internship.jobTitle} 
+                                            cmp={internship.postedByDetails.companyName} 
+                                            opn={internship.openings}
+                                            perks={internship.perks.split}
+                                            key={internship._id}
+                                            srId={internship._id}
+                                            type={"internship"}
+                                        />);
                                 })
                             } 
                     </>}
