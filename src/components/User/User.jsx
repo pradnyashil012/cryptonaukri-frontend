@@ -249,8 +249,9 @@ const User = () =>{
                             {user?<>
                                 {user.appliedAtJobs.map((data, index)=>{
                                     var time = data.appliedOn.split("T");
+                                    {console.log(data)}
                                     return <Box className={classes.right}>
-                                                <Typography sx={{fontWeight: '500'}} variant="h7">{index+1}. Job Id : <a href={`/jobapplication?id=${data.jobAssociated}`} >{data.jobAssociated}</a></Typography>
+                                                <Typography sx={{fontWeight: '500'}} variant="h7">{index+1}.  <a href={`/jobapplication?id=${data.jobAssociated}`} >{data.jobDetails.jobTitle}</a></Typography>
                                         <Typography variant="p">Applied on <span sx={{fontWeight: '500'}}>{time[0]}</span></Typography>
                                         {/* Status : Pending */}
                                     </Box>;
