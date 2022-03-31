@@ -499,10 +499,10 @@ const ApplyJob = (props) => {
                           fontWeight: "bold",
                         }}
                       >
-                        {jobInfo.postedBy.companyName}
+                        {jobInfo.postedByDetails.companyName}
                       </Box>
                     </Typography>
-                    Posted by {jobInfo.postedBy.executiveName}
+                    Posted by {jobInfo.postedByDetails.executiveName}
                   </Box>
                 </Box>
               </Box>
@@ -631,7 +631,7 @@ const ApplyJob = (props) => {
                         padding: "5px",
                       }}
                     >
-                      {jobInfo.postedBy.description}
+                      {jobInfo.jobDescription}
 
                       <br />
                       <br />
