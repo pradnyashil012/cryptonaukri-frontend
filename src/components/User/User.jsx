@@ -147,7 +147,7 @@ const User = () =>{
                             });
             
             response.then((data)=>{
-                //console.log(data.data);
+                console.log(data.data);
                 setUser(data.data);
                 setLoading(false);
             })
