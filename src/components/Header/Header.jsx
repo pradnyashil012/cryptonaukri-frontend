@@ -86,7 +86,7 @@ const Header = (props) => {
       
       const response = await axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
                         headers: {
-                          "Authorization": `Bearer ${token.split('"')[1]}`,
+                          "Authorization": `Bearer ${token}`,
                         }
                       });
       //console.log(response.data);

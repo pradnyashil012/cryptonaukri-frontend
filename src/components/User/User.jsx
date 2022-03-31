@@ -142,12 +142,12 @@ const User = () =>{
             
             const response =  axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
                                 headers: {
-                                "Authorization": `Bearer ${token.split('"')[1]}`,
+                                "Authorization": `Bearer ${token}`,
                                 }
                             });
             
             response.then((data)=>{
-                console.log(data.data);
+                //console.log(data.data);
                 setUser(data.data);
                 setLoading(false);
             })

@@ -121,12 +121,14 @@ const Login = (props) => {
           try {
             setLoading(true);
             const response = await Axios.post(`${API}api/v1/user/login`, { email, password });
-            console.log(email, password)
+            //console.log(email, password)
             const data = response.data;
             setLoading(false);
-            console.log(response.headers['authorization']);
+            //console.log(response.headers['authorization']);
             // if (data.login) {
-            props.setToken(response.headers['authorization']);
+            
+            //props.setToken(response.headers.authorization);
+            localStorage.setItem('token', response.headers['authorization']);
             localStorage.setItem('login', true);
             localStorage.setItem('cUser', data.cUser);
             toast.success(data.message);
@@ -136,7 +138,8 @@ const Login = (props) => {
             //   toast.error(data.message)
             // }
           } catch (error) {
-            console.log( error.request.response );
+            console.log(error.request);
+            console.log( error.request.response);
             const err = JSON.parse(error.request.response);
             if(err.code === "WRONG_PASSWORD"){
               toast.error("Wrong email or password !!")
