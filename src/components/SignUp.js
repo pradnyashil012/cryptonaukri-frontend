@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonBox: {
         textAlign: "center",
-        paddingTop: '20px'
+        paddingTop: '20px',
+        marginLeft: '10px'
     },
     heading: {
         margin: '20px 10%',
@@ -69,8 +70,6 @@ const SignUp = () => {
     });
 
     const [loading, setLoading] = useState(false);
-
-
     const otpAPI = `https://cryptonaukribackend.herokuapp.com/api/v1/user/otp?email=`
     const secretCode = 'jbsf198237orAUaf';
 
@@ -80,27 +79,21 @@ const SignUp = () => {
             showPassword: !values.showPassword,
         });
     };
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
     const handleFNameChange = (event) => {
         setFName(event.target.value)
     };
     const handleLNameChange = (event) => {
         setLName(event.target.value)
     };
-
-
     const handlesetCoupon = (event) => {
         setCoupon(event.target.value);
     };
-
     const handlesetLocation = (event) => {
         setLocation(event.target.value);
     };
-
     const handleCallback = (IncomingState) => {
         setState(IncomingState);
         // console.log('handlecallback is called !!')
@@ -109,7 +102,6 @@ const SignUp = () => {
     const handleOtpChange = (event) =>{
         setOtp(event.target.value);
     }
-
     const handleOtp = async (e) =>{
         e.preventDefault();
         if (!fname || !lname || !email || !password) {
@@ -159,10 +151,7 @@ const SignUp = () => {
         }
         
     }
-
-    
-
-    const handleSubmit = async (e) => {
+    const   handleSubmit = async (e) => {
         e.preventDefault();
 
         if(state === 'otp'){
@@ -177,7 +166,7 @@ const SignUp = () => {
                         const response = await Axios.get(otpAPI+email);
                         const data = response.data;
                         if(data.otpSent === true){
-                            toast.success('OTP sent to your registered email address.');
+                            toast.success('Code sent to your registered email address.');
                             setState('verify');
                         }
                         setLoading(false);
@@ -269,9 +258,9 @@ const SignUp = () => {
 
                         <Grid item xs={6} >
                             <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Last Name</InputLabel>
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-lname">Last Name</InputLabel>
                                 <OutlinedInput
-                                    id="outlined-adornment-name"
+                                    id="outlined-adornment-lname"
                                     type='text'
                                     value={lname}
                                     onChange={handleLNameChange}
@@ -296,9 +285,9 @@ const SignUp = () => {
 
                         <Grid item xs={5} >
                             <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Phone</InputLabel>
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-phone">Phone</InputLabel>
                                 <OutlinedInput
-                                    id="outlined-adornment-email"
+                                    id="outlined-adornment-phone"
                                     type='tel'
                                     value={number}
                                     onChange={(e) => setNumber(e.target.value)}
@@ -308,9 +297,9 @@ const SignUp = () => {
 
                         <Grid item xs={5} >
                             <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Location/City</InputLabel>
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-city">Location/City</InputLabel>
                                 <OutlinedInput
-                                    id="outlined-adornment-email"
+                                    id="outlined-adornment-city"
                                     type='text'
                                     value={location}
                                     onChange={handlesetLocation}
@@ -320,9 +309,9 @@ const SignUp = () => {
 
                         <Grid item xs={7} >
                             <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Coupon Code</InputLabel>
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-coupon">Coupon Code</InputLabel>
                                 <OutlinedInput
-                                    id="outlined-adornment-email"
+                                    id="outlined-adornment-coupon"
                                     type='text'
                                     value={coupon}
                                     onChange={handlesetCoupon}
@@ -332,9 +321,9 @@ const SignUp = () => {
                         </Grid>
 
 
-                        <Grid item xs={7} >
+                        <Grid item xs={6} >
                             <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-password">Password</InputLabel>
+                                <InputLabel className={classes.label} autoComplete="on" htmlFor="outlined-adornment-password">Password</InputLabel>
                                 <OutlinedInput
                                     id="outlined-adornment-password"
                                     type={values.showPassword ? 'text' : 'password'}
@@ -357,10 +346,11 @@ const SignUp = () => {
                             </FormControl>
                         </Grid>
 
-                        {state=='verify'?<>
-                            <Grid item xs={9} >
+                        {state=='verify'?
+                        <>
+                            <Grid item xs={6} >
                                 <FormControl fullWidth variant="outlined">
-                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Otp</InputLabel>
+                                    <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Verfication Code</InputLabel>
                                     <OutlinedInput variant="outlined"
                                     name="password"
                                     fullWidth
@@ -378,7 +368,7 @@ const SignUp = () => {
                                         className={classes.Button}
                                         disabled={state == 'verified' ? true : false}
                                     >
-                                    {state == 'verified' ? 'verified' : 'verify Otp and Signup'} </Button>}
+                                    {state == 'verified' ? 'verified' : ' Start Your Free Trail'} </Button>}
                             </Box>
                         </>:<></>}
 
@@ -392,7 +382,7 @@ const SignUp = () => {
                             color="primary"
                             disabled={state === 'verify'}
                             className={classes.Button}  >
-                            {state === 'otp' ? 'send Otp' : 'Create Account'}
+                            {state === 'otp' ? 'Verify Email' : 'Create Account'}
                         </Button>}
                     </Box>}
                 </Box>
