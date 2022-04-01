@@ -29,6 +29,14 @@ const useStyles = makeStyles((theme) => ({
         padding: '2px 5px',
         marginTop: '-5px',
     },
+    para:{
+        width:"100%",
+        height:"20px",
+        textAlign:"center",
+        color: theme.palette.primary.main,
+        fontWeight: 'bolder',
+        fontSize:'2vmax'
+    },
     buttonBox: {
         textAlign: "center",
         paddingTop: '20px',
@@ -234,14 +242,22 @@ const SignUp = () => {
                         <Box sx={{
                             fontWeight: 'bold'
                         }}>
-                            New User SignUp
+                            SignUp
                         </Box>
                     </Typography>
                 </div>
                 <Box component='form' className={classes.formContainer}>
 
                     <Grid container spacing={3}>
+                    <Grid item xs={12} >
+                        <p className={classes.para}>
+                        Try 14 days free Trial Offer
 
+                        </p>
+                        <p className={classes.para}>
+                            Hurry up! Only first 100 Developers!
+                        </p>
+                        </Grid>
                         <Grid item xs={6} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">First Name</InputLabel>
