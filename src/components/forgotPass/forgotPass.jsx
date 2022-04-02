@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Reset = (props) => {
 
-  const baseAPI = "https://cryptonaukribackend.herokuapp.com/";
+  const baseAPI = "https://cryptonaukribackendtest.herokuapp.com/";
 
 
   const [state, setState] = useState(1)
