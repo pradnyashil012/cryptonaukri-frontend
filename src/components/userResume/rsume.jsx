@@ -57,7 +57,7 @@ const Resume = () => {
 
     useEffect(async (e) => {
         let id = searchParams.get("id");
-        const response = await Axios.get(`https://cryptonaukri-backend.herokuapp.com/jobs/:${id}`)
+        const response = await Axios.get(`https://cryptonaukribackend.herokuapp.com/jobs/:${id}`)
             .then((res) => {
                 setPosition(res.data[0].position)
                 setCompany(res.data[0].company)
