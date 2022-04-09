@@ -40,7 +40,9 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonBox: {
     textAlign: "center",
-    paddingTop: '20px'
+    paddingTop: '20px',
+    
+    
   },
   body: {
     marginTop: '100px',
@@ -60,7 +62,7 @@ const Login = (props) => {
   const navigate = useNavigate();
   const classes = useStyles();
 
-  const API = 'https://cryptonaukribackend.herokuapp.com/'
+  const API = 'https://cryptonaukribackendtest.herokuapp.com/'
 
   const [values, setValues] = useState({
     showPassword: false,
@@ -84,6 +86,11 @@ const Login = (props) => {
     event.preventDefault();
   };
 
+  const handleForgotPassword =  (e) => {
+
+    e.preventDefault();
+    navigate('/resetPassWord')
+  }
   const handleSubmit = async (e) => {
 
     e.preventDefault();
@@ -212,6 +219,14 @@ const Login = (props) => {
               className={classes.Button}
             >
               Login </Button>}
+          </Box>
+          <Box className={classes.buttonBox} >
+          <Button onClick={handleForgotPassword}
+              variant="outlined"
+              color="primary"
+              className={classes.Button}
+            >
+              Forgot Password ? </Button>
           </Box>
         </Box>
       </Container>
