@@ -83,13 +83,13 @@ const Header = (props) => {
   const getUser = async() =>{
     if(token){
       //console.log(token.split('"')[1]);
-      
-      const response = await axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
+      console.log(token);
+      const response = await axios.get('https://cryptonaukribackendtest.herokuapp.com/api/v1/user/loggedInUserDetails', {
                         headers: {
-                          "Authorization": `Bearer ${token.split('"')[1]}`,
+                          "Authorization": `Bearer ${token}`,
                         }
                       });
-      //console.log(response.data);
+      console.log(response.data);
       setUser(response.data);
     }
     if(btoken){
@@ -247,6 +247,11 @@ const Header = (props) => {
           <hr />
           <div className={classes.navlinks}>
             <MenuItem className={classes.navItem}>
+              <Typography className={classes.navText} onClick={() => { setMobileOpen(!mobileOpen); }} variant="h5" component="div" >
+                <a href="https://community.cryptonaukri.com/" target="_blank"> Community</a>
+              </Typography>
+            </MenuItem>
+            <MenuItem className={classes.navItem}>
               <Typography className={classes.navText} onClick={() => { navigate('/jobspage'); setMobileOpen(!mobileOpen); }} variant="h5" component="div" >
                 Jobs
               </Typography>
@@ -278,6 +283,11 @@ const Header = (props) => {
 
             <Box id='navigation' className={classes.navigation}>
               <div className={classes.navlinks}>
+                <MenuItem className={classes.navItem}>
+                  <Typography className={classes.navText} variant="h5" component="div">
+                    <a href="https://community.cryptonaukri.com/" target="_blank"> Community</a>
+                  </Typography>
+                </MenuItem>
                 <MenuItem className={classes.navItem}>
                   <Typography className={classes.navText} onClick={() => { navigate('/jobspage'); }} variant="h5" component="div" >
                     Jobs

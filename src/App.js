@@ -70,8 +70,8 @@ theme = responsiveFontSizes(theme);
 
 const App = () => {
 
-  const {token, setToken} = useToken();
-  console.log(token);
+  //const {token, setToken} = useToken();
+  //console.log(token);
 
   const classes = useStyles();
   return (
@@ -87,14 +87,14 @@ const App = () => {
               <Route exact path="/details" element={<><JobDetails /></>}></Route>
               <Route exact path="/jobapplication" element={<><ApplyJob /></>}></Route>
               <Route exact path="/loginsignup" element={<><LoginSignup /></>}></Route>
-              <Route path="/userLogin" element={<><Login route="user" token={token} setToken={setToken} /></>}></Route>
+              <Route path="/userLogin" element={<><Login route="user" /></>}></Route>
               <Route path="/companyLogin" element={<><Login route="company" /></>}></Route>
               <Route path="/userSignUp" element={<> <SignUp /></>}></Route>
               <Route path="/companySignUp" element={<><BusReg /></>}></Route>
               <Route path="/jobspage" element={<> <JobsPage /></>}></Route>
               <Route path="/internships" element={<><InternshipPage /></>}></Route>
               <Route path="/jobform" element={<><JobForm /></>}></Route>
-              <Route path="/aboutme" element={<><AboutMe token={token} useToken={useToken}/></>}></Route>
+              <Route path="/aboutme" element={<><AboutMe /></>}></Route>
               <Route path="/aboutus" element={<><AboutUS /></>}></Route>
               <Route path="/contactus" element={<><Contact /></>}></Route>
               <Route path="/privacy" element={<><Privacy /></>}></Route>

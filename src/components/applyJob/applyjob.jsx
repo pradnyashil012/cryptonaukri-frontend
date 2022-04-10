@@ -136,6 +136,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ApplyJob = (props) => {
+
+  const token = localStorage.getItem('token');
+
   var url_string = window.location.href;
   var url = new URL(url_string);
   var jobid = url.searchParams.get("id");
@@ -160,6 +163,11 @@ const ApplyJob = (props) => {
   const navigate = useNavigate();
 
   useEffect(async () => {
+    if(!token){
+      setLoading(false);
+      toast.error("Please Login first !!");
+      navigate('/');
+    }
     try {
       setLoading(true);
       const response = await Axios.get(
@@ -168,7 +176,7 @@ const ApplyJob = (props) => {
       //console.log(response.data.details);
       const jobdata = response.data.details;
       setJobInfo(jobdata);
-      console.log(jobdata);
+      //console.log(jobdata);
       //console.log(jobInfo);
       setLoading(false);
     } catch(error) {
@@ -213,7 +221,7 @@ const ApplyJob = (props) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token.split('"')[1]}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );

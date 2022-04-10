@@ -3,7 +3,12 @@ import {
     Typography,
     Box, 
     Container,
-    makeStyles
+    makeStyles,
+    OutlinedInput,
+    Grid,
+    InputLabel,
+    CircularProgress,
+    Button
 } from '@material-ui/core';
 // import { AccountCircle } from "@material-ui/icons";
 import { toast } from 'react-toastify';
@@ -12,6 +17,13 @@ import { useNavigate } from "react-router-dom";
 import Skeleton from '@mui/material/Skeleton';
 
 const useStyles = makeStyles((theme) => ({
+    Button: {
+        margin: 10,
+        "&:hover": {
+        backgroundColor: theme.palette.primary.main,
+        color: "white",
+        },
+    },
     modal:{
         position: 'absolute',
         top: '30%',
@@ -90,6 +102,11 @@ const useStyles = makeStyles((theme) => ({
         },
 
     },
+    label: {
+        backgroundColor: 'white',
+        padding: '2px 5px',
+        marginTop: '-5px',
+    },
     headcontain: {
         position: 'relative',
         display: 'flex',
@@ -132,7 +149,10 @@ const User = () =>{
 
     const token = localStorage.getItem('token');
     const [loading, setLoading] = useState(false);
+    const [smLoading, setSmLoading] = useState(false);
     const [user, setUser] = useState();
+    const [show, setShow] = useState(false);
+    const [resume, setResume] = useState("");
     const navigate = useNavigate();
 
     const getUser = () =>{
@@ -140,9 +160,9 @@ const User = () =>{
         if(token){
             //console.log(token.split('"')[1]);
             
-            const response =  axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
+            const response =  axios.get('https://cryptonaukribackendtest.herokuapp.com/api/v1/user/loggedInUserDetails', {
                                 headers: {
-                                "Authorization": `Bearer ${token.split('"')[1]}`,
+                                "Authorization": `Bearer ${token}`,
                                 }
                             });
             
@@ -159,6 +179,31 @@ const User = () =>{
             toast.error("Please Login first !!");
             navigate('/');
         }
+    }
+
+    const updateResume = () =>{
+        setSmLoading(true);
+        const response =  axios.put('https://cryptonaukribackendtest.herokuapp.com/api/v1/user/updateResume',
+                                {
+                                    otherLinks: [resume]
+                                },
+                                {
+                                    headers: {
+                                    "Authorization": `Bearer ${token}`,
+                                    }
+                                }
+                            ); 
+        response.then((resp)=>{
+            setSmLoading(false);
+            if(resp.data.isResumeUpdated){
+                toast.success("Resume Updated Successfully")
+            }else{
+                toast.error("Error Occured while updating resume, please try again !!")
+            }
+            console.log(resp);
+        })
+        
+        setSmLoading(false);
     }
     
     useEffect(()=>{
@@ -238,6 +283,28 @@ const User = () =>{
                                     {user.location}
                                 </Box>
                             </Typography>
+                            <br/>
+                            {show?<Grid item xs={30} >
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Add Resume</InputLabel>
+                                <br />
+                                <OutlinedInput
+                                    sx={{
+                                        fontSize: '10px'
+                                    }}
+                                    id="outlined-adornment-name"
+                                    type='text'
+                                    value={resume}
+                                    onChange={(e)=>{setResume(e.target.value)}}
+                                    name='Resume Link'
+                                    label='Add your resume link'
+                                />
+                                {smLoading?<CircularProgress />:<Button onClick={updateResume}
+                                variant="outlined"
+                                color="primary"
+                                className={classes.Button}
+                                >
+                                Update </Button>}
+                            </Grid>:<Box sx={{color:'blue'}} onClick={()=>{setShow(!show)}}>Update Resume</Box>}
                             <br/>
                             <Typography className={classes.cardHead} variant={'h6'}>
                                 <Box sx={{
