@@ -248,7 +248,7 @@ const Header = (props) => {
           <div className={classes.navlinks}>
             <MenuItem className={classes.navItem}>
               <Typography className={classes.navText} onClick={() => { setMobileOpen(!mobileOpen); }} variant="h5" component="div" >
-                <a href="https://community.cryptonaukri.com/" target="_blank"> Community</a>
+                <a href="https://community.cryptonaukri.com/" className={classes.link} target="_blank" rel="noreferrer"> Community</a>
               </Typography>
             </MenuItem>
             <MenuItem className={classes.navItem}>
@@ -285,7 +285,7 @@ const Header = (props) => {
               <div className={classes.navlinks}>
                 <MenuItem className={classes.navItem}>
                   <Typography className={classes.navText} variant="h5" component="div">
-                    <a href="https://community.cryptonaukri.com/" target="_blank"> Community</a>
+                    <a href="https://community.cryptonaukri.com/" style={{"textDecoration": 'none', color: '#003979'}} target="_blank" rel="noreferrer"> Community</a>
                   </Typography>
                 </MenuItem>
                 <MenuItem className={classes.navItem}>
