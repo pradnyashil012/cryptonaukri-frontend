@@ -122,7 +122,7 @@ const InternshipCard = (props) => {
 
   const handleDelete = async (e) => {
     if (window.confirm('sure to delete this card ?')) {
-      const response = await Axios.delete(`https://cryptonaukri-backend.herokuapp.com/internships/:${e}`)
+      const response = await Axios.delete(`https://cryptonaukribackend.herokuapp.com/internships/:${e}`)
 
       const data = response.data;
       toast.success('Internship Deleted');
