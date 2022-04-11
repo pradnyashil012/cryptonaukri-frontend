@@ -126,7 +126,7 @@ const JobCard = (props) => {
 
   const handleDelete = async (e) => {
     if (window.confirm('sure to delete this card ?')) {
-      const response = await Axios.delete(`https://cryptonaukri-backend.herokuapp.com/jobs/:${e}`)
+      const response = await Axios.delete(`https://cryptonaukribackend.herokuapp.com/jobs/:${e}`)
 
       const data = response.data;
       const code = data.code;
