@@ -185,7 +185,17 @@ const User = () =>{
         setSmLoading(true);
         const response =  axios.put('https://cryptonaukribackend.herokuapp.com/api/v1/user/updateResume',
                                 {
-                                    otherLinks: [resume]
+                                    education:[],
+                                    jobs:[],
+                                    internships:[],
+                                    courses:[],
+                                    projects:[],
+                                    skills:[],
+                                    links:{
+                                        github:'',
+                                        linkedin:'',
+                                        otherLinks: [resume],
+                                    },
                                 },
                                 {
                                     headers: {
@@ -196,7 +206,45 @@ const User = () =>{
         response.then((resp)=>{
             setSmLoading(false);
             if(resp.data.isResumeUpdated){
-                toast.success("Resume Updated Successfully")
+                toast.success("Resume Updated Successfully");
+                getUser();
+            }else{
+                toast.error("Error Occured while updating resume, please try again !!")
+            }
+            console.log(resp);
+        })
+        
+        setSmLoading(false);
+    }
+
+    const addResume = () =>{
+        setSmLoading(true);
+        //console.log(resume);
+        const response =  axios.post('https://cryptonaukribackend.herokuapp.com/api/v1/user/addResume',
+                                {
+                                    education:[],
+                                    jobs:[],
+                                    internships:[],
+                                    courses:[],
+                                    projects:[],
+                                    skills:[],
+                                    links:{
+                                        github:'',
+                                        linkedin:'',
+                                        otherLinks: [resume],
+                                    },
+                                },
+                                {
+                                    headers: {
+                                    "Authorization": `Bearer ${token}`,
+                                    }
+                                }
+                            ); 
+        response.then((resp)=>{
+            setSmLoading(false);
+            if(resp.data.resumeAdded){
+                toast.success("Resume Added Successfully")
+                getUser();
             }else{
                 toast.error("Error Occured while updating resume, please try again !!")
             }
@@ -281,11 +329,13 @@ const User = () =>{
                                     {user.phoneNumber}
                                     <br />
                                     {user.location}
+                                    <br/>
+                                    {user.userResume?<>Your Resume : <a href={user.userResume.links.otherLinks} target="_blank">{user.userResume.links.otherLinks}</a></>:<>You have'nt added a resume yet, use the below option to add a resume.</>}
                                 </Box>
                             </Typography>
                             <br/>
                             {show?<Grid item xs={30} >
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Add Resume</InputLabel>
+                                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">{user.userResume?'Update':'Add'} Resume</InputLabel>
                                 <br />
                                 <OutlinedInput
                                     sx={{
@@ -298,13 +348,33 @@ const User = () =>{
                                     name='Resume Link'
                                     label='Add your resume link'
                                 />
-                                {smLoading?<CircularProgress />:<Button onClick={updateResume}
-                                variant="outlined"
-                                color="primary"
-                                className={classes.Button}
+                                {smLoading?<CircularProgress />:
+                                <>
+                                    {user.userResume?<>
+                                    <Button onClick={()=>updateResume()}
+                                        variant="outlined"
+                                        color="primary"
+                                        className={classes.Button}
+                                    >Update</Button>
+                                    </>:<>
+                                        <Button onClick={()=>addResume()}
+                                            variant="outlined"
+                                            color="primary"
+                                            className={classes.Button}
+                                        >Add</Button>
+                                    </>}
+                                </>
+                                }
+                            </Grid>:
+                            <Box sx={{width:'300px'}}>
+                                <Button onClick={()=>setShow(!show)}
+                                    variant="outlined"
+                                    color="primary"
+                                    className={classes.Button}
                                 >
-                                Update </Button>}
-                            </Grid>:<Box sx={{color:'blue'}} onClick={()=>{setShow(!show)}}>Update Resume</Box>}
+                                    {user.userResume?<>Update Resume</>:<>Add Resume</>}</Button>
+                            </Box>
+                            }
                             <br/>
                             <Typography className={classes.cardHead} variant={'h6'}>
                                 <Box sx={{
