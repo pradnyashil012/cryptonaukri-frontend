@@ -73,7 +73,7 @@ const Resume = () => {
 
     useEffect(async (e) => {
         let id = searchParams.get("id");
-        const response = await Axios.get(`https://cryptonaukri-backend.herokuapp.com/internships/:${id}`)
+        const response = await Axios.get(`https://cryptonaukribackend.herokuapp.com/internships/:${id}`)
             .then((res) => {
                 setPosition(res.data[0].position)
                 setCompany(res.data[0].company)
@@ -110,7 +110,7 @@ const Resume = () => {
         try {
 
             if (type == 1) {
-                const response = await Axios.post('https://cryptonaukri-backend.herokuapp.com/jobs', { position, company, experience, openings, link ,date });
+                const response = await Axios.post('https://cryptonaukribackend.herokuapp.com/jobs', { position, company, experience, openings, link ,date });
 
                 const data = response.data;
 
@@ -119,7 +119,7 @@ const Resume = () => {
 
             }
             else if (type == 2) {
-                const response = await Axios.post('https://cryptonaukri-backend.herokuapp.com/internships', { position, company, openings, link ,date });
+                const response = await Axios.post('https://cryptonaukribackend.herokuapp.com/internships', { position, company, openings, link ,date });
 
                 const data = response.data;
 
@@ -137,14 +137,14 @@ const Resume = () => {
 
         if (type === 1) {
             
-            const response = await Axios.patch(`https://cryptonaukri-backend.herokuapp.com/jobs/${urlParamId}`, { position, company, experience, openings, link });
+            const response = await Axios.patch(`https://cryptonaukribackend.herokuapp.com/jobs/${urlParamId}`, { position, company, experience, openings, link });
             
             toast.success('jobCard Updated !!');
             navigate('/')
 
         } else if (type === 2) {
 
-            const response = await Axios.patch(`https://cryptonaukri-backend.herokuapp.com/internships/${urlParamId}`, { position, company, openings, link });
+            const response = await Axios.patch(`https://cryptonaukribackend.herokuapp.com/internships/${urlParamId}`, { position, company, openings, link });
           
             toast.success('InternshipCard Updated !!');
             navigate('/')

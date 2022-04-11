@@ -160,7 +160,7 @@ const User = () =>{
         if(token){
             //console.log(token.split('"')[1]);
             
-            const response =  axios.get('https://cryptonaukribackendtest.herokuapp.com/api/v1/user/loggedInUserDetails', {
+            const response =  axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
                                 headers: {
                                 "Authorization": `Bearer ${token}`,
                                 }
@@ -183,8 +183,7 @@ const User = () =>{
 
     const updateResume = () =>{
         setSmLoading(true);
-        console.log(resume);
-        const response =  axios.put('https://cryptonaukribackendtest.herokuapp.com/api/v1/user/updateResume',
+        const response =  axios.put('https://cryptonaukribackend.herokuapp.com/api/v1/user/updateResume',
                                 {
                                     education:[],
                                     jobs:[],
@@ -221,7 +220,7 @@ const User = () =>{
     const addResume = () =>{
         setSmLoading(true);
         //console.log(resume);
-        const response =  axios.post('https://cryptonaukribackendtest.herokuapp.com/api/v1/user/addResume',
+        const response =  axios.post('https://cryptonaukribackend.herokuapp.com/api/v1/user/addResume',
                                 {
                                     education:[],
                                     jobs:[],

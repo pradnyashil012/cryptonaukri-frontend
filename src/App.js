@@ -38,7 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
   body: {
     overflow: 'hidden'
-  }
+  },
+  link: {
+    textDecoration: 'none'
+  },
 }));
 let theme = createTheme({
   breakpoints: {
@@ -62,8 +65,11 @@ let theme = createTheme({
     text: {
       main: "#003979",
       white: "#fff"
-    }
+    },
   },
+  link: {
+    
+  }
 });
 
 theme = responsiveFontSizes(theme);
