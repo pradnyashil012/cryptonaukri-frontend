@@ -10,6 +10,8 @@ import {
     CircularProgress,
     Button
 } from '@material-ui/core';
+import  ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import EditIcon from '@mui/icons-material/Edit';
 // import { AccountCircle } from "@material-ui/icons";
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -17,6 +19,25 @@ import { useNavigate } from "react-router-dom";
 import Skeleton from '@mui/material/Skeleton';
 
 const useStyles = makeStyles((theme) => ({
+    links:{
+        textDecoration: 'none',
+        color: theme.palette.primary.main,
+        border: `${theme.palette.primary.main} solid 1px`,
+        borderRadius: '5px',
+        padding: '4px',
+        fontSize: '1.4em'
+    },
+    couponCodeBox: {
+        border: `${theme.palette.primary.main} solid 2px`,
+        borderRadius: '10px',
+        padding: '6px',
+        margin: '4px',
+        maxWidth: '300px',
+        fontWeight: 'bold',
+        fontSize: '1.5em',
+        display: 'flex',
+        justifyContent: 'space-between'
+    },
     Button: {
         margin: 10,
         "&:hover": {
@@ -155,6 +176,15 @@ const User = () =>{
     const [resume, setResume] = useState("");
     const navigate = useNavigate();
 
+    const copyCode = (ccode) =>{
+        try{
+            navigator.clipboard.writeText(`https://www.cryptonaukri.com/userSignUp?code=${ccode}`);
+            toast.success('Cuopon copied to clipboard');
+        }catch(error){
+            toast.error('Something went wrong!!')
+        }
+    }
+
     const getUser = () =>{
         setLoading(true);
         if(token){
@@ -208,6 +238,7 @@ const User = () =>{
             if(resp.data.isResumeUpdated){
                 toast.success("Resume Updated Successfully");
                 getUser();
+                setShow(!show);
             }else{
                 toast.error("Error Occured while updating resume, please try again !!")
             }
@@ -245,6 +276,7 @@ const User = () =>{
             if(resp.data.resumeAdded){
                 toast.success("Resume Added Successfully")
                 getUser();
+                setShow(!show);
             }else{
                 toast.error("Error Occured while updating resume, please try again !!")
             }
@@ -329,11 +361,38 @@ const User = () =>{
                                     {user.phoneNumber}
                                     <br />
                                     {user.location}
-                                    <br/>
-                                    {user.userResume?<>Your Resume : <a href={user.userResume.links.otherLinks} target="_blank">{user.userResume.links.otherLinks}</a></>:<>You have'nt added a resume yet, use the below option to add a resume.</>}
+                                    <br />
+                                    <br />
+                                    <Box>
+                                        <Typography className={classes.cardHead} variant={'h6'}>
+                                            <Box sx={{
+                                                fontWeight: '500',
+                                            }}>
+                                                My Cupon Code :
+                                            </Box>
+                                        </Typography>
+                                        <Box className={classes.couponCodeBox}>
+                                            {user.couponCode}
+                                            <Button onClick={()=>copyCode(user.couponCode)}
+                                                color="primary"
+                                            ><ContentCopyIcon /></Button>
+                                        </Box>
+                                        
+                                    </Box>
+                                    
+
+
+                                    {user.userResume?<>
+                                        <Typography className={classes.cardHead} variant={'h6'}>
+                                            <Box sx={{
+                                                fontWeight: '500',
+                                            }}>
+                                                My Resume :
+                                            </Box>
+                                        </Typography></>:<>You have'nt added a resume yet, use the below option to add a resume.</>}
                                 </Box>
                             </Typography>
-                            <br/>
+
                             {show?<Grid item xs={30} >
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">{user.userResume?'Update':'Add'} Resume</InputLabel>
                                 <br />
@@ -367,12 +426,24 @@ const User = () =>{
                                 }
                             </Grid>:
                             <Box sx={{width:'300px'}}>
-                                <Button onClick={()=>setShow(!show)}
+                                
+                                {user.userResume?<>
+                                <a  href={user.userResume.links.otherLinks}
+                                    target='_blank'
+                                    rel="noreferrer"
                                     variant="outlined"
+                                    color="primary"
+                                    className={classes.links}
+                                >
+                                    View
+                                </a>
+                                <Button onClick={()=>setShow(!show)}
                                     color="primary"
                                     className={classes.Button}
                                 >
-                                    {user.userResume?<>Update Resume</>:<>Add Resume</>}</Button>
+                                    {user.userResume?<EditIcon />:<>Add Resume</>}
+                                </Button>
+                                </>:<></>}
                             </Box>
                             }
                             <br/>
