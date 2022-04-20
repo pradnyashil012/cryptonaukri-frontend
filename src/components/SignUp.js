@@ -272,6 +272,9 @@ const SignUp = () => {
                         </p>
                         <br/>
                     </Grid>
+
+                    {state!=='verify'?<>
+
                     <Grid item xs={6} >
                         <FormControl fullWidth variant="outlined">
                             <InputLabel className={classes.label} htmlFor="outlined-adornment-name">First Name</InputLabel>
@@ -298,83 +301,80 @@ const SignUp = () => {
                             />
                         </FormControl>
                     </Grid>
+                    <Grid item xs={6} >
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Email Address</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-email"
+                                type='email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </FormControl>
 
-                        <Grid item xs={6} >
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Email Address</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-email"
-                                    type='email'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </FormControl>
+                    </Grid>
+                    <Grid item xs={6} >
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel className={classes.label} htmlFor="outlined-adornment-phone">Phone</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-phone"
+                                type='tel'
+                                value={number}
+                                onChange={(e) => setNumber(e.target.value)}
+                            />
+                        </FormControl>
+                    </Grid>
 
-                        </Grid>
+                    <Grid item xs={12} >
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel className={classes.label} htmlFor="outlined-adornment-city">Location/City</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-city"
+                                type='text'
+                                value={location}
+                                onChange={handlesetLocation}
+                            />
+                        </FormControl>
+                    </Grid>
 
-                        <Grid item xs={6} >
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-phone">Phone</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-phone"
-                                    type='tel'
-                                    value={number}
-                                    onChange={(e) => setNumber(e.target.value)}
-                                />
-                            </FormControl>
-                        </Grid>
+                    <Grid item xs={12} >
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel className={classes.label} htmlFor="outlined-adornment-coupon">Coupon Code</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-coupon"
+                                type='text'
+                                value={coupon}
+                                onChange={handlesetCoupon}
+                            />
+                        </FormControl>
 
-                        <Grid item xs={12} >
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-city">Location/City</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-city"
-                                    type='text'
-                                    value={location}
-                                    onChange={handlesetLocation}
-                                />
-                            </FormControl>
-                        </Grid>
+                    </Grid>
+                    <Grid item xs={12} >
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel className={classes.label} autoComplete="on" htmlFor="outlined-adornment-password">Password</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={values.showPassword ? 'text' : 'password'}
+                                value={values.password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                        >
+                                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                            />
+                        </FormControl>
+                    </Grid>
 
-                        <Grid item xs={12} >
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-coupon">Coupon Code</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-coupon"
-                                    type='text'
-                                    value={coupon}
-                                    onChange={handlesetCoupon}
-                                />
-                            </FormControl>
-
-                        </Grid>
-
-
-                        <Grid item xs={12} >
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} autoComplete="on" htmlFor="outlined-adornment-password">Password</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={values.password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                    label="Password"
-                                />
-                            </FormControl>
-                        </Grid>
-
+                    </>:<></>}
                         {state=='verify'?
                         <>
                             <Grid item xs={12} >
