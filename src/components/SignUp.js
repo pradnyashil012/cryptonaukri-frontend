@@ -80,6 +80,9 @@ const SignUp = () => {
     const [loading, setLoading] = useState(false);
     const otpAPI = `https://cryptonaukribackend.herokuapp.com/api/v1/user/otp?email=`
     const secretCode = 'GYG89OIK';
+    const code1 = "CRYPTONAUKRI100";
+    const code2 = "JOINCRYPTONAUKRI";
+    const code3 = "JOINCRYPTONAUKRI22";
 
     const handleClickShowPassword = () => {
         setValues({
@@ -112,14 +115,17 @@ const SignUp = () => {
     }
     const handleOtp = async (e) =>{
         e.preventDefault();
-        if(coupon!== secretCode){
-            toast.error('Invalid Cuopon Code');
-            return;
-        }
+        
         if (!fname || !lname || !email || !password || !coupon) {
                 toast.error('Enter All the Values');
                 return;
         }
+
+        if(coupon!== code1 && coupon !== code2 && coupon !== code3){
+            toast.error('Invalid Cuopon Code');
+            return;
+        }
+
         if (fname && lname && email && password) {
             if(state === 'verify'){
 
@@ -167,7 +173,7 @@ const SignUp = () => {
         e.preventDefault();
 
         if(state === 'otp'){
-            if(coupon!== secretCode){
+            if(coupon!== code1 && coupon !== code2 && coupon !== code3){
                 toast.error('Invalid Cuopon Code');
                 return;
             }
