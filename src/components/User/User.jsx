@@ -194,7 +194,7 @@ const User = () => {
         //console.log(token.split('"')[1]);
 
         const response = axios.get(
-            "https://cryptonaukribackendtest.herokuapp.com/api/v1/user/loggedInUserDetails",
+            "https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails",
             {
             headers: {
                 Authorization: `Bearer ${token}`,
