@@ -191,14 +191,13 @@ const User = () => {
     const getUser = () => {
         setLoading(true);
         if (token) {
-        //console.log(token.split('"')[1]);
 
         const response = axios.get(
             "https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails",
             {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             }
         );
 
@@ -387,7 +386,7 @@ const User = () => {
                                 fontWeight: "500",
                             }}
                             >
-                            My Cupon Code :
+                            My Coupon Code :
                             </Box>
                         </Typography>
                         <Box className={classes.couponCodeBox}>
@@ -488,7 +487,13 @@ const User = () => {
                             >
                             View
                             </a>
-                            
+                            <Button
+                                onClick={() => setShow(!show)}
+                                color="primary"
+                                className={classes.Button}
+                            >
+                            <EditIcon />
+                        </Button>
                         </>
                         ) : (
                         <>
