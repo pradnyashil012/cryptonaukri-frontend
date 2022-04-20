@@ -12,11 +12,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
-        padding: '30px',
-        margin: '20px 20%',
+        padding: '15px',
+        margin: '0 auto',
         backgroundColor: 'white',
         borderRadius: '5px',
-        boxShadow: '0 0 10px silver'
+        boxShadow: '0 0 10px silver',
+        maxWidth:'600px',
     },
     Button: {
         '&:hover': {
@@ -31,11 +32,10 @@ const useStyles = makeStyles((theme) => ({
     },
     para:{
         width:"100%",
-        height:"20px",
         textAlign:"center",
         color: theme.palette.primary.main,
         fontWeight: 'bolder',
-        fontSize:'2vmax'
+        fontSize:'1.5em'
     },
     buttonBox: {
         textAlign: "center",
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
         height: '80vh',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     }
 }))
 
@@ -79,7 +79,7 @@ const SignUp = () => {
 
     const [loading, setLoading] = useState(false);
     const otpAPI = `https://cryptonaukribackend.herokuapp.com/api/v1/user/otp?email=`
-    const secretCode = 'jbsf198237orAUaf';
+    const secretCode = 'GYG89OIK';
 
     const handleClickShowPassword = () => {
         setValues({
@@ -112,7 +112,11 @@ const SignUp = () => {
     }
     const handleOtp = async (e) =>{
         e.preventDefault();
-        if (!fname || !lname || !email || !password) {
+        if(coupon!== secretCode){
+            toast.error('Invalid Cuopon Code');
+            return;
+        }
+        if (!fname || !lname || !email || !password || !coupon) {
                 toast.error('Enter All the Values');
                 return;
         }
@@ -163,6 +167,10 @@ const SignUp = () => {
         e.preventDefault();
 
         if(state === 'otp'){
+            if(coupon!== secretCode){
+                toast.error('Invalid Cuopon Code');
+                return;
+            }
             if (!fname || !lname || !email || !password) {
                 toast.error('Enter All the Values');
                 return;
@@ -248,45 +256,44 @@ const SignUp = () => {
                 </div>
                 <Box component='form' className={classes.formContainer}>
 
-                    <Grid container spacing={3}>
+                    <Grid container spacing={2} wrap={'wrap'}>
                     <Grid item xs={12} >
                         <p className={classes.para}>
                         Try 14 days free Trial Offer
-
                         </p>
                         <p className={classes.para}>
                             Hurry up! Only first 100 Developers!
                         </p>
-                        </Grid>
-                        <Grid item xs={6} >
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-name">First Name</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-name"
-                                    type='text'
-                                    value={fname}
-                                    onChange={handleFNameChange}
-                                    name='fname'
-                                    label='Company Name'
-                                />
-                            </FormControl>
-                        </Grid>
+                        <br/>
+                    </Grid>
+                    <Grid item xs={6} >
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel className={classes.label} htmlFor="outlined-adornment-name">First Name</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-name"
+                                type='text'
+                                value={fname}
+                                onChange={handleFNameChange}
+                                name='fname'
+                                label='Company Name'
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={6} >
+                        <FormControl fullWidth variant="outlined">
+                            <InputLabel className={classes.label} htmlFor="outlined-adornment-lname">Last Name</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-lname"
+                                type='text'
+                                value={lname}
+                                onChange={handleLNameChange}
+                                name='lname'
+                                label='Company Name'
+                            />
+                        </FormControl>
+                    </Grid>
 
                         <Grid item xs={6} >
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel className={classes.label} htmlFor="outlined-adornment-lname">Last Name</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-lname"
-                                    type='text'
-                                    value={lname}
-                                    onChange={handleLNameChange}
-                                    name='lname'
-                                    label='Company Name'
-                                />
-                            </FormControl>
-                        </Grid>
-
-                        <Grid item xs={7} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-email">Email Address</InputLabel>
                                 <OutlinedInput
@@ -299,7 +306,7 @@ const SignUp = () => {
 
                         </Grid>
 
-                        <Grid item xs={5} >
+                        <Grid item xs={6} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-phone">Phone</InputLabel>
                                 <OutlinedInput
@@ -311,7 +318,7 @@ const SignUp = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={5} >
+                        <Grid item xs={12} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-city">Location/City</InputLabel>
                                 <OutlinedInput
@@ -323,7 +330,7 @@ const SignUp = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={7} >
+                        <Grid item xs={12} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-coupon">Coupon Code</InputLabel>
                                 <OutlinedInput
@@ -337,7 +344,7 @@ const SignUp = () => {
                         </Grid>
 
 
-                        <Grid item xs={6} >
+                        <Grid item xs={12} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} autoComplete="on" htmlFor="outlined-adornment-password">Password</InputLabel>
                                 <OutlinedInput
@@ -364,7 +371,7 @@ const SignUp = () => {
 
                         {state=='verify'?
                         <>
-                            <Grid item xs={6} >
+                            <Grid item xs={12} >
                                 <FormControl fullWidth variant="outlined">
                                     <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Verfication Code</InputLabel>
                                     <OutlinedInput variant="outlined"

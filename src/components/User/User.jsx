@@ -168,6 +168,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 const User = () =>{
 
+    const secretCode = 'GYG89OIK';
+
     const token = localStorage.getItem('token');
     const [loading, setLoading] = useState(false);
     const [smLoading, setSmLoading] = useState(false);
@@ -324,12 +326,12 @@ const User = () =>{
                                 <Box sx={{
                                     fontWeight: '500',
                                 }}>
-                                    My Applications
+                                    
                                 </Box>
                             </Typography><br />
                             <Box className={classes.right}>
-                                    <Typography sx={{fontWeight: '500'}} variant="h7">Job Id : <Skeleton type="text" /></Typography>
-                                    <Typography variant="p">Applied on <span sx={{fontWeight: '500'}}><Skeleton type="text" /></span></Typography>
+                                    <Typography sx={{fontWeight: '500'}} variant="h7"> <Skeleton type="text" /></Typography>
+                                    <Typography variant="p"><span sx={{fontWeight: '500'}}><Skeleton type="text" /></span></Typography>
                                     
                             </Box>
                         </Box>
@@ -372,8 +374,8 @@ const User = () =>{
                                             </Box>
                                         </Typography>
                                         <Box className={classes.couponCodeBox}>
-                                            {user.couponCode}
-                                            <Button onClick={()=>copyCode(user.couponCode)}
+                                            {secretCode}
+                                            <Button onClick={()=>copyCode(secretCode)}
                                                 color="primary"
                                             ><ContentCopyIcon /></Button>
                                         </Box>
