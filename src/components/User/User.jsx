@@ -166,7 +166,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const User = () => {
 
-    const secretCode = 'GYG89OIK';
+    const secretCode = 'CRYPTONAUKRI100';
     const token = localStorage.getItem('token');
     const [loading, setLoading] = useState(false);
     const [smLoading, setSmLoading] = useState(false);
