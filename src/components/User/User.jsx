@@ -488,16 +488,18 @@ const User = () => {
                             >
                             View
                             </a>
-                            <Button
-                            onClick={() => setShow(!show)}
-                            color="primary"
-                            className={classes.Button}
-                            >
-                            {user.userResume ? <EditIcon /> : <>Add Resume</>}
-                            </Button>
+                            
                         </>
                         ) : (
-                        <></>
+                        <>
+                        <Button
+                                onClick={() => setShow(!show)}
+                                color="primary"
+                                className={classes.Button}
+                            >
+                            {user.userResume ? <EditIcon /> : <>Add Resume</>}
+                        </Button>
+                        </>
                         )}
                     </Box>
                     )}
