@@ -27,6 +27,7 @@ import Otp from "./components/otp/otp";
 import JobDetails from "./components/JobDetails/JobDetails";
 import ApplyJob from "./components/applyJob/applyjob";
 import AboutMe from "./components/User/User";
+import Profile from "./components/User/UserDashbaord";
 import useToken from './utils/useToken'
 
 const useStyles = makeStyles((theme) => ({
@@ -101,6 +102,7 @@ const App = () => {
               <Route path="/internships" element={<><InternshipPage /></>}></Route>
               <Route path="/jobform" element={<><JobForm /></>}></Route>
               <Route path="/aboutme" element={<><AboutMe /></>}></Route>
+              <Route path="/profile" element={<><Profile /></>}></Route>
               <Route path="/aboutus" element={<><AboutUS /></>}></Route>
               <Route path="/contactus" element={<><Contact /></>}></Route>
               <Route path="/privacy" element={<><Privacy /></>}></Route>
