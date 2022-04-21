@@ -170,7 +170,7 @@ const Login = (props) => {
             <Box sx={{
               fontWeight: 'bold'
             }}>
-              {props.route == 'user' ? "Applicant Login" : "Company Login"}
+              {props.route == 'user' ? "Developer Login" : "Company Login"}
             </Box>
           </Typography> </div>
         <Box component="form" className={classes.formContainer} >

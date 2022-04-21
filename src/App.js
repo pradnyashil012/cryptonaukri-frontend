@@ -94,9 +94,9 @@ const App = () => {
               <Route exact path="/details" element={<><JobDetails /></>}></Route>
               <Route exact path="/jobapplication" element={<><ApplyJob /></>}></Route>
               <Route exact path="/loginsignup" element={<><LoginSignup /></>}></Route>
-              <Route path="/userLogin" element={<><Login route="user" /></>}></Route>
+              <Route path="/devlogin" element={<><Login route="user" /></>}></Route>
               <Route path="/companyLogin" element={<><Login route="company" /></>}></Route>
-              <Route path="/userSignUp" element={<> <SignUp /></>}></Route>
+              <Route path="/devsignup" element={<> <SignUp /></>}></Route>
               <Route path="/companySignUp" element={<><BusReg /></>}></Route>
               <Route path="/jobspage" element={<> <JobsPage /></>}></Route>
               <Route path="/internships" element={<><InternshipPage /></>}></Route>

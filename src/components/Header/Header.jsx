@@ -24,7 +24,7 @@ const Header = (props) => {
 
   //handleUserSignUp and handleMouseOverSignup are functions for the laptop view two types of signups
   const handleUserSignUp = (event) => {
-    navigate('/userSignUp');
+    navigate('/devsignup');
     setSignanchorEl(null);
   }
   const handleCompanySignUp = (event) => {
@@ -43,7 +43,7 @@ const Header = (props) => {
     setAnchorEl(event.currentTarget);
   }
   const UserLoginbtn = () => {
-    navigate("/userLogin");
+    navigate("/devlogin");
     setAnchorEl(null);
     setMobileOpen(!mobileOpen);
   };
@@ -59,7 +59,7 @@ const Header = (props) => {
     setSignanchor(event.currentTarget);
   }
   const signupbtnUser = () => {
-    navigate("/userSignUp");
+    navigate("/devsignup");
     setSignanchor(null);
     setMobileOpen(!mobileOpen);
   };
@@ -136,7 +136,7 @@ const Header = (props) => {
 
   //handleUserLogin and handleMouseOver are functions for the laptop view two types of logins
   const handleUserLogin = (event) => {
-    navigate('/userLogin');
+    navigate('/devlogin');
     setAnchor(null);
   }
 
@@ -217,7 +217,7 @@ const Header = (props) => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={UserLoginbtn} >Applicant Login</MenuItem>
+                  <MenuItem onClick={UserLoginbtn} >Developer Login</MenuItem>
                   <MenuItem onClick={CompanyLoginbtn} >Company Login</MenuItem>
 
                 </Menu>
@@ -361,7 +361,7 @@ const Header = (props) => {
                       open={Boolean(anchor)}
                     >
                       <MenuItem onClick={handleBusinessLogin} >Business login</MenuItem>
-                      <MenuItem onClick={handleUserLogin} >Applicant login</MenuItem>
+                      <MenuItem onClick={handleUserLogin} >Developer login</MenuItem>
                     </Menu>
                     <Button className={classes.btn} onClick={handleMouseOverSignup}>Sign Up</Button>
                     <Menu
@@ -381,7 +381,7 @@ const Header = (props) => {
                       onClose={handleClose}
                     >
                       <MenuItem onClick={handleCompanySignUp} >Business Sign up</MenuItem>
-                      <MenuItem onClick={handleUserSignUp} >Applicant Sign up</MenuItem>
+                      <MenuItem onClick={handleUserSignUp} >Developer Sign up</MenuItem>
                     </Menu>
                   </div>}
               </div>
