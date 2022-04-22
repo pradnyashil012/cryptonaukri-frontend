@@ -232,9 +232,10 @@ const Footer = () => {
                     >
                       <Typography variant="h6" className={classes.typography}>
                         <YouTube className={classes.icon} />
-                        You Tube
+                        YouTube
                       </Typography>
                     </Link>
+                    
                   </Box>
                 </Grid>
               </Grid>
