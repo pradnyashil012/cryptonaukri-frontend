@@ -49,11 +49,12 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center'
     },
     body: {
-        marginTop: '150px',
+        marginTop: '120px',
         height: '80vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        marginBottom: "30px"
     }
 }))
 
