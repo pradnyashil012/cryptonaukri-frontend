@@ -8,6 +8,9 @@ import {
   LinkedIn,
   Copyright,
 } from "@material-ui/icons";
+import TFooter from "./FooterT"
+
+import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -78,184 +81,193 @@ const useStyles = makeStyles((theme) => ({
 
 const Footer = () => {
   const classes = useStyles();
-  return (
-    <>
-      <footer className={classes.footer}>
-        <div>
-          <Container>
-            <div className={classes.mainContainer}>
-              <Grid container spacing={5}>
-                <Grid
-                  className={classes.gridContainer}
-                  item
-                  xs={12}
-                  sm={6}
-                  md={4}
-                >
-                  <Typography
-                    className={`${classes.typography}, ${classes.footerHead}`}
-                    variant="h5"
+  const location = useLocation();
+
+  if(location.pathname !== '/'){
+    return (
+      <>
+        <footer className={classes.footer}>
+          <div>
+            <Container>
+              <div className={classes.mainContainer}>
+                <Grid container spacing={5}>
+                  <Grid
+                    className={classes.gridContainer}
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
                   >
-                    About
-                  </Typography>
-                  <Link
-                    href="/aboutus"
-                    color="inherit"
-                    underline="none"
-                    className={classes.typography}
-                  >
-                    <Typography variant="h6" className={classes.typography}>
-                      About us
+                    <Typography
+                      className={`${classes.typography}, ${classes.footerHead}`}
+                      variant="h5"
+                    >
+                      About
                     </Typography>
-                  </Link>
-                  <Link
-                    href="/terms"
-                    color="inherit"
-                    underline="none"
-                    className={classes.typography}
+                    <Link
+                      href="/aboutus"
+                      color="inherit"
+                      underline="none"
+                      className={classes.typography}
+                    >
+                      <Typography variant="h6" className={classes.typography}>
+                        About us
+                      </Typography>
+                    </Link>
+                    <Link
+                      href="/terms"
+                      color="inherit"
+                      underline="none"
+                      className={classes.typography}
+                    >
+                      <Typography variant="h6" className={classes.typography}>
+                        Terms and Conditions
+                      </Typography>
+                    </Link>
+                    <Link
+                      href="/privacy"
+                      color="inherit"
+                      underline="none"
+                      className={classes.typography}
+                    >
+                      <Typography variant="h6" className={classes.typography}>
+                        Privacy
+                      </Typography>
+                    </Link>
+                  </Grid>
+                  <Grid
+                    className={classes.gridContainer}
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
                   >
-                    <Typography variant="h6" className={classes.typography}>
-                      Terms and Conditions
+                    <Typography
+                      className={`${classes.typography}, ${classes.footerHead}`}
+                      variant="h5"
+                    >
+                      Support
                     </Typography>
-                  </Link>
-                  <Link
-                    href="/privacy"
-                    color="inherit"
-                    underline="none"
-                    className={classes.typography}
+                    <Link
+                      href="/contactus"
+                      color="inherit"
+                      underline="none"
+                      className={classes.typography}
+                    >
+                      <Typography variant="h6" className={classes.typography}>
+                        Contact
+                      </Typography>
+                    </Link>
+                    <Link
+                      href="/dcma"
+                      color="inherit"
+                      underline="none"
+                      className={classes.typography}
+                    >
+                      <Typography variant="h6" className={classes.typography}>
+                        DCMA
+                      </Typography>
+                    </Link>
+                    {/* <Link
+                      href="/generalQueries"
+                      color="inherit"
+                      underline="none"
+                      className={classes.typography}
+                    >
+                      <Typography variant="h6" className={classes.typography}>
+                        General Queries
+                      </Typography>
+                    </Link> */}
+                  </Grid>
+                  <Grid
+                    className={classes.gridContainer}
+                    item
+                    xs={12}
+                    sm={12}
+                    md={4}
                   >
-                    <Typography variant="h6" className={classes.typography}>
-                      Privacy
+                    <Typography
+                      className={`${classes.typography}, ${classes.footerHead}`}
+                      variant="h5"
+                    >
+                      Social Media Handles
                     </Typography>
-                  </Link>
+                    <Box className={classes.gridSocialContainer}>
+                      <Link
+                        href="https://www.instagram.com/cryptonaukri/"
+                        target="_blank"
+                        color="inherit"
+                        underline="none"
+                        className={classes.typography}
+                      >
+                        <Typography variant="h6" className={classes.typography}>
+                          <Instagram className={classes.icon} />
+                          Instagram
+                        </Typography>
+                      </Link>
+                      <Link
+                        href="https://www.linkedin.com/company/cryptonaukri/"
+                        target="_blank"
+                        color="inherit"
+                        underline="none"
+                        className={classes.typography}
+                      >
+                        <Typography variant="h6" className={classes.typography}>
+                          <LinkedIn className={classes.icon} />
+                          LinkedIn
+                        </Typography>
+                      </Link>
+                      <Link
+                        href="https://twitter.com/CryptoNaukri"
+                        target="_blank"
+                        color="inherit"
+                        underline="none"
+                        className={classes.typography}
+                      >
+                        <Typography variant="h6" className={classes.typography}>
+                          <Twitter className={classes.icon} />
+                          Twitter
+                        </Typography>
+                      </Link>
+                      <Link
+                        href="https://www.youtube.com/channel/UCj-OThZ-RvEXqmscW4SKLRg"
+                        target="_blank"
+                        color="inherit"
+                        underline="none"
+                        className={classes.typography}
+                      >
+                        <Typography variant="h6" className={classes.typography}>
+                          <YouTube className={classes.icon} />
+                          You Tube
+                        </Typography>
+                      </Link>
+                    </Box>
+                  </Grid>
                 </Grid>
-                <Grid
-                  className={classes.gridContainer}
-                  item
-                  xs={12}
-                  sm={6}
-                  md={4}
-                >
-                  <Typography
-                    className={`${classes.typography}, ${classes.footerHead}`}
-                    variant="h5"
-                  >
-                    Support
-                  </Typography>
-                  <Link
-                    href="/contactus"
-                    color="inherit"
-                    underline="none"
-                    className={classes.typography}
-                  >
-                    <Typography variant="h6" className={classes.typography}>
-                      Contact
-                    </Typography>
-                  </Link>
-                  <Link
-                    href="/dcma"
-                    color="inherit"
-                    underline="none"
-                    className={classes.typography}
-                  >
-                    <Typography variant="h6" className={classes.typography}>
-                      DCMA
-                    </Typography>
-                  </Link>
-                  {/* <Link
-                    href="/generalQueries"
-                    color="inherit"
-                    underline="none"
-                    className={classes.typography}
-                  >
-                    <Typography variant="h6" className={classes.typography}>
-                      General Queries
-                    </Typography>
-                  </Link> */}
-                </Grid>
-                <Grid
-                  className={classes.gridContainer}
-                  item
-                  xs={12}
-                  sm={12}
-                  md={4}
-                >
-                  <Typography
-                    className={`${classes.typography}, ${classes.footerHead}`}
-                    variant="h5"
-                  >
-                    Social Media Handles
-                  </Typography>
-                  <Box className={classes.gridSocialContainer}>
-                    <Link
-                      href="https://www.instagram.com/cryptonaukri/"
-                      target="_blank"
-                      color="inherit"
-                      underline="none"
-                      className={classes.typography}
-                    >
-                      <Typography variant="h6" className={classes.typography}>
-                        <Instagram className={classes.icon} />
-                        Instagram
-                      </Typography>
-                    </Link>
-                    <Link
-                      href="https://www.linkedin.com/company/cryptonaukri/"
-                      target="_blank"
-                      color="inherit"
-                      underline="none"
-                      className={classes.typography}
-                    >
-                      <Typography variant="h6" className={classes.typography}>
-                        <LinkedIn className={classes.icon} />
-                        LinkedIn
-                      </Typography>
-                    </Link>
-                    <Link
-                      href="https://twitter.com/CryptoNaukri"
-                      target="_blank"
-                      color="inherit"
-                      underline="none"
-                      className={classes.typography}
-                    >
-                      <Typography variant="h6" className={classes.typography}>
-                        <Twitter className={classes.icon} />
-                        Twitter
-                      </Typography>
-                    </Link>
-                    <Link
-                      href="https://www.youtube.com/channel/UCj-OThZ-RvEXqmscW4SKLRg"
-                      target="_blank"
-                      color="inherit"
-                      underline="none"
-                      className={classes.typography}
-                    >
-                      <Typography variant="h6" className={classes.typography}>
-                        <YouTube className={classes.icon} />
-                        You Tube
-                      </Typography>
-                    </Link>
-                  </Box>
-                </Grid>
-              </Grid>
-            </div>
-          </Container>
-        </div>
-        <div className="text-center p-3">
-          <Typography
-            variant="h6"
-            className={`${classes.typography}, ${classes.copyright}`}
-            component="div"
-          >
-            <Box sx={{ fontWeight: "lighter", my: 1 }}>
-              <Copyright className={classes.icon} />
-              2022 Copyrights CryptoNaukri
-            </Box>
-          </Typography>
-        </div>
-      </footer>
-    </>
-  );
+              </div>
+            </Container>
+          </div>
+          <div className="text-center p-3">
+            <Typography
+              variant="h6"
+              className={`${classes.typography}, ${classes.copyright}`}
+              component="div"
+            >
+              <Box sx={{ fontWeight: "lighter", my: 1 }}>
+                <Copyright className={classes.icon} />
+                2022 Copyrights CryptoNaukri
+              </Box>
+            </Typography>
+          </div>
+        </footer>
+      </>
+    );
+  }else{
+    return(<>
+    <TFooter />
+    </>);
+  }
+  
 };
 
 export default Footer;

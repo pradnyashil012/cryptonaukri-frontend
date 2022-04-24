@@ -145,14 +145,11 @@ const Login = (props) => {
             //   toast.error(data.message)
             // }
           } catch (error) {
-            console.log(error.request);
-            console.log( error.request.response);
-            const err = JSON.parse(error.request.response);
-            if(err.code === "WRONG_PASSWORD"){
-              toast.error("Wrong email or password !!")
-            }else{
-              toast.error(err.code);
-            }
+            console.log(error);
+            //console.log( error.request.response);
+            //const err = JSON.parse(error.request.response);
+            
+            toast.error(error);
             setLoading(false);
             //toast.error('Login Failed ,please try again !!')
           }
