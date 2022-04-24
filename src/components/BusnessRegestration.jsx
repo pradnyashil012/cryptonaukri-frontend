@@ -58,6 +58,10 @@ const BusReg = () => {
     const navigate = useNavigate();
     const classes = useStyles();
 
+    const [searchParams, setSearchParams] = useSearchParams();
+    let codeParamId = searchParams.get("Invite");
+
+
     const [exec, setExec] = useState('');
     const [comp, setComp] = useState('');
     const [email, setEmail] = useState('');
@@ -69,15 +73,15 @@ const BusReg = () => {
     const [website, setWebsite] = useState('');
     const [pass, setPass] = useState('');
     const [state, setState] = useState('otp');
-    const [coupon, setCoupon] = useState('');
+    const [coupon, setCoupon] = useState(codeParamId);
     const [otp, setOtp] = useState('');
     const [values, setValues] = useState({
         showPassword: false,
     });
 
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    // let urlParamId = searchParams.get("id");
+    // const [searchParams, setSearchParams] = useSearchParams();
+    // // let urlParamId = searchParams.get("id");
     const APIUrl = `https://cryptonaukribackend.herokuapp.com/`;
     const otpAPI = `https://cryptonaukribackend.herokuapp.com/api/v1/business/otp?email=`;
 
@@ -416,7 +420,7 @@ const BusReg = () => {
 
                         {state=='verify'?
                         <>
-                            <Grid item xs={9} >
+                            <Grid item xs={5} >
                                 <FormControl fullWidth variant="outlined">
                                     <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Otp</InputLabel>
                                     <OutlinedInput variant="outlined"
