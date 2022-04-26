@@ -1,6 +1,7 @@
 import React,{useEffect} from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { FaDiscord } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 const LandinPageT = () =>{
 
@@ -23,9 +24,13 @@ const LandinPageT = () =>{
                         <h2 style={{background: '-webkit-linear-gradient(95.73deg, rgba(210, 26, 207, 0.75) 0%, rgba(0, 239, 255, 0.75) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}} className="mt-3 text-5xl sm:text-7xl font-bold drop-shadow-2xl transform transition hover:scale-110 animate-pulse">Revolution</h2>
                         <p className="mt-4 flex gap-2 text-white font-semibold"><img className="h-5 w-5 mt-1" src="https://images.emojiterra.com/twitter/v13.1/512px/1f1ee-1f1f3.png" /> India's first crypto job website</p>
                         <div className="flex gap-3 mt-7 text-lg flex-wrap">
-                            <button onClick={()=>{navigate('/jobspage')}} style={{background: 'linear-gradient(95.73deg, rgba(210, 26, 207, 0.75) 0%, rgba(0, 239, 255, 0.75) 100%)'}} className="shadow p-1 rounded text-white px-3 font-semibold scale-100 translate-x-4 skew-y-3 mr-10 transform-none sm:transform transform transition hover:scale-110">Find a Job</button>
-                            <button onClick={()=>{navigate('/jobform')}} style={{background: '-webkit-linear-gradient(95.73deg, rgba(210, 26, 207, 0.75) 0%, rgba(0, 239, 255, 0.75) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}} className="font-semibold rounded p-1 px-3 border-2 border-purple-600 transform transition hover:scale-110 translate-y-1 skew-y-3 transform-none sm:transform mr-10">Post a job</button>
+                            <>
+                                <button onClick={()=>{navigate('/jobspage')}} style={{background: 'linear-gradient(95.73deg, rgba(210, 26, 207, 0.75) 0%, rgba(0, 239, 255, 0.75) 100%)'}} className="shadow p-1 rounded text-white px-3 font-semibold scale-100 translate-x-4 skew-y-3 mr-10 transform-none sm:transform transform transition hover:scale-110">Find a Job</button>
+                                <button onClick={()=>{navigate('/jobform')}} style={{background: '-webkit-linear-gradient(95.73deg, rgba(210, 26, 207, 0.75) 0%, rgba(0, 239, 255, 0.75) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}} className="font-semibold rounded p-1 px-3 border-2 border-purple-600 transform transition hover:scale-110 translate-y-1 skew-y-3 transform-none sm:transform mr-10">Post a job</button>
+                            </>
+                            
                         </div>
+                        <br />
                     </div>
                     <div className="text-center p-0 sm:p-4 mt-20" data-aos="fade-left" data-aos-duration="1500">
                         <img className="w-0 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://iili.io/VkREcx.md.png" />
@@ -38,6 +43,11 @@ const LandinPageT = () =>{
                 </div>
                 <br />
                 <br />
+                <br />
+                <a href="https://discord.gg/wFNW6Hd2yU" target="_blank" className="m-auto mt-10 text-white animate-pulse rounded rounded-lg p-1 flex flex-start bg-[#6B7FC5] w-52  transform transition hover:scale-110">
+                            <FaDiscord className="ml-1 mt-1 text-3xl" />
+                            <p className="mt-1 font-semibold ml-4 text-base text-center">Join the server</p>
+                </a>
                 <br />
                 <div id="1" className="flex justify-between bg-gray-900 p-0 sm:p-4 max-w-7xl m-auto mt-20">
                     <div className="p-4 text-white">
