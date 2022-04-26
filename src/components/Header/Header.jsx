@@ -5,6 +5,8 @@ import useStyles from './headerStyles';
 import { Link, useNavigate } from "react-router-dom";
 import { MenuRounded, Close } from '@mui/icons-material';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import THeader from "./HeaderT";
 const drawerWidth = 340;
 
 
@@ -22,6 +24,8 @@ const Header = (props) => {
   const [signanchorEl, setSignanchorEl] = React.useState(null);
   const [signanchor, setSignanchor] = React.useState(null);
 
+
+  const location = useLocation();
   //handleUserSignUp and handleMouseOverSignup are functions for the laptop view two types of signups
   const handleUserSignUp = (event) => {
     navigate('/devsignup');
@@ -269,159 +273,167 @@ const Header = (props) => {
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
-  return (
-    <>
-      <CssBaseline />
-      <AppBar className={classes.appBar} position='fixed'>
-        <Container>
-          <Toolbar className={classes.navbar} >
-            <div className={classes.navbox}>
-              <MenuItem onClick={() => { navigate('/'); }} className={classes.navLogo} >
-                <img className={classes.logo} src="img/logo.svg" />
-              </MenuItem>
-            </div>
-
-            <Box id='navigation' className={classes.navigation}>
-              <div className={classes.navlinks}>
-                <MenuItem className={classes.navItem}>
-                  <Typography className={classes.navText} variant="h5" component="div">
-                    <a href="https://community.cryptonaukri.com/" style={{"textDecoration": 'none', color: '#003979'}} target="_blank" rel="noreferrer"> Community</a>
-                  </Typography>
-                </MenuItem>
-                <MenuItem className={classes.navItem}>
-                  <Typography className={classes.navText} onClick={() => { navigate('/jobspage'); }} variant="h5" component="div" >
-                    Jobs
-                  </Typography>
-                </MenuItem>
-                <MenuItem className={classes.navItem}>
-                  <Typography className={classes.navText} onClick={() => { navigate('/internships'); }} variant="h5" component="div">
-                    Internships
-                  </Typography>
+  if(location.pathname !== '/'){
+      return (
+      <>
+        <CssBaseline />
+        <AppBar className={classes.appBar} position='fixed'>
+          <Container>
+            <Toolbar className={classes.navbar} >
+              <div className={classes.navbox}>
+                <MenuItem onClick={() => { navigate('/'); }} className={classes.navLogo} >
+                  <img className={classes.logo} src="img/logo.svg" />
                 </MenuItem>
               </div>
-              <div className={classes.btnbox}>
-                {login ?
-                  <div>
-                    <IconButton className={classes.iconContainer}
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      onClick={handleMenu}
-                      color="inherit">
-                      <ArrowDropDown /><AccountCircle className={classes.userIcon} />
-                    </IconButton>
-                    <Menu
-                      id="menu-appbar"
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
-                    >
 
-                      <div className={classes.MenuContainer}>
-                        <MenuItem className={classes.MenuItems} ><AccountCircle className={classes.InnerUserIcon} /></MenuItem>
+              <Box id='navigation' className={classes.navigation}>
+                <div className={classes.navlinks}>
+                  <MenuItem className={classes.navItem}>
+                    <Typography className={classes.navText} onClick={() => { setMobileOpen(!mobileOpen); }} variant="h5" component="div" >
+                      <a href="https://community.cryptonaukri.com/" className={classes.link} target="_blank" rel="noreferrer"> Community</a>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem className={classes.navItem}>
+                    <Typography className={classes.navText} onClick={() => { navigate('/jobspage'); }} variant="h5" component="div" >
+                      Jobs
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem className={classes.navItem}>
+                    <Typography className={classes.navText} onClick={() => { navigate('/internships'); }} variant="h5" component="div">
+                      Internships
+                    </Typography>
+                  </MenuItem>
+                </div>
+                <div className={classes.btnbox}>
+                  {login ?
+                    <div>
+                      <IconButton className={classes.iconContainer}
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleMenu}
+                        color="inherit">
+                        <ArrowDropDown /><AccountCircle className={classes.userIcon} />
+                      </IconButton>
+                      <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'left',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                      >
 
-                        <MenuItem onClick={()=>navigate('/aboutme')} className={classes.MenuItems} >{user?<>{user.firstName}</>:<></>}</MenuItem>
+                        <div className={classes.MenuContainer}>
+                          <MenuItem className={classes.MenuItems} ><AccountCircle className={classes.InnerUserIcon} /></MenuItem>
 
-                        {cUser==='BUISNESS' ?
-                          <>
-                            <MenuItem className={classes.MenuItems} onClick={addJob} as={Link} to='/jobform'>Add Job/Intership</MenuItem>
-                            <MenuItem className={classes.MenuItems} onClick={goToProfile} as={Link} to='/jobform'>Profile</MenuItem> </>
-                          : <></>
-                        }
+                          <MenuItem onClick={()=>navigate('/aboutme')} className={classes.MenuItems} >{user?<>{user.firstName}</>:<></>}</MenuItem>
 
-                        <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logout}>logout</Button></MenuItem>
-                      </div>
-                    </Menu></div> : <div>
-                    <Button
-                      aria-controls="menu-login"
-                      aria-haspopup="true"
-                      className={classes.btn} onClick={handleLogin} >Login</Button>
-                    <Menu
-                      className={classes}
-                      id="menu-login"
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      onClose={handleClose}
-                      anchorEl={anchor}
-                      open={Boolean(anchor)}
-                    >
-                      <MenuItem onClick={handleBusinessLogin} >Business login</MenuItem>
-                      <MenuItem onClick={handleUserLogin} >Developer login</MenuItem>
-                    </Menu>
-                    <Button className={classes.btn} onClick={handleMouseOverSignup}>Sign Up</Button>
-                    <Menu
-                      className={classes}
-                      id="menu-appbar"
-                      anchorEl={signanchorEl}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={Boolean(signanchorEl)}
-                      onClose={handleClose}
-                    >
-                      <MenuItem onClick={handleCompanySignUp} >Business Sign up</MenuItem>
-                      <MenuItem onClick={handleUserSignUp} >Developer Sign up</MenuItem>
-                    </Menu>
-                  </div>}
-              </div>
-            </Box>
-            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-              <div>
-                <IconButton
-                  className={classes.navText}
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="start"
-                  onClick={handleDrawerToggle}
-                  sx={{ mr: 2, display: { md: 'none' } }}
-                >
-                  <MenuRounded />
-                </IconButton>
-              </div>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
+                          {cUser==='BUISNESS' ?
+                            <>
+                              <MenuItem className={classes.MenuItems} onClick={addJob} as={Link} to='/jobform'>Add Job/Intership</MenuItem>
+                              <MenuItem className={classes.MenuItems} onClick={goToProfile} as={Link} to='/jobform'>Profile</MenuItem> </>
+                            : <></>
+                          }
 
-      <Box sx={{ display: 'flex' }}>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { sm: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-    </>
-  );
+                          <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logout}>logout</Button></MenuItem>
+                        </div>
+                      </Menu></div> : <div>
+                      <Button
+                        aria-controls="menu-login"
+                        aria-haspopup="true"
+                        className={classes.btn} onClick={handleLogin} >Login</Button>
+                      <Menu
+                        className={classes}
+                        id="menu-login"
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        onClose={handleClose}
+                        anchorEl={anchor}
+                        open={Boolean(anchor)}
+                      >
+                        <MenuItem onClick={handleBusinessLogin} >Business login</MenuItem>
+                        <MenuItem onClick={handleUserLogin} >Developer login</MenuItem>
+                      </Menu>
+                      <Button className={classes.btn} onClick={handleMouseOverSignup}>Sign Up</Button>
+                      <Menu
+                        className={classes}
+                        id="menu-appbar"
+                        anchorEl={signanchorEl}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'left',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        open={Boolean(signanchorEl)}
+                        onClose={handleClose}
+                      >
+                        <MenuItem onClick={handleCompanySignUp} >Business Sign up</MenuItem>
+                        <MenuItem onClick={handleUserSignUp} >Developer Sign up</MenuItem>
+                      </Menu>
+                    </div>}
+                </div>
+              </Box>
+              <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                <div>
+                  <IconButton
+                    className={classes.navText}
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    onClick={handleDrawerToggle}
+                    sx={{ mr: 2, display: { md: 'none' } }}
+                  >
+                    <MenuRounded />
+                  </IconButton>
+                </div>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+
+        <Box sx={{ display: 'flex' }}>
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { sm: 'block', md: 'none' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Box>
+      </>
+    );
+  }else{
+    return(
+      <THeader />
+    );
+  }
+
+  
 }
 export default Header;

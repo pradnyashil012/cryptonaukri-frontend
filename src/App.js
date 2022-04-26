@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import InternshipPage from "./components/internshipPage";
@@ -8,7 +8,7 @@ import Footer from "./components/Footer/Footer";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import { Box, createTheme, makeStyles, ThemeProvider } from '@material-ui/core';
-import Landing from './components/homepage/landing';
+import Landing from './components/homepage/landingT';
 import JobForm from './components/jobPost/jobForm';
 import { ToastContainer } from 'react-toastify';
 import Resume from "./components/userResume/rsume";
@@ -28,7 +28,8 @@ import JobDetails from "./components/JobDetails/JobDetails";
 import ApplyJob from "./components/applyJob/applyjob";
 import AboutMe from "./components/User/User";
 import Profile from "./components/User/UserDashbaord";
-import useToken from './utils/useToken'
+
+
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
@@ -77,14 +78,12 @@ theme = responsiveFontSizes(theme);
 
 const App = () => {
 
-  //const {token, setToken} = useToken();
-  //console.log(token);
-
   const classes = useStyles();
+
   return (
-    <> 
+    <>
       <div className={classes.body}>
-        <ToastContainer /> 
+        <ToastContainer />
         <ThemeProvider theme={theme}>
           <Header />
           <Box className={classes.contentBody}>
