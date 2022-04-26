@@ -20,10 +20,10 @@ const Navbar = () =>{
             <nav className="flex justify-between flex-wrap sm:flex-nowrap p-2 sm:p-5 text-white shadow bg-gray-900">
                 <div className="text-xl sm:text-2xl font-semibold mt-2">Crypto Naukri</div>
                 <div className=" mt-3 text-md font-semibold hidden sm:block">
-                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href>About</a>
-                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href>Jobs</a>
-                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href>Internship</a>
-                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href>Community</a>
+                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/aboutus">About</a>
+                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href="/jobspage">Jobs</a>
+                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/internships">Internship</a>
+                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://community.cryptonaukri.com/" target="_blank" rel="noopener">Community</a>
                 </div>
                 {token?
                 <div class="flex p-2 gap-3">
