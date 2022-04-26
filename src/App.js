@@ -80,14 +80,12 @@ const App = () => {
 
   const classes = useStyles();
 
-
-  
   return (
     <>
       <div className={classes.body}>
         <ToastContainer />
-        <Header />
         <ThemeProvider theme={theme}>
+          <Header />
           <Box className={classes.contentBody}>
             <Routes>
               <Route exact path="/" element={<><Landing /></>}></Route>

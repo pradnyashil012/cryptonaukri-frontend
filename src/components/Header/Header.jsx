@@ -289,12 +289,12 @@ const Header = (props) => {
               <Box id='navigation' className={classes.navigation}>
                 <div className={classes.navlinks}>
                   <MenuItem className={classes.navItem}>
-                    <Typography className={classes.navText} variant="h5" component="div">
-                      <a href="https://community.cryptonaukri.com/" style={{"textDecoration": 'none', color: '#003979'}} target="_blank" rel="noreferrer"> Community</a>
+                    <Typography className={classes.navText} onClick={() => { setMobileOpen(!mobileOpen); }} variant="h5" component="div" >
+                      <a href="https://community.cryptonaukri.com/" className={classes.link} target="_blank" rel="noreferrer"> Community</a>
                     </Typography>
                   </MenuItem>
                   <MenuItem className={classes.navItem}>
-                    <Typography sx={{"textDecoration": 'none', color: '#003979'}} className={classes.navText} onClick={() => { navigate('/jobspage'); }} variant="h5" component="div" >
+                    <Typography className={classes.navText} onClick={() => { navigate('/jobspage'); }} variant="h5" component="div" >
                       Jobs
                     </Typography>
                   </MenuItem>
