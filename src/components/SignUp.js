@@ -49,11 +49,12 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center'
     },
     body: {
-        marginTop: '100px',
+        marginTop: '120px',
         height: '80vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        marginBottom: "30px"
     }
 }))
 
@@ -154,8 +155,8 @@ const SignUp = () => {
                     );
                     const data = response.data;
                     console.log(data);
-                    toast.success("User Created!!, Please login now!!")
-                    navigate('/userLogin');
+                    toast.success("Developer Created!!, Please login now!!")
+                    navigate('/devlogin');
                     setLoading(false);
                     return;
                 } catch(error){
@@ -256,7 +257,7 @@ const SignUp = () => {
                         <Box sx={{
                             fontWeight: 'bold'
                         }}>
-                            SignUp
+                            Developer SignUp
                         </Box>
                     </Typography>
                 </div>
