@@ -17,7 +17,7 @@ const Navbar = () =>{
 
     return(
         <>
-            <nav className="flex justify-between flex-wrap sm:flex-nowrap p-2 sm:p-5 text-white shadow bg-gray-900">
+            <nav className="flex justify-between max-w-7xl m-auto flex-wrap sm:flex-nowrap p-2 sm:p-5 text-white shadow bg-gray-900">
                 <div className="text-xl sm:text-2xl font-semibold mt-2">Crypto Naukri</div>
                 <div className=" mt-3 text-md font-semibold hidden sm:block">
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/aboutus">About</a>

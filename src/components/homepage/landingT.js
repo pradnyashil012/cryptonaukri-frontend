@@ -44,13 +44,13 @@ const LandinPageT = () =>{
                 <br />
                 <br />
                 <br />
-                <a href="https://discord.gg/wFNW6Hd2yU" target="_blank" className="m-auto mt-10 text-white animate-pulse rounded rounded-lg p-1 flex flex-start bg-[#6B7FC5] w-52  transform transition hover:scale-110">
+                <a href="https://discord.gg/wFNW6Hd2yU" target="_blank" className="m-auto mt-10 text-white animate-pulse hover:animate-none rounded rounded-lg p-1 flex flex-start bg-[#6B7FC5] w-52  transform transition hover:scale-110">
                             <FaDiscord className="ml-1 mt-1 text-3xl" />
                             <p className="mt-1 font-semibold ml-4 text-base text-center">Join the server</p>
                 </a>
                 <br />
-                <div id="1" className="flex justify-between bg-gray-900 p-0 sm:p-4 max-w-7xl m-auto mt-20">
-                    <div className="p-4 text-white">
+                <div id="1" className="flex justify-between bg-gray-900 p-0 sm:p-4 max-w-6xl m-auto mt-20 sm:flex-nowrap flex-wrap">
+                    <div className="p-4 text-white m-auto">
                         <h3 className="text-2xl font-semibold">Problems faced by the developers</h3>
                         <ul className="mt-5">
                             <li className="m-2">👉 Can't find course to learn blockchain development</li>
@@ -59,15 +59,15 @@ const LandinPageT = () =>{
                             <li className="m-2">👉  No ecosystem for blockchain developers.</li>
                         </ul>
                     </div>
-                    <div className="text-center p-4 " data-aos="flip-left">
-                    <img className="w-0 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://iili.io/Vk565Q.md.png" alt="Vk565Q.md.png" />
+                    <div className="text-center p-4 m-auto" data-aos="flip-left">
+                        <img className="w-4/5 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://iili.io/Vk565Q.md.png" alt="Vk565Q.md.png" />
                     </div>
                 </div>
-                <div className="flex justify-between bg-gray-900 p-0 sm:p-4 max-w-7xl m-auto mt-10">
-                    <div className="text-center p-0 sm:p-4" data-aos="flip-right">
+                <div className="flex justify-between bg-gray-900 p-2 sm:p-5 max-w-6xl m-auto mt-10">
+                    <div className="text-center p-0 sm:p-4 m-auto" data-aos="flip-right">
                         <img className="w-0 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://iili.io/VkYCn1.md.png" alt="VkYCn1.md.png" />
                     </div>
-                    <div className="p-4 text-white">
+                    <div className="p-4 text-white m-auto">
                         <h3 className="text-2xl font-semibold">Solution by CryptoNaukri for Business</h3>
                         <ul className="mt-5">
                             <li className="m-2">👉 Get enough applications for a jobpost.</li>
@@ -77,8 +77,8 @@ const LandinPageT = () =>{
                         </ul>
                     </div>
                 </div>
-                <div className="flex justify-between bg-gray-900 p-0 sm:p-4 max-w-7xl m-auto mt-20">
-                    <div className="p-4 text-white mt-10">
+                <div className="flex justify-between bg-gray-900 p-2 sm:p-5 max-w-7xl m-auto mt-20 sm:flex-nowrap flex-wrap">
+                    <div className="p-4 text-white mt-10 m-auto">
                         <h3 className="text-2xl font-semibold">Problems faced by Businesses</h3>
                         <ul className="mt-5">
                             <li className="m-2">👉 Receives 100s of application for a job post.</li>
@@ -86,11 +86,11 @@ const LandinPageT = () =>{
                             <li className="m-2">👉 Spends around 3-4 lacs pers candidate during hiring training joining.</li>
                         </ul>
                     </div>
-                    <div className="text-center p-4 " data-aos="flip-up">
-                        <img className="w-0 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://i.ibb.co/MGxCzQb/flame-remote-work-1.png" alt="Remote Work" />
+                    <div className="text-center p-2 m-auto" data-aos="flip-up">
+                        <img className="w-4/5 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://i.ibb.co/MGxCzQb/flame-remote-work-1.png" alt="Remote Work" />
                     </div>
                 </div>
-                <div className="flex justify-between bg-gray-900 p-0 sm:p-4 max-w-7xl m-auto mt-10">
+                <div className="flex justify-between bg-gray-900 p-2 sm:p-5 max-w-6xl m-auto mt-10">
                     <div className="text-center p-0 sm:p-4" data-aos="flip-up">
                         <img  className="w-0 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://i.ibb.co/BLVTKnL/businessman-1.png" alt="VkYCn1.md.png" />
                     </div>
