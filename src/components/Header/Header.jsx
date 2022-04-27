@@ -430,7 +430,9 @@ const Header = (props) => {
     );
   }else{
     return(
-      <THeader />
+      <div className="bg-gray-900">
+        <THeader />
+      </div>
     );
   }
 
