@@ -1,14 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { AppBar, Box, Toolbar, Typography, IconButton, Menu, MenuItem, Button, CssBaseline, makeStyles, Container, Divider, List, ListItem, ListItemText, Drawer, Chip } from "@material-ui/core";
-import { AccountCircle, ArrowDropDown, } from "@material-ui/icons";
-import useStyles from './headerStyles';
+import React, { useState, useEffect } from "react";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  IconButton,
+  Menu,
+  MenuItem,
+  Button,
+  CssBaseline,
+  makeStyles,
+  Container,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  Drawer,
+  Chip,
+} from "@material-ui/core";
+import { AccountCircle, ArrowDropDown } from "@material-ui/icons";
+import useStyles from "./headerStyles";
 import { Link, useNavigate } from "react-router-dom";
-import { MenuRounded, Close } from '@mui/icons-material';
-import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { MenuRounded, Close } from "@mui/icons-material";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 import THeader from "./HeaderT";
 const drawerWidth = 340;
-
 
 const Header = (props) => {
   const classes = useStyles();
@@ -24,20 +41,19 @@ const Header = (props) => {
   const [signanchorEl, setSignanchorEl] = React.useState(null);
   const [signanchor, setSignanchor] = React.useState(null);
 
-
   const location = useLocation();
   //handleUserSignUp and handleMouseOverSignup are functions for the laptop view two types of signups
   const handleUserSignUp = (event) => {
-    navigate('/devsignup');
+    navigate("/devsignup");
     setSignanchorEl(null);
-  }
+  };
   const handleCompanySignUp = (event) => {
-    navigate('/companySignUp');
+    navigate("/companySignUp");
     setSignanchorEl(null);
-  }
+  };
   const handleMouseOverSignup = (event) => {
     setSignanchorEl(event.currentTarget);
-  }
+  };
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,7 +61,7 @@ const Header = (props) => {
   //handleDrawerMouseOver and loginbtn are for mobile view two types of login and for some other function as well
   const handleDrawerMouseOver = (event) => {
     setAnchorEl(event.currentTarget);
-  }
+  };
   const UserLoginbtn = () => {
     navigate("/devlogin");
     setAnchorEl(null);
@@ -61,7 +77,7 @@ const Header = (props) => {
   //handleDrawerMouseOverSignup an signupbtnUser are used for the mobile view two types of signup
   const handleDrawerMouseOverSignup = (event) => {
     setSignanchor(event.currentTarget);
-  }
+  };
   const signupbtnUser = () => {
     navigate("/devsignup");
     setSignanchor(null);
@@ -69,9 +85,9 @@ const Header = (props) => {
   };
   const signupbtnCompany = () => {
     navigate("/companySignUp");
-    setSignanchor(null)
+    setSignanchor(null);
     setMobileOpen(!mobileOpen);
-  }
+  };
   const logoutMobile = () => {
     localStorage.clear();
     navigate("/");
@@ -83,30 +99,35 @@ const Header = (props) => {
     navigate("/");
   };
 
-
-  const getUser = async() =>{
-    if(token){
+  const getUser = async () => {
+    if (token) {
       //console.log(token.split('"')[1]);
       console.log(token);
-      const response = await axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails', {
-                        headers: {
-                          "Authorization": `Bearer ${token}`,
-                        }
-                      });
+      const response = await axios.get(
+        "https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log(response.data);
       setUser(response.data);
     }
-    if(btoken){
-      const response = await axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/business/loggedInBusinessDetails', {
-                        headers: {
-                          "Authorization": `Bearer ${btoken}`,
-                        }
-                      });
+    if (btoken) {
+      const response = await axios.get(
+        "https://cryptonaukribackend.herokuapp.com/api/v1/business/loggedInBusinessDetails",
+        {
+          headers: {
+            Authorization: `Bearer ${btoken}`,
+          },
+        }
+      );
       //console.log(response.data);
       setUser(response.data);
     }
     //console.log("bt",btoken)
-  }
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -116,20 +137,20 @@ const Header = (props) => {
   };
   const addJob = () => {
     setAnchorEl(null);
-    navigate('/jobform');
-  }
+    navigate("/jobform");
+  };
   const addJobMobile = () => {
-    navigate('/jobform');
+    navigate("/jobform");
     setMobileOpen(!mobileOpen);
-  }
+  };
   const goToProfile = () => {
     setAnchorEl(null);
-    navigate('/businessprofile');
-  }
+    navigate("/businessprofile");
+  };
   const goToProfileMobile = () => {
-    navigate('/businessprofile');
+    navigate("/businessprofile");
     setMobileOpen(!mobileOpen);
-  }
+  };
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -140,60 +161,103 @@ const Header = (props) => {
 
   //handleUserLogin and handleMouseOver are functions for the laptop view two types of logins
   const handleUserLogin = (event) => {
-    navigate('/devlogin');
+    navigate("/devlogin");
     setAnchor(null);
-  }
+  };
 
   const handleBusinessLogin = (event) => {
-    navigate('/companyLogin');
+    navigate("/companyLogin");
     setAnchor(null);
-  }
+  };
 
   const handleLogin = (event) => {
     setAnchor(event.currentTarget);
-  }
-  //anchorEl={anchorEl},{anchor},{signanchor},{signanchorEl} se hi charo open ho rhe h se writing it here 
+  };
+  //anchorEl={anchorEl},{anchor},{signanchor},{signanchorEl} se hi charo open ho rhe h se writing it here
   //so that we can have a note of it
 
-  useEffect(()=>{
-    if(token){
+  useEffect(() => {
+    if (token) {
       getUser();
     }
-  },[token])
+  }, [token]);
 
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
       <List>
-        <Box sx={{ padding: '20px' }}>
+        <Box sx={{ padding: "20px" }}>
           <div className={classes.btnbox}>
-            {login ?
+            {login ? (
               <div>
                 <div className={classes.MenuContainer}>
                   <MenuItem>
                     <AccountCircle className={classes.userIcon} />
                   </MenuItem>
-                  <MenuItem onClick={()=>navigate('/aboutme')} className={classes.MenuItems}><Typography className={classes.navText} variant="h6" component="div">
-                    {user?<>{user.firstName}</>:<></>}
-                  </Typography></MenuItem>
+                  <MenuItem
+                    onClick={() => navigate("/aboutme")}
+                    className={classes.MenuItems}
+                  >
+                    <Typography
+                      className={classes.navText}
+                      variant="h6"
+                      component="div"
+                    >
+                      {user ? <>{user.firstName}</> : <></>}
+                    </Typography>
+                  </MenuItem>
 
-                  {cUser === 'BUISNESS' ?
+                  {cUser === "BUISNESS" ? (
                     <>
-                      <MenuItem className={classes.MenuItems} onClick={addJobMobile} as={Link} to='/jobform'>
-                        <Typography className={classes.navText} variant="h6" component="div">
+                      <MenuItem
+                        className={classes.MenuItems}
+                        onClick={addJobMobile}
+                        as={Link}
+                        to="/jobform"
+                      >
+                        <Typography
+                          className={classes.navText}
+                          variant="h6"
+                          component="div"
+                        >
                           Add Job/Internship
                         </Typography>
                       </MenuItem>
-                      <MenuItem className={classes.MenuItems} onClick={goToProfileMobile} as={Link} to='/jobform'>
-                        <Typography className={classes.navText} variant="h6" component="div">
+                      <MenuItem
+                        className={classes.MenuItems}
+                        onClick={goToProfileMobile}
+                        as={Link}
+                        to="/jobform"
+                      >
+                        <Typography
+                          className={classes.navText}
+                          variant="h6"
+                          component="div"
+                        >
                           Profile
                         </Typography>
-                      </MenuItem> </> : <div></div>
-                  }
+                      </MenuItem>{" "}
+                    </>
+                  ) : (
+                    <div></div>
+                  )}
 
-                  <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logoutMobile}>logout</Button></MenuItem>
-                </div></div> : <div>
+                  <MenuItem className={classes.MenuItems} onClick={handleClose}>
+                    <Button
+                      type="button"
+                      variant="outlined"
+                      color="primary"
+                      className={classes.Button}
+                      onClick={logoutMobile}
+                    >
+                      logout
+                    </Button>
+                  </MenuItem>
+                </div>
+              </div>
+            ) : (
+              <div>
                 {/* <Button className={classes.loginbttn} onClick={loginsignupbtn} as={Link} to='/loginsignup' >Login / Sign Up</Button>
                 <Menu 
                     className={classes.dropdown}
@@ -204,64 +268,103 @@ const Header = (props) => {
                   <MenuItem onClick={handleClose}>Login as an admin</MenuItem>
                   <MenuItem onClick={handleClose}>Login as a user</MenuItem>
                 </Menu> */}
-                <Button className={classes.btn} onClick={handleDrawerMouseOver}  >Login</Button>
+                <Button className={classes.btn} onClick={handleDrawerMouseOver}>
+                  Login
+                </Button>
                 <Menu
                   className={classes}
                   id="menu-appbar"
                   anchorEl={anchorEl}
                   anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
+                    vertical: "bottom",
+                    horizontal: "left",
                   }}
                   keepMounted
                   transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right",
                   }}
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={UserLoginbtn} >Developer Login</MenuItem>
-                  <MenuItem onClick={CompanyLoginbtn} >Company Login</MenuItem>
-
+                  <MenuItem onClick={UserLoginbtn}>Developer Login</MenuItem>
+                  <MenuItem onClick={CompanyLoginbtn}>Company Login</MenuItem>
                 </Menu>
-                <Button className={classes.btn} onClick={handleDrawerMouseOverSignup} >Sign Up</Button>
+                <Button
+                  className={classes.btn}
+                  onClick={handleDrawerMouseOverSignup}
+                >
+                  Sign Up
+                </Button>
                 <Menu
                   className={classes}
                   id="menu-appbar"
                   anchorEl={signanchor}
                   anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
+                    vertical: "bottom",
+                    horizontal: "left",
                   }}
                   keepMounted
                   transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right",
                   }}
                   open={Boolean(signanchor)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={signupbtnUser} >User Sign up</MenuItem>
-                  <MenuItem onClick={signupbtnCompany} >Business Sign up</MenuItem>
-
+                  <MenuItem onClick={signupbtnUser}>Developer Sign up</MenuItem>
+                  <MenuItem onClick={signupbtnCompany}>
+                    Business Sign up
+                  </MenuItem>
                 </Menu>
-              </div>}
+              </div>
+            )}
           </div>
           <hr />
           <div className={classes.navlinks}>
             <MenuItem className={classes.navItem}>
-              <Typography className={classes.navText} onClick={() => { setMobileOpen(!mobileOpen); }} variant="h5" component="div" >
-                <a href="https://community.cryptonaukri.com/" className={classes.link} target="_blank" rel="noreferrer"> Community</a>
+              <Typography
+                className={classes.navText}
+                onClick={() => {
+                  setMobileOpen(!mobileOpen);
+                }}
+                variant="h5"
+                component="div"
+              >
+                <a
+                  href="https://community.cryptonaukri.com/"
+                  className={classes.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {" "}
+                  Community
+                </a>
               </Typography>
             </MenuItem>
             <MenuItem className={classes.navItem}>
-              <Typography className={classes.navText} onClick={() => { navigate('/jobspage'); setMobileOpen(!mobileOpen); }} variant="h5" component="div" >
+              <Typography
+                className={classes.navText}
+                onClick={() => {
+                  navigate("/jobspage");
+                  setMobileOpen(!mobileOpen);
+                }}
+                variant="h5"
+                component="div"
+              >
                 Jobs
               </Typography>
             </MenuItem>
             <MenuItem className={classes.navItem}>
-              <Typography className={classes.navText} onClick={() => { navigate('/internships'); setMobileOpen(!mobileOpen); }} variant="h5" component="div">
+              <Typography
+                className={classes.navText}
+                onClick={() => {
+                  navigate("/internships");
+                  setMobileOpen(!mobileOpen);
+                }}
+                variant="h5"
+                component="div"
+              >
                 Internships
               </Typography>
             </MenuItem>
@@ -271,127 +374,221 @@ const Header = (props) => {
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
-  if(location.pathname !== '/'){
-      return (
+  if (location.pathname !== "/") {
+    return (
       <>
         <CssBaseline />
-        <AppBar className={classes.appBar} position='fixed'>
+        <AppBar className={classes.appBar} position="fixed">
           <Container>
-            <Toolbar className={classes.navbar} >
+            <Toolbar className={classes.navbar}>
               <div className={classes.navbox}>
-                <MenuItem onClick={() => { navigate('/'); }} className={classes.navLogo} >
+                <MenuItem
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                  className={classes.navLogo}
+                >
                   <img className={classes.logo} src="img/logo.svg" />
                 </MenuItem>
               </div>
 
-              <Box id='navigation' className={classes.navigation}>
+              <Box id="navigation" className={classes.navigation}>
                 <div className={classes.navlinks}>
                   <MenuItem className={classes.navItem}>
-                    <Typography className={classes.navText} onClick={() => { setMobileOpen(!mobileOpen); }} variant="h5" component="div" >
-                      <a href="https://community.cryptonaukri.com/" className={classes.link} target="_blank" rel="noreferrer"> Community</a>
+                    <Typography
+                      className={classes.navText}
+                      onClick={() => {
+                        setMobileOpen(!mobileOpen);
+                      }}
+                      variant="h5"
+                      component="div"
+                    >
+                      <a
+                        href="https://community.cryptonaukri.com/"
+                        className={classes.link}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {" "}
+                        Community
+                      </a>
                     </Typography>
                   </MenuItem>
                   <MenuItem className={classes.navItem}>
-                    <Typography className={classes.navText} onClick={() => { navigate('/jobspage'); }} variant="h5" component="div" >
+                    <Typography
+                      className={classes.navText}
+                      onClick={() => {
+                        navigate("/jobspage");
+                      }}
+                      variant="h5"
+                      component="div"
+                    >
                       Jobs
                     </Typography>
                   </MenuItem>
                   <MenuItem className={classes.navItem}>
-                    <Typography className={classes.navText} onClick={() => { navigate('/internships'); }} variant="h5" component="div">
+                    <Typography
+                      className={classes.navText}
+                      onClick={() => {
+                        navigate("/internships");
+                      }}
+                      variant="h5"
+                      component="div"
+                    >
                       Internships
                     </Typography>
                   </MenuItem>
                 </div>
                 <div className={classes.btnbox}>
-                  {login ?
+                  {login ? (
                     <div>
-                      <IconButton className={classes.iconContainer}
+                      <IconButton
+                        className={classes.iconContainer}
                         aria-controls="menu-appbar"
                         aria-haspopup="true"
                         onClick={handleMenu}
-                        color="inherit">
-                        <ArrowDropDown /><AccountCircle className={classes.userIcon} />
+                        color="inherit"
+                      >
+                        <ArrowDropDown />
+                        <AccountCircle className={classes.userIcon} />
                       </IconButton>
                       <Menu
                         id="menu-appbar"
                         anchorEl={anchorEl}
                         anchorOrigin={{
-                          vertical: 'bottom',
-                          horizontal: 'left',
+                          vertical: "bottom",
+                          horizontal: "left",
                         }}
                         keepMounted
                         transformOrigin={{
-                          vertical: 'top',
-                          horizontal: 'right',
+                          vertical: "top",
+                          horizontal: "right",
                         }}
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                       >
-
                         <div className={classes.MenuContainer}>
-                          <MenuItem className={classes.MenuItems} ><AccountCircle className={classes.InnerUserIcon} /></MenuItem>
+                          <MenuItem className={classes.MenuItems}>
+                            <AccountCircle className={classes.InnerUserIcon} />
+                          </MenuItem>
 
-                          <MenuItem onClick={()=>navigate('/aboutme')} className={classes.MenuItems} >{user?<>{user.firstName}</>:<></>}</MenuItem>
+                          <MenuItem
+                            onClick={() => navigate("/aboutme")}
+                            className={classes.MenuItems}
+                          >
+                            {user ? <>{user.firstName}</> : <></>}
+                          </MenuItem>
 
-                          {cUser==='BUISNESS' ?
+                          {cUser === "BUISNESS" ? (
                             <>
-                              <MenuItem className={classes.MenuItems} onClick={addJob} as={Link} to='/jobform'>Add Job/Intership</MenuItem>
-                              <MenuItem className={classes.MenuItems} onClick={goToProfile} as={Link} to='/jobform'>Profile</MenuItem> </>
-                            : <></>
-                          }
+                              <MenuItem
+                                className={classes.MenuItems}
+                                onClick={addJob}
+                                as={Link}
+                                to="/jobform"
+                              >
+                                Add Job/Intership
+                              </MenuItem>
+                              <MenuItem
+                                className={classes.MenuItems}
+                                onClick={goToProfile}
+                                as={Link}
+                                to="/jobform"
+                              >
+                                Profile
+                              </MenuItem>{" "}
+                            </>
+                          ) : (
+                            <></>
+                          )}
 
-                          <MenuItem className={classes.MenuItems} onClick={handleClose}><Button type='button' variant="outlined" color="primary" className={classes.Button} onClick={logout}>logout</Button></MenuItem>
+                          <MenuItem
+                            className={classes.MenuItems}
+                            onClick={handleClose}
+                          >
+                            <Button
+                              type="button"
+                              variant="outlined"
+                              color="primary"
+                              className={classes.Button}
+                              onClick={logout}
+                            >
+                              logout
+                            </Button>
+                          </MenuItem>
                         </div>
-                      </Menu></div> : <div>
+                      </Menu>
+                    </div>
+                  ) : (
+                    <div>
                       <Button
                         aria-controls="menu-login"
                         aria-haspopup="true"
-                        className={classes.btn} onClick={handleLogin} >Login</Button>
+                        className={classes.btn}
+                        onClick={handleLogin}
+                      >
+                        Login
+                      </Button>
                       <Menu
                         className={classes}
                         id="menu-login"
                         anchorOrigin={{
-                          vertical: 'top',
-                          horizontal: 'right',
+                          vertical: "top",
+                          horizontal: "right",
                         }}
                         keepMounted
                         transformOrigin={{
-                          vertical: 'top',
-                          horizontal: 'right',
+                          vertical: "top",
+                          horizontal: "right",
                         }}
                         onClose={handleClose}
                         anchorEl={anchor}
                         open={Boolean(anchor)}
                       >
-                        <MenuItem onClick={handleBusinessLogin} >Business login</MenuItem>
-                        <MenuItem onClick={handleUserLogin} >Developer login</MenuItem>
+                        <MenuItem onClick={handleBusinessLogin}>
+                          Business login
+                        </MenuItem>
+                        <MenuItem onClick={handleUserLogin}>
+                          Developer login
+                        </MenuItem>
                       </Menu>
-                      <Button className={classes.btn} onClick={handleMouseOverSignup}>Sign Up</Button>
+                      <Button
+                        className={classes.btn}
+                        onClick={handleMouseOverSignup}
+                      >
+                        Sign Up
+                      </Button>
                       <Menu
                         className={classes}
                         id="menu-appbar"
                         anchorEl={signanchorEl}
                         anchorOrigin={{
-                          vertical: 'bottom',
-                          horizontal: 'left',
+                          vertical: "bottom",
+                          horizontal: "left",
                         }}
                         keepMounted
                         transformOrigin={{
-                          vertical: 'top',
-                          horizontal: 'right',
+                          vertical: "top",
+                          horizontal: "right",
                         }}
                         open={Boolean(signanchorEl)}
                         onClose={handleClose}
                       >
-                        <MenuItem onClick={handleCompanySignUp} >Business Sign up</MenuItem>
-                        <MenuItem onClick={handleUserSignUp} >Developer Sign up</MenuItem>
+                        <MenuItem onClick={handleCompanySignUp}>
+                          Business Sign up
+                        </MenuItem>
+                        <MenuItem onClick={handleUserSignUp}>
+                          Developer Sign up
+                        </MenuItem>
                       </Menu>
-                    </div>}
+                    </div>
+                  )}
                 </div>
               </Box>
-              <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
                 <div>
                   <IconButton
                     className={classes.navText}
@@ -399,7 +596,7 @@ const Header = (props) => {
                     aria-label="open drawer"
                     edge="start"
                     onClick={handleDrawerToggle}
-                    sx={{ mr: 2, display: { md: 'none' } }}
+                    sx={{ mr: 2, display: { md: "none" } }}
                   >
                     <MenuRounded />
                   </IconButton>
@@ -409,7 +606,7 @@ const Header = (props) => {
           </Container>
         </AppBar>
 
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: "flex" }}>
           <Drawer
             container={container}
             variant="temporary"
@@ -419,8 +616,11 @@ const Header = (props) => {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { sm: 'block', md: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              display: { sm: "block", md: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
             }}
           >
             {drawer}
@@ -428,14 +628,12 @@ const Header = (props) => {
         </Box>
       </>
     );
-  }else{
-    return(
+  } else {
+    return (
       <div className="bg-gray-900">
         <THeader />
       </div>
     );
   }
-
-  
-}
+};
 export default Header;

@@ -44,7 +44,7 @@ const LandinPageT = () =>{
                 <br />
                 <br />
                 <br />
-                <a href="https://discord.gg/wFNW6Hd2yU" target="_blank" className="m-auto mt-10 text-white animate-pulse hover:animate-none rounded rounded-lg p-1 flex flex-start bg-[#6B7FC5] w-52  transform transition hover:scale-110">
+                <a href="https://discord.gg/r9bpXkqSzH" target="_blank" className="m-auto mt-10 text-white animate-pulse hover:animate-none rounded rounded-lg p-1 flex flex-start bg-[#6B7FC5] w-52  transform transition hover:scale-110">
                             <FaDiscord className="ml-1 mt-1 text-3xl" />
                             <p className="mt-1 font-semibold ml-4 text-base text-center">Join the server</p>
                 </a>
