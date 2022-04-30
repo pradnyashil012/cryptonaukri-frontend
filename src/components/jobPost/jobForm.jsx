@@ -106,6 +106,14 @@ const JobForm = (theme) => {
     let admin = true;
 
 
+    useEffect(()=>{
+        if(!token){
+            navigate('/companyLogin');
+            toast.error('Please login first');
+        }
+    },[])
+
+
 
     const handleBtn1Toggle = () => {
         setBtnState(1)

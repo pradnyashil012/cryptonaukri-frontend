@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react'
 import JobCard from './Job-Card/JobCard';
 import JobCardLoading from './Job-Card/JobCardLoading';
 import Axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const useStyles = makeStyles((theme) => ({
     body:{
@@ -17,7 +20,13 @@ const JobsPage = (e) => {
     // const [datarr, setDataArr] = React.useState([]);
 
 
+    const navigate = useNavigate();
+
     useEffect(async ()=>{
+        if(!localStorage.getItem('token')){
+            navigate('/devlogin');
+            toast.error('Please login first !!');
+        }
         setLoading(true);
         const response = await Axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob')
         .then((res)=>{

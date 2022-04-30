@@ -17,8 +17,8 @@ const Navbar = () =>{
 
     return(
         <>
-            <nav className="flex justify-between max-w-7xl m-auto flex-wrap sm:flex-nowrap p-2 sm:p-5 text-white shadow bg-gray-900">
-                <div className="text-xl sm:text-2xl font-semibold mt-2">Crypto Naukri</div>
+            <nav className="flex justify-between max-w-7xl m-auto p-2 sm:p-5 text-white shadow bg-gray-900">
+                <img className="w-1/5" src="https://i.ibb.co/kQmGYgB/crypto-final-logo-png-14-1.png" />
                 <div className=" mt-3 text-md font-semibold hidden sm:block">
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/aboutus">About</a>
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href="/jobspage">Jobs</a>
@@ -31,7 +31,7 @@ const Navbar = () =>{
                     <button onClick={()=>{logout()}} class="mt-2 text-2xl hover:text-red-800" href=""><FaSignOutAlt /></button>
                 </div>:<div className="flex gap-4 font-semibold">
                     <div className="group mt-2 ">
-                        <button className="hover:text-purple-400 transform transition hover:scale-110 mt-2" href="">Login</button>
+                        <button className=" sm:text-lg text-sm hover:text-purple-400 transform transition hover:scale-110 mt-2" href="">Login</button>
                         <div className="group-hover:block dropdown-menu absolute hidden h-auto text-center right-20 mt-1 mb-1 bg-gray-800 w-auto">
                             <a className="p-2 mr-4 mt-3 w-full text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/devlogin">Developer Login</a><br/>
                             <a className="p-2 mr-4 mt-3 w-full text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/companyLogin">Recruiter Login</a>
@@ -40,7 +40,7 @@ const Navbar = () =>{
                     <div className="group mt-2 ">
                         <button 
                             style={{background: 'linear-gradient(95.73deg, #D21ACF 0%, #00EFFF 100%)', borderRadius: '4px 4px 4px 20px'}} 
-                            className="p-2 hover:text-gray-100 transform transition hover:scale-110" 
+                            className="p-2 sm:text-lg text-sm hover:text-gray-100 transform transition hover:scale-110" 
                             >Sign Up</button>
                         <div className="group-hover:block dropdown-menu absolute hidden h-auto  right-10 mt-1 bg-gray-800 p-2">
                             <a className="mr-4 mt-3 text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="">Developer Signup</a><br/>
@@ -73,10 +73,10 @@ const Navbar = () =>{
             {showLinks?
                 <div class="bg-gray-900 p-2">
                     <div class="flex flex-col text-center rounded mr-3 ml-3 bg-gray-800 text-white shadowlg shadow-gray-500/40">
-                        <a className="mr-4 mt-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href>About</a>
-                        <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href>Jobs</a>
-                        <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href>Internship</a>
-                        <a className="mr-4 mb-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href>Community</a>
+                        <a className="mr-4 mt-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/aboutus">About</a>
+                        <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href="/jobspage">Jobs</a>
+                        <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/internships">Internship</a>
+                        <a className="mr-4 mb-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://community.cryptonaukri.com/" target="_blank" rel="noopener">Community</a>
                     </div>
                 </div>:<></>}
         </>
