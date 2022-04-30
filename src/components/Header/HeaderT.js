@@ -73,10 +73,10 @@ const Navbar = () =>{
             {showLinks?
                 <div class="bg-gray-900 p-2">
                     <div class="flex flex-col text-center rounded mr-3 ml-3 bg-gray-800 text-white shadowlg shadow-gray-500/40">
-                        <a className="mr-4 mt-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href>About</a>
-                        <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href>Jobs</a>
-                        <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href>Internship</a>
-                        <a className="mr-4 mb-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href>Community</a>
+                        <a className="mr-4 mt-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/aboutus">About</a>
+                        <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href="/jobspage">Jobs</a>
+                        <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/internships">Internship</a>
+                        <a className="mr-4 mb-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://community.cryptonaukri.com/" target="_blank" rel="noopener">Community</a>
                     </div>
                 </div>:<></>}
         </>

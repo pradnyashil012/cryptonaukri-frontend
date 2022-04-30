@@ -12,11 +12,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
-    padding: '30px',
-    margin: '20px 20%',
+    padding: '20px',
+    margin: '0 auto',
     backgroundColor: 'white',
     borderRadius: '5px',
-    boxShadow: '0 0 10px silver'
+    boxShadow: '0 0 10px silver',
+    maxWidth:'600px',
   },
   heading: {
     margin: '20px 10%',
