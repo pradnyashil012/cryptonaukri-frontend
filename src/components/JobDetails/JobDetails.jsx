@@ -61,6 +61,7 @@ const JobDetails = () => {
   var url_string = window.location.href;
   var url = new URL(url_string);
   var jobid = url.searchParams.get("id");
+  var jobtype = url.searchParams.get("type");
 
   const [jobInfo, setJobInfo] = useState("");
   const [usersData, setUsersData] = useState([]); 
@@ -68,14 +69,19 @@ const JobDetails = () => {
   const [open, setOpen] = useState(false);
   const [userLoading, setUserLoading] = useState(false);
 
-  //console.log(jobid);
+  console.log(jobtype);
+  console.log("LOLO");
+
+  const jobAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob';
+  const internAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/internship/findInternship'
 
   useEffect(async () => {
     try {
+      console.log("lol")
       setLoading(true);
-      const response = await Axios.get(
-        `https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob/${jobid}`
-      );
+      var endpoint = '';
+      jobtype === 'internship'? endpoint=internAPI : endpoint=jobAPI;
+      const response = await Axios.get(`${endpoint}${jobid}`);
       const jobdata = response.data.details;
       //console.log(jobdata);
       setUserLoading(true);

@@ -59,7 +59,15 @@ const Login = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var redirectType = url.searchParams.get("redirecttype");
+  var redirectid = url.searchParams.get("redirectid");
+  
+
+
   const navigate = useNavigate();
   const classes = useStyles();
 
@@ -136,6 +144,10 @@ const Login = (props) => {
             localStorage.setItem('login', true);
             localStorage.setItem('cUser', data.cUser);
             toast.success(data.message);
+            if(redirectType==='internship' || redirectType==='job'){
+              navigate(`/jobapplication?id=${redirectid}&type=${redirectType}`);
+              return;
+            }
             navigate('/jobspage')
           } catch (error) {
             const errorResponse = JSON.parse(error.request.response);
