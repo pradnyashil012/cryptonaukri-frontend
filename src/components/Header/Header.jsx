@@ -102,7 +102,7 @@ const Header = (props) => {
   const getUser = async () => {
     if (token) {
       //console.log(token.split('"')[1]);
-      console.log(token);
+      //console.log(token);
       const response = await axios.get(
         "https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails",
         {
@@ -111,7 +111,7 @@ const Header = (props) => {
           },
         }
       );
-      console.log(response.data);
+      //console.log(response.data);
       setUser(response.data);
     }
     if (btoken) {

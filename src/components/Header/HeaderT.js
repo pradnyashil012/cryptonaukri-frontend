@@ -18,7 +18,7 @@ const Navbar = () =>{
     return(
         <>
             <nav className="flex justify-between max-w-7xl m-auto p-2 sm:p-5 text-white shadow bg-gray-900">
-                <img className="w-1/5" src="https://i.ibb.co/kQmGYgB/crypto-final-logo-png-14-1.png" />
+                <img className="object-fill h-10 w-40 mt-2 shadow-lg shadow-indigo-500/40" src="https://i.ibb.co/kQmGYgB/crypto-final-logo-png-14-1.png" />
                 <div className=" mt-3 text-md font-semibold hidden sm:block">
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/aboutus">About</a>
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href="/jobspage">Jobs</a>

@@ -142,7 +142,7 @@ const ApplyJob = (props) => {
   var url_string = window.location.href;
   var url = new URL(url_string);
   var jobid = url.searchParams.get("id");
-  var type = url.searchParams.get("type");
+  var jobtype = url.searchParams.get("type");
   // const jobDescription = jobdesc.split("::");
   // console.log(jobDescription);
 
@@ -162,17 +162,15 @@ const ApplyJob = (props) => {
   const login = localStorage.getItem("login");
   const navigate = useNavigate();
 
+  const jobAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/jobs/';
+  const internAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/internship/'
+
   useEffect(async () => {
-    if(!token){
-      setLoading(false);
-      toast.error("Please Login first !!");
-      navigate('/');
-    }
     try {
       setLoading(true);
-      const response = await Axios.get(
-        `https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob/${jobid}`
-      );
+      var endpoint = '';
+      jobtype === 'internship'? endpoint=internAPI+'findInternship' : endpoint=jobAPI+'findJob';
+      const response = await Axios.get(`${endpoint}/${jobid}`);
       //console.log(response.data.details);
       const jobdata = response.data.details;
       setJobInfo(jobdata);
@@ -188,48 +186,59 @@ const ApplyJob = (props) => {
   var jobPostedTime = jobInfo ? jobInfo.postedOn.split("T") : "";
   //console.log(jobPostedTime);
 
-  const handleEdit = async (e) => {
-    navigate(`/jobform?id=${e}`);
 
-    // toast.success('jobCard Updated');
-  };
-
-  const handleDelete = async (e) => {
-    if (window.confirm("sure to delete this card ?")) {
-      const response = await Axios.delete(
-        `https://cryptonaukri-backend.herokuapp.com/jobs/:${e}`
-      );
-
-      const data = response.data;
-      const code = data.code;
-      toast.success("jobCard Deleted");
-      navigate("/");
-    }
-  };
 
   const handleApply = async () => {
     //console.log("ok apply krneka idhhr handle kari bhai !!");
     //console.log(whyHire, avl);
     var token = localStorage.getItem("token");
+
     try {
-      const response = await Axios.post(
-        `https://cryptonaukribackend.herokuapp.com/api/v1/jobs/applyJob`,
-        {
-          jobAssociated: jobInfo._id,
-          whyHire: whyHire,
-          candidateAvailability: avl,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+      var endpoint = '';
+      jobtype === 'internship'? endpoint=internAPI+'applyInternship' : endpoint=jobAPI+'applyJob';
+
+      if(jobtype === 'internship'){
+        const response = await Axios.post(
+          endpoint,
+          {
+            internshipAssociated : jobInfo._id,
+            whyHire: whyHire,
+            candidateAvailability: avl,
           },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.data.code === "INTERNSHIP_APPLIED") {
+          toast.success("You have success fully applied for the job !!");
+          setStage(3);
         }
-      );
-      //console.log(response);
-      if (response.data.code === "JOB_APPLIED") {
-        toast.success("You have success fully applied for the job !!");
-        setStage(3);
+
+      }else{
+        const response = await Axios.post(
+          endpoint,
+          {
+            jobAssociated: jobInfo._id,
+            whyHire: whyHire,
+            candidateAvailability: avl,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        //console.log(response);
+        if (response.data.code === "JOB_APPLIED") {
+          toast.success("You have success fully applied for the job !!");
+          setStage(3);
+        }
       }
+      
+
+      
     } catch (error) {
       //console.log(error.response.data.message);
       toast.error(error.response.data.message);
@@ -300,7 +309,7 @@ const ApplyJob = (props) => {
                     </Typography>
                   </div>
                   <div>
-                    {type == "job" ? (
+                    {jobtype == "job" ? (
                       <>
                         <Typography variant="p">
                           <Box
@@ -483,6 +492,8 @@ const ApplyJob = (props) => {
       </div>
     );
   }
+
+
   return (
     <div className={classes.body}>
       {jobInfo && stage === 1 ? (
@@ -524,6 +535,8 @@ const ApplyJob = (props) => {
                     justifyContent: "space-around",
                     paddingTop: "20px",
                     paddingBottom: "20px",
+                    flexWrap:"wrap",
+                    gap:"4%",
                   }}
                 >
                   <div>
@@ -545,7 +558,7 @@ const ApplyJob = (props) => {
                     </Typography>
                   </div>
                   <div>
-                    {type == "job" ? (
+                    {jobtype == "job" ? (
                       <>
                         <Typography variant="p">
                           <Box
@@ -578,7 +591,7 @@ const ApplyJob = (props) => {
                             fontWeight: "regular",
                           }}
                         >
-                          3 months
+                          {jobInfo.duration}
                         </Box>
                       </Typography>
                     )}
@@ -590,14 +603,14 @@ const ApplyJob = (props) => {
                           fontWeight: "bold",
                         }}
                       >
-                        CTC
+                        {jobtype==='internship'?<>Stipend</>:<>CTC</>}
                       </Box>
                       <Box
                         sx={{
                           fontWeight: "regular",
                         }}
                       >
-                        {jobInfo.ctc}
+                        {jobtype==='internship'?<>{jobInfo.stipend.amount}</>:<>{jobInfo.ctc}</>}
                       </Box>
                     </Typography>
                   </div>
@@ -608,7 +621,7 @@ const ApplyJob = (props) => {
                           fontWeight: "bold",
                         }}
                       >
-                        Applications
+                        Applicants
                       </Box>
                       <Box
                         sx={{
@@ -639,7 +652,7 @@ const ApplyJob = (props) => {
                         padding: "5px",
                       }}
                     >
-                      {jobInfo.jobDescription}
+                      {jobInfo.postedBy.description}
 
                       <br />
                       <br />
@@ -691,7 +704,7 @@ const ApplyJob = (props) => {
                         padding: "5px",
                       }}
                     >
-                      {jobInfo.jobDescription}
+                      {jobInfo.responsibilities}
                     </Box>
                   </Typography>
                 </Box>
@@ -714,13 +727,9 @@ const ApplyJob = (props) => {
                         padding: "5px",
                       }}
                     >
-                      {/* <Chip className={classes.Chip} label="JavaScript" />
-                                        <Chip className={classes.Chip} label="HTML" />
-                                        <Chip className={classes.Chip} label="Reactjs" />
-                                        <Chip className={classes.Chip} label="Mongodb" />
-                                        <Chip className={classes.Chip} label="PHP" /> */}
-                      {jobInfo.skills.map((skill) => {
-                        return <Chip className={classes.Chip} label={skill} />;
+                      {jobInfo.skills[0].split(",").map((skill) => {
+                        console.log(skill)
+                        return <><Chip className={classes.Chip} label={skill} /></>;
                       })}
                     </Box>
                   </Typography>
@@ -749,6 +758,7 @@ const ApplyJob = (props) => {
                   </Typography>
                 </Box>
 
+                {token?
                 <Box
                   sx={{
                     textAlign: "center",
@@ -778,6 +788,24 @@ const ApplyJob = (props) => {
                     </Button>
                   )}
                 </Box>
+                :<>
+                <Box
+                  sx={{
+                    textAlign: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  <Button
+                      onClick={()=>{navigate(`/devlogin?redirectid=${jobid}&redirecttype=${jobtype}`)}}
+                      className={classes.applyBtn}
+                      variant="outlined"
+                      color="primary"
+                    >
+                      Login to apply
+                    </Button>
+                </Box>
+                </>}
+                
               </Box>
             </Box>
           </Container>

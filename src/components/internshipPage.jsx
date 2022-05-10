@@ -52,13 +52,14 @@ const InternshipPage = () => {
 
                                     return( 
                                         <InternshipCard 
-                                            position={internship.jobTitle} 
+                                            position={internship.internshipTitle} 
                                             cmp={internship.postedByDetails.companyName} 
                                             opn={internship.openings}
                                             perks={internship.perks.split}
                                             key={internship._id}
                                             srId={internship._id}
                                             type={"internship"}
+                                            duration={internship.duration}
                                         />);
                                 })
                             } 

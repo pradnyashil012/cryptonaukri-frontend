@@ -64,33 +64,6 @@ const LandinPageT = () =>{
                     </div>
                 </div>
                 <div className="flex justify-between bg-gray-900 p-2 sm:p-5 max-w-6xl m-auto mt-10">
-                    <div className="text-center p-0 sm:p-4 m-auto" data-aos="flip-right">
-                        <img className="w-0 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://iili.io/VkYCn1.md.png" alt="VkYCn1.md.png" />
-                    </div>
-                    <div className="p-4 text-white m-auto">
-                        <h3 className="text-2xl font-semibold">Solution by CryptoNaukri for Business</h3>
-                        <ul className="mt-5">
-                            <li className="m-2">👉 Get enough applications for a jobpost.</li>
-                            <li className="m-2">👉 Get application from only Blockchain devolopers.</li>
-                            <li className="m-2">👉 Verify candidates potentials using our integrated platform.</li>
-                            <li className="m-2">👉 Spend 90% less on Hiring-Training.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="flex justify-between bg-gray-900 p-2 sm:p-5 max-w-7xl m-auto mt-20 sm:flex-nowrap flex-wrap">
-                    <div className="p-4 text-white mt-10 m-auto">
-                        <h3 className="text-2xl font-semibold">Problems faced by Businesses</h3>
-                        <ul className="mt-5">
-                            <li className="m-2">👉 Receives 100s of application for a job post.</li>
-                            <li className="m-2">👉 Anyone applies who does not have recquired skills.</li>
-                            <li className="m-2">👉 Spends around 3-4 lacs pers candidate during hiring training joining.</li>
-                        </ul>
-                    </div>
-                    <div className="text-center p-2 m-auto" data-aos="flip-up">
-                        <img className="w-4/5 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://i.ibb.co/MGxCzQb/flame-remote-work-1.png" alt="Remote Work" />
-                    </div>
-                </div>
-                <div className="flex justify-between bg-gray-900 p-2 sm:p-5 max-w-6xl m-auto mt-10">
                     <div className="text-center p-0 sm:p-4" data-aos="flip-up">
                         <img  className="w-0 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://i.ibb.co/BLVTKnL/businessman-1.png" alt="VkYCn1.md.png" />
                     </div>
@@ -103,6 +76,35 @@ const LandinPageT = () =>{
                         </ul>
                     </div>
                 </div>
+                <div className="flex justify-between bg-gray-900 p-2 sm:p-5 max-w-7xl m-auto mt-20 sm:flex-nowrap flex-wrap">
+                    <div className="p-4 text-white mt-10 m-auto">
+                        <h3 className="text-2xl font-semibold">Problems faced by Businesses</h3>
+                        <ul className="mt-5">
+                            <li className="m-2">👉 Receives 100s of application for a job post.</li>
+                            <li className="m-2">👉 Applicants don't have the required skills</li>
+                            <li className="m-2">👉 Businesses spends a lot of money and time to on hiring and<br/>{"  "} training candidates</li>
+                        </ul>
+                    </div>
+                    <div className="text-center p-2 m-auto" data-aos="flip-up">
+                        <img className="w-4/5 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://i.ibb.co/MGxCzQb/flame-remote-work-1.png" alt="Remote Work" />
+                    </div>
+                </div>
+                <div className="flex justify-between bg-gray-900 p-2 sm:p-5 max-w-6xl m-auto mt-10">
+                    <div className="text-center p-0 sm:p-4 m-auto" data-aos="flip-right">
+                        <img className="w-0 sm:w-4/5 m-auto transform transition hover:scale-110" src="https://iili.io/VkYCn1.md.png" alt="VkYCn1.md.png" />
+                    </div>
+                    <div className="p-4 text-white m-auto">
+                        <h3 className="text-2xl font-semibold">Solution by CryptoNaukri for Business</h3>
+                        <ul className="mt-5">
+                            <li className="m-2">👉 Get application from only Blockchain devolopers.</li>
+                            <li className="m-2">👉 Verify candidates potentials using our integrated platform.</li>
+                            <li className="m-2">👉 Spend negligible Time and Money on Hiring and Training.</li>
+                            <li className="m-2">👉 Hire directly from our bootcamp.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
             </main>
         </>
     );

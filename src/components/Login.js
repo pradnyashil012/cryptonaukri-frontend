@@ -59,7 +59,15 @@ const Login = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var redirectType = url.searchParams.get("redirecttype");
+  var redirectid = url.searchParams.get("redirectid");
+  
+
+
   const navigate = useNavigate();
   const classes = useStyles();
 
@@ -129,30 +137,29 @@ const Login = (props) => {
           try {
             setLoading(true);
             const response = await Axios.post(`${API}api/v1/user/login`, { email, password });
-            //console.log(email, password)
             const data = response.data;
             setLoading(false);
-            //console.log(response.headers['authorization']);
-            // if (data.login) {
-            
-            //props.setToken(response.headers.authorization);
+            console.log(data);
             localStorage.setItem('token', response.headers['authorization']);
             localStorage.setItem('login', true);
             localStorage.setItem('cUser', data.cUser);
             toast.success(data.message);
+            if(redirectType==='internship' || redirectType==='job'){
+              navigate(`/jobapplication?id=${redirectid}&type=${redirectType}`);
+              return;
+            }
             navigate('/jobspage')
-            // }
-            // else {
-            //   toast.error(data.message)
-            // }
           } catch (error) {
-            console.log(error);
-            //console.log( error.request.response);
-            //const err = JSON.parse(error.request.response);
-            
+            const errorResponse = JSON.parse(error.request.response);
+            //console.log((errorResponse));
+            //console.log(typeof(errorResponse))
+            if(errorResponse?.code == 'NOT_FOUND'){
+              toast.error("You are not yet registered with us yet, Please create a Account and continue.");
+              setLoading(false);
+              return;
+            }
             toast.error(error);
             setLoading(false);
-            //toast.error('Login Failed ,please try again !!')
           }
         }
     }

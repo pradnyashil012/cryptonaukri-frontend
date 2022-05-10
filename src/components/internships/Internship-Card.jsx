@@ -107,35 +107,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InternshipCard = (props) => {
-  let position = props.position;
-  let company = props.company;
-  let openings = props.opn;
-  let link = props.link;
 
   const login = localStorage.getItem("login")
   const navigate = useNavigate();
 
-  const handleEdit = async (e) => {
-    navigate(`/jobform?id=${e}`);
-    // toast.success('Internship Updated');
-  };
-
-  const handleDelete = async (e) => {
-    if (window.confirm('sure to delete this card ?')) {
-      const response = await Axios.delete(`https://cryptonaukribackend.herokuapp.com/internships/:${e}`)
-
-      const data = response.data;
-      toast.success('Internship Deleted');
-      navigate('/')
-    }
-  };
-
   const handleApply = () => {
-    if (login) {
       navigate(`/jobapplication?id=${props.srId}&type=${props.type}`)
-    } else {
-      toast.info('LogIn First !!');
-    }
   }
 
   const classes = useStyles();
@@ -170,20 +147,6 @@ const InternshipCard = (props) => {
                     </Box>
                   </Typography>
                 </Box>
-
-                {localStorage.getItem("admin") ?
-                  <Box className={classes.editbtn} >
-                    <CardActions>
-                      <Typography variant='button' >
-                        <Button className={classes.btn} onClick={() => { handleEdit(props.srNo) }} size='small' color="primary" variant='contained' >
-                          {<Edit />}
-                        </Button></Typography>
-                      <Typography variant='button'>
-                        <Button className={classes.btn} onClick={() => { handleDelete(props.srNo) }} size='small' color="primary" variant='contained'>{<Delete />}</Button>
-                      </Typography>
-                    </CardActions>
-                  </Box> : <></>
-                }
               </Box>
             </Box>
             <Box className={classes.rightBottom}>
@@ -193,14 +156,15 @@ const InternshipCard = (props) => {
                     <Box sx={{
                       fontWeight: 'regular',
                     }}>
-                      Openings : <strong>{props.opn}</strong>
+                      <strong>{props.opn} </strong> openings<br/>
+                      <strong>{props.duration} </strong> duration
                     </Box>
                   </Typography>
                 </Box>
               </Box>
               <Box>
                 <Button onClick={handleApply} className={classes.applyBtn} variant="outlined" color="primary">
-                  Apply Now
+                  Details
                 </Button>
               </Box>
             </Box>
