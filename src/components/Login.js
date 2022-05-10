@@ -129,7 +129,6 @@ const Login = (props) => {
           try {
             setLoading(true);
             const response = await Axios.post(`${API}api/v1/user/login`, { email, password });
-            console.log(response);
             const data = response.data;
             setLoading(false);
             console.log(data);
@@ -139,10 +138,10 @@ const Login = (props) => {
             toast.success(data.message);
             navigate('/jobspage')
           } catch (error) {
-            const errorResponse = error.data;
-            console.log(errorResponse);
-            console.log(typeof(errorResponse))
-            if(error.request.response['code'] == 'NOT_FOUND'){
+            const errorResponse = JSON.parse(error.request.response);
+            //console.log((errorResponse));
+            //console.log(typeof(errorResponse))
+            if(errorResponse?.code == 'NOT_FOUND'){
               toast.error("You are not yet registered with us yet, Please create a Account and continue.");
               setLoading(false);
               return;
