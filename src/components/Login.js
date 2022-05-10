@@ -129,30 +129,26 @@ const Login = (props) => {
           try {
             setLoading(true);
             const response = await Axios.post(`${API}api/v1/user/login`, { email, password });
-            //console.log(email, password)
+            console.log(response);
             const data = response.data;
             setLoading(false);
-            //console.log(response.headers['authorization']);
-            // if (data.login) {
-            
-            //props.setToken(response.headers.authorization);
+            console.log(data);
             localStorage.setItem('token', response.headers['authorization']);
             localStorage.setItem('login', true);
             localStorage.setItem('cUser', data.cUser);
             toast.success(data.message);
             navigate('/jobspage')
-            // }
-            // else {
-            //   toast.error(data.message)
-            // }
           } catch (error) {
-            console.log(error);
-            //console.log( error.request.response);
-            //const err = JSON.parse(error.request.response);
-            
+            const errorResponse = error.data;
+            console.log(errorResponse);
+            console.log(typeof(errorResponse))
+            if(error.request.response['code'] == 'NOT_FOUND'){
+              toast.error("You are not yet registered with us yet, Please create a Account and continue.");
+              setLoading(false);
+              return;
+            }
             toast.error(error);
             setLoading(false);
-            //toast.error('Login Failed ,please try again !!')
           }
         }
     }
