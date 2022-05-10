@@ -23,7 +23,7 @@ const Navbar = () =>{
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/aboutus">About</a>
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href="/jobspage">Jobs</a>
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/internships">Internship</a>
-                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://community.cryptonaukri.com/" target="_blank" rel="noopener">Community</a>
+                    <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://community.cryptonaukri.com/" target="_blank" rel="noopener noreferrer">Community</a>
                 </div>
                 {token?
                 <div class="flex p-2 gap-3">
@@ -34,7 +34,7 @@ const Navbar = () =>{
                         <button className=" sm:text-lg text-sm hover:text-purple-400 transform transition hover:scale-110 mt-2" href="">Login</button>
                         <div className="group-hover:block dropdown-menu absolute hidden h-auto text-center right-20 mt-1 mb-1 bg-gray-800 w-auto">
                             <a className="p-2 mr-4 mt-3 w-full text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/devlogin">Developer Login</a><br/>
-                            <a className="p-2 mr-4 mt-3 w-full text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/companyLogin">Recruiter Login</a>
+                            <a className="p-2 mr-4 mt-3 w-full text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/companyLogin">Business Login</a>
                         </div>
                     </div>
                     <div className="group mt-2 ">
@@ -43,8 +43,8 @@ const Navbar = () =>{
                             className="p-2 sm:text-lg text-sm hover:text-gray-100 transform transition hover:scale-110" 
                             >Sign Up</button>
                         <div className="group-hover:block dropdown-menu absolute hidden h-auto  right-10 mt-1 bg-gray-800 p-2">
-                            <a className="mr-4 mt-3 text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="">Developer Signup</a><br/>
-                            <a className="mr-4 mt-3 text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="">Recruiter Signup</a>
+                            <a className="mr-4 mt-3 text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://www.cryptonaukri.com/devsignup">Developer Signup</a><br/>
+                            <a className="mr-4 mt-3 text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://www.cryptonaukri.com/companySignUp">Business Signup</a>
                         </div>
                     </div>
                 </div>}
@@ -76,7 +76,7 @@ const Navbar = () =>{
                         <a className="mr-4 mt-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/aboutus">About</a>
                         <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href="/jobspage">Jobs</a>
                         <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/internships">Internship</a>
-                        <a className="mr-4 mb-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://community.cryptonaukri.com/" target="_blank" rel="noopener">Community</a>
+                        <a className="mr-4 mb-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://community.cryptonaukri.com/" target="_blank" rel="noopener noreferrer">Community</a>
                     </div>
                 </div>:<></>}
         </>

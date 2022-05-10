@@ -1,10 +1,10 @@
 import React from "react";
 
 import { 
-    FaFacebookSquare,
     FaLinkedin,
     FaTwitterSquare,
-    FaInstagramSquare
+    FaInstagramSquare,
+    FaDiscord
 } from 'react-icons/fa';
 const Footer = () =>{
     return(<div className="bg-gray-900">
@@ -15,9 +15,7 @@ const Footer = () =>{
             <p className="text-white text-xl">About</p>
             <ul className="text-gray-500 text-md">
                 <li><a href="/aboutus">How it works</a></li>
-                <li><a href="">Careers</a></li>
-                <li><a href="">Press</a></li>
-                <li><a href="">Blog</a></li>
+                <li><a href="https://www.linkedin.com/company/cryptonaukri/jobs/" target="_blank" rel="noopener noreferrer">Careers</a></li>
             </ul>
         </div>
         <div className="text-left">
@@ -42,10 +40,10 @@ const Footer = () =>{
             <p className="text-white text-xl">Follow us at</p>
             <br />
             <div class="flex gap-2">
-                <a href="https://www.instagram.com/cryptonaukri/" target="_blank" rel="noopener"><FaFacebookSquare className="text-xl text-white transform transition hover:scale-110" /></a>
-                <a href="https://www.linkedin.com/company/cryptonaukri/" target="_blank" rel="noopener"><FaLinkedin className="text-xl text-white transform transition hover:scale-110" /></a>
-                <a href="https://twitter.com/CryptoNaukri" target="_blank" rel="noopener"><FaTwitterSquare className="text-xl text-white transform transition hover:scale-110" /></a>
-                <a href="https://www.instagram.com/cryptonaukri/" target="_blank" rel="noopener"><FaInstagramSquare className="text-xl text-white transform transition hover:scale-110" /></a>
+                <a href="https://discord.com/invite/r9bpXkqSzH" target="_blank" rel="noopener noreferrer"><FaDiscord className="text-xl text-white transform transition hover:scale-110" /></a>
+                <a href="https://www.linkedin.com/company/cryptonaukri/" target="_blank" rel="noopener noreferrer"><FaLinkedin className="text-xl text-white transform transition hover:scale-110" /></a>
+                <a href="https://twitter.com/CryptoNaukri" target="_blank" rel="noopener noreferrer"><FaTwitterSquare className="text-xl text-white transform transition hover:scale-110" /></a>
+                <a href="https://www.instagram.com/cryptonaukri/" target="_blank" rel="noopener noreferrer"><FaInstagramSquare className="text-xl text-white transform transition hover:scale-110" /></a>
             </div>
         </div>
     </footer>
