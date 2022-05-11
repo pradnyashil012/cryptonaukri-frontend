@@ -180,7 +180,7 @@ const User = () => {
     const copyCode = (ccode) => {
         try {
         navigator.clipboard.writeText(
-            `https://www.cryptonaukri.com/userSignUp?code=${ccode}`
+            `https://www.cryptonaukri.com/devsignup?code=${ccode}`
         );
         toast.success("Coupon copied to clipboard");
         } catch (error) {
