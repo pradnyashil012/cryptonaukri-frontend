@@ -1,19 +1,18 @@
-import React,{useState} from "react";
-import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = () =>{
+const Navbar = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const [showLinks, setShowLinks] = useState(false);
 
-    const [showLinks, setShowLinks] = useState(false);
-    
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
-    const logout = () => {
-        localStorage.clear();
-        navigate("/");
-    };
+  const logout = () => {
+    localStorage.clear();
+    navigate('/');
+  };
 
     return(
         <div className="bg-black/70 shadow backdrop-blur-xl fixed inset-x-0 top-0 z-20">
