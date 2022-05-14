@@ -748,7 +748,7 @@ const JobForm = (theme) => {
                                         <OutlinedInput
                                             id="outlined-adornment-location"
                                             type='text'
-                                            placeholder='Stiend will upto'
+                                            placeholder='Stipend will upto'
                                             value={salary}
                                             onChange={handleSalaryChange}
                                         />
