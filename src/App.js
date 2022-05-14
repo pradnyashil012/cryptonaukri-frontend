@@ -29,7 +29,9 @@ import ApplyJob from "./components/applyJob/applyjob";
 import AboutMe from "./components/User/User";
 import Profile from "./components/User/UserDashbaord";
 
-
+import AuthDevLogin from "./components/auth/DevLogin";
+import AuthDevSignUp from "./components/auth/DevSignup";
+import { useCookies } from 'react-cookie';
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
@@ -80,6 +82,8 @@ const App = () => {
 
   const classes = useStyles();
 
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+
   return (
     <>
       <div className={classes.body}>
@@ -101,7 +105,7 @@ const App = () => {
               <Route path="/internships" element={<><InternshipPage /></>}></Route>
               <Route path="/jobform" element={<><JobForm /></>}></Route>
               <Route path="/aboutme" element={<><AboutMe /></>}></Route>
-              <Route path="/profile" element={<><Profile /></>}></Route>
+              
               <Route path="/aboutus" element={<><AboutUS /></>}></Route>
               <Route path="/contactus" element={<><Contact /></>}></Route>
               <Route path="/privacy" element={<><Privacy /></>}></Route>
@@ -111,6 +115,12 @@ const App = () => {
               <Route path="/userResume" element={<><Resume /></>}></Route>
               <Route path="/resetPassWord" element={<><Reset /></>}></Route>
               <Route path="/Otp" element={<><Otp /></>}></Route>
+
+              // new tailwind Routes
+              <Route path="/auth/devlogin" element={<><AuthDevLogin setCookie={setCookie} cookies={cookies} /></>}></Route>
+              <Route path="/auth/devsignup" element={<><AuthDevSignUp setCookie={setCookie} cookies={cookies} /></>}></Route>
+              <Route path="/profile" element={<><Profile /></>}></Route>
+
             </Routes>
           </Box>
           <Footer />

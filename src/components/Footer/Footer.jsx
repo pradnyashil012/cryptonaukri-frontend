@@ -92,7 +92,7 @@ const Footer = () => {
   const classes = useStyles();
   const location = useLocation();
 
-  if(location.pathname !== '/'){
+  if(location.pathname !== '/' && location.pathname !== "/auth/devlogin" && location.pathname !== "/auth/devsignup" && location.pathname !== "/profile"){
     return (
       <>
         <footer className={classes.footer}>

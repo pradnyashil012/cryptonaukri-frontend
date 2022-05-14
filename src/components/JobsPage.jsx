@@ -24,7 +24,7 @@ const JobsPage = (e) => {
 
     useEffect(async ()=>{
         if(!localStorage.getItem('token')){
-            navigate('/devlogin');
+            navigate('/auth/devlogin');
             toast.error('Please login first !!');
         }
         setLoading(true);

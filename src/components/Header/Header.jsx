@@ -28,6 +28,9 @@ import THeader from "./HeaderT";
 const drawerWidth = 340;
 
 const Header = (props) => {
+
+  const API = process.env.REACT_APP_API_ENDPOINT;
+
   const classes = useStyles();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,7 +66,7 @@ const Header = (props) => {
     setAnchorEl(event.currentTarget);
   };
   const UserLoginbtn = () => {
-    navigate("/devlogin");
+    navigate("/auth/devlogin");
     setAnchorEl(null);
     setMobileOpen(!mobileOpen);
   };
@@ -79,7 +82,7 @@ const Header = (props) => {
     setSignanchor(event.currentTarget);
   };
   const signupbtnUser = () => {
-    navigate("/devsignup");
+    navigate("/auth/devsignup");
     setSignanchor(null);
     setMobileOpen(!mobileOpen);
   };
@@ -104,7 +107,7 @@ const Header = (props) => {
       //console.log(token.split('"')[1]);
       //console.log(token);
       const response = await axios.get(
-        "https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails",
+        `${API}/api/v1/user/loggedInUserDetails`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -161,7 +164,7 @@ const Header = (props) => {
 
   //handleUserLogin and handleMouseOver are functions for the laptop view two types of logins
   const handleUserLogin = (event) => {
-    navigate("/devlogin");
+    navigate("/auth/devlogin");
     setAnchor(null);
   };
 
@@ -377,7 +380,8 @@ const Header = (props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  if (location.pathname !== "/") {
+  console.log(location.pathname)
+  if (location.pathname !== "/" && location.pathname !== "/auth/devlogin" && location.pathname !== "/auth/devsignup" && location.pathname !== "/profile") {
     return (
       <>
         <CssBaseline />
@@ -400,9 +404,6 @@ const Header = (props) => {
                   <MenuItem className={classes.navItem}>
                     <Typography
                       className={classes.navText}
-                      onClick={() => {
-                        setMobileOpen(!mobileOpen);
-                      }}
                       variant="h5"
                       component="div"
                     >

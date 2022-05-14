@@ -166,6 +166,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 const User = () => {
 
+    const API = process.env.REACT_APP_API_ENDPOINT;
+
     const secretCode = 'CRYPTONAUKRI100';
     const token = localStorage.getItem('token');
     const [loading, setLoading] = useState(false);
@@ -175,12 +177,14 @@ const User = () => {
     const [resume, setResume] = useState("");
     const navigate = useNavigate();
 
+
+
     const classes = useStyles();
 
     const copyCode = (ccode) => {
         try {
         navigator.clipboard.writeText(
-            `https://www.cryptonaukri.com/userSignUp?code=${ccode}`
+            `https://www.cryptonaukri.com/devsignup?code=${ccode}`
         );
         toast.success("Coupon copied to clipboard");
         } catch (error) {
@@ -189,11 +193,12 @@ const User = () => {
     };
 
     const getUser = () => {
+        // console.log(API);
         setLoading(true);
         if (token) {
 
         const response = axios.get(
-            "https://cryptonaukribackend.herokuapp.com/api/v1/user/loggedInUserDetails",
+            `${API}/api/v1/user/loggedInUserDetails`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -291,10 +296,10 @@ const User = () => {
     
     useEffect(() => {
         if (!token) {
-        toast.error("Please Login first !!");
-        navigate("/");
+            toast.error("Please Login first !!");
+            navigate("/");
         } else {
-        getUser();
+                getUser();
         }
     }, []);
 

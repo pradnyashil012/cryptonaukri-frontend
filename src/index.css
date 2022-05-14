@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url(https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Quintessential&family=Roboto&display=swap);
+
+* {
+    font-family: Be Vietnam Pro, sans-serif !important;
+}
