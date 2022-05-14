@@ -16,9 +16,9 @@ const Navbar = () =>{
     };
 
     return(
-        <>
-            <nav className="flex justify-between max-w-7xl m-auto p-2 sm:p-5 text-white shadow bg-gray-900">
-                <img className="object-fill h-10 w-40 mt-2 shadow-lg shadow-indigo-500/40" src="https://i.ibb.co/kQmGYgB/crypto-final-logo-png-14-1.png" />
+        <div className="bg-black/70 shadow backdrop-blur-xl fixed inset-x-0 top-0 z-20">
+            <nav className="flex justify-between max-w-7xl m-auto p-2 sm:p-5 text-white shadow">
+                <img className="object-fill h-10 w-40 mt-2 shadow-lg shadow-indigo-500/40 rounded" src="https://i.ibb.co/kQmGYgB/crypto-final-logo-png-14-1.png" />
                 <div className=" mt-3 text-md font-semibold hidden sm:block">
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed" href="/aboutus">About</a>
                     <a className="mr-4 hover:text-purple-400 hover:underline hover:decoration-dashed " href="/jobspage">Jobs</a>
@@ -33,7 +33,7 @@ const Navbar = () =>{
                     <div className="group mt-2 ">
                         <button className=" sm:text-lg text-sm hover:text-purple-400 transform transition hover:scale-110 mt-2" href="">Login</button>
                         <div className="group-hover:block dropdown-menu absolute hidden h-auto text-center right-20 mt-1 mb-1 bg-gray-800 w-auto">
-                            <a className="p-2 mr-4 mt-3 w-full text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/devlogin">Developer Login</a><br/>
+                            <a className="p-2 mr-4 mt-3 w-full text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/auth/devlogin">Developer Login</a><br/>
                             <a className="p-2 mr-4 mt-3 w-full text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/companyLogin">Business Login</a>
                         </div>
                     </div>
@@ -43,8 +43,8 @@ const Navbar = () =>{
                             className="p-2 sm:text-lg text-sm hover:text-gray-100 transform transition hover:scale-110" 
                             >Sign Up</button>
                         <div className="group-hover:block dropdown-menu absolute hidden h-auto  right-10 mt-1 bg-gray-800 p-2">
-                            <a className="mr-4 mt-3 text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://www.cryptonaukri.com/devsignup">Developer Signup</a><br/>
-                            <a className="mr-4 mt-3 text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://www.cryptonaukri.com/companySignUp">Business Signup</a>
+                            <a className="mr-4 mt-3 text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/auth/devsignup">Developer Signup</a><br/>
+                            <a className="mr-4 mt-3 text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/companySignUp">Business Signup</a>
                         </div>
                     </div>
                 </div>}
@@ -79,7 +79,7 @@ const Navbar = () =>{
                         <a className="mr-4 mb-3 hover:text-purple-400 hover:underline hover:decoration-dashed" href="https://community.cryptonaukri.com/" target="_blank" rel="noopener noreferrer">Community</a>
                     </div>
                 </div>:<></>}
-        </>
+        </div>
     );
 }
 
