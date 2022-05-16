@@ -250,7 +250,7 @@ const BusReg = () => {
                 <Box component='form' className={classes.formContainer}>
                     <Grid container spacing={3}>
                             {/*            company name                   */}
-                        <Grid item xs={8} >
+                        <Grid item xs={12} md={8}  >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Company Name</InputLabel>
                                 <OutlinedInput
@@ -265,7 +265,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={4} >
+                        <Grid item xs={12} md={4} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Website Link</InputLabel>
                                 <OutlinedInput
@@ -279,7 +279,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={4} >
+                        <Grid item xs={12} md={4} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Official Email</InputLabel>
                                 <OutlinedInput
@@ -293,7 +293,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={8} >
+                        <Grid item xs={12} md={4} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Executive Name</InputLabel>
                                 <OutlinedInput
@@ -307,7 +307,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={12} >
+                        <Grid item xs={12} md={12} >
                             <FormControl fullWidth variant="outlined">
                                 <TextField
                                     variant="outlined"
@@ -323,7 +323,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={6} >
+                        <Grid item xs={12} md={6} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Establishment Year</InputLabel>
                                 <OutlinedInput
@@ -337,7 +337,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={6} >
+                        <Grid item xs={12} md={6} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">GSTIN(Optional)</InputLabel>
                                 <OutlinedInput
@@ -351,7 +351,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={8} >
+                        <Grid item xs={12} md={8} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Office Location</InputLabel>
                                 <OutlinedInput
@@ -365,7 +365,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={4} >
+                        <Grid item xs={12} md={4} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Executive's Phone</InputLabel>
                                 <OutlinedInput
@@ -379,7 +379,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={5} >
+                        <Grid item xs={12} md={5} >
                         <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} autoComplete="on" htmlFor="outlined-adornment-password">Password</InputLabel>
                                 <OutlinedInput
@@ -404,7 +404,7 @@ const BusReg = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={5} >
+                        <Grid item xs={12} md={5} >
                             <FormControl fullWidth variant="outlined">
                                 <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Coupon Code</InputLabel>
                                 <OutlinedInput
@@ -420,7 +420,7 @@ const BusReg = () => {
 
                         {state=='verify'?
                         <>
-                            <Grid item xs={5} >
+                            <Grid item xs={12} md={5} >
                                 <FormControl fullWidth variant="outlined">
                                     <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Otp</InputLabel>
                                     <OutlinedInput variant="outlined"
