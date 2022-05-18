@@ -162,14 +162,15 @@ const ApplyJob = (props) => {
   const login = localStorage.getItem("login");
   const navigate = useNavigate();
 
-  const jobAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/jobs/';
-  const internAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/internship/'
+  const jobAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/jobs/`;
+  const internAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/internship/`
 
   useEffect(async () => {
     try {
       setLoading(true);
       var endpoint = '';
       jobtype === 'internship'? endpoint=internAPI+'findInternship' : endpoint=jobAPI+'findJob';
+      console.log(endpoint);
       const response = await Axios.get(`${endpoint}/${jobid}`);
       //console.log(response.data.details);
       const jobdata = response.data.details;
@@ -704,7 +705,7 @@ const ApplyJob = (props) => {
                         padding: "5px",
                       }}
                     >
-                      {jobInfo.responsibilities}
+                      {jobInfo.responsibilities || jobInfo.jobDescription}
                     </Box>
                   </Typography>
                 </Box>

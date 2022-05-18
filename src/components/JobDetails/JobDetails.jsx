@@ -72,8 +72,8 @@ const JobDetails = () => {
   console.log(jobtype);
   console.log("LOLO");
 
-  const jobAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob';
-  const internAPI = 'https://cryptonaukribackend.herokuapp.com/api/v1/internship/findInternship'
+  const jobAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/jobs/findJob`;
+  const internAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/internship/findInternship`
 
   useEffect(async () => {
     try {
@@ -86,7 +86,7 @@ const JobDetails = () => {
       //console.log(jobdata);
       setUserLoading(true);
       jobdata.usersApplied.map(async(user, index)=>{
-          const response2 = await Axios.get(`https://cryptonaukribackend.herokuapp.com/api/v1/user/userDetails?userID=${user.userAssociated}`)
+          const response2 = await Axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/userDetails?userID=${user.userAssociated}`)
           const duser = response2.data.details;
           jobdata.usersApplied[index].email = duser.email;
           jobdata.usersApplied[index].name = duser.firstName+" "+duser.lastName ;

@@ -20,20 +20,15 @@ const JobsPage = (e) => {
     // const [datarr, setDataArr] = React.useState([]);
 
 
-    const navigate = useNavigate();
-
     useEffect(async ()=>{
-        if(!localStorage.getItem('token')){
-            navigate('/auth/devlogin');
-            toast.error('Please login first !!');
-        }
         setLoading(true);
-        const response = await Axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/jobs/findJob')
+        const response = await Axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/jobs/findJob`)
         .then((res)=>{
+            //console.log(res);
             const resp = res.data;
-            console.log(resp.data);
+            //console.log(resp.data);
             setDataArr(resp.data);
-            console.log(dataArr);
+            //console.log(dataArr);
             setLoading(false);
             
         })
@@ -41,14 +36,13 @@ const JobsPage = (e) => {
             setLoading(false);
         });
     } ,[]);
-
     return (
         <div className={classes.body}>
             <Container>
                 <Box sx={{
                     paddingTop: '20px'
                 }}>
-                    <h1 style={{ margin: '10px 0' }}>Discover jobs</h1>
+                    <h1 style={{ margin: '10px 0' }}>Discover Jobs</h1>
                     {loading?
                         <>
                             <JobCardLoading />
@@ -56,23 +50,24 @@ const JobsPage = (e) => {
                             <JobCardLoading />
                         </>:<>
                             {
-                                dataArr.reverse().map((data) => {
-                                    return(
-                                        <JobCard 
-                                            type={"job"}
-                                            key={data._id} 
-                                            position={data.jobTitle} 
-                                            cmp={data.postedByDetails.companyName} 
-                                            exp={data.experience} 
-                                            opn={data.openings}
-                                            sr={data._id} 
-                                        />
-                                    );
-                                })
-                            }
-                    </>}
+                                dataArr.slice(0).reverse().map((job) => {
+                                    //console.log(internship);
 
-                    
+                                    return( 
+                                        <JobCard 
+                                            position={job.jobTitle} 
+                                            cmp={job.postedByDetails.companyName} 
+                                            opn={job.openings}
+                                            exp={job.experience}
+                                            description={job.jobDescription}
+                                            perks={job.perks.split}
+                                            key={job._id}
+                                            srId={job._id}
+                                            type={"job"}
+                                        />);
+                                })
+                            } 
+                    </>}
                 </Box>
             </Container>
         </div>

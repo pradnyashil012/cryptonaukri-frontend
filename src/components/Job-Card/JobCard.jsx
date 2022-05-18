@@ -9,14 +9,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const useStyles = makeStyles((theme) => ({
-  jobCardContainer: {
+  InternCardContainer: {
     [theme.breakpoints.between('xs', 770)]: {
       display: 'flex',
       justifyContent: 'center',
       flexWrap: 'wrap'
     }
   },
-  jobCard: {
+  internCard: {
     width: '100%',
     height: '200px',
     backgroundColor: 'white',
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
       border: '1px solid #3F51B5',
       boxShadow: '3px 3px 15px gray',
       padding: 0
-    },
+    }
   },
   left: {
     width: '30%',
@@ -76,8 +76,7 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
       color: 'white'
-    },
-
+    }
   },
   headcontain: {
     position: 'relative',
@@ -88,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
 
     },
+
   },
   editbtn: {
     position: 'relative',
@@ -97,102 +97,66 @@ const useStyles = makeStyles((theme) => ({
       margin: '0'
     },
   },
-
   btn: {
     border: 'blue solid 1px',
     '&:hover': {
-      border: 'blue solid 1px',
       backgroundColor: 'white',
+      border: 'blue solid 1px',
       color: 'blue'
-    },
-  },
+    }
+  }
 }));
 
+
 const JobCard = (props) => {
-  // let position = props.position;
-  // let company = props.company;
-  // let experience = props.exp;
-  // let openings = props.opn;
-  console.log(props);
-  
+
   const login = localStorage.getItem("login")
   const navigate = useNavigate();
 
-  const handleEdit = async (e) => {
-    navigate(`/jobform?id=${e}`);
-
-    // toast.success('jobCard Updated');
-  };
-
-  const handleDelete = async (e) => {
-    if (window.confirm('sure to delete this card ?')) {
-      const response = await Axios.delete(`https://cryptonaukribackend.herokuapp.com/jobs/:${e}`)
-
-      const data = response.data;
-      const code = data.code;
-      toast.success('jobCard Deleted');
-      navigate('/')
-    }
-  };
-
-  const handleApply = (props)=>{
-    if (login) {
-      // console.log(props);
-      // var encodedData = btoa(props.cmp+"::"+props.position+"::"+props.exp+"::"+props.link+"::"+props.opn+"::"+props.srNo); //company,position,experince,link,openings 
-      navigate(`/jobapplication?id=${props.sr}&type=${props.type}`)
-    }else{
-      toast.info('LogIn First !!');
-    }
+  const handleApply = () => {
+      navigate(`/jobapplication?id=${props.srId}&type=${props.type}`)
   }
 
   const classes = useStyles();
   return (
     <div>
-      <Box className={classes.jobCardContainer}>
-        <Box className={classes.jobCard}>
+      <Box className={classes.InternCardContainer}>
+        <Box className={classes.internCard}>
           <Box className={classes.left}>
             <Box
               className={classes.leftImg}
               component={'img'}
-              src="img/job.png"
+              src="img/internship.png"
               alt="nhi mili bhai image"
             />
           </Box>
           <Box className={classes.right}>
             <Box>
               <Box className={classes.headcontain} >
-                <Box >
-                  <Typography className={classes.cardHead} variant={'h4'}>
+                <Box>
+                  <Typography variant='h4'>
                     <Box sx={{
                       fontWeight: '500',
                     }}>
                       {props.position}
                     </Box>
                   </Typography>
-                  <Typography className={classes.cardComp} variant='h5'>
+                  <Typography variant='h5'>
                     <Box sx={{
                       fontWeight: 'bold',
                     }}>
                       {props.cmp}
                     </Box>
                   </Typography>
+                  <Typography variant='p'>
+                    <Box sx={{
+                      fontWeight: '200',
+                    }}>
+                      {(props.description).substr(0, 100)}...
+                    </Box>
+                  </Typography>
                 </Box>
-
-                {localStorage.getItem("admin") ?
-                  <Box className={classes.editbtn} >
-                    <CardActions>
-                      <Typography variant='button' >
-                        <Button className={classes.btn} onClick={() => { handleEdit(props.srNo) }} size='small' color="primary" variant='contained' >
-                          {<Edit />}
-                        </Button></Typography>
-                      <Typography variant='button'>
-                        <Button className={classes.btn} onClick={() => { handleDelete(props.srNo) }} size='small' color="primary" variant='contained'>{<Delete />}</Button>
-                      </Typography>
-                    </CardActions>
-                  </Box> : <></>
-                }
               </Box>
-
             </Box>
             <Box className={classes.rightBottom}>
               <Box>
@@ -201,21 +165,15 @@ const JobCard = (props) => {
                     <Box sx={{
                       fontWeight: 'regular',
                     }}>
-                      Experience : <strong>{props.exp}</strong>
-                    </Box>
-                  </Typography>
-                  <Typography variant='p'>
-                    <Box sx={{
-                      fontWeight: 'regular',
-                    }}>
-                      Openings : <strong>{props.opn}</strong>
+                      <strong>{props.opn} </strong> openings<br/>
+                      <strong>{props.exp} </strong> experience 
                     </Box>
                   </Typography>
                 </Box>
               </Box>
               <Box>
-                <Button onClick={()=>{handleApply(props)}} className={classes.applyBtn} variant="outlined" color="primary">
-                  Apply Now
+                <Button onClick={handleApply} className={classes.applyBtn} variant="outlined" color="primary">
+                  Details
                 </Button>
               </Box>
             </Box>
