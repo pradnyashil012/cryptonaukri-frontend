@@ -131,17 +131,16 @@ const LandinPageT = () => {
             </h3>
             <ul className='mt-5'>
               <li className='m-2'>
-                👉 Can't find course to learn blockchain development
+                👉 Can't find the best and affordable courses on Blockchain Development
               </li>
               <li className='m-2'>
-                👉 Can’t find the best community of Blockchain developers.
+                👉 Can’t find the best community full of Blockchain developers.
               </li>
               <li className='m-2'>
-                👉 Can’t find the best job portals to provide jobs in only
-                Blockchain.
+                👉 Can’t find the best jobs in only Blockchain Development.
               </li>
               <li className='m-2'>
-                👉 No ecosystem for blockchain developers.
+                👉 No ecosystem to learn Blockchain Development.
               </li>
             </ul>
           </div>
@@ -166,12 +165,15 @@ const LandinPageT = () => {
               Solution by CryptoNaukri for Developers
             </h3>
             <ul className='mt-5'>
-              <li className='m-2'>👉 Get enough application for a job post.</li>
+              <li className='m-2'>👉 Learn Blockchain Development from the best educators.</li>
               <li className='m-2'>
-                👉 Get application from only Blockchain devolopers.
+                👉 Use our community to solve problems during development.
               </li>
               <li className='m-2'>
-                👉 Verify candidates potentials using our integrated platform.
+                👉 Get the jobs in verified Blockchain startups
+              </li>
+              <li className='m-2'>
+                👉 Join our Bootcamp for 2 months for community based training and build portfolio by building projects
               </li>
             </ul>
           </div>

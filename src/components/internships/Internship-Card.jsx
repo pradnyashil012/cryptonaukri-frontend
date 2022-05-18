@@ -146,6 +146,15 @@ const InternshipCard = (props) => {
                       {props.cmp}
                     </Box>
                   </Typography>
+                  <Typography variant='p'>
+                    <Box sx={{
+                      fontWeight: '200',
+                      marginTop: '10px',
+                      marginBottom: '10px',
+                    }}>
+                      {(props.responsibilities).substr(0, 100)}...
+                    </Box>
+                  </Typography>
                 </Box>
               </Box>
             </Box>

@@ -32,18 +32,26 @@ const Login = ({setCookie}) =>{
                 
                 if(data.userLoggedIn){
                     // console.log(data);
-                    // console.log(response.headers.authorization)
+                    console.log(response.headers.authorization)
                     setLoginError(data.message);
                     setLoading(false);
                     const timestamp = new Date().getTime();
                     const expire = timestamp + (60 * 60 * 24 * 1000 * 3);
                     const expireDate = new Date(expire);
-                    setCookie(
-                        'token',response.headers.authorization,{
-                            expires: expireDate,
-                            path:'/'
-                        }
-                    );
+
+                    try{
+                        setCookie(
+                            'token',response.headers.authorization,{
+                                expires: expireDate,
+                                path:'/',
+                                domain: '.cryptonaukri.com'
+                            }
+                        );
+                    }catch(error){
+                        alert(";p");
+                        console.log(error);
+                    }
+                    
 
                     // below codes to be removed once cookies is applied accross the site
                     localStorage.setItem('token', response.headers.authorization);
@@ -60,6 +68,10 @@ const Login = ({setCookie}) =>{
 
             }catch(error) {
                 const errResp = error.response;
+                if(errResp.data.code === 'NOT_FOUND'){
+                    setLoginError("You are not yet registered with us. Please Register your account");
+                    setLoading(false);
+                }
                 if(errResp.data.code === 'WRONG_PASSWORD' ){
                     setLoginError("Wrong Email or Password");
                     setLoading(false);

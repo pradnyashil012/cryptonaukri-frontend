@@ -19,7 +19,7 @@ const InternshipPage = () => {
 
     useEffect(async ()=>{
         setLoading(true);
-        const response = await Axios.get('https://cryptonaukribackend.herokuapp.com/api/v1/internship/findInternship')
+        const response = await Axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/internship/findInternship`)
         .then((res)=>{
             //console.log(res);
             const resp = res.data;
@@ -55,6 +55,7 @@ const InternshipPage = () => {
                                             position={internship.internshipTitle} 
                                             cmp={internship.postedByDetails.companyName} 
                                             opn={internship.openings}
+                                            responsibilities={internship.responsibilities}
                                             perks={internship.perks.split}
                                             key={internship._id}
                                             srId={internship._id}
