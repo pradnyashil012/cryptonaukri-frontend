@@ -97,7 +97,7 @@ const BusReg = () => {
         setOtp(event.target.value);
     }
     const handleEmailChange = (e) => {
-        setEmail(e.target.value);
+        setEmail(e.target.value.toLowerCase());
         // console.log(email);
     }
     const handleDescChange = (e) => {
