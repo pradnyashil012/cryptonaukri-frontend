@@ -78,7 +78,7 @@ const Login = (props) => {
   });
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value)
+    setEmail(e.target.value.toLowerCase())
   }
   const handlePassChange = (e) => {
     setPass(e.target.value)
