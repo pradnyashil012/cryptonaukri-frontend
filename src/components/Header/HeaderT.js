@@ -9,6 +9,8 @@ const Navbar = () => {
 
   const token = localStorage.getItem('token');
 
+  const [showSubMenu, setShowSubMenu] = useState(0);
+
   const logout = () => {
     localStorage.clear();
     navigate('/');
@@ -30,8 +32,8 @@ const Navbar = () => {
                     <button onClick={()=>{logout()}} class="mt-2 text-2xl hover:text-red-800" href=""><FaSignOutAlt /></button>
                 </div>:<div className="flex gap-4 font-semibold">
                     <div className="group mt-2 ">
-                        <button className=" sm:text-lg text-sm hover:text-purple-400 transform transition hover:scale-110 mt-2" href="">Login</button>
-                        <div className="group-hover:block dropdown-menu absolute hidden h-auto text-center right-20 mt-1 mb-1 bg-gray-800 w-auto">
+                        <button className="sm:text-lg text-sm hover:text-purple-400 transform transition hover:scale-110 mt-2" href="">Login</button>
+                        <div className="group-hover:block dropdown-menu absolute h-auto text-center right-30 mt-1 mb-1 bg-gray-800 w-auto">
                             <a className="p-2 mr-4 mt-3 w-full text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/auth/devlogin">Developer Login</a><br/>
                             <a className="p-2 mr-4 mt-3 w-full text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/companyLogin">Business Login</a>
                         </div>
@@ -41,7 +43,7 @@ const Navbar = () => {
                             style={{background: 'linear-gradient(95.73deg, #D21ACF 0%, #00EFFF 100%)', borderRadius: '4px 4px 4px 20px'}} 
                             className="p-2 sm:text-lg text-sm hover:text-gray-100 transform transition hover:scale-110" 
                             >Sign Up</button>
-                        <div className="group-hover:block dropdown-menu absolute hidden h-auto  right-10 mt-1 bg-gray-800 p-2">
+                        <div className="group-hover:block dropdown-menu absolute h-auto  right-10 mt-1 bg-gray-800 p-2">
                             <a className="mr-4 mt-3 text-purple-300 font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/auth/devsignup">Developer Signup</a><br/>
                             <a className="mr-4 mt-3 text-white font-semibold hover:text-purple-400 hover:underline hover:decoration-dashed" href="/companySignUp">Business Signup</a>
                         </div>
