@@ -54,7 +54,7 @@ const LandinPageT = () => {
                     background:
                       'linear-gradient(95.73deg, rgba(210, 26, 207, 0.75) 0%, rgba(0, 239, 255, 0.75) 100%)',
                   }}
-                  className='shadow p-1 rounded text-white px-3 font-semibold scale-100 translate-x-4 skew-y-3 mr-10  sm:transform transform transition hover:scale-110'
+                  className='shadow p-1 rounded text-white px-3 font-semibold transition hover:scale-110 translate-y-1 skew-y-3 transform-none sm:transform mr-10'
                 >
                   Find a Job
                 </button>
@@ -123,7 +123,7 @@ const LandinPageT = () => {
         <br />
         <div
           id='1'
-          className='flex justify-between bg-gray-900 p-0 sm:p-4 max-w-6xl m-auto mt-20 sm:flex-nowrap flex-wrap'
+          className='flex justify-between bg-gray-900 p-0 sm:p-4 max-w-7xl m-auto mt-20 sm:flex-nowrap flex-wrap'
         >
           <div className='p-4 text-white m-auto'>
             <h3 className='text-2xl font-semibold'>
