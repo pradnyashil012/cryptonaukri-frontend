@@ -72,6 +72,10 @@ const Login = ({setCookie}) =>{
                     setLoginError("You are not yet registered with us. Please Register your account");
                     setLoading(false);
                 }
+                if(errResp.data.code === 'INVALID'){
+                    setLoginError("Account has been disabled(free trial period expired)");
+                    setLoading(false);
+                }
                 if(errResp.data.code === 'WRONG_PASSWORD' ){
                     setLoginError("Wrong Email or Password");
                     setLoading(false);
