@@ -47,7 +47,7 @@ const Signup = ({setCookie}) =>{
         setLoading(true);
         setSignUpError("");
         setOtp("");
-        if(email && password && firstName && lastName && phoneNumber && location && cuoponCode){
+        if(email && password && firstName && lastName && phoneNumber && location){
             try{
                 
                 const response = fetch(`${API}/api/v1/user/otp?email=${email}`);
@@ -89,7 +89,7 @@ const Signup = ({setCookie}) =>{
         //console.log(email.split('@')[1]);
         //console.log(process.env.REACT_APP_TEST_API_ENDPOINT);
 
-        if(email && password && firstName && lastName && phoneNumber && location && cuoponCode && otp){
+        if(email && password && firstName && lastName && phoneNumber && location && otp){
             setLoading(true);
             setSignUpError();
             try {
