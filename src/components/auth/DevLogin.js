@@ -7,6 +7,11 @@ const Login = ({setCookie}) =>{
 
     const navigate = useNavigate();
 
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var redirectType = url.searchParams.get("redirecttype");
+    var redirectid = url.searchParams.get("redirectid");
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginError, setLoginError] = useState("");
@@ -33,7 +38,7 @@ const Login = ({setCookie}) =>{
                 if(data.userLoggedIn){
                     // console.log(data);
                     console.log(response.headers.authorization)
-                    setLoginError(data.message);
+                    // setLoginError(data.message);
                     setLoading(false);
                     const timestamp = new Date().getTime();
                     const expire = timestamp + (60 * 60 * 24 * 1000 * 3);
@@ -57,6 +62,15 @@ const Login = ({setCookie}) =>{
                     localStorage.setItem('token', response.headers.authorization);
                     localStorage.setItem('cUser', 'DEVELOPER');
                     localStorage.setItem('login', true);
+
+                    if(redirectType==='internship' || redirectType==='job'){
+                        navigate(`/jobapplication?id=${redirectid}&type=${redirectType}`);
+                        return;
+                    }
+                    if(redirectType==='community'){
+                        window.location.href = `https://community.cryptonaukri.com${redirectid}`; 
+                        return;
+                    }
 
                     navigate('/jobspage');
                 }
