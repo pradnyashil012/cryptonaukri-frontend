@@ -156,7 +156,7 @@ const Signup = ({setCookie}) =>{
                                 return;
                             }
                             if(redirectType==='community'){
-                                window.location.href = `https://community.cryptonaukri.com/${redirectid}`; 
+                                window.location.href = `https://community.cryptonaukri.com${redirectid}`; 
                                 return;
                             }
 
