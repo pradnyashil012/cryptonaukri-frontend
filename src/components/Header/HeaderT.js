@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
     return(
-        <div className="bg-black/70 shadow backdrop-blur-xl fixed inset-x-0 top-0 z-20">
+        <div className="bg-black/50 shadow backdrop-blur-xl fixed inset-x-0 top-0 z-20">
             <nav className="flex justify-between max-w-7xl m-auto p-2 sm:p-5 text-white shadow">
                 <img className="object-fill h-10 w-40 mt-2 shadow-lg shadow-indigo-500/40 rounded" src="https://i.ibb.co/kQmGYgB/crypto-final-logo-png-14-1.png" />
                 <div className=" mt-3 text-md font-semibold hidden sm:block">
