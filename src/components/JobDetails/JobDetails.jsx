@@ -72,8 +72,8 @@ const JobDetails = () => {
   console.log(jobtype);
   console.log("LOLO");
 
-  const jobAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/jobs/findJob`;
-  const internAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/internship/findInternship`
+  const jobAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/jobs/findJob/`;
+  const internAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/internship/findInternship/`
 
   useEffect(async () => {
     try {
