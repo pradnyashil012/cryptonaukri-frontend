@@ -1,5 +1,5 @@
 import {
-  Box, makeStyles, Typography, TextField, OutlinedInput, Button, InputAdornment, FormControlLabel, Checkbox, IconButton, Container, Select, InputLabel, MenuItem, Grid, FormControl,
+  Box, makeStyles, Typography, TextField, OutlinedInput, Button,ButtonGroup, InputAdornment, FormControlLabel, Checkbox, IconButton, Container, Select, InputLabel, MenuItem, Grid, FormControl,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from "react";
@@ -44,6 +44,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     paddingTop: '20px',
   },
+  btnBox: {
+    display: 'flex',
+    padding: '20px 0'
+},
+// btn:{
+//   margin:"auto"
+// },
   body: {
     marginTop: '100px',
     height: '80vh',
@@ -64,12 +71,13 @@ const Reset = (props) => {
   const [otp, setOtp] = useState('')
   const [pass, setPass] = useState('')
   const [confPass, setConfPass] = useState('')
+  const [btnState, setBtnState] = useState("user")
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const classes = useStyles();
 
   const handleEmailState = (e) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value.toLowerCase());
 
   }
   const handleOtpState = (e) => {
@@ -81,6 +89,13 @@ const Reset = (props) => {
   const handlePassword2 = (e) =>{
     setConfPass(e.target.value);
   }
+  const handleBtn2Toggle = () => {
+    setBtnState("user")
+  }
+  const handleBtn1Toggle = () => {
+    setBtnState("business")
+}
+
 
 
   const handleOtpSubmit = async (e) => {
@@ -88,7 +103,7 @@ const Reset = (props) => {
     if(email){
       try{
         setLoading(true);
-        const response = await Axios.get(`${baseAPI}api/v1/user/forgetPasswordOTP?email=${email}`);
+        const response = await Axios.get(`${baseAPI}api/v1/${btnState}/forgetPasswordOTP?email=${email}`);
         const data = response.data;
         if(data.code == "OTP_SENT"){
           toast.success(data.message);
@@ -111,7 +126,7 @@ const Reset = (props) => {
       console.log("pass same ready to payload");
       try{
         setLoading(true);
-        const response = await Axios.post(`${baseAPI}api/v1/user/forgetPassword`,{
+        const response = await Axios.post(`${baseAPI}api/v1/${btnState}/forgetPassword`,{
                         email: email,
                         otp: Number(otp),
                         newPassword: pass,
@@ -150,8 +165,18 @@ const Reset = (props) => {
           <Grid container spacing={3}>
 
               {state===1?<Grid item xs={12} >
+              <Box className={classes.btnBox}>
+                        <ButtonGroup >
+                            <Button onClick={handleBtn2Toggle} type='button' variant={btnState === "user" ? "contained" : "outlined"} color="primary" className={classes.btn}  >
+                                User
+                            </Button>
+                            <Button onClick={handleBtn1Toggle} type='button' variant={btnState === "business" ? "contained" : "outlined"} color="primary" className={classes.btn} >
+                                Business
+                            </Button>
+                        </ButtonGroup>
+                    </Box>
                   <FormControl fullWidth variant="outlined">
-                    <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Email</InputLabel>
+                  <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Enter Email</InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-name"
                       type='email'
