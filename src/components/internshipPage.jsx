@@ -34,7 +34,8 @@ const InternshipPage = () => {
         });
     } ,[]);
     return (
-        <div className={classes.body}>
+        <>
+        <div className={classes.body} >
             <Container>
                 <Box sx={{
                     paddingTop: '20px'
@@ -68,6 +69,7 @@ const InternshipPage = () => {
                 </Box>
             </Container>
         </div>
+        </>
     )
 }
 export default InternshipPage;

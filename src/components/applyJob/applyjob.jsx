@@ -810,6 +810,10 @@ const ApplyJob = (props) => {
               </Box>
             </Box>
           </Container>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         </Box>
       ) : (
         <></>
