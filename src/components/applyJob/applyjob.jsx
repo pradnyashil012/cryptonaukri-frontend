@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { spacing } from "@mui/system";
 import { Delete, Edit } from "@material-ui/icons";
-import Axios from "axios";
+import axios from "axios";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -138,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
 const ApplyJob = (props) => {
 
   const token = localStorage.getItem('token');
-
+  const API = process.env.REACT_APP_API_ENDPOINT;
   var url_string = window.location.href;
   var url = new URL(url_string);
   var jobid = url.searchParams.get("id");
@@ -158,6 +158,7 @@ const ApplyJob = (props) => {
   const [stage, setStage] = useState(1);
   const [avl, setAvl] = useState("");
   const [whyHire, setWhyHire] = useState("");
+  const [resumeLink, setResumeLink] = useState("");
 
   const login = localStorage.getItem("login");
   const navigate = useNavigate();
@@ -165,13 +166,14 @@ const ApplyJob = (props) => {
   const jobAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/jobs/`;
   const internAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/internship/`
 
-  useEffect(async () => {
+  useEffect(
+  async ()=> {
     try {
       setLoading(true);
       var endpoint = '';
       jobtype === 'internship'? endpoint=internAPI+'findInternship' : endpoint=jobAPI+'findJob';
       console.log(endpoint);
-      const response = await Axios.get(`${endpoint}/${jobid}`);
+      const response = await axios.get(`${endpoint}/${jobid}`);
       //console.log(response.data.details);
       const jobdata = response.data.details;
       setJobInfo(jobdata);
@@ -182,12 +184,27 @@ const ApplyJob = (props) => {
       //console.log(error.response);
       toast.error("Something went wrong !!");
     }
+    
   }, []);
 
   var jobPostedTime = jobInfo ? jobInfo.postedOn.split("T") : "";
   //console.log(jobPostedTime);
 
 
+  const response = axios.get(
+    `${API}/api/v1/user/loggedInUserDetails`,
+    {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }
+);
+
+response.then((data) => {
+    setResumeLink(data.data.userResume.links.otherLinks[0]);
+    // setUser(data.data);
+    
+});
 
   const handleApply = async () => {
     //console.log("ok apply krneka idhhr handle kari bhai !!");
@@ -199,7 +216,7 @@ const ApplyJob = (props) => {
       jobtype === 'internship'? endpoint=internAPI+'applyInternship' : endpoint=jobAPI+'applyJob';
 
       if(jobtype === 'internship'){
-        const response = await Axios.post(
+        const response = await axios.post(
           endpoint,
           {
             internshipAssociated : jobInfo._id,
@@ -218,7 +235,7 @@ const ApplyJob = (props) => {
         }
 
       }else{
-        const response = await Axios.post(
+        const response = await axios.post(
           endpoint,
           {
             jobAssociated: jobInfo._id,
@@ -310,7 +327,7 @@ const ApplyJob = (props) => {
                     </Typography>
                   </div>
                   <div>
-                    {jobtype == "job" ? (
+                    {jobtype === "job" ? (
                       <>
                         <Typography variant="p">
                           <Box
@@ -833,7 +850,22 @@ const ApplyJob = (props) => {
                   </Box>
                 </Typography>
                 <br />
-
+                    
+                <TextField
+                  sx={{ marginTop: 3 }}
+                  fullWidth
+                  label="Resume Link ?"
+                  id="taskDescription"
+                  placeholder="Update the link in your profile and it will auto-filled next time"
+                  multiline
+                  rows={2}
+                  maxRows={1}
+                  value={resumeLink}
+                  onChange={(e) => {
+                    setResumeLink(e.target.value);
+                  }}
+                />
+                <br />
                 <TextField
                   sx={{ marginTop: 3 }}
                   fullWidth
