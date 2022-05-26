@@ -206,6 +206,16 @@ response.then((data) => {
     
 });
 
+  const handleStage2=()=>{
+    if(resumeLink.length >1){
+      setStage(2);
+      console.log(resumeLink.length);
+      
+    }else{
+      toast.error("Please update your resume link in your profile first 😔")
+    }
+  }
+
   const handleApply = async () => {
     //console.log("ok apply krneka idhhr handle kari bhai !!");
     //console.log(whyHire, avl);
@@ -796,7 +806,7 @@ response.then((data) => {
                   ) : (
                     <Button
                       onClick={() => {
-                        setStage(2);
+                        handleStage2()
                       }}
                       className={classes.applyBtn}
                       variant="outlined"
@@ -851,7 +861,7 @@ response.then((data) => {
                 </Typography>
                 <br />
                     
-                <TextField
+                {/* <TextField
                   sx={{ marginTop: 3 }}
                   fullWidth
                   label="Resume Link ?"
@@ -865,7 +875,7 @@ response.then((data) => {
                     setResumeLink(e.target.value);
                   }}
                 />
-                <br />
+                <br /> */}
                 <TextField
                   sx={{ marginTop: 3 }}
                   fullWidth
