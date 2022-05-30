@@ -161,6 +161,8 @@ const Signup = ({setCookie}) =>{
                             }
 
                             navigate('/aboutme');
+                        }else{
+                            navigate('/auth/devlogin')
                         }
                     
 
