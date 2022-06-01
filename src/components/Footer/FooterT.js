@@ -96,6 +96,21 @@ const Footer = () => {
               <FaInstagramSquare className='text-xl text-white transform transition hover:scale-110' />
             </a>
           </div>
+          <div className='mt-4'>
+            <a
+              href='https://wa.me/+918788305490'
+              target='_blank'
+              rel='noreferrer'
+              className='flex items-center gap-2 text-gray-500'
+            >
+              Ask Queries
+              <img
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png'
+                alt='whatsapp'
+                className='w-8 h-8'
+              />
+            </a>
+          </div>
         </div>
       </footer>
     </div>

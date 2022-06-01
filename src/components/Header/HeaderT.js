@@ -53,18 +53,27 @@ const Navbar = () => {
           </a>
         </div>
         {token ? (
-          <div class='flex p-2 gap-3'>
+          <div class='flex items-center p-2 gap-3'>
             <a
-              class='mt-2 p-1 hover:bg-gray-700 rounded text-3xl'
-              href='/aboutme'
+              href='https://wa.me/+918788305490'
+              target='_blank'
+              rel='noreferrer'
+              className='hidden md:block'
             >
+              <img
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png'
+                alt='whatsapp'
+                className='w-8 h-8'
+              />
+            </a>
+            <a class=' p-1 hover:bg-gray-700 rounded text-3xl' href='/aboutme'>
               <FaUserCircle />
             </a>
             <button
               onClick={() => {
                 logout();
               }}
-              class='mt-2 text-2xl hover:text-red-800'
+              class=' text-2xl hover:text-red-800'
               href=''
             >
               <FaSignOutAlt />
