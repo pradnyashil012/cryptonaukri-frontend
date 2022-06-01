@@ -297,15 +297,26 @@ const JobDetails = () => {
                         {index + 1}. {user.firstName + '' + user.lastName}
                       </Box>
                     </Typography>
-                    <Typography variant='p'>
+                    <Typography variant='subtitle1'>
                       <Box
                         sx={{
                           fontWeight: 'regular',
                         }}
                       >
-                        {user.email}
+                        <b>Email: </b> {user.email}
                       </Box>
                     </Typography>
+
+                    <Typography variant='subtitle1'>
+                      <Box
+                        sx={{
+                          fontWeight: 'regular',
+                        }}
+                      >
+                        <b>Phone: </b> {user.phoneNumber}
+                      </Box>
+                    </Typography>
+
                     <div style={{ margin: '16px 0' }}>
                       {user.userResume?.links ? (
                         <Button
