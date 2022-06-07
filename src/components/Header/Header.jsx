@@ -92,14 +92,14 @@ const Header = (props) => {
     setMobileOpen(!mobileOpen);
   };
   const logoutMobile = () => {
-    localStorage.clear();
-    navigate("/");
+    // localStorage.clear();
+    navigate("/auth/logout");
     setMobileOpen(!mobileOpen);
   };
   const logout = () => {
-    localStorage.clear();
-    setAnchorEl(null);
-    navigate("/");
+    // localStorage.clear();
+    // setAnchorEl(null);
+    navigate("/auth/logout");
   };
 
   const getUser = async () => {

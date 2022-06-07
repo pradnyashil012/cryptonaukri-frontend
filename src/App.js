@@ -156,7 +156,6 @@ const App = () => {
                 path='/devsignup'
                 element={
                   <>
-                    {' '}
                     <SignUp />
                   </>
                 }
@@ -173,7 +172,6 @@ const App = () => {
                 path='/jobspage'
                 element={
                   <>
-                    {' '}
                     <JobsPage />
                   </>
                 }

@@ -166,6 +166,7 @@ const ApplyJob = (props) => {
   const internAPI = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/internship/`;
 
   useEffect(() => {
+
     const fetchJob = async () => {
       try {
         setLoading(true);
@@ -187,7 +188,7 @@ const ApplyJob = (props) => {
       }
     };
     fetchJob();
-  }, [internAPI, jobAPI, jobid, jobtype]);
+  }, []);
 
   var jobPostedTime = jobInfo ? jobInfo.postedOn.split('T') : '';
   //console.log(jobPostedTime);
@@ -199,7 +200,8 @@ const ApplyJob = (props) => {
   });
 
   response.then((data) => {
-    setResumeLink(data.data.userResume.links.otherLinks[0]);
+    // console.log(data);
+    setResumeLink(data?.data?.userResume?.links?.otherLinks[0]);
     // setUser(data.data);
   });
 
@@ -663,7 +665,7 @@ const ApplyJob = (props) => {
                           fontWeight: 'regular',
                         }}
                       >
-                        {jobInfo.usersApplied.length}
+                        {jobInfo.numberOfApplicants}
                       </Box>
                     </Typography>
                   </div>

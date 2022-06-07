@@ -60,7 +60,6 @@ const Navbar = () => {
               rel='noreferrer'
               className='hidden md:block'
               class='mt-2 p-1 hover:bg-gray-700 rounded text-3xl'
-              href='/profile'
             >
               <img
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png'
@@ -68,7 +67,7 @@ const Navbar = () => {
                 className='w-8 h-8'
               />
             </a>
-            <a class=' p-1 hover:bg-gray-700 rounded text-3xl' href='/aboutme'>
+            <a class=' p-1 hover:bg-gray-700 rounded text-3xl' href='/profile'>
               <FaUserCircle />
             </a>
             <button

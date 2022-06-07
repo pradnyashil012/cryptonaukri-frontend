@@ -11,7 +11,6 @@ const Logout = () =>{
     const location = useLocation();
 
     useEffect(()=>{
- 
         if(token){
             removeCookie("token");
             localStorage.clear();
