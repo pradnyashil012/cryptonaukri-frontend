@@ -41,7 +41,7 @@ const Login = ({ setCookie }) => {
           // setLoginError(data.message);
           setLoading(false);
           const timestamp = new Date().getTime();
-          const expire = timestamp + 60 * 60 * 24 * 1000 * 3;
+          const expire = timestamp + 60 * 60 * 24 * 1000 * 2;
           const expireDate = new Date(expire);
 
           try {

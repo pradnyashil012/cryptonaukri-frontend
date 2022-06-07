@@ -115,7 +115,25 @@ const Profile = () => {
                     <div class='h-2 bg-gray-700 rounded'></div>
                   </div>
                 </div>
-              </div>
+            </main>
+        );
+    }
+    return(<>
+    <main className="bg-gray-800">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div className="gap-1 text-white max-w-7xl m-auto p-2 block md:flex">
+            <div className="mt-6 w-100 md:w-4/12">
+                <BasicUserDetails user={user} token={token} />
+            </div>
+            <div className="mt-6 w-100 md:w-8/12">
+                <UserApplicationsDetails
+                    appliedAtJobs={user.appliedAtJobs} 
+                    appliedAtInternships={user.appliedAtInternships} 
+                />
             </div>
           </div>
           <div className='mt-6 w-8/12'>
@@ -141,9 +159,22 @@ const Profile = () => {
             <UserApplicationsDetails />
           </div>
         </div>
-      </main>
-    </>
-  );
-};
+
+        {/* <div className="block md:hidden p-2 text-white">
+            <div className="mt-6 w-100">
+                <BasicUserDetails user={user} />
+            </div>
+            <div className="mt-6 w-100">
+                <UserApplicationsDetails
+                    appliedAtJobs={user.appliedAtJobs} 
+                    appliedAtInternships={user.appliedAtInternships} 
+                />
+            </div>
+        </div> */}
+        <br/>
+        <br/>
+    </main>
+    </>);
+}
 
 export default Profile;

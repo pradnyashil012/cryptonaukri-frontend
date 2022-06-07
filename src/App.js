@@ -31,6 +31,8 @@ import Profile from './components/User/UserDashbaord';
 
 import AuthDevLogin from './components/auth/DevLogin';
 import AuthDevSignUp from './components/auth/DevSignup';
+import AuthDevLogout from './components/auth/Logout';
+
 import { useCookies } from 'react-cookie';
 
 const useStyles = makeStyles((theme) => ({
@@ -277,6 +279,14 @@ const App = () => {
                 element={
                   <>
                     <AuthDevLogin setCookie={setCookie} cookies={cookies} />
+                  </>
+                }
+              ></Route>
+              <Route
+                path='/auth/logout'
+                element={
+                  <>
+                    <AuthDevLogout />
                   </>
                 }
               ></Route>

@@ -138,11 +138,12 @@ const Signup = ({ setCookie }) => {
               // setLoginError(data.message);
               setLoading(false);
               const timestamp = new Date().getTime();
-              const expire = timestamp + 60 * 60 * 24 * 1000 * 3;
+              const expire = timestamp + 60 * 60 * 24 * 1000 * 2;
               const expireDate = new Date(expire);
               setCookie('token', response.headers.authorization, {
                 expires: expireDate,
                 path: '/',
+                domain: '.cryptonaukri.com',
               });
               // below codes to be removed once cookies is applied accross the site
               localStorage.setItem('token', response.headers.authorization);

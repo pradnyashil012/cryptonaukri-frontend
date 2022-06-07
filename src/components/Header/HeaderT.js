@@ -12,8 +12,7 @@ const Navbar = () => {
   const [showSubMenu, setShowSubMenu] = useState(0);
 
   const logout = () => {
-    localStorage.clear();
-    navigate('/');
+    navigate('/auth/logout');
   };
 
   return (
@@ -55,10 +54,13 @@ const Navbar = () => {
         {token ? (
           <div class='flex items-center p-2 gap-3'>
             <a
+
               href='https://wa.me/+918788305490'
               target='_blank'
               rel='noreferrer'
               className='hidden md:block'
+              class='mt-2 p-1 hover:bg-gray-700 rounded text-3xl'
+              href='/profile'
             >
               <img
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png'

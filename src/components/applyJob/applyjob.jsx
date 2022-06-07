@@ -594,7 +594,10 @@ const ApplyJob = (props) => {
                               fontWeight: 'regular',
                             }}
                           >
-                            {jobInfo.fixedPay}
+                            {(jobInfo.fixedPay)?.toLocaleString('en-US', {
+                                style: 'currency',
+                                currency: 'INR',
+                          })}
                           </Box>
                         </Typography>
                       </>
@@ -631,11 +634,18 @@ const ApplyJob = (props) => {
                           fontWeight: 'regular',
                         }}
                       >
-                        {jobtype === 'internship' ? (
-                          <>{jobInfo.stipend.amount}</>
-                        ) : (
-                          <>{jobInfo.ctc}</>
-                        )}
+
+                        {jobtype==='internship'?<>{
+                          (jobInfo.stipend.amount)?.toLocaleString('en-US', {
+                                style: 'currency',
+                                currency: 'INR',
+                          })
+                          }</>:<>{
+                            (jobInfo.ctc)?.toLocaleString('en-US', {
+                                style: 'currency',
+                                currency: 'INR',
+                            })
+                          }</>}
                       </Box>
                     </Typography>
                   </div>
@@ -752,13 +762,9 @@ const ApplyJob = (props) => {
                         padding: '5px',
                       }}
                     >
-                      {jobInfo.skills[0].split(',').map((skill) => {
-                        console.log(skill);
-                        return (
-                          <>
-                            <Chip className={classes.Chip} label={skill} />
-                          </>
-                        );
+                      {jobInfo.skills.map((skill) => {
+                        console.log(skill)
+                        return <><Chip className={classes.Chip} label={skill} /></>;
                       })}
                     </Box>
                   </Typography>
