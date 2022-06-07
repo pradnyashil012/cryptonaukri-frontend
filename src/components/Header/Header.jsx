@@ -199,7 +199,7 @@ const Header = (props) => {
                     <AccountCircle className={classes.userIcon} />
                   </MenuItem>
                   <MenuItem
-                    onClick={() => navigate("/aboutme")}
+                    onClick={() => navigate("/profile")}
                     className={classes.MenuItems}
                   >
                     <Typography
@@ -477,7 +477,7 @@ const Header = (props) => {
                           </MenuItem>
 
                           <MenuItem
-                            onClick={() => navigate("/aboutme")}
+                            onClick={() => navigate("/profile")}
                             className={classes.MenuItems}
                           >
                             {user ? <>{user.firstName}</> : <></>}

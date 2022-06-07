@@ -30,6 +30,8 @@ const Profile = () =>{
 
     const token = cookies.token;
 
+    // console.log(token);
+
     const API = process.env.REACT_APP_API_ENDPOINT;
 
     // state variables
@@ -50,7 +52,7 @@ const Profile = () =>{
                                 }
                             });
             response.then((data)=>{
-                console.log(data.data);
+                // console.log(data.data);
                 setUser(data.data);
                 setLoading(false);
             })
@@ -136,14 +138,31 @@ const Profile = () =>{
         <br/>
         <br/>
         <br/>
-        <div className=" p-2 flex gap-3 text-white max-w-7xl m-auto">
-            <div className="mt-6 w-4/12">
-                <BasicUserDetails user={user} />
+        <div className="gap-1 text-white max-w-7xl m-auto p-2 block md:flex">
+            <div className="mt-6 w-100 md:w-4/12">
+                <BasicUserDetails user={user} token={token} />
             </div>
-            <div className="mt-6 w-8/12">
-                <UserApplicationsDetails />
+            <div className="mt-6 w-100 md:w-8/12">
+                <UserApplicationsDetails
+                    appliedAtJobs={user.appliedAtJobs} 
+                    appliedAtInternships={user.appliedAtInternships} 
+                />
             </div>
         </div>
+
+        {/* <div className="block md:hidden p-2 text-white">
+            <div className="mt-6 w-100">
+                <BasicUserDetails user={user} />
+            </div>
+            <div className="mt-6 w-100">
+                <UserApplicationsDetails
+                    appliedAtJobs={user.appliedAtJobs} 
+                    appliedAtInternships={user.appliedAtInternships} 
+                />
+            </div>
+        </div> */}
+        <br/>
+        <br/>
     </main>
     </>);
 }
