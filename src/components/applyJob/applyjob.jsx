@@ -541,7 +541,7 @@ const ApplyJob = (props) => {
                           fontWeight: 'bold',
                         }}
                       >
-                        {jobInfo.postedByDetails.companyName}
+                        <a href={jobInfo.postedByDetails.websiteLink} target="_blank" rel="noopener noreferrer">{jobInfo.postedByDetails.companyName}</a>
                       </Box>
                     </Typography>
                     Posted by {jobInfo.postedByDetails.executiveName}
@@ -836,7 +836,7 @@ const ApplyJob = (props) => {
                       <Button
                         onClick={() => {
                           navigate(
-                            `/devlogin?redirectid=${jobid}&redirecttype=${jobtype}`
+                            `/auth/devlogin?redirectid=${jobid}&redirecttype=${jobtype}`
                           );
                         }}
                         className={classes.applyBtn}

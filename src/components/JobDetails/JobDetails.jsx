@@ -160,7 +160,7 @@ const JobDetails = () => {
                   fontWeight: 'regular',
                 }}
               >
-                {jobInfo.postedByDetails.companyName}
+                <a href={jobInfo.postedByDetails.websiteLink}>{jobInfo.postedByDetails.companyName}</a>
               </Box>
             </Typography>
             <Typography variant='p'>
@@ -250,7 +250,7 @@ const JobDetails = () => {
                       fontWeight: 'regular',
                     }}
                   >
-                    {jobInfo.usersApplied.length}
+                    {jobInfo.numberOfApplicants}
                   </Box>
                 </Typography>
               </div>
