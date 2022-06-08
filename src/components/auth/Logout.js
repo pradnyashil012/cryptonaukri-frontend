@@ -3,24 +3,27 @@ import { useCookies } from 'react-cookie';
 import { toast } from "react-toastify";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Logout = () =>{
+const Logout = ({removeCookie}) =>{
 
     const navigate = useNavigate();
-    const [cookies, removeCookie] = useCookies(["token"]);
-    const token = cookies.token;
-    const location = useLocation();
+    // const [removeCookie] = useCookies(["token"]);
+    // const token = cookies.token;
+    // const location = useLocation();
 
     useEffect(()=>{
-        if(token){
-            removeCookie("token");
+        // if(token){
+            removeCookie('token',{
+                path:'/',
+                domain: '.cryptonaukri.com',
+            });
             localStorage.clear();
             toast.success("Succesfully Logged out !!");
             navigate('/');
             return;
-        }else{
-            toast.error("Please Login first !!");
-            navigate('/');
-        }
+        // }else{
+        //     toast.error("Please Login first !!");
+        //     navigate('/');
+        // }
         
     },[])
 

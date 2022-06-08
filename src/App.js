@@ -284,7 +284,7 @@ const App = () => {
                 path='/auth/logout'
                 element={
                   <>
-                    <AuthDevLogout />
+                    <AuthDevLogout removeCookie={removeCookie} />
                   </>
                 }
               ></Route>
