@@ -43,7 +43,8 @@ const Login = ({ setCookie }) => {
           const timestamp = new Date().getTime();
           const expire = timestamp + 60 * 60 * 24 * 1000 * 2;
           const expireDate = new Date(expire);
-
+          console.log(expireDate);
+          //document.cookie = `token=${response.headers.authorization}; expires=${expireDate}; path=/; domain=.cryptonaukri.com`;
           try {
             setCookie('token', response.headers.authorization, {
               expires: expireDate,

@@ -6,17 +6,9 @@ import { useCookies } from 'react-cookie';
 
 import BasicUserDetails from './BasicUserDetails';
 import UserApplicationsDetails from './Applications';
-// import {
-//     FaEnvelope,
-//     FaLocationArrow,
-//     FaPhoneAlt,
-//     FaEdit,
-//     FaRegCopy,
-//     FaRegShareSquare,
-//     FaEye,
-//     FaPlus,
-//     FaInfoCircle
-// } from 'react-icons/fa';
+import UserCommunityDetails from './UserCommunityDetails'
+import Loading from './LoadingEffect';
+
 
 const Profile = () => {
   // will be swtiched to custom hooks later
@@ -81,48 +73,7 @@ const Profile = () => {
 
   if (loading) {
       return (
-        <main className='bg-gray-800'>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <div className='gap-1 text-white max-w-7xl m-auto p-2 block md:flex'>
-            <div className='mt-6 w-100 md:w-4/12'>
-              <div class='bg-gray-900 border border-blue-800 shadow rounded-md p-4 max-w-sm w-full mx-auto'>
-                <div class='animate-pulse flex space-x-4'>
-                  <div class='bg-gray-700 h-20 w-20 rounded'></div>
-                  <div class='flex-1 space-y-6 py-1'>
-                    <div class='h-2 bg-gray-700 rounded'></div>
-                    <div class='space-y-3'>
-                      <div class='grid grid-cols-3 gap-4'>
-                        <div class='h-2 bg-gray-700 rounded col-span-2'></div>
-                        <div class='h-2 bg-gray-700 rounded col-span-1'></div>
-                      </div>
-                      <div class='h-2 bg-gray-700 rounded'></div>
-                    </div>
-                  </div>
-                </div>
-                <br />
-                <div class='animate-pulse flex space-x-4'>
-                  <div class='flex-1 space-y-6 py-1'>
-                    <div class='h-2 bg-gray-700 rounded'></div>
-                    <div class='space-y-3'>
-                      <div class='grid grid-cols-3 gap-4'>
-                        <div class='h-2 bg-gray-700 rounded col-span-2'></div>
-                        <div class='h-2 bg-gray-700 rounded col-span-1'></div>
-                      </div>
-                      <div class='h-2 bg-gray-700 rounded'></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="mt-6 w-100 md:w-8/12">
-              <UserApplicationsDetails />
-            </div>
-          </div>
-        </main>
+        <Loading/>
       );
   }
   return(<>
@@ -133,14 +84,22 @@ const Profile = () => {
       <br/>
       <br/>
       <div className="gap-1 text-white max-w-7xl m-auto p-2 block md:flex">
-          <div className="mt-6 w-100 md:w-4/12">
+          <div className="mt-6 w-100 md:w-4/12 gap-2">
               <BasicUserDetails user={user} token={token} />
+              <UserCommunityDetails />
           </div>
           <div className="mt-6 w-100 md:w-8/12">
-              <UserApplicationsDetails
+              <button onClick={()=>setActiveTab(1)} className={`${activeTab===1 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Applications</button>
+              <button onClick={()=>setActiveTab(2)} className={`${activeTab===2 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Profile</button>
+              <button onClick={()=>setActiveTab(3)} className={`${activeTab===3 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Security</button>
+              
+              {activeTab==1 && <UserApplicationsDetails
                   appliedAtJobs={user.appliedAtJobs} 
                   appliedAtInternships={user.appliedAtInternships} 
-              />
+              />}
+              {activeTab==2 && <div>Profile</div>}
+              {activeTab==3 && <div>Security</div>}
+              
           </div>
         </div>
     </main>

@@ -12,10 +12,10 @@ const Logout = ({removeCookie}) =>{
 
     useEffect(()=>{
         // if(token){
-            removeCookie('token',{
-                path:'/',
-                domain: '.cryptonaukri.com',
-            });
+            // removeCookie('token',{
+            //     path:'/',
+            // });
+            document.cookie.replace(/(?<=^|;).+?(?=\=|;|$)/g, name => window.location.hostname.split('.').reverse().reduce(domain => (domain=domain.replace(/^\.?[^.]+/, ''),document.cookie=`${name}=;max-age=0;path=/;domain=${domain}`,domain), window.location.hostname));
             localStorage.clear();
             toast.success("Succesfully Logged out !!");
             navigate('/');
