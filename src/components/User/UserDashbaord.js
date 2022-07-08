@@ -8,6 +8,7 @@ import BasicUserDetails from './BasicUserDetails';
 import UserApplicationsDetails from './Applications';
 import UserCommunityDetails from './UserCommunityDetails'
 import Loading from './LoadingEffect';
+import SideProfile from './SideProfile';
 
 
 const Profile = () => {
@@ -97,7 +98,7 @@ const Profile = () => {
                   appliedAtJobs={user.appliedAtJobs} 
                   appliedAtInternships={user.appliedAtInternships} 
               />}
-              {activeTab==2 && <div>Profile</div>}
+              {activeTab==2 && <SideProfile githubUrl={user.userResume.links.github} />}
               {activeTab==3 && <div>Security</div>}
               
           </div>
