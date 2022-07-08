@@ -4,14 +4,7 @@ import InternshipCard from './internships/Internship-Card';
 import JobCardLoading from './Job-Card/JobCardLoading';
 import Axios from 'axios';
 
-const useStyles = makeStyles((theme) => ({
-    body:{
-        marginTop:'70px'
-    }
-}));
-
 const InternshipPage = () => {
-    const classes = useStyles();
     const [dataArr, setDataArr] = useState([]);
     const [loading, setLoading] = useState(false);
     // const [datarr, setDataArr] = React.useState([]);
@@ -34,42 +27,90 @@ const InternshipPage = () => {
         });
     } ,[]);
     return (
-        <>
-        <div className={classes.body} >
-            <Container>
-                <Box sx={{
-                    paddingTop: '20px'
-                }}>
-                    <h1 style={{ margin: '10px 0' }}>Discover Internships</h1>
-                    {loading?
-                        <>
-                            <JobCardLoading />
-                            <JobCardLoading />
-                            <JobCardLoading />
-                        </>:<>
-                            {
-                                dataArr.slice(0).reverse().map((internship) => {
-                                    //console.log(internship);
-
-                                    return( 
-                                        <InternshipCard 
-                                            position={internship.internshipTitle} 
-                                            cmp={internship.postedByDetails.companyName} 
-                                            opn={internship.openings}
-                                            responsibilities={internship.responsibilities}
-                                            perks={internship.perks.split}
-                                            key={internship._id}
-                                            srId={internship._id}
-                                            type={"internship"}
-                                            duration={internship.duration}
-                                        />);
-                                })
-                            } 
-                    </>}
-                </Box>
-            </Container>
+        <div className="bg-slate-900 pt-16">
+        <div className="text-white bg-gray-900 p-4 max-w-7xl m-auto">
+            <div className="text-white text-lg bg-gray-800 p-2 w-fit border rounded-md">Discover Internships</div>
+            <div className="mt-3 flex flex-wrap gap-3">
+                {
+                    loading === true ?
+                    <>
+                        <JobCardLoading />
+                        <JobCardLoading />
+                        <JobCardLoading />
+                        <JobCardLoading />
+                        <JobCardLoading />
+                    </> :
+                    <>
+                        {
+                            dataArr.slice(0).reverse().map((internship) => {
+                                return (
+                                    <InternshipCard 
+                                        position={internship.internshipTitle} 
+                                        cmp={internship.postedByDetails.companyName} 
+                                        opn={internship.openings}
+                                        responsibilities={internship.responsibilities}
+                                        perks={internship.perks.split}
+                                        key={internship._id}
+                                        srId={internship._id}
+                                        type={"internship"}
+                                        duration={internship.duration}
+                                    />
+                                )
+                            })
+                        }
+                    </>
+                }
+            </div>
         </div>
-        </>
+    </div>
     )
 }
 export default InternshipPage;
+
+
+// ** old material ui
+
+// const useStyles = makeStyles((theme) => ({
+//     body:{
+//         marginTop:'70px'
+//     }
+// }));
+
+// const classes = useStyles();
+
+{/* <>
+<div className={classes.body} >
+    <Container>
+        <Box sx={{
+            paddingTop: '20px'
+        }}>
+            <h1 style={{ margin: '10px 0' }}>Discover Internships</h1>
+            {loading?
+                <>
+                    <JobCardLoading />
+                    <JobCardLoading />
+                    <JobCardLoading />
+                </>:<>
+                    {
+                        dataArr.slice(0).reverse().map((internship) => {
+                            //console.log(internship);
+
+                            return( 
+                                <InternshipCard 
+                                    position={internship.internshipTitle} 
+                                    cmp={internship.postedByDetails.companyName} 
+                                    opn={internship.openings}
+                                    responsibilities={internship.responsibilities}
+                                    perks={internship.perks.split}
+                                    key={internship._id}
+                                    srId={internship._id}
+                                    type={"internship"}
+                                    duration={internship.duration}
+                                />);
+                        })
+                    } 
+            </>}
+        </Box>
+    </Container>
+</div>
+</> */}
