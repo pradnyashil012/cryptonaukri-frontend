@@ -24,6 +24,7 @@ const JobsPage = (e) => {
             setDataArr(resp.data);
             //console.log(dataArr);
             setLoading(false);
+            // setLoading(true);
             
         })
         .catch((err)=>{
@@ -39,7 +40,11 @@ const JobsPage = (e) => {
                     {
                         loading === true ?
                         <>
-                            <h3>loading</h3>
+                            <JobCardLoading />
+                            <JobCardLoading />
+                            <JobCardLoading />
+                            <JobCardLoading />
+                            <JobCardLoading />
                         </> :
                         <>
                             {
