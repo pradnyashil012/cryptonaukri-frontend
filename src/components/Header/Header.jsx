@@ -381,7 +381,7 @@ const Header = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   console.log(location.pathname)
-  if (location.pathname !== "/" && location.pathname !== "/auth/devlogin" && location.pathname !== "/auth/devsignup" && location.pathname !== "/profile" && location.pathname !== "/jobspage" && location.pathname !== "/internships") {
+  if (location.pathname !== "/" && location.pathname !== "/auth/devlogin" && location.pathname !== "/auth/devsignup" && location.pathname !== "/profile" && location.pathname !== "/jobspage" && location.pathname !== "/internships"  && location.pathname !== "/contactus" && location.pathname !== "/aboutus" && location.pathname !== "/dcma" && location.pathname !== "/privacy") {
     return (
       <>
         <CssBaseline />
