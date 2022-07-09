@@ -2,8 +2,6 @@ import React from "react";
 import { makeStyles, Container, Grid, Link, Box } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { createSvgIcon } from '@mui/material/utils';
-
-
 import {
   Instagram,
   Twitter,
@@ -11,6 +9,7 @@ import {
   LinkedIn,
   Copyright,
 } from "@material-ui/icons";
+
 import TFooter from "./FooterT"
 
 import { useLocation } from 'react-router-dom';

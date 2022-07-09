@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import EditProfile from './EditProfile'
 import {FiLinkedin, FiGithub, FiTwitter} from 'react-icons/fi'
+import {AiOutlineLink} from 'react-icons/ai'
 
 
 const BasicUserDetails = ({user, token}) =>{
@@ -16,24 +17,23 @@ const BasicUserDetails = ({user, token}) =>{
                     <div className='text-md'>{user?.firstName + " " +user?.lastName}</div>
                     <div className='text-xs text-gray-200'>{user?.email}</div>
                 </div>
-                
-                <div className='flex flex-row justify-start'>
+                <div className='mb-1 flex flex-row justify-start'>
                     {
-                        user.userResume.links.github === '' ? 
+                        user?.userResume.links.github === '' ? 
                         null : 
-                        <a href={user.userResume.links.github} className='flex items-center'><FiGithub /></a>
+                        <a href={user?.userResume.links.github} className='flex items-center'><FiGithub /></a>
                     }
                     {
-                        user.userResume.links.linkedin === '' ? 
+                        user?.userResume.links.linkedin === '' ? 
                         null : 
-                        <a href={user.userResume.links.linkedin} className='ml-3 flex items-end'><FiLinkedin /></a>
+                        <a href={user?.userResume.links.linkedin} className='ml-3 flex items-end'><FiLinkedin /></a>
                     }         
 
                        {/* tell backend guy to include twitter field in schema */}
                     {/* {
-                        user.userResume.links.twitter === '' ? 
+                        user?.userResume.links.twitter === '' ? 
                         null : 
-                        <a href={user.userResume.links.linkedin} className='ml-3 flex items-end'><FiTwitter /></a>
+                        <a href={user?.userResume.links.linkedin} className='ml-3 flex items-end'><FiTwitter /></a>
                     }                     */}
                     
                 </div>
@@ -48,17 +48,28 @@ const BasicUserDetails = ({user, token}) =>{
         </div>
         
 
-        <div className="py-3 px-1">
+        <div className="mt-2 py-2 px-1">
 
-            <span>Resume</span><br/>
+            <div className='text-xs text-gray-200'>{user?.location}</div>
+
+            <div className=''>
+                {
+                    user?.userResume?.links.otherLinks[0] === "" ?
+                    <span className='text-sm text-red-500'>Update Your Profile</span> :
+                    <div className='flex flex-row items-center'>
+                        <span className='mr-1 text-sm'>Resume</span>
+                        <a href={user?.userResume.links.otherLinks[0]} target="_blank">
+                            <AiOutlineLink />
+                        </a>
+                    </div>
+                }
+                </div>
+            {/* <span>Resume</span><br/>
             {user?.userResume === null && 'Add a Resume'}
-            {user?.userResume !== null && <a className="text-red-500 text-xs" href={user?.userResume?.links?.otherLinks[0]}>{user?.userResume?.links?.otherLinks[0].substring(0, 60)}...</a>}
+            {user?.userResume !== null && <a className="text-red-500 text-xs" href={user?.userResume?.links?.otherLinks[0]}>{user?.userResume?.links?.otherLinks[0].substring(0, 60)}...</a>} */}
         </div>
 
         <EditProfile user={user} token={token} />
-        {/* <div className="mt-6">
-            <span>Community Stats</span>
-        </div> */}
     </div>
     </>);
 }

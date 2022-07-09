@@ -91,7 +91,7 @@ const Profile = () => {
           </div>
           <div className="mt-6 w-100 md:w-8/12">
               <button onClick={()=>setActiveTab(1)} className={`${activeTab===1 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Applications</button>
-              <button onClick={()=>setActiveTab(2)} className={`${activeTab===2 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Profile</button>
+              <button onClick={()=>setActiveTab(2)} className={`${activeTab===2 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Projects</button>
               <button onClick={()=>setActiveTab(3)} className={`${activeTab===3 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Security</button>
               
               {activeTab==1 && <UserApplicationsDetails
