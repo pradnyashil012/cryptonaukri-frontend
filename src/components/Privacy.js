@@ -24,7 +24,7 @@ const Privacy = () => {
           <p className="text-base text-gray-500">
             If you have additional questions or require more information about
             our Privacy Policy, do not hesitate to Contact through email at{" "}
-            <b className="text-cyan-600">support@cryptonaukri.com</b>
+            <span className="text-cyan-600">support@cryptonaukri.com</span>
           </p>
 
           <h2 className="mt-2 underline underline-offset-2">Log Files</h2>

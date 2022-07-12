@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import EditResume from './EditResume'
 import EditProfile from './EditProfile'
 import {FiLinkedin, FiGithub, FiTwitter} from 'react-icons/fi'
 import {AiOutlineLink} from 'react-icons/ai'
@@ -48,7 +49,7 @@ const BasicUserDetails = ({user, token}) =>{
         </div>
         
 
-        <div className="mt-2 py-2 px-1">
+        <div className="mt-2 pt-2 px-1">
 
             <div className='text-xs text-gray-200'>{user?.location}</div>
 
@@ -68,8 +69,11 @@ const BasicUserDetails = ({user, token}) =>{
             {user?.userResume === null && 'Add a Resume'}
             {user?.userResume !== null && <a className="text-red-500 text-xs" href={user?.userResume?.links?.otherLinks[0]}>{user?.userResume?.links?.otherLinks[0].substring(0, 60)}...</a>} */}
         </div>
-
-        <EditProfile user={user} token={token} />
+        
+        <div className='pt-2 flex gap-3'>
+            <EditResume user={user} token={token} />
+            {/* <EditProfile user={user} token={token} /> */}
+        </div>
     </div>
     </>);
 }
