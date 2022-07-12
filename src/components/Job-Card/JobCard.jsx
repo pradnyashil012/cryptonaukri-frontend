@@ -17,7 +17,8 @@ const JobCard = (props) => {
   }
 
   return (
-    <div className="bg-slate-900 h-60 flex flex-col justify-between grow shrink basis-80 py-3 px-2 border border-gray-500 rounded-lg">
+    // min-h-min
+    <div className="bg-slate-900 min-h-min flex flex-col justify-between grow shrink basis-80 py-3 px-2 border border-gray-500 rounded-lg">
         <div>
             <div className="text-lg sm:text-xl font-semibold">{props.position}</div>
             <div className="mt-1">{props.cmp}</div>

@@ -16,7 +16,7 @@ const InternshipCard = (props) => {
   }
 
   return (
-    <div className="h-60 flex flex-col justify-between grow shrink basis-80 py-3 px-2 border border-gray-500 rounded-lg">
+    <div className="min-h-min flex flex-col justify-between grow shrink basis-80 py-3 px-2 border border-gray-500 rounded-lg">
         <div>
             <div className="text-lg sm:text-xl font-semibold">{props.position}</div>
             <div className="mt-1">{props.cmp}</div>
