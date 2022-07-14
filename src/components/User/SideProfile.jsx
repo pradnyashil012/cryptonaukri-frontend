@@ -6,11 +6,15 @@ import {AiOutlineStar} from "react-icons/ai"
 import {RiLinksFill} from "react-icons/ri"
 
 const SideProfile = (props) => {
-  const { githubUrl } = props;
-  // const githubUrl = "https://github.com/akshay782";
-
-  var github_url_parts = githubUrl.split('/')
-  const github_username = github_url_parts[3];
+  const { userResume } = props;
+  
+  var github_username = undefined;
+  if(userResume === null){
+    github_username = `""`
+  } else{
+    var github_url_parts = userResume.links.github.split('/');
+    github_username = github_url_parts[3];
+  }
   
   const [projects, setProjects] = useState({loading: true, projectslist:[]})
 
@@ -43,7 +47,7 @@ const SideProfile = (props) => {
       </div>
 
       {
-        githubUrl === "" ?
+        (userResume === null || userResume.links.github === "")  ?
         <div className="text-center mt-2">Update your profile</div> :
         <div className="mt-2">
           {

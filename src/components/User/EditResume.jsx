@@ -4,6 +4,8 @@ import {MdOutlineClose} from "react-icons/md"
 
 const EditResume = ({token, user}) =>{
 
+    // necona7303@lodores.com
+
     const API = process.env.REACT_APP_API_ENDPOINT;
 
     const [resume, setResume] = useState("");
@@ -94,77 +96,69 @@ const EditResume = ({token, user}) =>{
     }
 
     // ** currently working in progress 
-    // const addResume = async (e)=>{
-    //     e.preventDefault();
+    const addResume = async (e)=>{
+        e.preventDefault();
 
-    //     setResumeHint("");
-    //     setGithubHint("");
-    //     setLinkedinHint("");
+        setResumeHint("");
+        setGithubHint("");
+        setLinkedinHint("");
 
-    //     if(validResume(resume) && validGithub(github) && validLinkedin(linkedin)){
-    //         setSmLoading(true);
+        if(validResume(resume) && validGithub(github) && validLinkedin(linkedin)){
+            setSmLoading(true);
 
-    //         const resp = await axios.post(`${API}/api/v1/user/addResume`,
-    //         {
-    //             education: [],
-    //             jobs: [],
-    //             internships: [],
-    //             courses: [],
-    //             projects: [],
-    //             skills: [],
-    //             links: {
-    //             github: github,
-    //             linkedin: linkedin,
-    //             otherLinks: [resume],
-    //             }
-    //         },
-    //         {
-    //             headers: {
-    //             Authorization: `Bearer ${token}`,
-    //             }
-    //         })
+            const resp = await axios.post(`${API}/api/v1/user/addResume`,
+            {
+                education: [],
+                jobs: [],
+                internships: [],
+                courses: [],
+                projects: [],
+                skills: [],
+                links: {
+                github: github,
+                linkedin: linkedin,
+                otherLinks: [resume],
+                }
+            },
+            {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                }
+            })
 
-    //         setSmLoading(false);
-    //         console.log(resp.data);
+            setSmLoading(false);
+            console.log(resp.data);
 
-    //         if(resp.data.isResumeUpdated){
-    //             setResumeUpdated("Successful! Please refresh the page")
-    //         } else{
-    //             setResumeUpdated("An Error occured while updating resume, please check back in later!")
-    //         }
-    //     } else{
-    //         if(validResume(resume) === false){
-    //             setResumeHint("Enter proper google drive link")
-    //         }
-    //         if(validGithub(github) === false){
-    //             setGithubHint("Enter proper url of your github profile")
-    //         }
-    //         if(validLinkedin(linkedin) === false){
-    //             setLinkedinHint("Enter proper url of your linkedin profile")
-    //         }
-    //     }
-    // }
-
-    // const handleSubmit = () =>{
-    //     if(user?.userResume === null){
-    //         addResume();
-    //     } else{
-    //         updateResume();
-    //     }
-    // }
+            if(resp.data.isResumeUpdated){
+                setResumeUpdated("Successful! Please refresh the page")
+            } else{
+                setResumeUpdated("An Error occured while updating resume, please check back in later!")
+            }
+        } else{
+            if(validResume(resume) === false){
+                setResumeHint("Enter proper google drive link")
+            }
+            if(validGithub(github) === false){
+                setGithubHint("Enter proper url of your github profile")
+            }
+            if(validLinkedin(linkedin) === false){
+                setLinkedinHint("Enter proper url of your linkedin profile")
+            }
+        }
+    }
 
     return (
         <>
-            <button className="bg-gray-700 rounded p-1 text-xs text-center w-full mt-1" onClick={()=>setOpenEditProfile(true)}>Edit Resume</button>
+            <button className="bg-gray-700 rounded p-1 text-xs text-center w-full mt-1" onClick={()=>setOpenEditProfile(true)}>{user?.userResume === null ? <p>Add Resume</p> : <p>Edit Resume</p>}</button>
 
             <div className={`${openEditProfile ? 'visible ' : 'hidden '}} fixed top-0 left-0 w-screen flex justify-center h-screen bg-black/50`}>
                 <div className="bg-gray-800 h-min border rounded-md mt-32 p-2 w-1/2 flex flex-col">
                     <div className="px-1 py-2 border-b text-lg tracking-wider font-semibold text-gray-900 dark:text-white flex items-center justify-between">
-                        <div>Edit Resume</div>
+                        <div>{user?.userResume === null ? <p>Add Resume</p> : <p>Edit Resume</p>}</div>
                         <div className="cursor-pointer" onClick={()=>setOpenEditProfile(false)}><MdOutlineClose size={25} /></div>
                     </div>
 
-                    <form onSubmit={updateResume}
+                    <form onSubmit={user?.userResume === null ? addResume : updateResume}
                     className="px-1 mt-2" >
                         <div className="flex flex-col">
                             <label className="pl-1 text-base mb-1 text-white dark:text-gray-400">Resume</label>

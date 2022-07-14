@@ -39,7 +39,7 @@ const Profile = () => {
         },
       });
       response.then((data) => {
-        // console.log(data.data);
+        console.log(data.data);
         setUser(data.data);
         setLoading(false);
       });
@@ -98,7 +98,7 @@ const Profile = () => {
                   appliedAtJobs={user.appliedAtJobs} 
                   appliedAtInternships={user.appliedAtInternships} 
               />}
-              {activeTab==2 && <SideProfile githubUrl={user.userResume.links.github} />}
+              {activeTab==2 && <SideProfile userResume={user.userResume} />}
               {activeTab==3 && <div>Security</div>}
               
           </div>
