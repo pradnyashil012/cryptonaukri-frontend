@@ -9,6 +9,7 @@ import UserApplicationsDetails from './Applications';
 import UserCommunityDetails from './UserCommunityDetails'
 import Loading from './LoadingEffect';
 import SideProfile from './SideProfile';
+import Security from './Security';
 
 
 const Profile = () => {
@@ -39,7 +40,7 @@ const Profile = () => {
         },
       });
       response.then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         setUser(data.data);
         setLoading(false);
       });
@@ -94,12 +95,12 @@ const Profile = () => {
               <button onClick={()=>setActiveTab(2)} className={`${activeTab===2 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Projects</button>
               <button onClick={()=>setActiveTab(3)} className={`${activeTab===3 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Security</button>
               
-              {activeTab==1 && <UserApplicationsDetails
+              {activeTab===1 && <UserApplicationsDetails
                   appliedAtJobs={user.appliedAtJobs} 
                   appliedAtInternships={user.appliedAtInternships} 
               />}
-              {activeTab==2 && <SideProfile userResume={user.userResume} />}
-              {activeTab==3 && <div>Security</div>}
+              {activeTab===2 && <SideProfile userResume={user.userResume} />}
+              {activeTab===3 && <Security user={user} token={token} />}
               
           </div>
         </div>
