@@ -80,7 +80,7 @@ const BasicUserDetails = ({user, token}) =>{
         
         <div className='pt-2 flex gap-3'>
             <EditResume user={user} token={token} />
-            {/* <EditProfile user={user} token={token} /> */}
+            <EditProfile user={user} token={token} />
         </div>
     </div>
     </>);
