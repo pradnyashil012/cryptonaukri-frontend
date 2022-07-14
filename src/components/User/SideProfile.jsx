@@ -56,7 +56,7 @@ const SideProfile = (props) => {
   }, [github_username])
 
   return (
-    <div className="bg-gray-900 p-2 rounded ">
+    <div className="bg-gray-900 p-2 rounded h-screen">
       <div className="flex justify-center items-center">
         {/* <FiGithub />  */}
         <span className="ml-2">Your <span className="underline underline-offset-4 text-cyan-600">GitHub</span> Projects</span>
