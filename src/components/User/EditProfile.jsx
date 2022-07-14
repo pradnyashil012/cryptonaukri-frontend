@@ -30,7 +30,7 @@ const EditResume = ({token, user}) =>{
         setPhoneNumberHint("");
         setLocationHint("");
 
-        if(firstName != "" && lastName != "" && phoneNumber != "" && location != ""){
+        if(firstName !== "" && lastName !== "" && phoneNumber !== "" && location !== ""){
             setSmLoading(true);
 
             const resp = await axios.put(`${API}/api/v1/user/updateProfile`,
@@ -74,8 +74,8 @@ const EditResume = ({token, user}) =>{
         <>
             <button className="bg-gray-700 rounded p-1 text-xs text-center w-full mt-1" onClick={()=>setOpenEditProfile(true)}>Edit Profile</button>
 
-            <div className={`${openEditProfile ? 'visible ' : 'hidden '}} fixed top-0 left-0 w-screen flex justify-center h-screen bg-black/50`}>
-                <div className="bg-gray-800 h-min border rounded-md mt-32 p-2 w-1/2 flex flex-col">
+            <div className={`${openEditProfile ? 'visible ' : 'hidden '}} fixed top-0 left-0 right-0 w-screen flex justify-center h-screen bg-black/50 px-2 sm:px-20`}>
+                <div className="bg-gray-800 h-min border rounded-md mt-32 p-2 mx-4 flex flex-col w-full sm:w-1/2">
                     <div className="px-1 py-2 border-b text-lg tracking-wider font-semibold text-gray-900 dark:text-white flex items-center justify-between">
                         <div>Edit Profile Details</div>
                         <div className="cursor-pointer" onClick={()=>setOpenEditProfile(false)}><MdOutlineClose size={25} /></div>
