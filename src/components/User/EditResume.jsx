@@ -94,8 +94,7 @@ const EditResume = ({token, user}) =>{
             }
         }
     }
-
-    // ** currently working in progress 
+ 
     const addResume = async (e)=>{
         e.preventDefault();
 
