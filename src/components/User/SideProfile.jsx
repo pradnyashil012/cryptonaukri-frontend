@@ -5,9 +5,20 @@ import {BiGitRepoForked} from "react-icons/bi"
 import {AiOutlineStar} from "react-icons/ai"
 import {RiLinksFill} from "react-icons/ri"
 
+const ProjectLoadingCard =()=>{
+  return(
+    <div className="px-2 mt-3 mb-2 animate-pulse">
+      <div className="w-1/4 h-5 bg-gray-300 rounded-sm"></div>
+      <div className="w-1/5 h-4 mt-1 bg-gray-300 rounded-sm"></div>
+      <div className="h-9 mt-1 bg-gray-300 rounded-sm pb-2"></div>
+      <div className="my-1 border"></div>
+    </div>
+  )
+}
+
 const SideProfile = (props) => {
   const { userResume } = props;
-  
+
   var github_username = undefined;
   if(userResume === null){
     github_username = `""`
@@ -16,9 +27,14 @@ const SideProfile = (props) => {
     github_username = github_url_parts[3];
   }
   
-  const [projects, setProjects] = useState({loading: true, projectslist:[]})
+  const [projects, setProjects] = useState({loading: false, projectslist:[]})
 
   function fetchGithubPinRepos(github_username) {
+    setProjects({
+      loading: true,
+      projectslist:[]
+    });
+
     // https://gh-pinned-repos.egoist.sh/?username=<github_username>
     axios.get(`https://gh-pinned-repos.egoist.sh/?username=${github_username}`)
     .then((response)=>{
@@ -47,6 +63,13 @@ const SideProfile = (props) => {
       </div>
 
       {
+        projects.loading ? 
+        <>
+          <ProjectLoadingCard />
+          <ProjectLoadingCard />
+          <ProjectLoadingCard />
+          <ProjectLoadingCard />
+        </> :
         (userResume === null || userResume.links.github === "")  ?
         <div className="text-center mt-2">Update your profile</div> :
         <div className="mt-2">

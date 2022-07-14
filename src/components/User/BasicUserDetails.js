@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import EditResume from './EditResume'
 import EditProfile from './EditProfile'
 import {FiLinkedin, FiGithub, FiTwitter} from 'react-icons/fi'
@@ -11,7 +11,7 @@ const BasicUserDetails = ({user, token}) =>{
     <div className="bg-gray-900 p-2 rounded">
         <div className="flex gap-2">
             <div className='w-20 h-20'>
-                <img className='w-full h-full rounded shadow-lg' src={`https://avatars.dicebear.com/api/initials/${user?.firstName +" "+ user?.lastName}.svg`} />
+                <img alt="profile" className='w-full h-full rounded shadow-lg' src={`https://avatars.dicebear.com/api/initials/${user?.firstName +" "+ user?.lastName}.svg`} />
             </div>
             <div className='flex flex-col h-20 justify-between'>
                 <div>
@@ -25,19 +25,19 @@ const BasicUserDetails = ({user, token}) =>{
                         {
                             user?.userResume?.links.github === '' ? 
                             null : 
-                            <a href={user?.userResume?.links.github} className='flex items-center'><FiGithub /></a>
+                            <a href={user?.userResume?.links.github} className='flex items-center' target="_blank"><FiGithub /></a>
                         }
                         {
                             user?.userResume?.links.linkedin === '' ? 
                             null : 
-                            <a href={user?.userResume?.links.linkedin} className='ml-3 flex items-end'><FiLinkedin /></a>
+                            <a href={user?.userResume?.links.linkedin} className='ml-3 flex items-end' target="_blank"><FiLinkedin /></a>
                         }         
 
                         {/* tell backend guy to include twitter field in schema
                         {
                             user?.userResume.links.twitter === '' ? 
                             null : 
-                            <a href={user?.userResume.links.linkedin} className='ml-3 flex items-end'><FiTwitter /></a>
+                            <a href={user?.userResume.links.linkedin} className='ml-3 flex items-end' target="_blank"><FiTwitter /></a>
                         } */}
                 </div>
                 }
