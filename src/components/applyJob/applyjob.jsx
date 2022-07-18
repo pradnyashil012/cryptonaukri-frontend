@@ -18,6 +18,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Skeleton from '@mui/material/Skeleton';
 import { TextField } from '@material-ui/core';
+import {FiHome} from 'react-icons/fi';
+import {GrLocation} from 'react-icons/gr';
+import {HiOutlineLocationMarker} from 'react-icons/hi'
+import {MdOutlineOutbond, MdPeopleOutline, MdDateRange, MdMapsHomeWork} from 'react-icons/md'
+import {GiMoneyStack} from 'react-icons/gi'
+import {BiLinkExternal} from 'react-icons/bi'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -176,7 +182,7 @@ const ApplyJob = (props) => {
           : (endpoint = jobAPI + 'findJob');
         console.log(endpoint);
         const response = await axios.get(`${endpoint}/${jobid}`);
-        //console.log(response.data.details);
+        console.log(response.data);
         const jobdata = response.data.details;
         setJobInfo(jobdata);
         //console.log(jobdata);
@@ -517,349 +523,194 @@ const ApplyJob = (props) => {
     );
   }
 
+  // class="mx-auto flex w-full max-w-3xl flex-col bg-gray-50 px-6 dark:bg-gray-900 md:px-0"
+
   return (
-    <div className={classes.body}>
-      {jobInfo && stage === 1 ? (
-        <Box className={classes.jobCardContainer}>
-          <Container>
-            <Box className={classes.right}>
-              <Box>
-                <Box className={classes.headcontain}>
-                  <Box>
-                    <Typography className={classes.cardHead} variant={'h4'}>
-                      <Box
-                        sx={{
-                          fontWeight: '500',
-                        }}
-                      >
-                        {jobInfo.jobTitle}
-                      </Box>
-                    </Typography>
-                    <Typography className={classes.cardComp} variant='h5'>
-                      <Box
-                        sx={{
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        <a href={jobInfo.postedByDetails.websiteLink} target="_blank" rel="noopener noreferrer">{jobInfo.postedByDetails.companyName}</a>
-                      </Box>
-                    </Typography>
-                    Posted by {jobInfo.postedByDetails.executiveName}
-                  </Box>
-                </Box>
-              </Box>
+    <div className='w-full bg-gray-800 text-white'>
+    {jobInfo && stage === 1 ? (
+        <div className="px-3 pt-28 mx-auto w-full max-w-4xl md:px-0 pb-5">
+          <div className='text-2xl'>
+            {
+            jobtype == 'job' ? 
+              <>{jobInfo.jobTitle}</> :
+              <>{jobInfo.internshipTitle}</>
+            }
+          </div>
+          <div className='text-base text-gray-300 flex items-center'><MdMapsHomeWork/><span className='ml-1.5'>{jobInfo.postedByDetails.companyName}</span></div>
+          <div className='mt-3 flex items-center'>
+            {
+              jobInfo.isRemote === true ?
+              <FiHome /> :
+              <HiOutlineLocationMarker />
+            }
+            <p className='ml-1'>{jobInfo.location}</p>
+          </div>
+          {
+            jobtype == 'job' ? 
+            <div className='flex items-center justify-between mt-2'>
+              <div className='flex flex-col items-start justify-center'>
+                <div className='flex items-center'><GiMoneyStack/><p className='ml-1'>CTC</p></div>
+                <div className='text-sm text-gray-300'>
+                  {(jobInfo.ctc)?.toLocaleString('en-US',{style:'currency', currency:'INR'})}
+                </div>
+              </div>
+              <div className='flex flex-col items-start justify-center'>
+                <div className='flex items-center'><MdOutlineOutbond /><p className='ml-1'>Fixed Pay</p></div>
+                <div className='text-sm text-gray-300'>
+                  {
+                    jobInfo.fixedPay !== undefined ?
+                    <>{jobInfo.fixedPay}</> :
+                    "NA"
+                  }
+                </div>
+              </div>
+              <div className='flex flex-col items-start justify-center'>
+                <div className='flex items-center'><MdPeopleOutline/><p className='ml-1'>Applicants</p></div>
+                <div className='text-sm text-gray-300'>{jobInfo.numberOfApplicants}</div>
+              </div>
+            </div> : 
+            <div className='flex items-center justify-between mt-2'>
+              <div className='flex flex-col items-start justify-center'>
+                <div className='flex items-center'><GiMoneyStack/><p className='ml-1'>Stipend</p></div>
+                <div className='text-sm text-gray-300'>
+                  {(jobInfo.stipend.amount)?.toLocaleString('en-US',{style:'currency', currency:'INR'})}
+                </div>
+              </div>
+              <div className='flex flex-col items-start justify-center'>
+                <div className='flex items-center'><MdDateRange /><p className='ml-1'>Duration</p></div>
+                <div className='text-sm text-gray-300'>
+                  {jobInfo.duration===""?"NA":jobInfo.duration}
+                </div>
+              </div>
+              <div className='flex flex-col items-start justify-center'>
+                <div className='flex items-center'><MdPeopleOutline/><p className='ml-1'>Applicants</p></div>
+                <div className='text-sm text-gray-300'>{jobInfo.usersApplied.length}</div>
+              </div>
+            </div>
+          }
+          <div className='mt-2'>
+            <div className='text-sm'>Posted by <span className='text-gray-300'>{jobInfo.postedByDetails.executiveName}</span> on <span className='text-gray-300'>{jobPostedTime[0]}</span></div>
+          </div>
+          <div className='w-full my-2 text-gray-300 border-t'></div>
+          <div className='mt-3'>
+            <div className='text-xl'>About Company</div>
+            {
+              jobtype === 'job' ?
+              <a href={jobInfo.postedByDetails.websiteLink} target="_blank" className='text-cyan-600 w-fit'>
+                <div className='flex items-center w-fit'><span className='mr-1'>Website</span><BiLinkExternal/></div>
+              </a> :
+              <a href={jobInfo.postedBy.websiteLink} target="_blank" className='text-cyan-600 w-fit'>
+                <div className='flex items-center w-fit'><span className='mr-1'>Website</span><BiLinkExternal/></div>
+              </a>
+            }
+            {
+              jobInfo.postedBy.description === undefined ?
+              <div className='text-base text-gray-300'>NA</div> :
+              <div className='text-base text-gray-300'>{jobInfo.postedBy.description}</div>
+            }
+          </div>
 
-              <Box>
-                <Box
-                  sx={{
-                    fontWeight: 'regular',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-around',
-                    paddingTop: '20px',
-                    paddingBottom: '20px',
-                    flexWrap: 'wrap',
-                    gap: '4%',
-                  }}
-                >
-                  <div>
-                    <Typography variant='p'>
-                      <Box
-                        sx={{
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Posted On
-                      </Box>
-                      <Box
-                        sx={{
-                          fontWeight: 'regular',
-                        }}
-                      >
-                        {jobPostedTime[0]}
-                      </Box>
-                    </Typography>
-                  </div>
-                  <div>
-                    {jobtype == 'job' ? (
-                      <>
-                        <Typography variant='p'>
-                          <Box
-                            sx={{
-                              fontWeight: 'bold',
-                            }}
-                          >
-                            Fixed Pay
-                          </Box>
-                          <Box
-                            sx={{
-                              fontWeight: 'regular',
-                            }}
-                          >
-                            {(jobInfo.fixedPay)?.toLocaleString('en-US', {
-                                style: 'currency',
-                                currency: 'INR',
-                          })}
-                          </Box>
-                        </Typography>
-                      </>
-                    ) : (
-                      <Typography variant='p'>
-                        <Box
-                          sx={{
-                            fontWeight: 'bold',
-                          }}
-                        >
-                          Duration
-                        </Box>
-                        <Box
-                          sx={{
-                            fontWeight: 'regular',
-                          }}
-                        >
-                          {jobInfo.duration}
-                        </Box>
-                      </Typography>
-                    )}
-                  </div>
-                  <div>
-                    <Typography variant='p'>
-                      <Box
-                        sx={{
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        {jobtype === 'internship' ? <>Stipend</> : <>CTC</>}
-                      </Box>
-                      <Box
-                        sx={{
-                          fontWeight: 'regular',
-                        }}
-                      >
+          <div className='mt-3'>
+            <div className='text-xl'>Perks</div>
+            {
+              jobtype === 'job' ?
+              <div className='flex flex-wrap gap-2 mt-2'>
+                {
+                  jobInfo.healthInsurance ?
+                  <div className='grow-0 shrink py-1 px-2 rounded-2xl bg-slate-500 text-white text-sm w-fit'>Health Insurance</div> : null
+                }
+                {jobInfo.informalDress ? 
+                  <div className='grow-0 shrink py-1 px-2 rounded-2xl bg-slate-500 text-white text-sm w-fit'>Informal Dress</div> : null 
+                }
+                {jobInfo.incentives ? 
+                  <div className='grow-0 shrink py-1 px-2 rounded-2xl bg-slate-500 text-white text-sm w-fit'>Incentives</div> : null
+                }
+              </div> :
+              <div className='flex flex-wrap gap-2 mt-2'>
+              {
+                jobInfo.perks.certificate ?
+                <div className='grow-0 shrink py-1 px-2 rounded-2xl bg-slate-500 text-white text-sm w-fit'>Certificate</div> : null
+              }
+              {jobInfo.perks.food ? 
+                <div className='grow-0 shrink py-1 px-2 rounded-2xl bg-slate-500 text-white text-sm w-fit'>Food</div> : null 
+              }
+              <div className='grow-0 shrink py-1 px-2 rounded-2xl bg-slate-500 text-white text-sm w-fit'>Work Hours: {jobInfo.perks.workHours}</div>
+              {jobInfo.perks.letterOfRecommendation ? 
+                <div className='grow-0 shrink py-1 px-2 rounded-2xl bg-slate-500 text-white text-sm w-fit'>Letter Of Recommendation</div> : null
+              }
+              {jobInfo.perks.isPPO ? 
+                <div className='grow-0 shrink py-1 px-2 rounded-2xl bg-slate-500 text-white text-sm w-fit'>PPO</div> : null
+              }
+            </div>
+            }
+          </div>
+          
+          <div className='mt-3'>
+            <div className='text-xl'>{jobtype === 'job' ? "Job Description" : "Responsibilities"}</div>
+            {
+              jobtype === 'job' ?
+              <div className='text-base text-gray-300'>
+                {
+                  jobInfo.jobDescription === "" ?
+                  "NA" : jobInfo.jobDescription === undefined ? "NA" : <>{jobInfo.jobDescription}</>
+                }
+              </div> : 
+              <div className='text-base text-gray-300'>
+                {
+                  jobInfo.responsibilities === "" ?
+                  "NA" : jobInfo.responsibilities === undefined ? "NA" : <>{jobInfo.responsibilities}</>
+                }
+              </div>
+            }
+          </div>
 
-                        {jobtype==='internship'?<>{
-                          (jobInfo.stipend.amount)?.toLocaleString('en-US', {
-                                style: 'currency',
-                                currency: 'INR',
-                          })
-                          }</>:<>{
-                            (jobInfo.ctc)?.toLocaleString('en-US', {
-                                style: 'currency',
-                                currency: 'INR',
-                            })
-                          }</>}
-                      </Box>
-                    </Typography>
-                  </div>
-                  <div>
-                    <Typography variant='p'>
-                      <Box
-                        sx={{
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Applicants
-                      </Box>
-                      <Box
-                        sx={{
-                          fontWeight: 'regular',
-                        }}
-                      >
-                        {jobInfo.numberOfApplicants}
-                      </Box>
-                    </Typography>
-                  </div>
-                </Box>
+          <div className='mt-3'>
+            <div className='text-xl'>Required Skills</div>
+            <div className='flex gap-2 flex-wrap'>
+              {
+                jobInfo.skills.map((skill, index)=>{
+                  return (
+                    <div key={index} className='grow-0 shrink py-1 px-2 rounded-2xl bg-slate-500 text-white text-sm w-fit'>{skill}</div>
+                    )
+                  })
+                }
+            </div>
+          </div>
 
-                <Box>
-                  <Typography variant='h6'>
-                    <Box
-                      sx={{
-                        fontWeight: 'bold',
-                        padding: '5px',
-                      }}
-                    >
-                      About Company
-                    </Box>
-                  </Typography>
-                  <Typography variant='p'>
-                    <Box
-                      sx={{
-                        fontWeight: 'regular',
-                        padding: '5px',
-                      }}
-                    >
-                      {jobInfo.postedBy.description}
+          <div className='mt-3'>
+            <div className='text-xl'>Number of openings</div>
+            <div className='text-base text-gray-300'>{jobInfo.openings}</div>
+          </div>
 
-                      <br />
-                      <br />
-                      {jobInfo.healthInsurance ? (
-                        <Chip
-                          className={classes.Chip}
-                          label={'Health Insurance'}
-                        />
-                      ) : (
-                        <></>
-                      )}
-                      {jobInfo.informalDress ? (
-                        <Chip
-                          className={classes.Chip}
-                          label={'Informal Dress'}
-                        />
-                      ) : (
-                        <></>
-                      )}
-                      {jobInfo.incentives ? (
-                        <Chip className={classes.Chip} label={'Incentives'} />
-                      ) : (
-                        <></>
-                      )}
-                      {jobInfo.isRemote ? (
-                        <Chip className={classes.Chip} label={'Remote'} />
-                      ) : (
-                        <></>
-                      )}
-                    </Box>
-                  </Typography>
-                </Box>
+          {/* style={{border: "1px solid #043771", backgroundColor: "#043771"}} */}
+          {/* border border-cyan-900 hover:bg-blue-900 */}
+          {/* style={{border: '1px solid #06366C'}} */}
+          <div className='mt-3'>
+            {
+              token ?
+              <>
+              {
+                applied ?
+                  <button className='px-3 py-1.5 rounded-md bg-blue-800 hover:bg-blue-900'>ALREADY APPLIED</button> :
+                  <button onClick={() => {
+                    handleStage2();
+                  }} className='px-3 py-1.5 rounded-md bg-blue-800 hover:bg-blue-900'>APPLY</button>
+                  
+              }
+              </> :
+              <>
+                <button onClick={() => {
+                  navigate(`/auth/devlogin?redirectid=${jobid}&redirecttype=${jobtype}`)
+                  }} className='px-3 py-1.5 rounded-md bg-blue-800 hover:bg-blue-900'>LOGIN TO APPLY</button>
+              </>
 
-                <Box>
-                  <Typography variant='h6'>
-                    <Box
-                      sx={{
-                        fontWeight: 'bold',
-                        padding: '5px',
-                      }}
-                    >
-                      About Job
-                    </Box>
-                  </Typography>
-                  <Typography variant='p'>
-                    <Box
-                      sx={{
-                        fontWeight: 'regular',
-                        padding: '5px',
-                      }}
-                    >
-                      {jobInfo.responsibilities || jobInfo.jobDescription}
-                    </Box>
-                  </Typography>
-                </Box>
-
-                <Box>
-                  <Typography variant='h6'>
-                    <Box
-                      sx={{
-                        fontWeight: 'bold',
-                        padding: '5px',
-                      }}
-                    >
-                      Required Skill(s)
-                    </Box>
-                  </Typography>
-                  <Typography variant='p'>
-                    <Box
-                      sx={{
-                        fontWeight: 'regular',
-                        padding: '5px',
-                      }}
-                    >
-                      {jobInfo.skills.map((skill) => {
-                        console.log(skill)
-                        return <><Chip className={classes.Chip} label={skill} /></>;
-                      })}
-                    </Box>
-                  </Typography>
-                </Box>
-
-                <Box>
-                  <Typography variant='h6'>
-                    <Box
-                      sx={{
-                        fontWeight: 'bold',
-                        padding: '5px',
-                      }}
-                    >
-                      No. of Openings
-                    </Box>
-                  </Typography>
-                  <Typography variant='p'>
-                    <Box
-                      sx={{
-                        fontWeight: 'regular',
-                        padding: '5px',
-                      }}
-                    >
-                      {jobInfo.openings}
-                    </Box>
-                  </Typography>
-                </Box>
-
-                {token ? (
-                  <Box
-                    sx={{
-                      textAlign: 'center',
-                      marginTop: '20px',
-                    }}
-                  >
-                    {applied ? (
-                      <Button
-                        onClick={handleApply}
-                        className={classes.applyBtn}
-                        disabled
-                        variant='outlined'
-                        color='primary'
-                      >
-                        Already Applied
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={() => {
-                          handleStage2();
-                        }}
-                        className={classes.applyBtn}
-                        variant='outlined'
-                        color='primary'
-                      >
-                        Apply
-                      </Button>
-                    )}
-                  </Box>
-                ) : (
-                  <>
-                    <Box
-                      sx={{
-                        textAlign: 'center',
-                        marginTop: '20px',
-                      }}
-                    >
-                      <Button
-                        onClick={() => {
-                          navigate(
-                            `/auth/devlogin?redirectid=${jobid}&redirecttype=${jobtype}`
-                          );
-                        }}
-                        className={classes.applyBtn}
-                        variant='outlined'
-                        color='primary'
-                      >
-                        Login to apply
-                      </Button>
-                    </Box>
-                  </>
-                )}
-              </Box>
-            </Box>
-          </Container>
-          <br />
-          <br />
-          <br />
-          <br />
-        </Box>
+            }
+          </div>
+        </div>
       ) : (
         <></>
       )}
-      {stage == 2 ? (
+      {stage === 2 ? (
         <>
           <Box className={classes.jobCardContainer}>
             <Container>
