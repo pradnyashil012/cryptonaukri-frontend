@@ -22,7 +22,7 @@ import {FiHome} from 'react-icons/fi';
 import {GrLocation} from 'react-icons/gr';
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {MdOutlineOutbond, MdPeopleOutline, MdDateRange, MdMapsHomeWork} from 'react-icons/md'
-import {GiMoneyStack} from 'react-icons/gi'
+import {GiMoneyStack, GiPartyPopper} from 'react-icons/gi'
 import {BiLinkExternal} from 'react-icons/bi'
 
 const useStyles = makeStyles((theme) => ({
@@ -148,13 +148,6 @@ const ApplyJob = (props) => {
   var url = new URL(url_string);
   var jobid = url.searchParams.get('id');
   var jobtype = url.searchParams.get('type');
-  // const jobDescription = jobdesc.split("::");
-  // console.log(jobDescription);
-
-  // let position = props.position;
-  // let company = props.company;
-  // let experience = props.exp;
-  // let openings = props.opn;
 
   const [applied, setApplied] = useState(false);
   const [open, setOpen] = useState(false);
@@ -523,11 +516,11 @@ const ApplyJob = (props) => {
     );
   }
 
-  // class="mx-auto flex w-full max-w-3xl flex-col bg-gray-50 px-6 dark:bg-gray-900 md:px-0"
 
   return (
     <div className='w-full bg-gray-800 text-white'>
-    {jobInfo && stage === 1 ? (
+    {
+      jobInfo && stage === 1 ? 
         <div className="px-3 pt-28 mx-auto w-full max-w-4xl md:px-0 pb-5">
           <div className='text-2xl'>
             {
@@ -588,7 +581,7 @@ const ApplyJob = (props) => {
               </div>
             </div>
           }
-          <div className='mt-2'>
+          <div className='mt-3'>
             <div className='text-sm'>Posted by <span className='text-gray-300'>{jobInfo.postedByDetails.executiveName}</span> on <span className='text-gray-300'>{jobPostedTime[0]}</span></div>
           </div>
           <div className='w-full my-2 text-gray-300 border-t'></div>
@@ -706,147 +699,52 @@ const ApplyJob = (props) => {
 
             }
           </div>
-        </div>
-      ) : (
-        <></>
-      )}
-      {stage === 2 ? (
-        <>
-          <Box className={classes.jobCardContainer}>
-            <Container>
-              <Box className={classes.right}>
-                <Typography className={classes.cardComp} variant='h5'>
-                  <Box
-                    sx={{
-                      fontWeight: 'semibold',
-                    }}
-                  >
-                    Answer the following to questions to move forward
-                  </Box>
-                </Typography>
-                <br />
+        </div> : 
+      null
+    }
 
-                {/* <TextField
-                  sx={{ marginTop: 3 }}
-                  fullWidth
-                  label="Resume Link ?"
-                  id="taskDescription"
-                  placeholder="Update the link in your profile and it will auto-filled next time"
-                  multiline
-                  rows={2}
-                  maxRows={1}
-                  value={resumeLink}
-                  onChange={(e) => {
-                    setResumeLink(e.target.value);
-                  }}
-                />
-                <br /> */}
-                <TextField
-                  sx={{ marginTop: 3 }}
-                  fullWidth
-                  label='Why Should we hire you?'
-                  id='taskDescription'
-                  placeholder='Be creative, think what makes you different.'
-                  multiline
-                  rows={2}
-                  maxRows={4}
-                  value={whyHire}
-                  onChange={(e) => {
-                    setWhyHire(e.target.value);
-                  }}
-                />
-                <br />
-                <TextField
-                  sx={{ marginTop: 3 }}
-                  fullWidth
-                  label='When can you start working ?'
-                  id='taskDescription'
-                  placeholder='Can you join immediately?. Tell us more about you availiblity'
-                  multiline
-                  rows={2}
-                  maxRows={4}
-                  value={avl}
-                  onChange={(e) => {
-                    setAvl(e.target.value);
-                  }}
-                />
-                <br />
-                <Button
-                  sx={{ maxWidth: '200px' }}
-                  onClick={() => {
-                    handleApply(1);
-                  }}
-                  className={classes.applyBtn}
-                  variant='contained'
-                  color='primary'
-                >
-                  Submit
-                </Button>
-                <br />
-                <Button
-                  sx={{ maxWidth: '200px' }}
-                  onClick={() => {
-                    setStage(1);
-                  }}
-                  className={classes.applyBtn}
-                  variant='outlined'
-                  color='primary'
-                >
-                  Back
-                </Button>
-              </Box>
-            </Container>
-          </Box>
-        </>
-      ) : (
-        <></>
-      )}
-      {stage === 3 ? (
-        <>
-          <Box className={classes.jobCardContainer}>
-            <Container>
-              <Box className={classes.right}>
-                <Typography className={classes.cardComp} variant='h4'>
-                  <Box
-                    sx={{
-                      fontWeight: 'bold',
-                      color: 'green',
-                    }}
-                  >
-                    🎉🎉🎉 Congratulationss! you have successfully applied for
-                    the job.
-                  </Box>
-                </Typography>
-                <Typography className={classes.cardComp} variant='h6'>
-                  <Box
-                    sx={{
-                      fontWeight: '',
-                      color: 'green',
-                    }}
-                  >
-                    Rest be assured your application will be sent to the
-                    recruiter
-                  </Box>
-                </Typography>
-                <br />
-                <Button
-                  sx={{ maxWidth: '200px' }}
-                  onClick={() => {
-                    setStage(1);
-                  }}
-                  className={classes.applyBtn}
-                  variant='outlined'
-                  color='primary'
-                >
-                  Back
-                </Button>
-              </Box>
-            </Container>
-          </Box>
-        </>
-      ) : (
-        <></>
-      )}
+    {
+      stage === 2 ? 
+        <div className='px-3 pt-28 mx-auto w-full max-w-4xl md:px-0 h-screen'>
+          <div className=''>
+            <div className='text-2xl flex items-center'>Answer the following to questions to move forward</div>
+            <div className='text-sm text-gray-300'><span className=' text-red-600'>Note: </span>Before applying, make sure you have lastest resume updated in your dashboard.</div>
+
+            <div>
+              <div class="mt-4">
+                <input required value={whyHire} onChange={(e) => {setWhyHire(e.target.value)}} type="textarea" placeholder='Be creative, think what makes you different.' id='whyhire' className="text-gray-300 w-full bg-transparent border-b py-1 focus:outline-none focus:border-cyan-600 focus:border-b-2 focus:mt-0.5 transition-colors peer" autocomplete="off" />
+                <label for='whyhire' className="text-gray-300 cursor-text text-sm peer-focus:text-cyan-600 transition-all">
+                  Why Should we hire you?
+                </label>
+              </div>
+              <div class="mt-4">
+                <input required value={avl} onChange={(e) => {setAvl(e.target.value)}} type="textarea" placeholder='Can you join immediately? Tell us more about you availability.' id='whenstart' className="text-gray-300 w-full bg-transparent border-b py-1 focus:outline-none focus:border-cyan-600 focus:border-b-2 focus:mt-0.5 transition-colors peer" autocomplete="off" />
+                <label for='whenstart' className="text-gray-300 cursor-text text-sm peer-focus:text-cyan-600 transition-all">
+                  When can you start working?
+                </label>
+              </div>
+            </div>
+
+            <div className='mt-5 flex flex-row items-center gap-3.5'>
+              <button onClick={() => {handleApply(1)}} className='px-3 py-1.5 rounded-md bg-blue-800 hover:bg-blue-900'>SUBMIT</button>
+              <button onClick={() => {setStage(1)}} className='px-3 py-1.5 rounded-md bg-slate-400 hover:bg-slate-500'>BACK</button>
+            </div>
+          </div>
+        </div> : 
+      null
+    }
+
+      {
+        stage === 3 ? 
+          <div className='px-3 pt-28 mx-auto w-full max-w-4xl md:px-0 h-screen'>
+            <div className='flex flex-col items-center'>
+              <div className='flex items-center text-2xl text-green-600 text-center'>Congratulations! you have successfully applied for the job.</div>
+              <div className='text-center '>Rest assured your application is sent to the recruiter.</div>
+              <button onClick={() => {setStage(1)}} className='mt-4 px-3 py-1.5 rounded-md bg-slate-400 hover:bg-slate-500' >BACK</button>
+            </div>
+          </div> : 
+        null
+      }
     </div>
   );
 };
