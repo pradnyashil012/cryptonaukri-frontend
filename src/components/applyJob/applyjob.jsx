@@ -150,7 +150,7 @@ const ApplyJob = (props) => {
         <div className="px-3 pt-28 mx-auto w-full max-w-4xl md:px-0 pb-5">
           <div className='text-2xl'>
             {
-            jobtype == 'job' ? 
+            jobtype === 'job' ? 
               <>{jobInfo.jobTitle}</> :
               <>{jobInfo.internshipTitle}</>
             }
@@ -165,7 +165,7 @@ const ApplyJob = (props) => {
             <p className='ml-1'>{jobInfo.location}</p>
           </div>
           {
-            jobtype == 'job' ? 
+            jobtype === 'job' ? 
             <div className='flex items-center justify-between mt-2'>
               <div className='flex flex-col items-start justify-center'>
                 <div className='flex items-center'><GiMoneyStack/><p className='ml-1'>CTC</p></div>

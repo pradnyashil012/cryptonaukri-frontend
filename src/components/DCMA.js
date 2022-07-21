@@ -5,10 +5,10 @@ import { makeStyles } from "@material-ui/styles";
 
 const DCMA = () => {
   return (
-    <div className="bg-gray-800 pt-16">
+    <div className="bg-gray-800 pt-16 h-screen">
       <div className="flex flex-col items-center justify-center bg-gray-800 text-white p-4 max-w-7xl m-auto">
         <div className="mt-8 text-2xl font-bold tracking-wider underline underline-offset-4">
-          Contact Us
+          DCMA
         </div>
         <div className="mt-5 text-lg text-center px-20">
           <p>

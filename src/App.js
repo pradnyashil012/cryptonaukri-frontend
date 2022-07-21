@@ -26,7 +26,6 @@ import Reset from './components/forgotPass/forgotPass';
 import Otp from './components/otp/otp';
 import JobDetails from './components/JobDetails/JobDetails';
 import ApplyJob from './components/applyJob/applyjob';
-import AboutMe from './components/User/User';
 import Profile from './components/User/UserDashbaord';
 
 import AuthDevLogin from './components/auth/DevLogin';
@@ -189,14 +188,6 @@ const App = () => {
                 element={
                   <>
                     <JobForm />
-                  </>
-                }
-              ></Route>
-              <Route
-                path='/aboutme'
-                element={
-                  <>
-                    <AboutMe />
                   </>
                 }
               ></Route>
