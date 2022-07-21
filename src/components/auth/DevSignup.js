@@ -161,7 +161,7 @@ const Signup = ({ setCookie }) => {
                 return;
               }
 
-              navigate('/aboutme');
+              navigate('/profile');
             }
           } catch (error) {
             setSignUpError('Something went wrong. Try logging in');
