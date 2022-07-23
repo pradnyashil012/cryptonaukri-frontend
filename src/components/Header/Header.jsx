@@ -25,6 +25,7 @@ import { MenuRounded, Close } from "@mui/icons-material";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import THeader from "./HeaderT";
+import Navbar from "./Navbar/Navbar"
 const drawerWidth = 340;
 
 const Header = (props) => {
@@ -632,7 +633,7 @@ const Header = (props) => {
   } else {
     return (
       <div className="bg-gray-900">
-        <THeader />
+        <Navbar />
       </div>
     );
   }
