@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+
+const INITIAL_COUNT = 600;
 
 const Signup = ({ setCookie }) => {
   const navigate = useNavigate();
@@ -21,6 +23,24 @@ const Signup = ({ setCookie }) => {
   const [step, setStep] = useState(1);
 
   const [otp, setOtp] = useState('');
+  // otp timer setup
+  const [status, setStatus] = useState('stop')
+  const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT);
+  const secondsToDisplay = secondsRemaining % 60;
+  const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60;
+  const minutesToDisplay = minutesRemaining % 60;
+
+  useInterval(
+    () => {
+      if (secondsRemaining > 0) {
+        setSecondsRemaining(secondsRemaining - 1);
+      } else {
+        setStatus('stop');
+      }
+    },
+    status === 'start' ? 1000 : null
+    // passing null stops the interval
+  );
 
   const [signUpError, setSignUpError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -55,6 +75,7 @@ const Signup = ({ setCookie }) => {
             console.log(data);
             if (data.code === 'OTP_SENT') {
               setStep(2);
+              setStatus('start');
               setLoading(false);
               return;
             }
@@ -271,20 +292,6 @@ const Signup = ({ setCookie }) => {
                 />
               </div>
 
-              <p className='text-blue-400 '>Cuopon Code</p>
-              <div className='bg-gray-700 flex items-center rounded shadow-sm mb-4'>
-                <input
-                  value={cuoponCode}
-                  onChange={(e) => {
-                    setCuoponCode(e.target.value);
-                  }}
-                  className='p-2 text-gray-300 bg-gray-700 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
-                  type='text'
-                  placeholder='Cuopon Code'
-                  autocomplete='do-not-autofill'
-                />
-              </div>
-
               <p className='text-blue-400 '>Password</p>
               <div className='bg-gray-700 flex items-center rounded shadow-sm'>
                 <input
@@ -366,12 +373,18 @@ const Signup = ({ setCookie }) => {
                       Verify Email
                     </button>
                     <br />
-                    <button
-                      onClick={handleSendOtp}
-                      className='text-blue-600 block mx-auto text-sm rounded shadow-md px-6 py-2 w-full'
-                    >
-                      Re-Send OTP
-                    </button>
+                    <div className='flex items-center justify-center gap-2'>
+                      <div className={`${status==='stop' ? 'text-red-700' : 'text-green-600'} text-xl`}>{twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}</div>
+                      {
+                        status === 'stop' ?
+                        <button
+                          onClick={handleSendOtp}
+                          className='text-blue-600 block text-sm rounded shadow-md px-2.5 py-2'
+                        >
+                          Re-Send OTP
+                        </button> : null
+                      }
+                    </div>
                   </>
                 )}
 
@@ -402,3 +415,26 @@ const Signup = ({ setCookie }) => {
 };
 
 export default Signup;
+
+// helping functions
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
+
+const twoDigits = (num) => String(num).padStart(2, "0");
