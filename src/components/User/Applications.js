@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const UserApplicationsDetails = ({appliedAtJobs, appliedAtInternships}) =>{
-    console.log(appliedAtInternships);
+    // console.log(appliedAtInternships);
 
     const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const UserApplicationsDetails = ({appliedAtJobs, appliedAtInternships}) =>{
 
         {activeTab===1 && <div className="mt-3 flex flex-col gap-3 overflow-y-auto h-screen">
             {
-                appliedAtJobs?.length === 0 ?
+                (appliedAtJobs?.length === 0 || appliedAtJobs===undefined) ?
                     <span className="w-full text-center text-cyan-500 mt-2">You have'nt applied to any jobs yet :{`(`} </span> :
                     null
                 }
@@ -51,7 +51,7 @@ const UserApplicationsDetails = ({appliedAtJobs, appliedAtInternships}) =>{
 
         {activeTab===2 && <div className="mt-3 flex flex-col gap-3 overflow-y-auto h-screen">
             {
-                appliedAtInternships?.length === 0 ?
+                (appliedAtInternships?.length === 0 || appliedAtInternships===undefined) ?
                     <span className="w-full text-center text-cyan-500 mt-2">You have'nt applied to any internships yet :{`(`} </span> :
                     null
                 }
