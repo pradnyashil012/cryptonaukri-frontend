@@ -33,6 +33,9 @@ const Navbar = () =>{
         if(active) setActive(false)
         setSignupActive(!signupActive)
     }
+    const logout = () => {
+        navigate('/auth/logout');
+    };
 
     return (
         <nav className="w-full bg-black/50 shadow backdrop-blur-xl fixed text-white">
@@ -68,7 +71,7 @@ const Navbar = () =>{
                         token ?
                         <div className="flex items-center gap-2">
                             <div onClick={()=>{navigate('/profile')}} className='cursor-pointer'><CgProfile size={30}/></div>
-                            <div>sign out</div>
+                            <div onClick={()=>logout()} className="cursor-pointer">Sign out</div>
                         </div> :
                         <div className="flex items-center gap-3">
                             <button onClick={toggleLogin} className="hover:text-purple-400">Login</button>
