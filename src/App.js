@@ -34,7 +34,6 @@ import AuthDevLogout from './components/auth/Logout';
 
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { data } from 'autoprefixer';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -100,7 +99,8 @@ const App = () => {
       navigate('/auth/logout')
     }
   }
-  // this useEffect used for just to validate the jwt token
+  // this useEffect used just for - to validate the jwt token
+  // it validate jwt by fetching userdata
   // it fetches userData but if the token expires already it
   // will auto logout
   useEffect(()=>{

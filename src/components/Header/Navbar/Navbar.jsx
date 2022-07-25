@@ -49,19 +49,19 @@ const Navbar = () =>{
                     <div className={`nav_dropLinks ${active?'show':'hide'}`}>
                         <div className="absolute top-20 left-0 right-0 w-full px-2 rounded-b-md">
                             <ul className="bg-gray-900 flex flex-col items-center text-lg rounded-md transition-all">
-                                <li className="p-1 cursor-pointer hover:text-purple-400"><a href="https://community.cryptonaukri.com/" target='_blank'>Community</a></li>
-                                <li className="p-1 cursor-pointer hover:text-purple-400"><a href="/jobspage">Jobs</a></li>
-                                <li className="p-1 cursor-pointer hover:text-purple-400"><a href="/internships">Internships</a></li>
-                                <li className="p-1 cursor-pointer hover:text-purple-400"><a href="/aboutus">About us</a></li>
+                                <li className="p-1 cursor-pointer hover:text-purple-400"><a href="https://community.cryptonaukri.com/" target='_blank' className="hover:text-purple-400">Community</a></li>
+                                <li className="p-1 cursor-pointer hover:text-purple-400"><a href="/jobspage" className="hover:text-purple-400">Jobs</a></li>
+                                <li className="p-1 cursor-pointer hover:text-purple-400"><a href="/internships" className="hover:text-purple-400">Internships</a></li>
+                                <li className="p-1 cursor-pointer hover:text-purple-400"><a href="/aboutus" className="hover:text-purple-400">About us</a></li>
                             </ul>
                         </div>
                     </div>
                     <div className="nav_horizontalLinks" >
                         <ul className="flex gap-4">
-                            <li className="cursor-pointer hover:text-purple-400 hover:underline hover:underline-offset-4"><a href="https://community.cryptonaukri.com/" target='_blank'>Community</a></li>
-                            <li className="cursor-pointer hover:text-purple-400 hover:underline hover:underline-offset-4"><a href="/jobspage">Jobs</a></li>
-                            <li className="cursor-pointer hover:text-purple-400 hover:underline hover:underline-offset-4"><a href="/internships">Internships</a></li>
-                            <li className="cursor-pointer hover:text-purple-400 hover:underline hover:underline-offset-4"><a href="/aboutus">About us</a></li>
+                            <li className="cursor-pointer hover:text-purple-400 hover:underline hover:underline-offset-4"><a href="https://community.cryptonaukri.com/" target='_blank' className="hover:text-purple-400">Community</a></li>
+                            <li className="cursor-pointer hover:text-purple-400 hover:underline hover:underline-offset-4"><a href="/jobspage" className="hover:text-purple-400">Jobs</a></li>
+                            <li className="cursor-pointer hover:text-purple-400 hover:underline hover:underline-offset-4"><a href="/internships" className="hover:text-purple-400">Internships</a></li>
+                            <li className="cursor-pointer hover:text-purple-400 hover:underline hover:underline-offset-4"><a href="/aboutus" className="hover:text-purple-400">About us</a></li>
                         </ul>
                     </div>
                 </div>
