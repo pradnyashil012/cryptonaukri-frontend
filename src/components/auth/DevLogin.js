@@ -37,7 +37,7 @@ const Login = ({ setCookie }) => {
 
         if (data.userLoggedIn) {
           // console.log(data);
-          console.log(response.headers.authorization);
+          // console.log(response.headers.authorization);
           // setLoginError(data.message);
           setLoading(false);
           const timestamp = new Date().getTime();

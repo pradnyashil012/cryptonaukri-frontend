@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import InternshipPage from './components/internshipPage';
 import JobsPage from './components/JobsPage';
@@ -33,6 +33,9 @@ import AuthDevSignUp from './components/auth/DevSignup';
 import AuthDevLogout from './components/auth/Logout';
 
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
+import { data } from 'autoprefixer';
+
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
@@ -77,10 +80,36 @@ let theme = createTheme({
 
 theme = responsiveFontSizes(theme);
 
+
 const App = () => {
   const classes = useStyles();
 
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const navigate = useNavigate();
+  const API = process.env.REACT_APP_API_ENDPOINT;
+
+  const fetchData = async (token)=>{
+    try {
+      const response = await axios.get(`${API}/api/v1/user/loggedInUserDetails`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      console.error(error)
+      navigate('/auth/logout')
+    }
+  }
+  // this useEffect used for just to validate the jwt token
+  // it fetches userData but if the token expires already it
+  // will auto logout
+  useEffect(()=>{
+    if(cookies.token){
+      fetchData(cookies.token)
+    } else {
+      console.log('token not exits');
+    }
+  },[])
 
   return (
     <>
