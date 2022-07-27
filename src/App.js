@@ -1,53 +1,52 @@
-import './App.css';
-import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import Header from './components/Header/Header';
-import InternshipPage from './components/internshipPage';
-import JobsPage from './components/JobsPage';
-import Footer from './components/Footer/Footer';
-import SignUp from './components/SignUp';
-import Login from './components/Login';
-import { Box, createTheme, makeStyles, ThemeProvider } from '@material-ui/core';
-import Landing from './components/homepage/landingT';
-import JobForm from './components/jobPost/jobForm';
-import { ToastContainer } from 'react-toastify';
-import Resume from './components/userResume/rsume';
-import { responsiveFontSizes } from '@mui/material/styles/';
-import BusReg from './components/BusnessRegestration';
-import LoginSignup from './components/LoginSignup';
-import BussinessProfile from './components/BusinessProfile';
-import AboutUS from './components/AboutUS';
-import Contact from './components/Contact';
-import Privacy from './components/Privacy';
-import DCMA from './components/DCMA.js';
-import GeneralQueries from './components/GeneralQueries';
-import Terms from './components/Terms';
-import Reset from './components/forgotPass/forgotPass';
-import Otp from './components/otp/otp';
-import JobDetails from './components/JobDetails/JobDetails';
-import ApplyJob from './components/applyJob/applyjob';
-import Profile from './components/User/UserDashbaord';
+import "./App.css";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Header from "./components/Header/Header";
+import InternshipPage from "./components/internshipPage";
+import JobsPage from "./components/JobsPage";
+import Footer from "./components/Footer/Footer";
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import { Box, createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
+import Landing from "./components/homepage/landingT";
+import JobForm from "./components/jobPost/jobForm";
+import { ToastContainer } from "react-toastify";
+import Resume from "./components/userResume/rsume";
+import { responsiveFontSizes } from "@mui/material/styles/";
+import BusReg from "./components/BusnessRegestration";
+import LoginSignup from "./components/LoginSignup";
+import BussinessProfile from "./components/BusinessProfile";
+import AboutUS from "./components/AboutUS";
+import Contact from "./components/Contact";
+import Privacy from "./components/Privacy";
+import DCMA from "./components/DCMA.js";
+import GeneralQueries from "./components/GeneralQueries";
+import Terms from "./components/Terms";
+import Reset from "./components/forgotPass/forgotPass";
+import Otp from "./components/otp/otp";
+import JobDetails from "./components/JobDetails/JobDetails";
+import ApplyJob from "./components/applyJob/applyjob";
+import Profile from "./components/User/UserDashbaord";
 
-import AuthDevLogin from './components/auth/DevLogin';
-import AuthDevSignUp from './components/auth/DevSignup';
-import AuthDevLogout from './components/auth/Logout';
+import AuthDevLogin from "./components/auth/DevLogin";
+import AuthDevSignUp from "./components/auth/DevSignup";
+import AuthDevLogout from "./components/auth/Logout";
 
-import { useCookies } from 'react-cookie';
-import axios from 'axios';
-
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
-    height: 'auto',
+    height: "auto",
     margin: 0,
     padding: 0,
-    minHeight: '90vh',
+    minHeight: "90vh",
   },
   body: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   link: {
-    textDecoration: 'none',
+    textDecoration: "none",
   },
 }));
 let theme = createTheme({
@@ -63,15 +62,15 @@ let theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#003979',
-      home: '#02142A',
+      main: "#003979",
+      home: "#02142A",
     },
     secondary: {
-      main: '#D3DCEE',
+      main: "#D3DCEE",
     },
     text: {
-      main: '#003979',
-      white: '#fff',
+      main: "#003979",
+      white: "#fff",
     },
   },
   link: {},
@@ -79,37 +78,50 @@ let theme = createTheme({
 
 theme = responsiveFontSizes(theme);
 
-
 const App = () => {
   const classes = useStyles();
 
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const API = process.env.REACT_APP_API_ENDPOINT;
 
-  const fetchData = async (token)=>{
+  const fetchData = async (token) => {
     try {
-      const response = await axios.get(`${API}/api/v1/user/loggedInUserDetails`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${API}/api/v1/user/loggedInUserDetails`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (error) {
-      console.error(error)
-      navigate('/auth/logout')
+      try {
+        const response = await axios.get(
+          `${API}/api/v1/business/loggedInBusinessDetails`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (e) {
+        console.error(error);
+        navigate("/auth/logout");
+      }
     }
-  }
+  };
   // this useEffect used just for - to validate the jwt token
   // it validate jwt by fetching userdata
   // it fetches userData but if the token expires already it
   // will auto logout
-  useEffect(()=>{
-    if(cookies.token){
-      fetchData(cookies.token)
+  useEffect(() => {
+    if (cookies.token) {
+      fetchData(cookies.token);
     } else {
-      console.log('token not exits');
+      console.log("token not exits");
     }
-  },[])
+  }, []);
 
   return (
     <>
@@ -121,7 +133,7 @@ const App = () => {
             <Routes>
               <Route
                 exact
-                path='/'
+                path="/"
                 element={
                   <>
                     <Landing />
@@ -130,7 +142,7 @@ const App = () => {
               ></Route>
               <Route
                 exact
-                path='/businessprofile'
+                path="/businessprofile"
                 element={
                   <>
                     <BussinessProfile />
@@ -139,7 +151,7 @@ const App = () => {
               ></Route>
               <Route
                 exact
-                path='/details'
+                path="/details"
                 element={
                   <>
                     <JobDetails />
@@ -148,7 +160,7 @@ const App = () => {
               ></Route>
               <Route
                 exact
-                path='/jobapplication'
+                path="/jobapplication"
                 element={
                   <>
                     <ApplyJob />
@@ -157,7 +169,7 @@ const App = () => {
               ></Route>
               <Route
                 exact
-                path='/loginsignup'
+                path="/loginsignup"
                 element={
                   <>
                     <LoginSignup />
@@ -165,23 +177,27 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/devlogin'
+                path="/devlogin"
                 element={
                   <>
-                    <Login route='user' />
+                    <Login route="user" />
                   </>
                 }
               ></Route>
               <Route
-                path='/companyLogin'
+                path="/companyLogin"
                 element={
                   <>
-                    <Login route='company' />
+                    <Login
+                      route="company"
+                      setCookie={setCookie}
+                      cookies={cookies}
+                    />
                   </>
                 }
               ></Route>
               <Route
-                path='/devsignup'
+                path="/devsignup"
                 element={
                   <>
                     <SignUp />
@@ -189,7 +205,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/companySignUp'
+                path="/companySignUp"
                 element={
                   <>
                     <BusReg />
@@ -197,7 +213,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/jobspage'
+                path="/jobspage"
                 element={
                   <>
                     <JobsPage />
@@ -205,7 +221,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/internships'
+                path="/internships"
                 element={
                   <>
                     <InternshipPage />
@@ -213,7 +229,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/jobform'
+                path="/jobform"
                 element={
                   <>
                     <JobForm />
@@ -221,7 +237,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/aboutus'
+                path="/aboutus"
                 element={
                   <>
                     <AboutUS />
@@ -229,7 +245,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/contactus'
+                path="/contactus"
                 element={
                   <>
                     <Contact />
@@ -237,7 +253,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/privacy'
+                path="/privacy"
                 element={
                   <>
                     <Privacy />
@@ -245,7 +261,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/dcma'
+                path="/dcma"
                 element={
                   <>
                     <DCMA />
@@ -253,7 +269,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/generalQueries'
+                path="/generalQueries"
                 element={
                   <>
                     <GeneralQueries />
@@ -261,7 +277,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/terms'
+                path="/terms"
                 element={
                   <>
                     <Terms />
@@ -269,7 +285,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/userResume'
+                path="/userResume"
                 element={
                   <>
                     <Resume />
@@ -277,7 +293,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/resetPassWord'
+                path="/resetPassWord"
                 element={
                   <>
                     <Reset />
@@ -285,7 +301,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/Otp'
+                path="/Otp"
                 element={
                   <>
                     <Otp />
@@ -293,7 +309,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/auth/devlogin'
+                path="/auth/devlogin"
                 element={
                   <>
                     <AuthDevLogin setCookie={setCookie} cookies={cookies} />
@@ -301,15 +317,15 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/auth/logout'
+                path="/auth/logout"
                 element={
                   <>
-                    <AuthDevLogout removeCookie={removeCookie} />
+                    <AuthDevLogout />
                   </>
                 }
               ></Route>
               <Route
-                path='/auth/devsignup'
+                path="/auth/devsignup"
                 element={
                   <>
                     <AuthDevSignUp setCookie={setCookie} cookies={cookies} />
@@ -317,7 +333,7 @@ const App = () => {
                 }
               ></Route>
               <Route
-                path='/profile'
+                path="/profile"
                 element={
                   <>
                     <Profile />
