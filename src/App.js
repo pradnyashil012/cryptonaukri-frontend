@@ -8,7 +8,7 @@ import Footer from "./components/Footer/Footer";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import { Box, createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
-import Landing from "./components/homepage/landingT";
+import LandingPage from "./components/homepage/LandingPage";
 import JobForm from "./components/jobPost/jobForm";
 import { ToastContainer } from "react-toastify";
 import Resume from "./components/userResume/rsume";
@@ -128,7 +128,7 @@ const App = () => {
       <div className={classes.body}>
         <ToastContainer />
         <ThemeProvider theme={theme}>
-          <Header />
+          {/* <Header /> */}
           <Box className={classes.contentBody}>
             <Routes>
               <Route
@@ -136,7 +136,7 @@ const App = () => {
                 path="/"
                 element={
                   <>
-                    <Landing />
+                    <LandingPage />
                   </>
                 }
               ></Route>
@@ -342,7 +342,7 @@ const App = () => {
               ></Route>
             </Routes>
           </Box>
-          <Footer />
+          {/* <Footer /> */}
         </ThemeProvider>
       </div>
     </>
