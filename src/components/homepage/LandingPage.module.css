@@ -2,4 +2,7 @@
     min-width: screen;
     min-height: screen;
     background-color: red;
+} 
+.bg-hero{
+    background-image: url("./Assets/logo.png");
 }
