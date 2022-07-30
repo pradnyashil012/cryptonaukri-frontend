@@ -6,21 +6,21 @@ import {GrLinkedinOption, GrTwitter, GrInstagram} from 'react-icons/gr'
 const Footer = () => {
   return (
     <footer className="w-full py-12 bg-black">
-      <div className="container mx-auto grid grid-cols-7">
-        <div className="col-span-2">
-          <img src={logo} alt="" />
-          <p className="text-white leading-6 pl-2 mt-4 font-light ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur reprehenderit enim rem itaque hic unde pariatur ratione ullam, dolores iure animi, odio eligendi.</p>
-          <div className="flex justify-start gap-3 text-xl text-white mt-4 ml-2">
+      <div className="container mx-auto md:grid md:grid-cols-7 ">
+        <div className="md:col-span-2">
+          <img src={logo} alt="" className="mx-auto md:m-0 w-[200px] md:w-auto"/>
+          <p className="text-white leading-6 pl-2 mt-4 font-light "><span className="text-center md:text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur reprehenderit enim rem itaque hic unde pariatur ratione ullam, dolores iure animi, odio eligendi.</span></p>
+          <div className="flex justify-center md:justify-start gap-3 text-xl text-white mt-4 ml-2">
             <a href="#" rel="noreferrer" target="_blank"><CgFacebook/></a>
             <a href="#" rel="noreferrer" target="_blank"><GrLinkedinOption/></a>
             <a href="#" rel="noreferrer" target="_blank"><GrTwitter/></a>
             <a href="#" rel="noreferrer" target="_blank"><GrInstagram/></a>
           </div>
         </div>
-        <div className="col-span-2"></div>
-        <div>
-          <h2 className="text-white font-semibold text-xl">About</h2>
-          <div className="mt-8 font-light">
+        <div className="md:col-span-2"></div>
+        <div className="text-center md:text-left mt-8 md:mt-4">
+          <h2 className="text-white font-semibold text-xl  md:text-left">About</h2>
+          <div className="mt-2 md:mt-12 md:text-left  font-light">
             {" "}
             <Link to="/" className="text-md  block text-white my-2">
               How it works
@@ -30,9 +30,9 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div>
-          <h2 className="text-white font-semibold text-xl">Partner with us</h2>
-          <div className="mt-8 font-light gap-2">
+        <div className="text-center  mt-8 md:mt-4">
+          <h2 className="text-white font-semibold text-xl  md:text-left">Partner with us</h2>
+          <div className="mt-2 md:mt-8  font-light gap-2 md:text-left">
             {" "}
             <Link to="/" className="text-md block text-white my-2">
              Partnership Program
@@ -48,9 +48,9 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div>
-          <h2 className="text-white font-semibold text-xl">Support</h2>
-          <div className="mt-8 font-light">
+        <div className="text-center md:text-left mt-8 md:mt-4">
+          <h2 className="text-white font-semibold text-xl md:text-left">Support</h2>
+          <div className="mt-2 md:mt-8 font-light md:text-left">
             {" "}
             <Link to="/" className="text-md  block text-white my-2">
               Contact us
