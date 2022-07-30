@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 .testing-homepage{
     min-width: screen;
     min-height: screen;
@@ -5,4 +6,7 @@
 } 
 .bg-hero{
     background-image: url("./Assets/logo.png");
+}
+*{
+    font-family: 'Inter' , sans-serif !important;
 }

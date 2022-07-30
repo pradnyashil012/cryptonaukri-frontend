@@ -12,7 +12,7 @@ const Header = () => {
     <header className="w-full bg-[#00142A] py-3 shadow-lg sticky top-0">
       <div className="container mx-auto flex justify-between items-center">
         <img src={logo} className="w-[150px] md:w-[300px]" alt="" />
-        <nav className=" justify-end items-center text-white gap-4 hidden md:flex">
+        <nav className=" justify-end items-center text-[#6C94F7] gap-4 hidden md:flex">
           <Link to="#">Home</Link>
           <Link to="#">About</Link>
           <Link to="#">Community</Link>
@@ -20,11 +20,12 @@ const Header = () => {
           <Link to="#">Contact</Link>
           <RegularButton>Join Us</RegularButton>
         </nav>
+       
         <h1
-          className="text-white md:hidden text-2xl"
+          className="text-[#6C94F7] md:hidden text-2xl"
           onClick={() => setMenuDisplay(!menuDisplay)}
         >
-          {menuDisplay ?   <IoMenuOutline /> : <IoClose className="text-white" />}
+          {menuDisplay ?   <IoMenuOutline /> : <IoClose  />}
         </h1>
       </div>
       <MobileMenu state={menuDisplay} /> 
