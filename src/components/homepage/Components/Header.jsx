@@ -5,20 +5,20 @@ import RegularButton from "./RegularButton";
 import { useState } from "react";
 import { IoClose, IoMenuOutline } from "react-icons/io5";
 import MobileMenu from "./MobileMenu";
+import '../Styles/Header.css'
 const Header = () => {
   // this state will control the display of menu icons and menubar in mobile devices
   const [menuDisplay, setMenuDisplay] = useState(true);
   return (
-    <header className="w-full bg-[#00142A] py-3 shadow-lg sticky top-0">
+    <header className="w-full header-gradient py-3   sticky top-0">
       <div className="container mx-auto flex justify-between items-center">
-        <img src={logo} className="w-[150px] md:w-[300px]" alt="" />
-        <nav className=" justify-end items-center text-[#6C94F7] gap-4 hidden md:flex">
-          <Link to="#">Home</Link>
-          <Link to="#">About</Link>
-          <Link to="#">Community</Link>
-          <Link to="#">Intermships</Link>
-          <Link to="#">Contact</Link>
-          <RegularButton>Join Us</RegularButton>
+        <img src={logo} className="w-[150px] md:w-[210px]" alt="" />
+        <nav className=" justify-end items-center text-black gap-4 hidden md:flex uppercase">
+          <Link to='/'>Community</Link>
+          <Link to='/'>Internships</Link>
+          <Link to='/'>Jobs</Link>
+          <RegularButton>Login</RegularButton>
+          <RegularButton>Register</RegularButton>
         </nav>
        
         <h1
