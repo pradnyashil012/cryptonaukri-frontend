@@ -8,18 +8,19 @@ const Hero = () => {
       {" "}
       <div className="w-full absolute top-0 left-0 z-50">
         {" "}
-        <div className="container     grid grid-cols-2 gap-12 h-screen ">
-          <div className="min-w-full flex min-h-full  flex-col justify-center">
-            <h1 className="text-[110px] font-semibold text-black leading-[100px]  mb-6">
+        <div className="container   text-center  grid md:grid-cols-2 md:gap-12 h-screen ">
+          <div className="min-w-full md:flex min-h-full  md:flex-col md:justify-center">
+            <h1 className="text-[32px] md:text-[110px] font-semibold text-black md:leading-[100px] w-full mb-6 my-12 md:my-0  md:text-left">
               Towerds the <br />
               <span className="text-[#0351A3] font-bold ">Revolution</span>
             </h1>
-            <h2 className="  text-3xl leading-8 font-normal">
+            <h2 className="text-lg   md:text-left  md:text-3xl leading-8 font-normal">
               On the mission to convert 1M+ Web3 enthusiasts to Web3 developers
               by 2025
             </h2>
-            <div className="mt-6 w-full flex justify-start gap-6">
-              <RegularButton>Post a job</RegularButton>
+            <div className="mt-6 w-full md:flex md:justify-start gap-6">
+              <RegularButton>Post a job</RegularButton> 
+               <div className="md:hidden my-4"></div>
               <RegularButton>Find a job</RegularButton>
             </div>
           </div>

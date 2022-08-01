@@ -2,7 +2,7 @@ import React from "react";
 import { FaDiscord } from 'react-icons/fa'
 const Discord = () => {
   return (
-    <section className="bg-discord w-full h-[340px] flex flex-col items-center justify-center bg-cover bg-opacity-10 md:bg-opacity-100">
+    <section className=" bg-discord w-full h-[340px] flex flex-col items-center justify-center bg-opacity-0 md:bg-opacity-100 ">
       <h2 className="text-white text-5xl font-semibold text-center">
         Ready to start? <br />
         Join us on discord
