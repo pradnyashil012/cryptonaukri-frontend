@@ -35,3 +35,9 @@
   background-image: url('../Assets/discordBg.png');
   
 }
+.startup-issue {
+  background-image: url("../Assets/FramesLightMode2.svg");
+}
+.startup-solution {
+  background-image: url("../Assets/FramesLightModeW.svg");
+}

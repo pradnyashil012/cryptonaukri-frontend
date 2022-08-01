@@ -2,7 +2,7 @@ import React from "react";
 
 const StartupIssue = () => {
   return (
-    <section className="bg-[#004293] py-32">
+    <section className=" py-32 startup-issue ">
       <div className="container mx-auto">
         {" "}
         <h1 className="text-right font-medium text-white text-[80px] ml-[400px]">
