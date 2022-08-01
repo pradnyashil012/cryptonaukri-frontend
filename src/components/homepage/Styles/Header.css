@@ -31,3 +31,7 @@
     filter: blur(200px);
     transform:translateY(20px)
 }
+.bg-discord{
+  background-image: url('../Assets/discordBg.png');
+  
+}
