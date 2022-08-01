@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../Assets/logo.png";
-import { Link } from "react-router-dom";
-import { CgFacebook } from 'react-icons/cg'
+import { Link } from "react-router-dom"; 
 import {GrLinkedinOption, GrTwitter, GrInstagram} from 'react-icons/gr'
 const Footer = () => {
   return (
@@ -11,10 +10,10 @@ const Footer = () => {
           <img src={logo} alt="" className=""/>
           <p className="text-black leading-6 pl-2 mt-4 font-light ">Follow us at</p>
           <div className="flex justify-center md:justify-start gap-3 text-xl   mt-4 ml-2">
-            <a href="#" rel="noreferrer" target="_blank"><CgFacebook/></a>
-            <a href="#" rel="noreferrer" target="_blank"><GrLinkedinOption/></a>
-            <a href="#" rel="noreferrer" target="_blank"><GrTwitter/></a>
-            <a href="#" rel="noreferrer" target="_blank"><GrInstagram/></a>
+ 
+            <a href="https://www.linkedin.com/company/cryptonaukri/" rel="noreferrer" target="_blank"><GrLinkedinOption/></a>
+            <a href="https://twitter.com/CryptoNaukri" rel="noreferrer" target="_blank"><GrTwitter/></a>
+            <a href="https://www.instagram.com/cryptonaukri/" rel="noreferrer" target="_blank"><GrInstagram/></a>
           </div>
         </div>
         <div className="md:col-span-2"></div>
