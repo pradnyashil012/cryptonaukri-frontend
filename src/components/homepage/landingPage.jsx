@@ -10,6 +10,7 @@ import developerProblem from "./Assets/developerProblem.png";
 import developerSolution from "./Assets/programmer-solution.png";
 import businessProblem from "./Assets/business-problmem.png";
 import businessSolution from "./Assets/business-solution.png"
+import Web3Hack from "./Components/Web3Hack";
 const landingPage = () => {
   const developerProblems = [
     "Affordable training for Web3 development.",
@@ -40,6 +41,7 @@ const landingPage = () => {
   return (
     <div className="testing-homepage"> 
       <Hero />
+      <Web3Hack /> 
       <StartupIssue />
       <StartupSolution />
       <Problem
