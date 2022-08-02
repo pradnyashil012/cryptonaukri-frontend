@@ -87,24 +87,18 @@ const App = () => {
 
   const fetchData = async (token) => {
     try {
-      const response = await axios.get(
-        `${API}/api/v1/user/loggedInUserDetails`,
-        {
+      await axios.get(`${API}/api/v1/user/loggedInUserDetails`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      try {
+        await axios.get(`${API}/api/v1/business/loggedInBusinessDetails`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-    } catch (error) {
-      try {
-        const response = await axios.get(
-          `${API}/api/v1/business/loggedInBusinessDetails`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        });
       } catch (e) {
         console.error(error);
         navigate("/auth/logout");
@@ -320,7 +314,7 @@ const App = () => {
                 path="/auth/logout"
                 element={
                   <>
-                    <AuthDevLogout />
+                    <AuthDevLogout removeCookie={removeCookie} />
                   </>
                 }
               ></Route>

@@ -25,11 +25,10 @@ import { MenuRounded, Close } from "@mui/icons-material";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import THeader from "./HeaderT";
-import Navbar from "./Navbar/Navbar"
+import Navbar from "./Navbar/Navbar";
 const drawerWidth = 340;
 
 const Header = (props) => {
-
   const API = process.env.REACT_APP_API_ENDPOINT;
 
   const classes = useStyles();
@@ -105,8 +104,6 @@ const Header = (props) => {
 
   const getUser = async () => {
     if (token) {
-      //console.log(token.split('"')[1]);
-      //console.log(token);
       const response = await axios.get(
         `${API}/api/v1/user/loggedInUserDetails`,
         {
@@ -115,7 +112,6 @@ const Header = (props) => {
           },
         }
       );
-      //console.log(response.data);
       setUser(response.data);
     }
     if (btoken) {
@@ -127,10 +123,8 @@ const Header = (props) => {
           },
         }
       );
-      //console.log(response.data);
       setUser(response.data);
     }
-    //console.log("bt",btoken)
   };
 
   const handleClose = () => {
@@ -381,8 +375,21 @@ const Header = (props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  console.log(location.pathname)
-  if (location.pathname !== "/" && location.pathname !== "/auth/devlogin" && location.pathname !== "/auth/devsignup" && location.pathname !== "/profile" && location.pathname !== "/jobspage" && location.pathname !== "/internships"  && location.pathname !== "/contactus" && location.pathname !== "/aboutus" && location.pathname !== "/dcma" && location.pathname !== "/terms" && location.pathname !== "/privacy" && location.pathname !== "/jobapplication") {
+  console.log(location.pathname);
+  if (
+    location.pathname !== "/" &&
+    location.pathname !== "/auth/devlogin" &&
+    location.pathname !== "/auth/devsignup" &&
+    location.pathname !== "/profile" &&
+    location.pathname !== "/jobspage" &&
+    location.pathname !== "/internships" &&
+    location.pathname !== "/contactus" &&
+    location.pathname !== "/aboutus" &&
+    location.pathname !== "/dcma" &&
+    location.pathname !== "/terms" &&
+    location.pathname !== "/privacy" &&
+    location.pathname !== "/jobapplication"
+  ) {
     return (
       <>
         <CssBaseline />

@@ -135,7 +135,7 @@ const Login = (props) => {
             await props.setCookie("token", response.headers.authorization, {
               expires: expireDate,
               path: "/",
-              // domain: '.cryptonaukri.com',
+              domain: ".cryptonaukri.com",
             });
 
             toast.success(response.data.message);

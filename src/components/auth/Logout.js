@@ -11,9 +11,9 @@ const Logout = ({ removeCookie }) => {
 
   useEffect(() => {
     // if(token){
-    // removeCookie('token',{
-    //     path:'/',
-    // });
+    removeCookie("token", {
+      path: "/",
+    });
     document.cookie.replace(/(?<=^|;).+?(?=\=|;|$)/g, (name) =>
       window.location.hostname
         .split(".")
