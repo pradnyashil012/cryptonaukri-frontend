@@ -1,10 +1,10 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Header from "./components/Header/Header";
+import Header from "./components/homepage/Components/Header";
 import InternshipPage from "./components/internshipPage";
 import JobsPage from "./components/JobsPage";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/homepage/Components/Footer.jsx";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import { Box, createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
@@ -81,7 +81,7 @@ theme = responsiveFontSizes(theme);
 const App = () => {
   const classes = useStyles();
 
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookies, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const API = process.env.REACT_APP_API_ENDPOINT;
 
@@ -128,221 +128,71 @@ const App = () => {
       <div className={classes.body}>
         <ToastContainer />
         <ThemeProvider theme={theme}>
-          {/* <Header /> */}
+          <Header />
           <Box className={classes.contentBody}>
             <Routes>
+              <Route path="/" element={<LandingPage />}></Route>
               <Route
-                exact
-                path="/"
-                element={
-                  <>
-                    <LandingPage />
-                  </>
-                }
-              ></Route>
-              <Route
-                exact
+                 
                 path="/businessprofile"
-                element={
-                  <>
-                    <BussinessProfile />
-                  </>
-                }
+                element={<BussinessProfile />}
               ></Route>
+              <Route   path="/details" element={<JobDetails />}></Route>
               <Route
-                exact
-                path="/details"
-                element={
-                  <>
-                    <JobDetails />
-                  </>
-                }
-              ></Route>
-              <Route
-                exact
+                 
                 path="/jobapplication"
-                element={
-                  <>
-                    <ApplyJob />
-                  </>
-                }
+                element={<ApplyJob />}
               ></Route>
               <Route
-                exact
+                 
                 path="/loginsignup"
-                element={
-                  <>
-                    <LoginSignup />
-                  </>
-                }
+                element={<LoginSignup />}
               ></Route>
-              <Route
-                path="/devlogin"
-                element={
-                  <>
-                    <Login route="user" />
-                  </>
-                }
-              ></Route>
+              <Route path="/devlogin" element={<Login route="user" />}></Route>
               <Route
                 path="/companyLogin"
                 element={
-                  <>
-                    <Login
-                      route="company"
-                      setCookie={setCookie}
-                      cookies={cookies}
-                    />
-                  </>
+                  <Login
+                    route="company"
+                    setCookie={setCookie}
+                    cookies={cookies}
+                  />
                 }
               ></Route>
-              <Route
-                path="/devsignup"
-                element={
-                  <>
-                    <SignUp />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/companySignUp"
-                element={
-                  <>
-                    <BusReg />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/jobspage"
-                element={
-                  <>
-                    <JobsPage />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/internships"
-                element={
-                  <>
-                    <InternshipPage />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/jobform"
-                element={
-                  <>
-                    <JobForm />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/aboutus"
-                element={
-                  <>
-                    <AboutUS />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/contactus"
-                element={
-                  <>
-                    <Contact />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/privacy"
-                element={
-                  <>
-                    <Privacy />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/dcma"
-                element={
-                  <>
-                    <DCMA />
-                  </>
-                }
-              ></Route>
+              <Route path="/devsignup" element={<SignUp />}></Route>
+              <Route path="/companySignUp" element={<BusReg />}></Route>
+              <Route path="/jobs" element={<JobsPage />}></Route>
+              <Route path="/internships" element={<InternshipPage />}></Route>
+              <Route path="/jobform" element={<JobForm />}></Route>
+              <Route path="/aboutus" element={<AboutUS />}></Route>
+              <Route path="/contactus" element={<Contact />}></Route>
+              <Route path="/privacy" element={<Privacy />}></Route>
+              <Route path="/dcma" element={<DCMA />}></Route>
               <Route
                 path="/generalQueries"
-                element={
-                  <>
-                    <GeneralQueries />
-                  </>
-                }
+                element={<GeneralQueries />}
               ></Route>
-              <Route
-                path="/terms"
-                element={
-                  <>
-                    <Terms />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/userResume"
-                element={
-                  <>
-                    <Resume />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/resetPassWord"
-                element={
-                  <>
-                    <Reset />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/Otp"
-                element={
-                  <>
-                    <Otp />
-                  </>
-                }
-              ></Route>
+              <Route path="/terms" element={<Terms />}></Route>
+              <Route path="/userResume" element={<Resume />}></Route>
+              <Route path="/resetPassWord" element={<Reset />}></Route>
+              <Route path="/Otp" element={<Otp />}></Route>
               <Route
                 path="/auth/devlogin"
                 element={
-                  <>
-                    <AuthDevLogin setCookie={setCookie} cookies={cookies} />
-                  </>
+                  <AuthDevLogin setCookie={setCookie} cookies={cookies} />
                 }
               ></Route>
-              <Route
-                path="/auth/logout"
-                element={
-                  <>
-                    <AuthDevLogout />
-                  </>
-                }
-              ></Route>
+              <Route path="/auth/logout" element={<AuthDevLogout />}></Route>
               <Route
                 path="/auth/devsignup"
                 element={
-                  <>
-                    <AuthDevSignUp setCookie={setCookie} cookies={cookies} />
-                  </>
+                  <AuthDevSignUp setCookie={setCookie} cookies={cookies} />
                 }
               ></Route>
-              <Route
-                path="/profile"
-                element={
-                  <>
-                    <Profile />
-                  </>
-                }
-              ></Route>
+              <Route path="/profile" element={<Profile />}></Route>
             </Routes>
           </Box>
-          {/* <Footer /> */}
+          <Footer />
         </ThemeProvider>
       </div>
     </>

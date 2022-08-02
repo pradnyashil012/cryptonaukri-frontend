@@ -1,5 +1,6 @@
 .header-gradient {
   position: relative;
+  z-index: 50;
   background: linear-gradient(
       90deg,
       rgba(255, 153, 51, 0.3) 0.76%,
@@ -11,26 +12,7 @@
     #f4f4f5;
  
   backdrop-filter: blur(134.733px);
-}
-.header-gradient::before {
-  content:"";
-  position: absolute;
-  top:0;
-  left:0;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(
-      90deg,
-      rgba(255, 153, 51, 0.3) 0.76%,
-      rgba(255, 255, 255, 0.27) 35.9%,
-      rgba(0, 57, 121, 0.3) 52.96%,
-      rgba(255, 255, 255, 0.27) 71.57%,
-      rgba(19, 136, 8, 0.3) 100%
-    ),
-    #f4f4f5;
-    filter: blur(200px);
-    transform:translateY(20px)
-}
+} 
 .bg-discord{
   background-image: url('../Assets/discordBg.png');
   background-size: cover;

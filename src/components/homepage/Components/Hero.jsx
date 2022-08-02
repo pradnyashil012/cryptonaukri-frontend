@@ -11,7 +11,7 @@ const Hero = () => {
         <div className="container   text-center  grid md:grid-cols-2 md:gap-12 h-screen ">
           <div className="min-w-full md:flex min-h-full  md:flex-col md:justify-center">
             <h1 className="text-[32px] md:text-[110px] font-semibold text-black md:leading-[100px] w-full mb-6 my-12 md:my-0  md:text-left">
-              Towerds the <br />
+              Towards the <br />
               <span className="text-[#0351A3] font-bold ">Revolution</span>
             </h1>
             <h2 className="text-lg   md:text-left  md:text-3xl leading-8 font-normal">
@@ -29,7 +29,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <img src={herobg} className="absolute top-10 opaicity-30 z-0" alt="" />
+      <img src={herobg} className="absolute md:top-10 top-32 opaicity-30 z-0" alt="" />
     </main>
   );
 };

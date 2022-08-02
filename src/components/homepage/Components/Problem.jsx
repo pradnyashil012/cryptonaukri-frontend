@@ -3,7 +3,7 @@ import { GoPrimitiveDot } from "react-icons/go";
 const Problem = ({ image, side, title, list, paragraph, backgroundColor }) => {
   return (
     <section className={`bg-[${backgroundColor}]`}>
-      <div className="container mx-auto grid md:grid-cols-2 grid-cols-1 py-24 md:gap-24">
+      <div className="container mx-auto grid md:grid-cols-2 grid-cols-1 md:py-24 md:gap-24">
         <div className="flex w-full h-full justify-center items-center md:hidden ">
           <img src={image} alt="" />
         </div>
@@ -13,7 +13,7 @@ const Problem = ({ image, side, title, list, paragraph, backgroundColor }) => {
           </div>
         )}
         <div className="py-12 text-left flex flex-col justify-center h-full">
-          <h2 className="text-[#004AAD] text-xl text-cenrer md:text-left md:text-[52px] font-bold">{title}</h2>
+          <h2 className="text-[#004AAD] text-xl text-cenrer md:text-left md:text-[52px] font-bold leading-6 md:leading-[50px]">{title}</h2>
 
           <h2 className="text-md md:text-xl leading-6 font-normal text-black mt-6 ">
             <span className="mb-4">{paragraph}</span>

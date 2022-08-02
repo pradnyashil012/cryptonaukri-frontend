@@ -1,6 +1,4 @@
-import React from "react";
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
+import React from "react";  
 import "./LandingPage.module.css";
 import Hero from "./Components/Hero";
 import StartupIssue from "./Components/StartupIssue";
@@ -40,8 +38,7 @@ const landingPage = () => {
 
   ]
   return (
-    <div className="testing-homepage">
-      <Header />
+    <div className="testing-homepage"> 
       <Hero />
       <StartupIssue />
       <StartupSolution />
@@ -79,7 +76,7 @@ const landingPage = () => {
       /> 
       <Goal />
       <Discord />
-      <Footer />
+      
     </div>
   );
 };
