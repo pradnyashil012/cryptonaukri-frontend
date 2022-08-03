@@ -8,7 +8,7 @@ import Footer from "./components/homepage/Components/Footer.jsx";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import { Box, createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
-import LandingPage from "./components/homepage/LandingPage";
+import LandingPage from './components/homepage/landingPage.jsx'
 import JobForm from "./components/jobPost/jobForm";
 import { ToastContainer } from "react-toastify";
 import Resume from "./components/userResume/rsume";
