@@ -164,8 +164,8 @@ const App = () => {
               <Route path="/jobs" element={<JobsPage />}></Route>
               <Route path="/internships" element={<InternshipPage />}></Route>
               <Route path="/jobform" element={<JobForm />}></Route>
-              <Route path="/aboutus" element={<AboutUS />}></Route>
-              <Route path="/contactus" element={<Contact />}></Route>
+              <Route path="/about-us" element={<AboutUS />}></Route>
+              <Route path="/contact-us" element={<Contact />}></Route>
               <Route path="/privacy" element={<Privacy />}></Route>
               <Route path="/dcma" element={<DCMA />}></Route>
               <Route

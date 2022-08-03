@@ -12,14 +12,14 @@ const Header = () => {
   return (
     <header className="w-full header-gradient py-3   sticky top-0">
       <div className="container mx-auto flex justify-between items-center">
-        <img src={logo} className="w-[150px] md:w-[210px]" alt="" />
+       <Link to="/"> <img src={logo} className="w-[150px] md:w-[210px]" alt="" /></Link>
         <nav className=" justify-end items-center text-black gap-4 hidden md:flex uppercase">
           <a href='https://community.cryptonaukri.com/'>Community</a>
           <Link to='/internships'>Internships</Link>
           <Link to='/jobs'>Jobs</Link>
         
-          <Link to='/login'><RegularButton>Login</RegularButton></Link>
-          <RegularButton>Register</RegularButton>
+          <Link to='/auth/devlogin'><RegularButton>Login</RegularButton></Link>
+          <RegularButton to="/auth/devsignup">Register</RegularButton>
         </nav>
        
         <h1

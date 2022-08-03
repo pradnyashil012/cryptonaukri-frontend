@@ -21,43 +21,33 @@ const Footer = () => {
           <h2 className="  font-semibold text-xl  md:text-left">About</h2>
           <div className="mt-2 md:mt-12 md:text-left  font-light">
             {" "}
-            <Link to="/" className="text-md  block   my-2">
-              How it works
+            <Link to="/about-us" className="text-md  block   my-2">
+              About us 
             </Link>
-            <Link to="/" className="text-md   block   my-2">
-              Careers
-            </Link>
+             
           </div>
         </div>
         <div className="text-center  mt-8 md:mt-4">
           <h2 className="  font-semibold text-xl  md:text-left">Partner with us</h2>
           <div className="mt-2 md:mt-8  font-light gap-2 md:text-left">
             {" "}
-            <Link to="/" className="text-md block   my-2">
-             Partnership Program
-            </Link>
-            <Link to="/" className="text-md   block   my-2">
-             Affiliate Program
-            </Link>
-            <Link to="/" className="text-md   block   my-2">
-             Intrigations Community
-            </Link>
-            <Link to="/" className="text-md   block   my-2">
+           
+            <a href="https://web3hack.tech/" className="text-md   block   my-2">
              Promotions and Events
-            </Link>
+            </a>
           </div>
         </div>
         <div className="text-center md:text-left mt-8 md:mt-4">
           <h2 className="  font-semibold text-xl md:text-left">Support</h2>
           <div className="mt-2 md:mt-8 font-light md:text-left">
             {" "}
-            <Link to="/" className="text-md  block   my-2">
+            <Link to="/contact-us" className="text-md  block   my-2">
               Contact us
             </Link>
-            <Link to="/" className="text-md   block   my-2">
+            <Link to="/privacy" className="text-md   block   my-2">
               Privacy Policy
             </Link>
-            <Link to="/" className="text-md   block   my-2">
+            <Link to="/dcma" className="text-md   block   my-2">
              DCMA
             </Link>
             <Link to="/" className="text-md   block   my-2">
