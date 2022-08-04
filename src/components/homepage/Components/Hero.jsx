@@ -4,7 +4,7 @@ import RegularButton from "./RegularButton";
 import heroImg from "../Assets/heroImg.png";
 const Hero = () => {
   return (
-    <main className="min-h-screen min-w-screen  bg-white relative ">
+    <main className="min-h-screen min-w-screen  bg-white relative z-10">
       {" "}
       <div className="w-full absolute top-0 left-0 z-50">
         {" "}

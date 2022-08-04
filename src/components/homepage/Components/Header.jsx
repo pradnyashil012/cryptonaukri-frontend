@@ -12,6 +12,8 @@ const Header = () => {
   const [cookies, setCookie] = useCookies(["token"]);
   console.log(cookies.token);
   const [menuDisplay, setMenuDisplay] = useState(true);
+  const [registerDropdownDisplay, setRegisterDropdownDisplay] = useState(false);
+  const [loginDropdownDisplay, setLoginDropdownDisplay] = useState(false);
   return (
     <header className="w-full header-gradient py-3   sticky top-0">
       <div className="container mx-auto flex justify-between items-center">
@@ -19,19 +21,61 @@ const Header = () => {
           {" "}
           <img src={logo} className="w-[150px] md:w-[210px]" alt="" />
         </Link>
-        
-          <nav className=" justify-end items-center text-black gap-4 hidden md:flex uppercase">
-            <a href="https://community.cryptonaukri.com/">Community</a>
-            <Link to="/internships">Internships</Link>
-            <Link to="/jobs">Jobs</Link>
 
-          {cookies.token ? (<RegularButton to="/auth/logout" > Sign Out</RegularButton>) : (<>
-            <Link to="/auth/devlogin">
-              <RegularButton>Login</RegularButton>
-            </Link>
-            <RegularButton to="/auth/devsignup">Register</RegularButton></>)}
-          </nav>
- 
+        <nav className=" justify-end items-center text-black gap-4 hidden md:flex uppercase">
+          <a href="https://community.cryptonaukri.com/">Community</a>
+          <Link to="/internships">Internships</Link>
+          <Link to="/jobs">Jobs</Link>
+
+          {cookies.token ? (
+            <RegularButton to="/auth/logout"> Sign Out</RegularButton>
+          ) : (
+            <>
+              <RegularButton
+                className="relative"
+                state={loginDropdownDisplay}
+                setState={setLoginDropdownDisplay}
+              >
+                Login
+                {loginDropdownDisplay && (
+                  <div className="absolute w-[200px] top-12 left-0 py-2 px-4 text-left rounded-md bg-white text-[#0351A3] shadow-md z-30">
+                    <Link to="/dev-login" className="block hover:text-black">
+                      Developer Login
+                    </Link>
+                    <Link
+                      to="/company-login"
+                      className="block hover:text-black"
+                    >
+                      Business Login
+                    </Link>
+                  </div>
+                )}
+              </RegularButton>
+
+              <RegularButton
+                state={registerDropdownDisplay}
+                setState={setRegisterDropdownDisplay}
+                className="relative"
+              >
+                {" "}
+                Register
+                {registerDropdownDisplay && (
+                  <div className="absolute w-[200px] top-12 left-0 py-2 px-4 text-left rounded-md bg-white text-[#0351A3] shadow-md  z-20">
+                    <Link to="/dev-signup" className="block hover:text-black">
+                      Developer Register
+                    </Link>
+                    <Link
+                      to="/company-signup"
+                      className="block hover:text-black"
+                    >
+                      Business Register
+                    </Link>
+                  </div>
+                )}
+              </RegularButton>
+            </>
+          )}
+        </nav>
 
         <h1
           className="text-[#6C94F7] md:hidden text-2xl"

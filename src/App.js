@@ -133,9 +133,9 @@ const App = () => {
               <Route path="/details" element={<JobDetails />}></Route>
               <Route path="/jobapplication" element={<ApplyJob />}></Route>
               <Route path="/loginsignup" element={<LoginSignup />}></Route>
-              <Route path="/devlogin" element={<Login route="user" />}></Route>
+              <Route path="/dev-login" element={<Login route="user" />}></Route>
               <Route
-                path="/companyLogin"
+                path="/company-login"
                 element={
                   <Login
                     route="company"
@@ -144,8 +144,8 @@ const App = () => {
                   />
                 }
               ></Route>
-              <Route path="/devsignup" element={<SignUp />}></Route>
-              <Route path="/companySignUp" element={<BusReg />}></Route>
+              <Route path="/dev-signup" element={<SignUp />}></Route>
+              <Route path="/company-signup" element={<BusReg />}></Route>
               <Route path="/jobs" element={<JobsPage />}></Route>
               <Route path="/internships" element={<InternshipPage />}></Route>
               <Route path="/jobform" element={<JobForm />}></Route>
