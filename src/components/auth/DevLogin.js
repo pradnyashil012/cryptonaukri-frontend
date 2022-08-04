@@ -49,7 +49,7 @@ const Login = ({ setCookie }) => {
             setCookie("token", response.headers.authorization, {
               expires: expireDate,
               path: "/",
-              // domain: ".cryptonaukri.com",
+              domain: ".cryptonaukri.com",
             });
           } catch (error) {
             alert(";p");
