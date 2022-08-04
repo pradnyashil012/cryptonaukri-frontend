@@ -8,7 +8,7 @@ import Footer from "./components/homepage/Components/Footer.jsx";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import { Box, createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
-import LandingPage from './components/homepage/landingPage.jsx'
+import LandingPage from "./components/homepage/landingPage.jsx";
 import JobForm from "./components/jobPost/jobForm";
 import { ToastContainer } from "react-toastify";
 import Resume from "./components/userResume/rsume";
@@ -81,30 +81,24 @@ theme = responsiveFontSizes(theme);
 const App = () => {
   const classes = useStyles();
 
-  const [cookies, setCookie] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const API = process.env.REACT_APP_API_ENDPOINT;
 
   const fetchData = async (token) => {
     try {
-      const response = await axios.get(
-        `${API}/api/v1/user/loggedInUserDetails`,
-        {
+      await axios.get(`${API}/api/v1/user/loggedInUserDetails`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      try {
+        await axios.get(`${API}/api/v1/business/loggedInBusinessDetails`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-    } catch (error) {
-      try {
-        const response = await axios.get(
-          `${API}/api/v1/business/loggedInBusinessDetails`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        });
       } catch (e) {
         console.error(error);
         navigate("/auth/logout");
@@ -133,21 +127,12 @@ const App = () => {
             <Routes>
               <Route path="/" element={<LandingPage />}></Route>
               <Route
-                 
                 path="/businessprofile"
                 element={<BussinessProfile />}
               ></Route>
-              <Route   path="/details" element={<JobDetails />}></Route>
-              <Route
-                 
-                path="/jobapplication"
-                element={<ApplyJob />}
-              ></Route>
-              <Route
-                 
-                path="/loginsignup"
-                element={<LoginSignup />}
-              ></Route>
+              <Route path="/details" element={<JobDetails />}></Route>
+              <Route path="/jobapplication" element={<ApplyJob />}></Route>
+              <Route path="/loginsignup" element={<LoginSignup />}></Route>
               <Route path="/devlogin" element={<Login route="user" />}></Route>
               <Route
                 path="/companyLogin"
@@ -179,7 +164,17 @@ const App = () => {
               <Route
                 path="/auth/devlogin"
                 element={
-                  <AuthDevLogin setCookie={setCookie} cookies={cookies} />
+                  <>
+                    <AuthDevLogin setCookie={setCookie} cookies={cookies} />
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/auth/logout"
+                element={
+                  <>
+                    <AuthDevLogout removeCookie={removeCookie} />
+                  </>
                 }
               ></Route>
               <Route path="/auth/logout" element={<AuthDevLogout />}></Route>
