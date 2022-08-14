@@ -41,7 +41,7 @@ const landingPage = () => {
   return (
     <div className="testing-homepage"> 
       <Hero />
-      <Web3Hack /> 
+      {/* <Web3Hack />  */}
       <StartupIssue />
       <StartupSolution />
       <Problem
