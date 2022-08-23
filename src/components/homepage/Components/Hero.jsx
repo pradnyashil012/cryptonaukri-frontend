@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import herobg from "../Assets/herobg.png";
 import RegularButton from "./RegularButton";
 import heroImg from "../Assets/heroImg.png";
@@ -21,7 +22,7 @@ const Hero = () => {
             <div className="mt-6 w-full md:flex md:justify-start gap-6">
               <RegularButton>Post a job</RegularButton> 
                <div className="md:hidden my-4"></div>
-              <RegularButton>Find a job</RegularButton>
+              <Link to='/jobs'><RegularButton>Find a job</RegularButton></Link>
             </div>
           </div>
           <div className="flex items-center justify-end">
