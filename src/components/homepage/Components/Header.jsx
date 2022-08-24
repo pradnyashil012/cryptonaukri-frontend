@@ -9,8 +9,8 @@ import "../Styles/Header.css";
 import { useCookies } from "react-cookie";
 const Header = () => {
   // this state will control the display of menu icons and menubar in mobile devices
-  const [cookies, setCookie] = useCookies(["token"]);
-  console.log(cookies.token);
+  const [cookies, removeCookie] = useCookies('token');
+  console.log(cookies);
   const [menuDisplay, setMenuDisplay] = useState(true);
   const [registerDropdownDisplay, setRegisterDropdownDisplay] = useState(false);
   const [loginDropdownDisplay, setLoginDropdownDisplay] = useState(false);
