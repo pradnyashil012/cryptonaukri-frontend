@@ -11,6 +11,10 @@ import developerSolution from "./Assets/programmer-solution.png";
 import businessProblem from "./Assets/business-problmem.png";
 import businessSolution from "./Assets/business-solution.png"
 import Web3Hack from "./Components/Web3Hack";
+<<<<<<< HEAD
+=======
+import Header from "./Components/Header";
+>>>>>>> dev
 const landingPage = () => {
   const developerProblems = [
     "Affordable training for Web3 development.",
@@ -39,6 +43,11 @@ const landingPage = () => {
 
   ]
   return (
+<<<<<<< HEAD
+=======
+    <div>
+      {/* <Header /> */}
+>>>>>>> dev
     <div className="testing-homepage"> 
       <Hero />
       {/* <Web3Hack />  */}
@@ -80,6 +89,10 @@ const landingPage = () => {
       <Discord />
       
     </div>
+<<<<<<< HEAD
+=======
+    </div>
+>>>>>>> dev
   );
 };
 

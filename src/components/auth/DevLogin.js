@@ -3,8 +3,80 @@ import ForgotPassword from "./ForgotPassword";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+//Importing material UI Components
+import { Box, createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
+
+import {
+  Typography,
+  TextField,
+  OutlinedInput,
+  Button,
+  InputAdornment,
+  FormControlLabel,
+  Checkbox,
+  IconButton,
+  Container,
+  Select,
+  InputLabel,
+  MenuItem,
+  Grid,
+  FormControl,
+} from "@material-ui/core";
+
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import CircularProgress from "@mui/material/CircularProgress";
+
+
+//Adding Styles
+const useStyles = makeStyles((theme) => ({
+  formContainer: {
+    padding: "20px",
+    margin: "0 auto",
+    backgroundColor: "white",
+    borderRadius: "5px",
+    boxShadow: "0 0 10px silver",
+    maxWidth: "600px",
+  },
+  heading: {
+    margin: "20px 10%",
+    color: theme.palette.primary.main,
+    fontWeight: "bolder",
+    textAlign: "center",
+  },
+  label: {
+    backgroundColor: "white",
+    padding: "2px 5px",
+    marginTop: "-5px",
+  },
+  inputContainer: {
+    margin: "30px 0",
+  },
+  Button: {
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+      color: "white",
+    },
+  },
+  buttonBox: {
+    textAlign: "center",
+    paddingTop: "20px",
+  },
+  body: {
+    marginTop: "100px",
+    height: "80vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));
+
+
+
 const Login = ({ setCookie }) => {
   const navigate = useNavigate();
+
+  //Defining Classes
+  const classes = useStyles();
 
   var url_string = window.location.href;
   var url = new URL(url_string);
@@ -19,6 +91,25 @@ const Login = ({ setCookie }) => {
   // const [nPassWrongs, setNPassWrongs] = useState(0);
 
   const API = process.env.REACT_APP_API_ENDPOINT;
+
+  const [values, setValues] = useState({
+    showPassword: false,
+  });
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handlePassChange = (e) => {
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -100,6 +191,7 @@ const Login = ({ setCookie }) => {
   };
 
   return (
+<<<<<<< HEAD
     <main className="bg-gray-900">
       <div className="max-w-xl mx-auto rounded bg-gray-900">
         <br />
@@ -119,9 +211,103 @@ const Login = ({ setCookie }) => {
               <div className="mb-4 bg-red-400 text-white px-2 py-2 rounded text-xs">
                 {loginError}
               </div>
+=======
+    <>
+    
+    {/* NEW code */}
+
+
+    <div>
+      {/* <Header /> */}
+    <div className={classes.body}>
+      <Container>
+        <div className={classes.heading}>
+          <Typography variant="h4">
+            <Box
+              sx={{
+                fontWeight: "bold",
+              }}
+            >
+              {"Developer Login"}
+            </Box>
+          </Typography>{" "}
+        </div>
+        <Box component="form" className={classes.formContainer}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel
+                  className={classes.label}
+                  htmlFor="outlined-adornment-name"
+                >
+                  {"Username"}                   {/* //Asking user for Email */}
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-name"
+                  type="text"
+                  value={email}
+                  // onChange={handleEmailChange}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  name="comp"
+                  label="Company Name"
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel
+                  className={classes.label}
+                  htmlFor="outlined-adornment-name"
+                >
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  variant="outlined"
+                  placeholder="Enter Password"
+                  name="password"
+                  fullWidth
+                  type={values.showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={handlePassChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>{" "}
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+
+          <Box className={classes.buttonBox}>
+            {loading ? (
+              <CircularProgress />
+>>>>>>> dev
             ) : (
-              <></>
+              <Button
+                onClick={handleSubmit}
+                variant="outlined"
+                color="primary"
+                className={classes.Button}
+              >
+                Login{" "}                                                    {/* // The Login Button */}
+              </Button>
             )}
+<<<<<<< HEAD
             <div className="flex items-center bg-gray-700 rounded shadow-sm mb-4">
               <span className="px-3">
                 <svg
@@ -169,9 +355,16 @@ const Login = ({ setCookie }) => {
             {/* <ForgotPassword /> */}
             <button
               type="button"
+=======
+          </Box>
+          <Box className={classes.buttonBox}>
+            <Button
+              // onClick={handleForgotPassword}
+>>>>>>> dev
               onClick={() => {
                 navigate("/resetPassWord");
               }}
+<<<<<<< HEAD
               className="mb-4 mt-1 text-xs text-md text-gray-500 text-center underline text-cyan-500 rounded-lg py-1 px-2 m-auto"
             >
               Forgot your password ?
@@ -214,6 +407,20 @@ const Login = ({ setCookie }) => {
       <br />
       <br />
     </main>
+=======
+              variant="outlined"
+              color="primary"
+              className={classes.Button}
+            >
+              Forgot Password ?{" "}                                            {/* // The Forgot Password Button */}
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </div>
+    </div>
+    </>
+>>>>>>> dev
   );
 };
 
