@@ -219,7 +219,7 @@ const Login = ({ setCookie }) => {
                   className={classes.label}
                   htmlFor="outlined-adornment-name"
                 >
-                  {"user"}                   {/* //Asking user for Email */}
+                  {"Username"}                   {/* //Asking user for Email */}
                 </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-name"

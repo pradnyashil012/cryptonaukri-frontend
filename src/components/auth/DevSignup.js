@@ -215,7 +215,7 @@ const Signup = ({ setCookie }) => {
         <br />
         <br />
 
-        <div className='bg-white shadow-xl shadow-gray-800 rounded pt-2 pb-16 ml-3 mr-3'>
+        <div className='bg-white shadow-2xl rounded pt-2 pb-16 ml-3 mr-3'>
           <br />
           <div className='text-center text-gray-700 mb-6 text-2xl font-semibold'>
             👷 Developer Sign-Up
