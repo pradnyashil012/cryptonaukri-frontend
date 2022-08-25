@@ -20,10 +20,12 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CircularProgress from "@mui/material/CircularProgress";
+
+import { useCookies } from "react-cookie";
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -77,6 +79,8 @@ const Login = (props) => {
   var redirectType = url.searchParams.get("redirecttype");
   var redirectid = url.searchParams.get("redirectid");
 
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+
   const navigate = useNavigate();
   const classes = useStyles();
 
@@ -118,7 +122,7 @@ const Login = (props) => {
       if (props.route === "company") {
         try {
           setLoading(true);
-          const response = await Axios.post(`${API}api/v1/business/login`, {
+          const response = await axios.post(`${API}api/v1/business/login`, {
             email,
             password,
           });
@@ -153,22 +157,31 @@ const Login = (props) => {
       } else if (props.route === "user") {
         try {
           setLoading(true);
-          const response = await Axios.post(`${API}api/v1/user/login`, {
+          const response = await axios.post(`${API}api/v1/user/login`, {
             email,
             password,
           });
           const data = response.data;
           setLoading(false);
           console.log(data);
+          
           localStorage.setItem("token", response.headers["authorization"]);
           localStorage.setItem("login", true);
-          localStorage.setItem("cUser", data.cUser);
+          localStorage.setItem("cUser", "DEVELOPER");
+          const timestamp = new Date().getTime();
+          const expire = timestamp + 60 * 60 * 24 * 1000 * 2;
+          const expireDate = new Date(expire);
+          setCookie("token", response.headers.authorization, {
+            expires: expireDate,
+            path: "/",
+            //domain: ".cryptonaukri.com",
+          });
           toast.success(data.message);
           if (redirectType === "internship" || redirectType === "job") {
             navigate(`/jobapplication?id=${redirectid}&type=${redirectType}`);
             return;
           }
-          navigate("/jobspage");
+          navigate("/jobs");
         } catch (error) {
           const errorResponse = JSON.parse(error.request.response);
           //console.log((errorResponse));
