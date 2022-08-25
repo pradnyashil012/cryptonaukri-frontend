@@ -70,7 +70,7 @@ const Navbar = () =>{
                         // need to access from cookies when cookies applied over whole site
                         token ?
                         <div className="flex items-center gap-2">
-                            <div onClick={()=>{navigate('/profile')}} className='cursor-pointer'><CgProfile size={30}/></div>
+                            <div onClick={()=>{navigate('/profile')}} className='cursor-pointer'><CgProfile size={30}/></div>       {/*Routing Error*/}
                             <div onClick={()=>logout()} className="cursor-pointer">Sign out</div>
                         </div> :
                         <div className="flex items-center gap-3">
