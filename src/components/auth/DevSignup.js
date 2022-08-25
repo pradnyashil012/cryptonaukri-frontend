@@ -206,8 +206,8 @@ const Signup = ({ setCookie }) => {
   };
 
   return (
-    <main className='bg-gray-900 login-tailwind-font'>
-      <div className='max-w-xl mx-auto rounded bg-gray-900'>
+    <main className='bg-gray-300 login-tailwind-font'>
+      <div className='max-w-xl mx-auto rounded bg-gray-300'>
         <br />
         <br />
         <br />
@@ -215,9 +215,9 @@ const Signup = ({ setCookie }) => {
         <br />
         <br />
 
-        <div className='bg-gray-800 shadow-lg shadow-gray-800 rounded pt-2 pb-16 ml-3 mr-3'>
+        <div className='bg-white shadow-2xl rounded pt-2 pb-16 ml-3 mr-3'>
           <br />
-          <div className='text-center text-gray-300 mb-6 text-2xl font-semibold'>
+          <div className='text-center text-gray-700 mb-6 text-2xl font-semibold'>
             👷 Developer Sign-Up
           </div>
           {step === 1 && (
@@ -231,13 +231,13 @@ const Signup = ({ setCookie }) => {
               )}
 
               <p className='text-blue-400 '>Your Name</p>
-              <div className='flex items-center bg-gray-800 rounded shadow-sm mb-4 gap-x-2'>
+              <div className='flex items-center rounded shadow-sm mb-4 gap-x-2'>
                 <input
                   value={firstName}
                   onChange={(e) => {
                     setFirstName(e.target.value);
                   }}
-                  className='p-2 text-gray-300 bg-gray-700 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
+                  className='p-2 text-gray-900 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
                   type='text'
                   placeholder='First Name '
                   autocomplete='do-not-autofill'
@@ -247,7 +247,7 @@ const Signup = ({ setCookie }) => {
                   onChange={(e) => {
                     setLastName(e.target.value);
                   }}
-                  className='p-2 text-gray-300 bg-gray-700 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
+                  className='p-2 text-gray-900  w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
                   type='text'
                   placeholder='Last Name '
                   autocomplete='do-not-autofill'
@@ -255,13 +255,13 @@ const Signup = ({ setCookie }) => {
               </div>
 
               <p className='text-blue-400 '>Email and Mobile Number</p>
-              <div className='flex items-center bg-gray-800 rounded shadow-sm mb-4 gap-x-2'>
+              <div className='flex items-center  rounded shadow-sm mb-4 gap-x-2'>
                 <input
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
-                  className='p-2 text-gray-300 bg-gray-700 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
+                  className='p-2 text-gray-900 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
                   type='text'
                   placeholder='Email '
                   autocomplete='do-not-autofill'
@@ -271,7 +271,7 @@ const Signup = ({ setCookie }) => {
                   onChange={(e) => {
                     setPhoneNumber(e.target.value);
                   }}
-                  className='p-2 text-gray-300 bg-gray-700 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
+                  className='p-2 text-gray-900 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
                   type='text'
                   placeholder='Mobile Number'
                   autocomplete='do-not-autofill'
@@ -279,13 +279,13 @@ const Signup = ({ setCookie }) => {
               </div>
 
               <p className='text-blue-400 '>Your City</p>
-              <div className='flex items-center bg-gray-800 rounded shadow-sm mb-4'>
+              <div className='flex items-center rounded shadow-sm mb-4'>
                 <input
                   value={location}
                   onChange={(e) => {
                     setLocation(e.target.value);
                   }}
-                  className='p-2 text-gray-300 bg-gray-700 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
+                  className='p-2 text-gray-900 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
                   type='text'
                   placeholder='City '
                   autocomplete='do-not-autofill'
@@ -293,13 +293,13 @@ const Signup = ({ setCookie }) => {
               </div>
 
               <p className='text-blue-400 '>Password</p>
-              <div className='bg-gray-700 flex items-center rounded shadow-sm'>
+              <div className=' flex items-center rounded shadow-sm'>
                 <input
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
-                  className='p-2 text-gray-300 bg-gray-700 w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
+                  className='p-2 text-gray-900  w-full h-12 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded'
                   type='password'
                   placeholder='Password'
                   autocomplete='do-not-autofill'
