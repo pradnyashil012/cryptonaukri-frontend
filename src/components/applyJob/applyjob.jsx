@@ -327,7 +327,7 @@ const ApplyJob = (props) => {
     }
 
     {
-      (stage == 2) &&
+      stage === 2 ? 
         <div className='px-3 pt-28 mx-auto w-full max-w-4xl md:px-0 h-screen'>
           <div className=''>
             <div className='text-2xl flex items-center'>Answer the following to questions to move forward</div>
@@ -353,18 +353,20 @@ const ApplyJob = (props) => {
               <button onClick={() => {setStage(1)}} className='px-3 py-1.5 rounded-md bg-slate-400 hover:bg-slate-500'>BACK</button>
             </div>
           </div>
-        </div> 
+        </div> : 
+      null
     }
 
       {
-        (stage == 3) &&
+        stage === 3 ? 
           <div className='px-3 pt-28 mx-auto w-full max-w-4xl md:px-0 h-screen'>
             <div className='flex flex-col items-center'>
               <div className='flex items-center text-2xl text-green-600 text-center'>Congratulations! you have successfully applied for the job.</div>
               <div className='text-center '>Rest assured your application is sent to the recruiter.</div>
               <button onClick={() => {setStage(1)}} className='mt-4 px-3 py-1.5 rounded-md bg-slate-400 hover:bg-slate-500' >BACK</button>
             </div>
-          </div>
+          </div> : 
+        null
       }
     </div>
   );

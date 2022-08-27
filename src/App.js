@@ -5,7 +5,8 @@ import Header from "./components/homepage/Components/Header";
 import InternshipPage from "./components/internshipPage";
 import JobsPage from "./components/JobsPage";
 import Footer from "./components/homepage/Components/Footer.jsx";
-import SignUp from "./components/SignUp";import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
 import { Box, createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
 import LandingPage from "./components/homepage/landingPage.jsx";
 import JobForm from "./components/jobPost/jobForm";
@@ -111,7 +112,9 @@ const App = () => {
   useEffect(() => {
     if (cookies.token) {
       fetchData(cookies.token);
-    } 
+    } else {
+      console.log("token not exits");
+    }
   }, []);
 
   return (
@@ -130,7 +133,7 @@ const App = () => {
               <Route path="/details" element={<JobDetails />}></Route>
               <Route path="/jobapplication" element={<ApplyJob />}></Route>
               <Route path="/loginsignup" element={<LoginSignup />}></Route>
-              <Route path="/dev-login" element={<Login route="user" cookies={cookies}/>}></Route>
+              <Route path="/dev-login" element={<Login route="user" />}></Route>
               <Route
                 path="/company-login"
                 element={
