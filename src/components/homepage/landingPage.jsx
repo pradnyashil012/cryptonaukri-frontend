@@ -43,11 +43,8 @@ const landingPage = () => {
 
   ]
   return (
-<<<<<<< HEAD
-=======
     <div>
       {/* <Header /> */}
->>>>>>> dev
     <div className="testing-homepage"> 
       <Hero />
       {/* <Web3Hack />  */}
@@ -87,12 +84,8 @@ const landingPage = () => {
       /> 
       <Goal />
       <Discord />
-      
+      </div>
     </div>
-<<<<<<< HEAD
-=======
-    </div>
->>>>>>> dev
   );
 };
 
