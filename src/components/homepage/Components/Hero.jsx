@@ -22,7 +22,9 @@ const Hero = () => {
             <div className="mt-6 w-full md:flex md:justify-start gap-6">
               <RegularButton>Post a job</RegularButton> 
                <div className="md:hidden my-4"></div>
-               <Link to='/jobs'><RegularButton>Find a job</RegularButton></Link>
+
+              <Link to='/jobs'><RegularButton>Find a job</RegularButton></Link>
+
             </div>
           </div>
           <div className="flex items-center justify-end">
