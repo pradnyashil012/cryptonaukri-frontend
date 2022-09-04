@@ -1,6 +1,5 @@
 // import React from 'react'
 // import RegularButton from './RegularButton'
-
 // const Web3Hack = () => {
 //   return( <>
 // <<<<<<< HEAD
