@@ -353,12 +353,6 @@ const ApplyJob = (props) => {
               <button onClick={() => {setStage(1)}} className='px-3 py-1.5 rounded-md bg-slate-400 hover:bg-slate-500'>BACK</button>
             </div>
           </div>
-        </div> : 
-      null
-    }
-
-      {
-        stage === 3 ? 
           <div className='px-3 pt-28 mx-auto w-full max-w-4xl md:px-0 h-screen'>
             <div className='flex flex-col items-center'>
               <div className='flex items-center text-2xl text-green-600 text-center'>Congratulations! you have successfully applied for the job.</div>
