@@ -42,6 +42,24 @@ const landingPage = () => {
       {/* <Header /> */}
     <div className="testing-homepage"> 
       <Hero />
+     {/* Below div:  Temporarily for bootcamp */}
+      <div className="py-20">
+      <div className="flex flex-col items-center text-center justify-center text-2xl md:text-5xl text-[#003979] font-extrabold">
+        WEB3 
+        <div className="md:hidden">
+        </div>
+         Development Bootcamp
+      </div>
+        <div className="flex flex-col mt-8 text-center items-center justify-center">
+          <b className="mb-4 font-semibold text-md md:text-lg">CryptoNaukri presents
+          <div className="md:hidden">
+          </div>
+           Web3 development Bootcamp</b>
+          <p className=" text-sm px-3 md:text-lg">Full Stack Web3 Development, Ethereum, Hyperledger, Hyperledger Fabric, Hyperledger Indy, etc. will be covered in just 3 months!</p>
+          <p className=" text-sm px-3 md:text-lg"> with <b>8+ web3 projects</b> and <b>guaranteed web3 developer job </b></p>
+          <button href="https://web3bootcamp.cryptonaukri.com/" target="_blank" className='border-2 rounded-lg text-white mr-4 border-[#003979] bg-[#003979] font-semibold px-12 py-2 mt-7 inline-block hover:bg-transparent hover:text-[#003979]'><p className=" hover:text-[#003979]">Learn more !</p></button>
+        </div>
+     </div>
       {/* <Web3Hack />  */}
       <StartupIssue />
       <StartupSolution />
