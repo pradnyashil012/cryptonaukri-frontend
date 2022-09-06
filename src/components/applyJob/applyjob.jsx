@@ -360,7 +360,8 @@ const ApplyJob = (props) => {
               <button onClick={() => {setStage(1)}} className='mt-4 px-3 py-1.5 rounded-md bg-slate-400 hover:bg-slate-500' >BACK</button>
             </div>
           </div> : 
-        null
+          </div> : 
+        <></>
       }
     </div>
   );
