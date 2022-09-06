@@ -9,8 +9,7 @@ import "../Styles/Header.css";
 import { useCookies } from "react-cookie";
 const Header = () => {
   // this state will control the display of menu icons and menubar in mobile devices
-  const [cookies, setCookie] = useCookies(["token"]);
-  console.log(cookies.token);
+  const login = localStorage.getItem("login")
   const [menuDisplay, setMenuDisplay] = useState(true);
   const [registerDropdownDisplay, setRegisterDropdownDisplay] = useState(false);
   const [loginDropdownDisplay, setLoginDropdownDisplay] = useState(false);
@@ -27,7 +26,7 @@ const Header = () => {
           <Link to="/internships">Internships</Link>
           <Link to="/jobs">Jobs</Link>
 
-          {cookies.token ? (
+          {login ? (
             <RegularButton to="/auth/logout"> Sign Out</RegularButton>
           ) : (
             <>
@@ -39,7 +38,7 @@ const Header = () => {
                 Login
                 {loginDropdownDisplay && (
                   <div className="absolute w-[200px] top-12 left-0 py-2 px-4 text-left rounded-md bg-white text-[#0351A3] shadow-md z-30">
-                    <Link to="/dev-login" className="block hover:text-black">
+                    <Link to="/auth/devlogin" className="block hover:text-black">
                       Developer Login
                     </Link>
                     <Link

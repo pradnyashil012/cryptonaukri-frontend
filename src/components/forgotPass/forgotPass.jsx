@@ -235,7 +235,7 @@ const Reset = (props) => {
                       <InputLabel className={classes.label} htmlFor="outlined-adornment-name">Re-enter Password</InputLabel>
                       <OutlinedInput
                         id="outlined-adornment-name"
-                        type='text'
+                        type='password'
                         value={confPass}
                         onChange={handlePassword2}
                         name='Re Password'

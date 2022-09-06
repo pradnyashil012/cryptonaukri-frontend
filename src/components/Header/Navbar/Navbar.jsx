@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { HiOutlineTerminal } from "react-icons/hi";
 import { MdBusiness } from "react-icons/md";
 import "./navbar.scss";
-
+import { useCookies } from "react-cookie";
 const Navbar = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
@@ -12,7 +12,8 @@ const Navbar = () => {
   const [signupActive, setSignupActive] = useState(false);
 
   // need to access from cookies when cookies applied over whole site
-  const token = localStorage.getItem("token");
+  //const token = localStorage.getItem("token");
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]); 
 
   const gotohome = () => {
     navigate("/");
@@ -172,7 +173,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           {
             // need to access from cookies when cookies applied over whole site
-            token ? (
+            cookies ? (
               <div className="flex items-center gap-2">
                 <div
                   onClick={() => {
