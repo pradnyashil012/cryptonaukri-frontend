@@ -8,12 +8,8 @@ import Footer from "./components/homepage/Components/Footer.jsx";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import { Box, createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
-<<<<<<< HEAD
 import LandingPage from "./components/homepage/landingPage.jsx";
-=======
-// import Landing from "./components/homepage/landingT";
-import LandingPage from "./components/homepage/landingPage"
->>>>>>> dev
+
 import JobForm from "./components/jobPost/jobForm";
 import { ToastContainer } from "react-toastify";
 import Resume from "./components/userResume/rsume";
@@ -132,20 +128,6 @@ const App = () => {
             <Routes>
               <Route path="/" element={<LandingPage />}></Route>
               <Route
-<<<<<<< HEAD
-=======
-                exact
-                path="/"
-                element={
-                  <>
-                    {/* <Landing /> */}
-                    <LandingPage />
-                  </>
-                }
-              ></Route>
-              <Route
-                exact
->>>>>>> dev
                 path="/businessprofile"
                 element={<BussinessProfile />}
               ></Route>
