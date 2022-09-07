@@ -43,23 +43,38 @@ const landingPage = () => {
     <div className="testing-homepage"> 
       <Hero />
      {/* Below div:  Temporarily for bootcamp */}
-      <div className="py-20">
+      <div className="mt-20">
       <div className="flex flex-col items-center text-center justify-center text-2xl md:text-5xl text-[#003979] font-extrabold">
-        WEB3 
+        <p className="hidden md:block"> WEB3 Development Bootcamp</p>
+        <div className="md:hidden">
+        <p>WEB3</p>
         <div className="md:hidden">
         </div>
-         Development Bootcamp
+        <p>Development Bootcamp</p>
+        </div>
       </div>
         <div className="flex flex-col mt-8 text-center items-center justify-center">
-          <b className="mb-4 font-semibold text-md md:text-lg">CryptoNaukri presents
+          <p className="hidden md:block mb-4 font-semibold text-lg">Cryptonaukri presents WEB3 development bootcamp</p>
           <div className="md:hidden">
+            <b className="mb-4 font-semibold text-md md:text-lg">CryptoNaukri presents
+            <div className="md:hidden">
+            </div>
+             Web3 development Bootcamp</b>
           </div>
-           Web3 development Bootcamp</b>
-          <p className=" text-sm px-3 md:text-lg">Full Stack Web3 Development, Ethereum, Hyperledger, Hyperledger Fabric, Hyperledger Indy, etc. will be covered in just 3 months!</p>
+          <p className=" text-sm mt-3 px-3 md:text-lg">Full Stack Web3 Development, Ethereum, Hyperledger, Hyperledger Fabric, Hyperledger Indy, etc. will be covered in just 3 months!</p>
           <p className=" text-sm px-3 md:text-lg"> with <b>8+ web3 projects</b> and <b>guaranteed web3 developer job </b></p>
-          <button href="https://web3bootcamp.cryptonaukri.com/" target="_blank" className='border-2 rounded-lg text-white mr-4 border-[#003979] bg-[#003979] font-semibold px-12 py-2 mt-7 inline-block hover:bg-transparent hover:text-[#003979]'><p className=" hover:text-[#003979]">Learn more !</p></button>
+          <a href="https://web3bootcamp.cryptonaukri.com/" target="_blank" className='border-2 rounded-lg text-white mr-4 border-[#003979] bg-[#003979] font-semibold px-12 py-2 mt-7 inline-block hover:bg-transparent hover:text-[#003979]'><p className=" hover:text-[#003979]">Learn more !</p></a>
+          <p className="mt-12 font-bold text-2xl">OR</p>
         </div>
      </div>
+
+
+     <div className='flex flex-col items-center text-center justify-center  my-12'>
+      <p className='font-bold text-5xl text-[#003979]'>Connect with founder !</p>
+      <p className="my-4">Schedule online meet with founder for more details !</p>
+      <a href="https://calendly.com/cryptonaukri/cryptonaukri-web3-development-bootcamp-discussion" target="_blank" className='border-2 mt-1 border-[#003979] text-[#003979] font-semibold rounded-md px-12 py-2 inline-block hover:bg-[#003979] hover:text-white hover:cursor-pointer'>Schedule now !</a>
+    </div>
+
       {/* <Web3Hack />  */}
       <StartupIssue />
       <StartupSolution />
