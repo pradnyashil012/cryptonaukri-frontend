@@ -60,7 +60,7 @@ const Header = () => {
                 Register
                 {registerDropdownDisplay && (
                   <div className="absolute w-[200px] top-12 left-0 py-2 px-4 text-left rounded-md bg-white text-[#0351A3] shadow-md  z-20">
-                    <Link to="/dev-signup" className="block hover:text-black">
+                    <Link to="/auth/devsignup" className="block hover:text-black">
                       Developer Register
                     </Link>
                     <Link
