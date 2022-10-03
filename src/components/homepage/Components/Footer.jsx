@@ -47,10 +47,13 @@ const Footer = () => {
             <Link to="/privacy" className="text-md   block   my-2">
               Privacy Policy
             </Link>
+            <Link to="/refundpolicy" className="text-md   block   my-2">
+              Refund Policy
+            </Link>
             <Link to="/dcma" className="text-md   block   my-2">
              DCMA
             </Link>
-            <Link to="/" className="text-md   block   my-2">
+            <Link to="/terms" className="text-md   block   my-2">
               Terms and Conditions
             </Link>
           </div>

@@ -28,6 +28,7 @@ import Otp from "./components/otp/otp";
 import JobDetails from "./components/JobDetails/JobDetails";
 import ApplyJob from "./components/applyJob/applyjob";
 import Profile from "./components/User/UserDashbaord";
+import Refundpolicy from "./components/Redundpolicy"
 
 import AuthDevLogin from "./components/auth/DevLogin";
 import AuthDevSignUp from "./components/auth/DevSignup";
@@ -186,6 +187,7 @@ const App = () => {
                 }
               ></Route>
               <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/refundpolicy" element={<Refundpolicy />}></Route>
             </Routes>
           </Box>
           <Footer />

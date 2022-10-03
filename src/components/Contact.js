@@ -16,8 +16,12 @@ const Contact = () => {
         <div className="mt-5 text-lg text-center px-20">
           <p>
             If you have any query regrading Site, Advertisement and any other
-            issue, please feel free to contact at{" "}
-            <b className="tracking-wider text-cyan-600">support@cryptonaukri.com</b>
+            issue, please feel free to contact at{" "}<br/>
+            <b className="tracking-wider text-cyan-600"><b>Contact number: </b> +91 87883 05490</b>
+            <br/>
+            <b className="tracking-wider text-cyan-600"><b>e-mail: </b> support@cryptonaukri.com</b>
+            <br/>
+            <b className="tracking-wider text-cyan-600"><b>Address: </b> JV55+W3V, Civil Line, Churhe Bada, Brahmapuri, Maharashtra 441206</b>
           </p>
         </div>
 
