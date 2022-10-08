@@ -36,6 +36,7 @@ import AuthDevLogout from "./components/auth/Logout";
 
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import Workshop from "./components/workshop/Workshop";
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
@@ -133,6 +134,7 @@ const App = () => {
                 element={<BussinessProfile />}
               ></Route>
               <Route path="/details" element={<JobDetails />}></Route>
+              <Route path="/workshop" element={<Workshop />}></Route>
               <Route path="/jobapplication" element={<ApplyJob />}></Route>
               <Route path="/loginsignup" element={<LoginSignup />}></Route>
               <Route path="/dev-login" element={<Login route="user" />}></Route>
