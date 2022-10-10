@@ -1,8 +1,14 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {BsPlusLg, BsClock} from "react-icons/bs"
 import { useLocation } from "react-router-dom";
 import {TiTick} from "react-icons/ti"
 import {IoMdDownload} from "react-icons/io"
+
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Curriculum = () => {
 
@@ -126,12 +132,19 @@ const Curriculum = () => {
 
     const location = useLocation();
 
+    const [expanded, setExpanded] = useState(false);
+
+    const handleChange =
+        (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+        };
+
   return (
     <div className=' px-4 border-t-2 pt-20 mb-12 md:px-20'>
 
-        {location.pathname==="/" ? <></> : <>
+        {location.pathname==="/workshop" ? <></> : <>
             <div className='flex my-4'>
-                <a href='/' className='text-black text-lg font-semibold'>{"< "}back</a>
+                <a href='/workshop' className='text-black text-lg font-semibold'>{"< "}back</a>
             </div>
         </>}
 
@@ -167,27 +180,35 @@ const Curriculum = () => {
 
         {/* Carousel div */}
         <div className='shadow-md mx-auto mt-20  w-full md:w-2/3'>
-        {location.pathname==="/curriculum" ?<>            
-            {content.map((item, i) => {
+        {location.pathname==="/workshop_curriculum" ?<>            
+        {content.map((item, i) => {
                 return (
                 <>
-                    <div className='overflow-hidden border-t'>
-                        <label>
-                        <input className='absolute opacity-0 peer' type="checkbox"></input>
-                        <div className='flex items-center cursor-pointer justify-between'>
-                            <div className='p-5'>
-                                <p className=' m-0 font-semibold'>{item.title}</p>
-                                <div className='flex items-center mt-2 text-xs '><BsClock className='m-0 mr-1'/><p className='text-xs m-0'>{item.week}</p></div>
-                            </div>
-                            <BsPlusLg className=' h-12 float-right peer-checked:rotate-45 peer-checked:text-indigo-500 mr-4'/>
-                        </div>
-                        {(i!=10 && i!=11) && item.desc.map((desc) => {
+                    <div key={i} className='my-3'>
+                    <Accordion expanded={expanded === `panel${i+1}`} onChange={handleChange(`panel${i+1}`)} style={{textAlign:"left"}}>
+                        <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        >
+                            <Typography className='py-2'><b>{item.title}</b></Typography>
+                        </AccordionSummary>
+
+                        <AccordionDetails>
+                        {(i!==10 && i!==11) && item.desc.map((desc) => {
                             return(
-                                <div className='bg-gray-300 peer-checked:border-b-2 border-white max-h-0 peer-checked:max-h-20'><p className='p-5 my-auto'>{desc}</p></div>
+                                <Typography className='py-4 border-b-2'>
+                                    {desc}
+                                </Typography>
                             );
                         })}
-                        {(i!=10 && i!=11) && <div className='bg-gray-300 max-h-0 mb-4 peer-checked:max-h-20'><p className='p-5'>{item.last_point}</p></div>}
-                        </label>
+                        </AccordionDetails>
+
+                        <AccordionDetails>
+                            {(i!=10 && i!=11) && <Typography className='py-2 m-0'>{item.last_point}</Typography>}
+                        </AccordionDetails>
+
+                    </Accordion>
                     </div>
                 </>)})}
                 </>:
@@ -195,31 +216,39 @@ const Curriculum = () => {
                 {content.slice(0,2).map((item, i) => {
                 return (
                 <>
-                    <div className='overflow-hidden border-t'>
-                        <label>
-                        <input className='absolute opacity-0 peer' type="checkbox"></input>
-                        <div className='flex items-center cursor-pointer justify-between'>
-                            <div className='p-5'>
-                                <p className=' m-0 font-semibold'>{item.title}</p>
-                                <div className='flex items-center mt-2 text-xs '><BsClock className='m-0 mr-1'/><p className='text-xs m-0'>{item.week}</p></div>
-                            </div>
-                            <BsPlusLg className=' h-12 float-right peer-checked:rotate-45 peer-checked:text-indigo-500 mr-4'/>
-                        </div>
-                        {(i!=10 && i!=11) && item.desc.map((desc) => {
+                    <div key={i} className='my-3'>
+                    <Accordion expanded={expanded === `panel${i+1}`} onChange={handleChange(`panel${i+1}`)} style={{textAlign:"left"}}>
+                        <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        >
+                            <Typography className='py-2'><b>{item.title}</b></Typography>
+                        </AccordionSummary>
+
+                        <AccordionDetails>
+                        {(i!==10 && i!==11) && item.desc.map((desc) => {
                             return(
-                                <div className='bg-gray-300 peer-checked:border-b-2 border-white max-h-0 peer-checked:max-h-20'><p className='p-5 my-auto'>{desc}</p></div>
+                                <Typography className='py-4 border-b-2'>
+                                    {desc}
+                                </Typography>
                             );
                         })}
-                        {(i!=10 && i!=11) && <div className='bg-gray-300 max-h-0 mb-4 peer-checked:max-h-20'><p className='p-5'>{item.last_point}</p></div>}
-                        </label>
+                        </AccordionDetails>
+
+                        <AccordionDetails>
+                            {(i!=10 && i!=11) && <Typography className='py-2 m-0'>{item.last_point}</Typography>}
+                        </AccordionDetails>
+
+                    </Accordion>
                     </div>
                 </>)})}
                 </>}
 
         </div>
-                {location.pathname==="/curriculum" ? <></> : <>
-                <div className='flex absolute mt-4 right-[24%]'>
-                    <a href='/curriculum' className='text-red-400'>See more..</a>
+                {location.pathname==="/workshop_curriculum" ? <></> : <>
+                <div className='flex absolute mt-2 right-[18%]'>
+                    <a href='/workshop_curriculum' className='text-red-400'>See more..</a>
                 </div>
                 </>}
     </div>

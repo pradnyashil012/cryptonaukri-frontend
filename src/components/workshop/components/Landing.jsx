@@ -52,7 +52,7 @@ const Landing = () => {
       </div>
     </div>
 
-    <div className="second-batch">
+    <div className="second-batch py-12">
       <img src={blubo} alt="blubo" />
       <div className='second-batch-text'>
         <p><span className='hr2'>Second batch for</span> <span className='hr3'>Web3</span> <span className='hr2'>Enthusiasts</span></p>

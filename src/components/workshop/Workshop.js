@@ -52,7 +52,7 @@ const Workshop = () => {
       }/>
 
       <Route exact path="/register" element={<Register />} />
-      <Route exact path="/curriculum" element={<Curriculum />} />
+      <Route exact path="/workshop_curriculum" element={<Curriculum />} />
     </Routes>
     
     </>
