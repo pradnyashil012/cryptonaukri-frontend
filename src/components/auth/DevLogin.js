@@ -3,6 +3,9 @@ import ForgotPassword from "./ForgotPassword";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 //Importing material UI Components
 import { Box, createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
 
@@ -143,6 +146,7 @@ const Login = ({ setCookie }) => {
               domain: ".cryptonaukri.com",
             });
           } catch (error) {
+            toast.error("Something went wrong!");
             alert(";p");
             console.log(error);
           }
@@ -160,7 +164,7 @@ const Login = ({ setCookie }) => {
             window.location.href = `https://community.cryptonaukri.com${redirectid}`;
             return;
           }
-
+          toast.success("Login successfull!");
           navigate("/jobs");
         }
 
@@ -171,14 +175,17 @@ const Login = ({ setCookie }) => {
           setLoginError(
             "You are not yet registered with us. Please Register your account"
           );
+          toast.error("You are not register with us. Please register first!");
           setLoading(false);
         }
         if (errResp.data.code === "INVALID") {
           setLoginError("Account has been disabled(free trial period expired)");
+          toast.error("This account has been disabled!");
           setLoading(false);
         }
         if (errResp.data.code === "WRONG_PASSWORD") {
           setLoginError("Wrong Email or Password");
+          toast.error("Wrong Email or Password");
           setLoading(false);
         }
         // setLoginError("Something went wrong!");
@@ -186,6 +193,7 @@ const Login = ({ setCookie }) => {
       }
     } else {
       setLoginError("Something went wrong!");
+      toast.error("Both Email and Password are required!");
       console.log("Email and password is required.");
     }
   };
@@ -302,6 +310,7 @@ const Login = ({ setCookie }) => {
         </Box>
       </Container>
     </div>
+    <ToastContainer />  
     </div>
     </>
   );

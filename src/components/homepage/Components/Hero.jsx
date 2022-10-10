@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import herobg from "../Assets/herobg.png";
+import bgone from "../Assets/bgone.png";
 import RegularButton from "./RegularButton";
 import heroImg from "../Assets/heroImg.png";
 const Hero = () => {
@@ -32,7 +32,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <img src={herobg} className="absolute md:top-10 top-32 opaicity-30 z-0" alt="" />
+      <img src={bgone} className="absolute md:top-10 top-32 opaicity-30 z-0" alt="" />
     </main>
   );
 };

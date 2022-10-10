@@ -19,7 +19,7 @@ const Header = () => {
   const [loginDropdownDisplay, setLoginDropdownDisplay] = useState(false);
   const [ open, setOpen] = useState(false);
   return (
-    <header className="w-full header-gradient py-3   sticky top-0">
+    <header className="w-full bg-gray-300 header-gradient py-3 text-white sticky top-0">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/">
           {" "}
@@ -27,9 +27,9 @@ const Header = () => {
         </Link>
 
         <nav className=" justify-end items-center text-black gap-4 hidden md:flex">
-          <a href="https://community.cryptonaukri.com/">COMMUNITY</a>
-          <Link to="/internships">INTERNSHIPS</Link>
-          <Link to="/jobs">JOBS</Link>
+          <a href="https://community.cryptonaukri.com/" className="text-black text-lg">Community</a>
+          <a href="/internships" className="text-black text-lg">Internships</a>
+          <a href="/jobs" className="text-black text-lg">Jobs</a>
 
           {login ? (
             <>
@@ -58,22 +58,23 @@ const Header = () => {
           ) : (
             <>
               <RegularButton
-                className="relative"
+                className="relative text-white"
                 state={loginDropdownDisplay}
                 setState={setLoginDropdownDisplay}
               >
-                Login
+                <p className="text-white m-0 text-sm">Login</p>
                 {loginDropdownDisplay && (
-                  <div className="absolute w-[200px] top-12 left-0 py-2 px-4 text-left rounded-md bg-white text-[#0351A3] shadow-md z-30">
-                    <Link to="/auth/devlogin" className="block hover:text-black">
+                  <div className="absolute w-[200px] top-12 right-8 py-2 px-4 text-left rounded-md bg-white text-[#0351A3] shadow-md z-30">
+                    <a href="/auth/devlogin" className="text-[16px] text-[#0351A3] hover:text-black">
                       Developer Login
-                    </Link>
-                    <Link
-                      to="/company-login"
-                      className="block hover:text-black"
+                    </a>
+                    <br/>
+                    <a
+                      href="/company-login"
+                      className="text-[16px] text-[#0351A3] hover:text-black"
                     >
                       Business Login
-                    </Link>
+                    </a>
                   </div>
                 )}
               </RegularButton>
@@ -84,18 +85,19 @@ const Header = () => {
                 className="relative"
               >
                 {" "}
-                Register
+                <p className="text-white m-0 text-sm">Register</p>
                 {registerDropdownDisplay && (
-                  <div className="absolute w-[200px] top-12 left-0 py-2 px-4 text-left rounded-md bg-white text-[#0351A3] shadow-md  z-20">
-                    <Link to="/auth/devsignup" className="block hover:text-black">
+                  <div className="absolute w-[200px] top-12 right-8 py-2 px-4 text-left rounded-md bg-white text-[#0351A3] shadow-md  z-20">
+                    <a href="/auth/devsignup" className=" hover:text-black text-[#0351A3] text-[16px] ">
                       Developer Register
-                    </Link>
-                    <Link
-                      to="/company-signup"
-                      className="block hover:text-black"
+                    </a>
+                    <br/>
+                    <a
+                      href="/company-signup"
+                      className=" hover:text-black text-[#0351A3] text-[16px]"
                     >
                       Business Register
-                    </Link>
+                    </a>
                   </div>
                 )}
               </RegularButton>
