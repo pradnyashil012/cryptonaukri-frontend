@@ -148,7 +148,7 @@ const EditResume = ({token, user}) =>{
 
     return (
         <>
-            <button className="bg-gray-700 rounded p-1 text-xs text-center w-full mt-1" onClick={()=>setOpenEditProfile(true)}>{user?.userResume === null ? <p>Add Resume</p> : <p>Edit Resume</p>}</button>
+            <button className="bg-gray-700 rounded p-1 text-xs text-center w-full mt-1" onClick={()=>setOpenEditProfile(true)}>{user?.userResume === null ? <p className="text-xs">Add Resume</p> : <p className="text-xs">Edit Resume</p>}</button>
 
             <div className={`${openEditProfile ? 'visible ' : 'hidden '} fixed top-0 left-0 right-0 w-screen flex justify-center h-screen bg-black/50 px-2 sm:px-20`}>
                 <div className="bg-gray-800 h-min border rounded-md mt-32 p-2 mx-4 flex flex-col w-full sm:w-1/2">

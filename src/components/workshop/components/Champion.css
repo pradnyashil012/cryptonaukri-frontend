@@ -1,0 +1,128 @@
+.champion-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding: 4rem 2rem;
+}
+
+.champion-title{
+    text-align: center;
+    padding: 3rem 0;
+    background: linear-gradient(180deg, rgba(118, 167, 220, 0.2) 0%, rgba(177, 205, 251, 0.2) 100%);
+}
+
+
+/* .champion-content{
+    display: flex;
+    flex-direction: row;
+}
+
+.champion-text{
+    text-align: left;
+    width: 48rem;
+    padding-right: 8rem;
+}
+
+.champion-image img{
+    width: 22rem;
+}
+
+.champion-image h2{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+
+    color: #003979;
+} */
+
+.switching-fast{
+    /* background-image: url('../assets/buildings.png'); */
+    padding: 3rem 5rem;
+    text-align: center;
+}
+
+.switch-title p{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+}
+
+.switch-title span{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+    color: #003979;
+}
+
+.swtich-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+
+    font-family: 'Inter';
+    font-style: normal;
+}
+
+.swtich-content p{
+    font-size: larger;
+    margin: 0;
+}
+
+.swtich-content img{
+    height: 20rem;
+
+    margin: 2rem 5rem 2rem 0;
+}
+
+
+@media screen and (max-width: 914px){
+
+    .swtich-content img{
+        height: 15rem;
+    
+        margin: 0 5rem 3rem 0;
+    }
+}
+
+@media screen and (max-width: 450px){
+
+    .swtich-content{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+        margin-top: 0;
+
+        height: 45rem;
+    }
+
+    .switching-fast{
+        padding: 1rem 1rem;
+        margin: 0;
+    }
+
+    .switch-title p{
+        font-size: 30px;
+    }
+    
+    .switch-title span{
+        font-size: 31px;
+    }
+
+    .points{
+        width: 100%;
+    }
+
+    .swtich-content img{
+        margin: 1rem 0;
+    }
+
+}

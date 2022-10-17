@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import herobg from "../Assets/herobg.png";
+import bgone from "../Assets/bgone.png";
 import RegularButton from "./RegularButton";
 import heroImg from "../Assets/heroImg.png";
 const Hero = () => {
@@ -20,11 +20,9 @@ const Hero = () => {
               by 2025
             </h2>
             <div className="mt-6 w-full md:flex md:justify-start gap-6">
-              <RegularButton>Post a job</RegularButton> 
+               <a href="/" className={`border-2 mr-4 border-[#003979] text-[#003979] text-center items-center font-semibold rounded-md px-8 py-2 inline-block hover:bg-[#003979] hover:text-white`}>Post a job</a>
                <div className="md:hidden my-4"></div>
-
-              <Link to='/jobs'><RegularButton>Find a job</RegularButton></Link>
-
+               <a href="/jobs" className={`border-2 mr-4 border-[#003979] text-[#003979] text-center items-center font-semibold rounded-md px-8 py-2 inline-block hover:bg-[#003979] hover:text-white`}>Find a job</a>
             </div>
           </div>
           <div className="flex items-center justify-end">
@@ -32,7 +30,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <img src={herobg} className="absolute md:top-10 top-32 opaicity-30 z-0" alt="" />
+      <img src={bgone} className="absolute md:top-10 top-32 opaicity-30 z-0" alt="" />
     </main>
   );
 };

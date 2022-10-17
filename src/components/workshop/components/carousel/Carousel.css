@@ -1,0 +1,68 @@
+.carousel-style{
+    /* height: auto; */
+    text-align: center;
+    padding: 0rem 6rem;
+}
+
+.carousel-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    /* height:10rem; */
+}
+
+.person-description p{
+    text-align: left;
+    height: 13rem;
+}
+
+/* .person-description p{
+    font-size: 17px;
+} */
+
+.carousel-div p{
+    /* margin: 2rem 0; */
+}
+
+.carousel-person{
+    height: 6rem;
+    border-radius: 50%;
+}
+
+.carousel-detail{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: 0;
+}
+
+.carousel-contact{
+    margin-left: 1rem;
+}
+
+.carousel-contact h2{
+    margin:0;
+    margin-left: 4px;
+}
+
+@media screen and (max-width: 450px){
+    .carousel-style{
+        padding: 2rem 2rem;
+    }
+
+    .person-description p{
+        text-align: left;
+        height: 24rem;
+        font-size: small;
+    }
+
+    .carousel-div {
+        height: auto;
+    }
+
+    /* .person-description p{
+        font-size: 18px;
+    } */
+}

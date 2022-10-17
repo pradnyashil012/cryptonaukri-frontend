@@ -7,14 +7,14 @@ import { CenterFocusStrong } from "@material-ui/icons";
 
 const AboutUS = () => {
   return (
-    <div className="bg-gray-800 pt-16 h-screen">
+    <div className="bg-gray-800 flex items-center h-[90vh]">
       <div className="flex flex-col items-center justify-center bg-gray-800 text-white p-4 max-w-7xl m-auto">
         <div className="mt-8 text-2xl font-bold tracking-wider underline underline-offset-4">
           About Us
         </div>
         <div className="mt-5 text-lg text-center px-20">
           <p>
-            We are an ecosystem for Blockchain Developers where they can learn
+            Cryptonaukri is an ecosystem for Blockchain Developers where they can learn
             Blockchain development, can solve their problems using our community
             and can get the jobs using our job portal in Blockchain space
             startups and MNCs.

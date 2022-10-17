@@ -9,7 +9,7 @@ const Discord = () => {
   );
   const button = (
     <a
-      href="https://discord.gg/9nRFqEDn"
+      href="https://discord.gg/r9bpXkqSzH"
       className="mt-3 md:mt-6 text-md md:text-lg  text-white flex items-center gap-2 bg-[#6C94F7] px-3 py-2 md:px-6 md:py-3 rounded-md"
     >
       <FaDiscord className="text-2xl" /> Join our Server

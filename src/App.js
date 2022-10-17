@@ -28,6 +28,7 @@ import Otp from "./components/otp/otp";
 import JobDetails from "./components/JobDetails/JobDetails";
 import ApplyJob from "./components/applyJob/applyjob";
 import Profile from "./components/User/UserDashbaord";
+import Refundpolicy from "./components/Redundpolicy"
 
 import AuthDevLogin from "./components/auth/DevLogin";
 import AuthDevSignUp from "./components/auth/DevSignup";
@@ -35,6 +36,7 @@ import AuthDevLogout from "./components/auth/Logout";
 
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import Workshop from "./components/workshop/Workshop";
 
 const useStyles = makeStyles((theme) => ({
   contentBody: {
@@ -132,6 +134,7 @@ const App = () => {
                 element={<BussinessProfile />}
               ></Route>
               <Route path="/details" element={<JobDetails />}></Route>
+              <Route path="/workshop" element={<Workshop />}></Route>
               <Route path="/jobapplication" element={<ApplyJob />}></Route>
               <Route path="/loginsignup" element={<LoginSignup />}></Route>
               <Route path="/dev-login" element={<Login route="user" />}></Route>
@@ -186,6 +189,7 @@ const App = () => {
                 }
               ></Route>
               <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/refundpolicy" element={<Refundpolicy />}></Route>
             </Routes>
           </Box>
           <Footer />

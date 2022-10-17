@@ -1,0 +1,69 @@
+.fees-container{
+    background: linear-gradient(180deg, rgba(118, 167, 220, 0.1) 0%, rgba(177, 205, 251, 0.1) 100%);
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.fee-structure{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.fees{
+    margin-right: 20rem;
+}
+
+.fee-image img{
+    width: 13rem;
+    height: 20rem;
+}
+
+.two-minute{
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.two-minute p{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+    margin: 0;
+}
+
+@media screen and (max-width: 450px){
+
+    .fee-title{
+        width: 100%;
+        margin: 0;
+        padding:0;
+    }
+
+    .fee-structure{
+        flex-direction: column;
+        text-align: center;
+        padding:0;
+    }
+
+    .fees{
+        margin-right: 0rem;
+        margin-top: 2rem;
+    }
+
+    .fee-image img{
+        margin-top: 3rem;
+        width: 10rem;
+        height: 17rem;
+    }
+
+    .two-minute{
+        padding: 3rem 1rem;
+    }
+
+    .two-minute p{
+        font-size: 23px;
+    }
+}

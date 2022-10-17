@@ -1,0 +1,69 @@
+.champion-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding: 2rem 2rem;
+}
+
+.champion-content{
+    display: flex;
+    flex-direction: row;
+}
+
+.champion-text{
+    text-align: left;
+    width: 48rem;
+    padding-right: 8rem;
+}
+
+.champion-image img{
+    width: 22rem;
+    height: 22rem;
+}
+
+.champion-image h2{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+
+    color: #003979;
+}
+
+.switching-fast{
+    background-image: url('../assets/buildings.png');
+    padding: 1rem 5rem;
+}
+
+.switch-title p{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+}
+
+.switch-title span{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+    color: #003979;
+}
+
+.swtich-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.swtich-content img{
+    width: 17rem;
+    height: 20rem;
+
+    margin: 2rem 5rem 2rem 0;
+}

@@ -7,3 +7,58 @@
 * {
     font-family: Be Vietnam Pro, sans-serif ;
 }
+
+.hr1{
+    /* font-family: 'Inter'; */
+    /* font-style: normal; */
+    font-weight: 700;
+    font-size: 45px;
+    margin: 0;
+  }
+  
+  .hr2{
+    /* font-family: 'Inter'; */
+    /* font-style: normal; */
+    font-weight: 700;
+    font-size: 45px;
+    color: #003979;
+    margin: 0;
+  }
+  
+  .hr3{
+    /* font-family: 'Inter'; */
+    /* font-style: normal; */
+    font-weight: 700;
+    font-size: 45px;
+    color: #006DF6;
+    margin: 0;
+  }
+  
+  @media screen and (max-width: 1025px){
+    .hr1{
+      font-size: 40px;
+    }
+  
+    .hr2{
+      font-size: 40px;
+    }
+  
+    .hr3{
+      font-size: 40px;
+    }
+  }
+  
+  @media screen and (max-width: 400px){
+    .hr1{
+      font-size: 23px;
+    }
+  
+    .hr2{
+      font-size: 23px;
+    }
+  
+    .hr3{
+      font-size: 23px;
+    }
+  }
+  

@@ -47,6 +47,7 @@ const Profile = () => {
       setUser(response.data);
     } else {
       setLoading(false);
+      console.log("I hope not")
       toast.error('Please Login first !!');
       navigate('/');
     }
@@ -67,6 +68,7 @@ const Profile = () => {
   useEffect(() => {
     if (!token) {
       // if not logged in return to home screen
+      console.log("I'm here")       //Token's not fetching
       toast.error('Please Login first !!');
       navigate('/');
     }
@@ -85,12 +87,12 @@ const Profile = () => {
       <br/>
       <br/>
       <br/>
-      <div className="gap-1 text-white max-w-7xl m-auto p-2 block md:flex">
-          <div className="mt-6 w-100 md:w-4/12 gap-2">
+      <div className="grid grid-cols-1 text-white md:grid-cols-2 gap-8 md:mx-8 pb-8">
+          <div className=" col-span-1">
               <BasicUserDetails user={user} token={token} />
               <UserCommunityDetails />
           </div>
-          <div className="mt-6 w-100 md:w-8/12">
+          <div className=" col-span-1">
               <button onClick={()=>setActiveTab(1)} className={`${activeTab===1 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Applications</button>
               <button onClick={()=>setActiveTab(2)} className={`${activeTab===2 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Projects</button>
               <button onClick={()=>setActiveTab(3)} className={`${activeTab===3 && 'bg-blue-800'} font-bold m-2 text-white text-xs p-2 rounded`}>Security</button>
@@ -103,7 +105,7 @@ const Profile = () => {
               {activeTab===3 && <Security user={user} token={token} />}
               
           </div>
-        </div>
+      </div>
     </main>
     </>
   );
